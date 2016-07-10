@@ -1,0 +1,16 @@
+[
+{
+  "modid": "baseminerals",
+  "name": "Base Minerals",
+  "description": "Base Minerals Addon",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://minecraft.curseforge.com/projects/base-minerals",
+  "updateUrl": "",
+  "authorList": ["cyb3rkat"],
+  "credits": "DrCyano (aka Cyanobacterium)",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,53 @@
+itemGroup.baseminerals.items=Base Minerals
+itemGroup.baseminerals.tools=Base Minerals
+itemGroup.baseminerals.blocks=Base Minerals
+nei.baseminerals.recipehandler.crusher.name=Crushed Blocks/Items
+
+item.baseminerals:template_arrow.name=Template Arrow
+item.baseminerals:template_axe.name=Template Axe
+item.baseminerals:template_bars.name=Template Bars
+item.baseminerals:template_blend.name=Template Blend
+item.baseminerals:template_block.name=Template Block
+item.baseminerals:template_boots.name=Template Boots
+item.baseminerals:template_bolt.name=Template Bolt
+item.baseminerals:template_bow.name=Template Bow
+item.baseminerals:template_chestplate.name=Template Chestplate
+item.baseminerals:template_crackhammer.name=Template Crack Hammer
+item.baseminerals:template_crossbow.name=Template Crossbow
+item.baseminerals:template_door.name=Template Door
+item.baseminerals:template_fishingrod.name=Template Fishing Rod
+item.baseminerals:template_gear.name=Template Gear
+item.baseminerals:template_helmet.name=Template Helmet
+item.baseminerals:template_hoe.name=Template Hoe
+item.baseminerals:template_horsearmor.name=Template Horse Armor
+item.baseminerals:template_ingot.name=Template Ingot
+item.baseminerals:template_leggings.name=Template Leg Armor
+item.baseminerals:template_nugget.name=Template Nugget
+item.baseminerals:template_ore.name=Template Ore
+item.baseminerals:template_pickaxe.name=Template Pickaxe
+item.baseminerals:template_powder.name=Powdered Template
+item.baseminerals:template_rod.name=Template Rod
+item.baseminerals:template_shears.name=Template Shears
+item.baseminerals:template_shovel.name=Template Shovel
+item.baseminerals:template_smallblend.name=Small Pile of Template Blend
+item.baseminerals:template_smallpowder.name=Small Pile of Powdered Template
+item.baseminerals:template_sword.name=Template Sword
+item.baseminerals:template_trapdoor.name=Template Trapdoor
+
+tile.baseminerals:template_bars.name=Template Bars
+tile.baseminerals:template_block.name=Template Block
+tile.baseminerals:template_door.name=Template Door
+tile.baseminerals:template_ore.name=Template Ore
+tile.baseminerals:template_plate.name=Template Plate
+tile.baseminerals:template_trapdoor.name=Template Trapdoor
+
+tooltip.template.tool=Nothing Special
+
+tooltip.template.armor=Nothing Special
+
+achievement.template_maker=Template Brass
+achievement.template_maker.desc=Combine powdered ??? and ??? to make ???
+
+fluid.baseminerals.template=Molten Template
+
+tile.baseminerals:template.name=Molten Template
