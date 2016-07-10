@@ -12,6 +12,11 @@ import cyano.basemetals.material.MetalMaterial;
 public abstract class Materials extends cyano.basemetals.init.Materials {
 
 	public static MetalMaterial template;
+	public static MetalMaterial lithium;
+	public static MetalMaterial niter;
+	public static MetalMaterial phosphorous;
+	public static MetalMaterial silicon;
+	public static MetalMaterial sulfur;
 
 	private static boolean initDone = false;
 
@@ -23,6 +28,11 @@ public abstract class Materials extends cyano.basemetals.init.Materials {
 
 		// Mod Metals
 		template = addMaterial("template", 8, 8, 4.5);
+		lithium = addMaterial("lithium", 8, 8, 4.5);
+		niter = addMaterial("niter", 8, 8, 4.5);
+		phosphorous = addMaterial("phosphorous", 8, 8, 4.5);
+		silicon = addMaterial("silicon", 8, 8, 4.5);
+		sulfur = addMaterial("sulfur", 8, 8, 4.5);
 
 		initDone = true;
 	}
