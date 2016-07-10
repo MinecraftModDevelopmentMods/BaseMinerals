@@ -15,6 +15,7 @@ public abstract class Materials extends cyano.basemetals.init.Materials {
 	public static MetalMaterial lithium;
 	public static MetalMaterial niter;
 	public static MetalMaterial phosphorous;
+	public static MetalMaterial salt;
 	public static MetalMaterial silicon;
 	public static MetalMaterial sulfur;
 
@@ -31,6 +32,7 @@ public abstract class Materials extends cyano.basemetals.init.Materials {
 		lithium = addMaterial("lithium", 8, 8, 4.5);
 		niter = addMaterial("niter", 8, 8, 4.5);
 		phosphorous = addMaterial("phosphorous", 8, 8, 4.5);
+		salt = addMaterial("salt", 8, 8, 4.5);
 		silicon = addMaterial("silicon", 8, 8, 4.5);
 		sulfur = addMaterial("sulfur", 8, 8, 4.5);
 
