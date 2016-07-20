@@ -31,12 +31,12 @@ public class ItemGroups {
 		if(initDone) return;
 
 		// placeholders
-		blockItem = Items.template_crackhammer;
-//		itemItem = Items.template_crackhammer;
-//		toolItem = Items.template_crackhammer;
+		blockItem = Items.charcoal_powder;
+//		itemItem = Items.charcoal_powder;
+//		toolItem = Items.charcoal_powder;
 
 		tab_blocks = new FunctionalCreativeTab(BaseMinerals.MODID.concat(".blocks"), false,
-				()->Items.template_crackhammer, 
+				()->Items.charcoal_powder, 
 				(ItemStack a,ItemStack b)->{
 					int delta = Items.getSortingValue(a)-Items.getSortingValue(b);
 					if(delta == 0) return a.getItem().getUnlocalizedName().compareToIgnoreCase(b.getItem().getUnlocalizedName());

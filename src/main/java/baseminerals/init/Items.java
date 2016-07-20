@@ -32,32 +32,68 @@ import java.util.*;
  */
 public abstract class Items {
 
-	public static Item template_arrow;
-	public static Item template_axe;
-	public static Item template_blend;
-	public static Item template_boots;
-	public static Item template_bolt;
-	public static Item template_bow;
-	public static Item template_chestplate;
-	public static Item template_crackhammer;
-	public static Item template_crossbow;
-	public static Item template_door;
-	public static Item template_fishingrod;
-	public static Item template_helmet;
-	public static Item template_hoe;
-	public static Item template_horsearmor;
-	public static Item template_ingot;
-	public static Item template_leggings;
-	public static Item template_nugget;
-	public static Item template_pickaxe;
-	public static Item template_powder;
-	public static Item template_shears;
-	public static Item template_shovel;
-	public static Item template_smallblend;
-	public static Item template_smallpowder;
-	public static Item template_sword;
-	public static Item template_rod;
-	public static Item template_gear;
+//	public static Item charcoal_blend;
+//	public static Item charcoal_ingot;
+	public static Item charcoal_nugget;
+	public static Item charcoal_powder;
+//	public static Item charcoal_smallblend;
+	public static Item charcoal_smallpowder;
+
+//	public static Item lithium_blend;
+	public static Item lithium_ingot;
+	public static Item lithium_nugget;
+	public static Item lithium_powder;
+//	public static Item lithium_smallblend;
+	public static Item lithium_smallpowder;
+
+//	public static Item niter_blend;
+//	public static Item niter_ingot;
+//	public static Item niter_nugget;
+	public static Item niter_powder;
+//	public static Item niter_smallblend;
+	public static Item niter_smallpowder;
+
+//	public static Item phosphorus_blend;
+//	public static Item phosphorus_ingot;
+//	public static Item phosphorus_nugget;
+	public static Item phosphorus_powder;
+//	public static Item phosphorus_smallblend;
+	public static Item phosphorus_smallpowder;
+
+//	public static Item potash_blend;
+//	public static Item potash_ingot;
+//	public static Item potash_nugget;
+	public static Item potash_powder;
+//	public static Item potash_smallblend;
+	public static Item potash_smallpowder;
+
+//	public static Item salt_blend;
+//	public static Item salt_ingot;
+//	public static Item salt_nugget;
+	public static Item salt_powder;
+//	public static Item salt_smallblend;
+	public static Item salt_smallpowder;
+
+//	public static Item saltpeter_blend;
+//	public static Item saltpeter_ingot;
+//	public static Item saltpeter_nugget;
+	public static Item saltpeter_powder;
+//	public static Item saltpeter_smallblend;
+	public static Item saltpeter_smallpowder;
+
+	public static Item silicon_blend;
+	public static Item silicon_ingot;
+	public static Item silicon_nugget;
+	public static Item silicon_powder;
+	public static Item silicon_smallblend;
+	public static Item silicon_smallpowder;
+
+//	public static Item sulfur_blend;
+//	public static Item sulfur_ingot;
+//	public static Item sulfur_nugget;
+	public static Item sulfur_powder;
+//	public static Item sulfur_smallblend;
+	public static Item sulfur_smallpowder;
 
 	private static boolean initDone = false;
 
@@ -118,32 +154,68 @@ public abstract class Items {
 		
 		baseminerals.init.Blocks.init();
 
-		template_arrow = create_arrow(Materials.template);
-		template_axe = create_axe(Materials.template);
-		template_blend = create_blend(Materials.template);
-		template_boots = create_boots(Materials.template);
-		template_bolt = create_bolt(Materials.template);
-		template_bow = create_bow(Materials.template);
-		template_chestplate = create_chestplate(Materials.template);
-		template_crackhammer = create_crackhammer(Materials.template);
-		template_crossbow = create_crossbow(Materials.template);
-		template_door = create_door(Materials.template, Blocks.template_door);
-		template_fishingrod = create_fishingrod(Materials.template);
-		template_helmet = create_helmet(Materials.template);
-		template_hoe = create_hoe(Materials.template);
-		template_horsearmor = create_horsearmor(Materials.template);
-		template_ingot = create_ingot(Materials.template);
-		template_leggings = create_leggings(Materials.template);
-		template_nugget = create_nugget(Materials.template);
-		template_pickaxe = create_pickaxe(Materials.template);
-		template_powder = create_powder(Materials.template);
-		template_shears = create_shears(Materials.template);
-		template_shovel = create_shovel(Materials.template);
-		template_smallblend = create_smallblend(Materials.template);
-		template_smallpowder = create_smallpowder(Materials.template);
-		template_sword = create_sword(Materials.template);
-		template_rod = create_rod(Materials.template);
-		template_gear = create_gear(Materials.template);
+//		charcoal_blend = create_blend(Materials.charcoal);
+//		charcoal_ingot = create_ingot(Materials.charcoal);
+		charcoal_nugget = create_nugget(Materials.charcoal); // Special
+		charcoal_powder = create_powder(Materials.charcoal);
+//		charcoal_smallblend = create_smallblend(Materials.charcoal);
+		charcoal_smallpowder = create_smallpowder(Materials.charcoal);
+
+//		lithium_blend = create_blend(Materials.lithium);
+		lithium_ingot = create_ingot(Materials.lithium);
+		lithium_nugget = create_nugget(Materials.lithium);
+		lithium_powder = create_powder(Materials.lithium);
+//		lithium_smallblend = create_smallblend(Materials.lithium);
+		lithium_smallpowder = create_smallpowder(Materials.lithium);
+
+//		niter_blend = create_blend(Materials.niter);
+//		niter_ingot = create_ingot(Materials.niter);
+//		niter_nugget = create_nugget(Materials.niter);
+		niter_powder = create_powder(Materials.niter);
+//		niter_smallblend = create_smallblend(Materials.niter);
+		niter_smallpowder = create_smallpowder(Materials.niter);
+
+//		phosphorus_blend = create_blend(Materials.phosphorus);
+//		phosphorus_ingot = create_ingot(Materials.phosphorus);
+//		phosphorus_nugget = create_nugget(Materials.phosphorus);
+		phosphorus_powder = create_powder(Materials.phosphorus);
+//		phosphorus_smallblend = create_smallblend(Materials.phosphorus);
+		phosphorus_smallpowder = create_smallpowder(Materials.phosphorus);
+
+//		potash_blend = create_blend(Materials.potash);
+//		potash_ingot = create_ingot(Materials.potash);
+//		potash_nugget = create_nugget(Materials.potash);
+		potash_powder = create_powder(Materials.potash);
+//		potash_smallblend = create_smallblend(Materials.potash);
+		potash_smallpowder = create_smallpowder(Materials.potash);
+
+//		salt_blend = create_blend(Materials.salt);
+//		salt_ingot = create_ingot(Materials.salt);
+//		salt_nugget = create_nugget(Materials.salt);
+		salt_powder = create_powder(Materials.salt);
+//		salt_smallblend = create_smallblend(Materials.salt);
+		salt_smallpowder = create_smallpowder(Materials.salt);
+
+//		saltpeter_blend = create_blend(Materials.saltpeter);
+//		saltpeter_ingot = create_ingot(Materials.saltpeter);
+//		saltpeter_nugget = create_nugget(Materials.saltpeter);
+		saltpeter_powder = create_powder(Materials.saltpeter);
+//		saltpeter_smallblend = create_smallblend(Materials.saltpeter);
+		saltpeter_smallpowder = create_smallpowder(Materials.saltpeter);
+
+		silicon_blend = create_blend(Materials.silicon);
+		silicon_ingot = create_ingot(Materials.silicon);
+		silicon_nugget = create_nugget(Materials.silicon);
+		silicon_powder = create_powder(Materials.silicon);
+		silicon_smallblend = create_smallblend(Materials.silicon);
+		silicon_smallpowder = create_smallpowder(Materials.silicon);
+
+//		sulfur_blend = create_blend(Materials.sulfur);
+//		sulfur_ingot = create_ingot(Materials.sulfur);
+//		sulfur_nugget = create_nugget(Materials.sulfur);
+		sulfur_powder = create_powder(Materials.sulfur);
+//		sulfur_smallblend = create_smallblend(Materials.sulfur);
+		sulfur_smallpowder = create_smallpowder(Materials.sulfur);
 
 		for(Item i : itemRegistry.keySet()) {
 			allItems.put(itemRegistry.get(i), i);

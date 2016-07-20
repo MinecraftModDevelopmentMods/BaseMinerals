@@ -37,11 +37,14 @@ public abstract class Fluids {
 		FluidRegistry.enableUniversalBucket();
 	}
 
-	public static Fluid fluidTemplate = null;
-	public static BlockFluidBase fluidBlockTemplate = null;
+	public static Fluid fluidLithium = null;
+	public static BlockFluidBase fluidBlockLithium = null;
 
-	private static final Map<Fluid,BlockFluidBase> fluidBlocks = new HashMap<>();
-	private static final Map<BlockFluidBase,String> fluidBlockNames = new HashMap<>();
+	public static Fluid fluidSilicon = null;
+	public static BlockFluidBase fluidBlockSilicon = null;
+
+	private static final Map<Fluid, BlockFluidBase> fluidBlocks = new HashMap<>();
+	private static final Map<BlockFluidBase, String> fluidBlockNames = new HashMap<>();
 
 	private static boolean initDone = false;
 
@@ -52,10 +55,14 @@ public abstract class Fluids {
 		if(initDone) return;
 
 		// fluids
-		fluidTemplate = newFluid(BaseMinerals.MODID, "template", 2000, 10000, 330, 10, 0xFFFFFFFF);
+		fluidLithium = newFluid(BaseMinerals.MODID, "lithium", 2000, 10000, 330, 10, 0xFFFFFFFF);
+
+		fluidSilicon = newFluid(BaseMinerals.MODID, "silicon", 2000, 10000, 330, 10, 0xFFFFFFFF);
 
 		// fluid blocks
-		fluidBlockTemplate = registerFluidBlock(fluidTemplate, new BlockMoltenFluid(fluidTemplate),"template");
+		fluidBlockLithium = registerFluidBlock(fluidLithium, new BlockMoltenFluid(fluidLithium),"lithium");
+
+		fluidBlockSilicon = registerFluidBlock(fluidSilicon, new BlockMoltenFluid(fluidSilicon),"silicon");
 
 		initDone = true;
 	}

@@ -22,9 +22,10 @@ public class TinkersConstructPlugin {
 		if(initDone) return;
 
 		if(Loader.isModLoaded("tconstruct")) {
-			registerFluid(Fluids.fluidTemplate, true);
 
-//			registerAlloy("template", 2, "template", 1, "template", 1);
+			registerFluid(Fluids.fluidLithium, true);
+
+			registerFluid(Fluids.fluidSilicon, true);
 		}
 
 		initDone = true;
