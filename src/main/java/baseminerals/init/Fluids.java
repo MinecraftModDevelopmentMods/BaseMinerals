@@ -1,7 +1,7 @@
 package baseminerals.init;
 
 import baseminerals.BaseMinerals;
-import baseminerals.blocks.BlockMoltenFluid;
+import cyano.basemetals.blocks.BlockMoltenFluid;
 import cyano.basemetals.fluids.CustomFluid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -52,7 +52,8 @@ public abstract class Fluids {
 	 * 
 	 */
 	public static void init() {
-		if(initDone) return;
+		if(initDone)
+			return;
 
 		// fluids
 		fluidLithium = newFluid(BaseMinerals.MODID, "lithium", 2000, 10000, 330, 10, 0xFFFFFFFF);
@@ -78,7 +79,7 @@ public abstract class Fluids {
 			Item item = Item.getItemFromBlock(block);
 			final ModelResourceLocation fluidModelLocation = new ModelResourceLocation(
 					modID.toLowerCase() + ":" + fluidBlockNames.get(block), "fluid");
-            ModelBakery.registerItemVariants(item);
+			ModelBakery.registerItemVariants(item);
 			ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition()
 			{
 				@Override
@@ -99,12 +100,12 @@ public abstract class Fluids {
 	}
 
 	private static Fluid newFluid(String modID, String name, int density, int viscosity, int temperature, int luminosity, int tintColor) {
-		Fluid fluid = new CustomFluid(name, new ResourceLocation(modID+":blocks/molten_metal_still"), new ResourceLocation(modID+":blocks/molten_metal_flow"), tintColor);
+		Fluid fluid = new CustomFluid(name, new ResourceLocation(modID + ":blocks/molten_metal_still"), new ResourceLocation(modID + ":blocks/molten_metal_flow"), tintColor);
 		fluid.setDensity(density);
 		fluid.setViscosity(viscosity);
 		fluid.setTemperature(temperature);
 		fluid.setLuminosity(luminosity);
-		fluid.setUnlocalizedName(modID+"."+name);
+		fluid.setUnlocalizedName(modID + "." + name);
 		FluidRegistry.registerFluid(fluid);
 		FluidRegistry.addBucketForFluid(fluid);
 		return fluid;

@@ -26,7 +26,8 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 	 * 
 	 */
 	public static void init() {
-		if(initDone) return;
+		if(initDone)
+			return;
 
 		baseminerals.init.Materials.init();
 		baseminerals.init.Items.init();
@@ -44,11 +45,11 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 		final Map<MetalMaterial, Item> allShovels = new HashMap<>(size);
 		final Map<MetalMaterial, Item> allIngots = new HashMap<>(size);
 
-
 		baseminerals.init.Items.getItemsByMetal().entrySet().stream()
 				.forEach((Map.Entry<MetalMaterial,List<Item>> e)->{
 					final MetalMaterial m = e.getKey();
-					if(m == null) return;
+					if(m == null)
+						return;
 					for(Item i : e.getValue()) {
 						if(i instanceof ItemArmor) { allArmors.computeIfAbsent(m, (MetalMaterial g)->new ArrayList<>()).add(i); continue; }
 						if(i instanceof ItemMetalCrackHammer) { allHammers.put(m, i); continue; }
@@ -66,13 +67,15 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 
 		for(MetalMaterial m : baseminerals.init.Materials.getAllMetals()) {
 			float value = m.hardness + m.strength + m.magicAffinity + m.getToolHarvestLevel();
-//			if(m.isRare) continue;
+//			if(m.isRare)
+//				continue;
 			// for reference, iron has a value of 21.5, gold would be 14, copper is 14, and diamond is 30
 			int emeraldPurch = emeraldPurchaseValue(value);
 			int emeraldSale = emeraldSaleValue(value);
 			int tradeLevel = tradeLevel(value);
 
-			if(emeraldPurch > 64 || emeraldSale > 64) continue; // too expensive
+			if(emeraldPurch > 64 || emeraldSale > 64)
+				continue; // too expensive
 
 			int armorsmith = (3 << 16) | (1 << 8) | (tradeLevel);
 			int weaponsmith = (3 << 16) | (2 << 8) | (tradeLevel);
@@ -90,8 +93,10 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 				tradesTable.computeIfAbsent(toolsmith, (Integer key)->new ArrayList<>())
 						.addAll(Arrays.asList(ingotTrades));
 			}
-			if(allHammers.containsKey(m) && allPickAxes.containsKey(m)
-					 && allAxes.containsKey(m) && allShovels.containsKey(m)
+			if(allHammers.containsKey(m)
+					 && allPickAxes.containsKey(m)
+					 && allAxes.containsKey(m)
+					 && allShovels.containsKey(m)
 					 && allHoes.containsKey(m)) {
 				tradesTable.computeIfAbsent(toolsmith,(Integer key)->new ArrayList<>())
 						.addAll(Arrays.asList(
@@ -112,7 +117,7 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 				tradesTable.computeIfAbsent(weaponsmith,(Integer key)->new ArrayList<>())
 						.addAll(Arrays.asList(
 						makeTradePalette(
-						makePurchasePalette(emeraldPurch + (int)(m.getBaseAttackDamage() / 2)-1, 1, allSwords.get(m)))
+						makePurchasePalette(emeraldPurch + (int)(m.getBaseAttackDamage() / 2) - 1, 1, allSwords.get(m)))
 						));
 			}
 			if(allArmors.containsKey(m)) {
@@ -124,21 +129,24 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 			}
 
 			if(m.magicAffinity > 5) {
-				if(allHammers.containsKey(m)) tradesTable.computeIfAbsent((3 << 16) | (3 << 8) | (tradeLevel+2),(Integer key)->new ArrayList<>())
+				if(allHammers.containsKey(m))
+					tradesTable.computeIfAbsent((3 << 16) | (3 << 8) | (tradeLevel + 2), (Integer key)->new ArrayList<>())
 						.addAll(Arrays.asList(
-						new ListEnchantedItemForEmeralds(allHammers.get(m), new PriceInfo(emeraldPurch+7, emeraldPurch+12))));
-				if(allPickAxes.containsKey(m)) tradesTable.computeIfAbsent((3 << 16) | (3 << 8) | (tradeLevel+1),(Integer key)->new ArrayList<>())
+						new ListEnchantedItemForEmeralds(allHammers.get(m), new PriceInfo(emeraldPurch + 7, emeraldPurch + 12))));
+				if(allPickAxes.containsKey(m))
+					tradesTable.computeIfAbsent((3 << 16) | (3 << 8) | (tradeLevel + 1), (Integer key)->new ArrayList<>())
 						.addAll(Arrays.asList(
-						new ListEnchantedItemForEmeralds(allPickAxes.get(m), new PriceInfo(emeraldPurch+7, emeraldPurch+12))));
+						new ListEnchantedItemForEmeralds(allPickAxes.get(m), new PriceInfo(emeraldPurch + 7, emeraldPurch + 12))));
 				if(allArmors.containsKey(m)) {
 					for(int i = 0; i < allArmors.get(m).size(); i++)
-						tradesTable.computeIfAbsent((3 << 16) | (1 << 8) | (tradeLevel+1),(Integer key)->new ArrayList<>())
+						tradesTable.computeIfAbsent((3 << 16) | (1 << 8) | (tradeLevel + 1), (Integer key)->new ArrayList<>())
 								.addAll(Arrays.asList(
-						new ListEnchantedItemForEmeralds(allArmors.get(m).get(i), new PriceInfo(emeraldPurch+7 + (int)(m.hardness / 2), emeraldPurch+12 + (int)(m.hardness / 2)))));
+						new ListEnchantedItemForEmeralds(allArmors.get(m).get(i), new PriceInfo(emeraldPurch + 7 + (int)(m.hardness / 2), emeraldPurch + 12 + (int)(m.hardness / 2)))));
 				}
-				if(allSwords.containsKey(m)) tradesTable.computeIfAbsent((3 << 16) | (2 << 8) | (tradeLevel+1),(Integer key)->new ArrayList<>())
+				if(allSwords.containsKey(m))
+					tradesTable.computeIfAbsent((3 << 16) | (2 << 8) | (tradeLevel + 1), (Integer key)->new ArrayList<>())
 						.addAll(Arrays.asList(
-						new ListEnchantedItemForEmeralds(allSwords.get(m), new PriceInfo(emeraldPurch+7 + (int)(m.getBaseAttackDamage() / 2)-1, emeraldPurch+12 + (int)(m.getBaseAttackDamage() / 2)-1))));
+						new ListEnchantedItemForEmeralds(allSwords.get(m), new PriceInfo(emeraldPurch + 7 + (int)(m.getBaseAttackDamage() / 2) - 1, emeraldPurch + 12 + (int)(m.getBaseAttackDamage() / 2) - 1))));
 			}
 		}
 		tradesTable.computeIfAbsent((3 << 16) | (1 << 8) | (1),(Integer key)->new ArrayList<>())
@@ -183,7 +191,8 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 	}
 
 	private static int fluctuation(int baseValue) {
-		if(baseValue <= 1) return 0;
+		if(baseValue <= 1)
+			return 0;
 		return Math.max(2, baseValue / 4);
 	}
 
@@ -194,7 +203,7 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 			trades[i] = new SimpleTrade(
 					new ItemStack(net.minecraft.init.Items.EMERALD, emeraldPrice, 0), fluctuation(emeraldPrice),
 					(ItemStack)null, 0,
-					new ItemStack(item,stackSize, 0), 0);
+					new ItemStack(item, stackSize, 0), 0);
 		}
 		return trades;
 	}
@@ -212,7 +221,8 @@ public class VillagerTrades extends cyano.basemetals.init.VillagerTrades {
 	}
 
 	private static ITradeList[] makeTradePalette(ITradeList[]... list) {
-		if(list.length == 1) return list[0];
+		if(list.length == 1)
+			return list[0];
 		int totalsize = 0;
 		for(ITradeList[] e : list) {
 			totalsize += e.length;

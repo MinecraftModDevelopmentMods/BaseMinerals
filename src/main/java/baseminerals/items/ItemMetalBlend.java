@@ -1,7 +1,7 @@
 package baseminerals.items;
 
-import baseminerals.init.Materials;
 import cyano.basemetals.init.Achievements;
+import baseminerals.init.Materials;
 import cyano.basemetals.material.MetalMaterial;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -26,7 +26,7 @@ public class ItemMetalBlend extends cyano.basemetals.items.ItemMetalBlend {
 	public void onCreated(final ItemStack item, final World world, final EntityPlayer crafter) {
 		super.onCreated(item, world, crafter);
 		// achievement
-		if(metal == Materials.template) {
+		if(metal == Materials.charcoal) {
 			crafter.addStat(Achievements.metallurgy, 1);
 		}
 	}

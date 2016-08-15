@@ -14,9 +14,11 @@ import org.apache.logging.log4j.Level;
 import baseminerals.data.AdditionalLootTables;
 import baseminerals.data.DataConstants;
 import cyano.basemetals.registry.CrusherRecipeRegistry;
+import baseminerals.proxy.CommonProxy;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -38,20 +40,38 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 		acceptedMinecraftVersions = "1.9,)",
 		//certificateFingerprint = "",
 		updateJSON = "https://raw.githubusercontent.com/jriwanek/BaseMinerals/master/update.json")
-public class BaseMinerals
-{
+public class BaseMinerals {
+
 	@Instance
 	public static BaseMinerals INSTANCE = null;
 
+	@SidedProxy(clientSide = "baseminerals.proxy.ClientProxy", serverSide = "baseminerals.proxy.CommonProxy")
+	public static CommonProxy PROXY = null;
+
+	/** ID of this mod */
 	public static final String MODID = "baseminerals";
+
+	/** display name of this mod */
 	public static final String NAME = "Base Minerals";
+
+	/**
+	 * Version number, in Major.Minor.Build format. The minor number is
+	 * increased whenever a change is made that has the potential to break
+	 * compatibility with other mods that depend on this one.
+	 */
 	public static final String VERSION = "0.11.0";
 
 	/** All ore-spawn files discovered in the ore-spawn folder */
 	public static final List<Path> oreSpawnConfigFiles = new LinkedList<>();
 
+	/** If true, hammers cannot be crafted */
+	public static boolean disableAllHammers = false;
+
 	/** location of ore-spawn files */
 	public static Path oreSpawnFolder = null;
+
+	/** if true, then this mod will require the orespawn mod */
+	public static boolean requireOreSpawn = true;
 
 	/**
 	 * 
@@ -65,6 +85,10 @@ public class BaseMinerals
 		// load config
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
+
+		disableAllHammers = false;
+
+		requireOreSpawn = false;
 
 		oreSpawnFolder = Paths.get(event.getSuggestedConfigurationFile().toPath().getParent().toString(), "orespawn");
 		Path oreSpawnFile = Paths.get(oreSpawnFolder.toString(),MODID+".json");
