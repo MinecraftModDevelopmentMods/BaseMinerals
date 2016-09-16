@@ -108,8 +108,8 @@ public abstract class Items {
 	private static Map<MetalMaterial, Integer> materialSortingValues = new HashMap<>();
 
 	/**
-	 * Gets an item by its name. The name is the name as it is registered in 
-	 * the GameRegistry, not its unlocalized name (the unlocalized name is the 
+	 * Gets an item by its name. The name is the name as it is registered in the
+	 * GameRegistry, not its unlocalized name (the unlocalized name is the
 	 * registered name plus the prefix "modernmetals.")
 	 * @param name The name of the item in question
 	 * @return The item matching that name, or null if there isn't one
@@ -119,10 +119,10 @@ public abstract class Items {
 	}
 
 	/**
-	 * This is the reverse of the getItemByName(...) method, returning the 
+	 * This is the reverse of the getItemByName(...) method, returning the
 	 * registered name of an item instance (Modern Metals items only).
 	 * @param i The item in question
-	 * @return The name of the item, or null if the item is not a Modern Metals 
+	 * @return The name of the item, or null if the item is not a Modern Metals
 	 * item.
 	 */
 	public static String getNameOfItem(Item i) {
@@ -139,6 +139,7 @@ public abstract class Items {
 
 	/**
 	 * Gets the inventory item corresponding to a given door block
+	 *
 	 * @param b The door block
 	 * @return The item that the player should use to place that kind of door
 	 */
@@ -219,7 +220,7 @@ public abstract class Items {
 		sulfur_smallpowder = createSmallPowder(Materials.sulfur);
 
 		// TODO: Make this support multiple oredicts
-		for(Item i : itemRegistry.keySet()) {
+		for(final Item i : itemRegistry.keySet()) {
 			allItems.put(itemRegistry.get(i), i);
 			if(i instanceof IOreDictionaryEntry)
 				OreDictionary.registerOre(((IOreDictionaryEntry)i).getOreDictionaryName(), i);
@@ -271,15 +272,14 @@ public abstract class Items {
 		List<MetalMaterial> metlist = new ArrayList<>(Materials.getAllMetals().size());
 		metlist.addAll(Materials.getAllMetals());
 		metlist.sort((MetalMaterial a, MetalMaterial b)-> a.getName().compareToIgnoreCase(b.getName()));
-		for(int i = 0; i < metlist.size(); i++) {
+		for(int i = 0; i < metlist.size(); i++)
 			materialSortingValues.put(metlist.get(i), i * 100);
-		}
 
 		initDone = true;
 	}
 
 	private static Item registerItem(Item item, String name, MetalMaterial metal, CreativeTabs tab) {
-		ResourceLocation location = new ResourceLocation(BaseMinerals.MODID, name);
+		final ResourceLocation location = new ResourceLocation(BaseMinerals.MODID, name);
 		item.setRegistryName(location);
 		item.setUnlocalizedName(location.toString());
 		GameRegistry.register(item);
@@ -298,7 +298,7 @@ public abstract class Items {
 	}
 
 	private static Item createIngot(MetalMaterial metal) {
-		return registerItem(new baseminerals.items.ItemMetalIngot(metal), metal.getName()+"_"+"ingot", metal, ItemGroups.tab_items);
+		return registerItem(new baseminerals.items.ItemMetalIngot(metal), metal.getName() + "_ingot", metal, ItemGroups.tab_items);
 	}
 
 	private static Item createNugget(MetalMaterial metal) {
@@ -376,7 +376,7 @@ public abstract class Items {
 	}
 
 	@SuppressWarnings("unused")
-	private static Item createHorsearmor(MetalMaterial metal) {
+	private static Item createHorseArmor(MetalMaterial metal) {
 		return registerItem(new ItemMetalHorseArmor(metal), metal.getName() + "_horsearmor", metal, ItemGroups.tab_tools);
 	}
 
@@ -426,28 +426,28 @@ public abstract class Items {
 
 	@SuppressWarnings("unused")
 	private static Item createCrystal(MetalMaterial metal) {
-		Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_crystal", metal, ItemGroups.tab_items);
+		final Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_crystal", metal, ItemGroups.tab_items);
 		OreDictionary.registerOre("crystal" + metal.getCapitalizedName(), i);
 		return i;
 	}
 
 	@SuppressWarnings("unused")
 	private static Item createShard(MetalMaterial metal) {
-		Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_shard", metal, ItemGroups.tab_items);
+		final Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_shard", metal, ItemGroups.tab_items);
 		OreDictionary.registerOre("shard" + metal.getCapitalizedName(), i);
 		return i;
 	}
 
 	@SuppressWarnings("unused")
 	private static Item createClump(MetalMaterial metal) {
-		Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_clump", metal, ItemGroups.tab_items);
+		final Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_clump", metal, ItemGroups.tab_items);
 		OreDictionary.registerOre("clump" + metal.getCapitalizedName(), i);
 		return i;
 	}
 
 	@SuppressWarnings("unused")
 	private static Item createDirtyPowder(MetalMaterial metal) {
-		Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_powder_dirty", metal, ItemGroups.tab_items);
+		final Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_powder_dirty", metal, ItemGroups.tab_items);
 		OreDictionary.registerOre("dustDirty" + metal.getCapitalizedName(), i);
 		return i;
 	}
@@ -455,38 +455,38 @@ public abstract class Items {
 	// TODO: Possibly make this a block, 1/2 of the normal plate.
 	@SuppressWarnings("unused")
 	private static Item createDensePlate(MetalMaterial metal) {
-		Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_dense_plate", metal, ItemGroups.tab_items);
+		final Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_dense_plate", metal, ItemGroups.tab_items);
 		OreDictionary.registerOre("plateDense" + metal.getCapitalizedName(), i);
 		return i;
 	}
 
 	@SuppressWarnings("unused")
 	private static Item createCrushed(MetalMaterial metal) {
-		Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_crushed", metal, ItemGroups.tab_items);
+		final Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_crushed", metal, ItemGroups.tab_items);
 		OreDictionary.registerOre("crushed" + metal.getCapitalizedName(), i);
 		return i;
 	}
 
 	@SuppressWarnings("unused")
 	private static Item createCrushedPurified(MetalMaterial metal) {
-		Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_crushed_purified", metal, ItemGroups.tab_items);
+		final Item i = registerItem(new GenericMetalItem(metal), metal.getName() + "_crushed_purified", metal, ItemGroups.tab_items);
 		OreDictionary.registerOre("crushedPurified" + metal.getCapitalizedName(), i);
 		return i;
 	}
 
 	@SuppressWarnings("unused")
 	private static Item createSlab(MetalMaterial metal, Block block, BlockSlab slab, BlockSlab doubleslab) {
-		ResourceLocation location = new ResourceLocation(BaseMinerals.MODID, metal.getName() + "_slab");
-		Item item = new ItemMetalSlab(metal, block, slab, doubleslab);
+		final ResourceLocation location = new ResourceLocation(BaseMinerals.MODID, metal.getName() + "_slab");
+		final Item item = new ItemMetalSlab(metal, block, slab, doubleslab);
 		registerItem(item, location.getResourcePath(), metal, ItemGroups.tab_blocks);
-//		item.setUnlocalizedName(location.toString()); // Hack to set name right
+		//item.setUnlocalizedName(location.toString()); // Hack to set name right
 		return item;
 	}
 
 	@SuppressWarnings("unused")
 	private static Item createDoor(MetalMaterial metal, BlockDoor door) {
-		ResourceLocation location = new ResourceLocation(BaseMinerals.MODID, metal.getName() + "_door");
-		Item item = new ItemMetalDoor(door, metal);
+		final ResourceLocation location = new ResourceLocation(BaseMinerals.MODID, metal.getName() + "_door");
+		final Item item = new ItemMetalDoor(door, metal);
 		registerItem(item, location.getResourcePath() + "_item", metal, ItemGroups.tab_blocks);
 		item.setUnlocalizedName(location.toString()); // Hack to set name right
 		doorMap.put(door, item);
@@ -515,20 +515,20 @@ public abstract class Items {
 		return classVal + metalVal + (a.getMetadata() % 100);
 	}
 
-	public static Map<Item, String> getItemRegistry () {
-		return itemRegistry;
-	}
-
 	/**
 	 * 
 	 * @param event
 	 */
 	@SideOnly(Side.CLIENT)
 	public static void registerItemRenders(FMLInitializationEvent event) {
-		for(Item i : itemRegistry.keySet()) {
+		for(final Item i : itemRegistry.keySet()) {
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
 			.register(i, 0, 
 				new ModelResourceLocation(new ResourceLocation(BaseMinerals.MODID, itemRegistry.get(i)), "inventory"));
 		}
+	}
+
+	public static Map<Item, String> getItemRegistry() {
+		return itemRegistry;
 	}
 }

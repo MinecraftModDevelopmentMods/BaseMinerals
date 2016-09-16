@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 /**
- * 
+ *
  * @author Jasmine Iwanek
  *
  */
@@ -15,6 +15,7 @@ public class EnderIOPlugin {
 
 	private static boolean initDone = false;
 
+	// @formatter:off
 	private static final String ALLOY_SMELTER_MSG =
 			"<recipeGroup name=\"" + BaseMinerals.MODID + "\" >" +
 			 "<recipe name=\"%s\" energyCost=\"%d\" >" +
@@ -26,7 +27,7 @@ public class EnderIOPlugin {
 			  "</output>" +
 			 "</recipe>" +
 			"</recipeGroup>";
-			
+
 	private static final String SAG_MILL_MSG =
 			"<recipeGroup name=\"" + BaseMinerals.MODID + "\">" +
 			 "<recipe name=\"%s\" energyCost=\"%d\">" +
@@ -38,8 +39,9 @@ public class EnderIOPlugin {
 			   "<itemStack modID=\"" + BaseMinerals.MODID + "\" itemName=\"%s\" itemMeta=\"%d\" number=\"1\" chance=\"0.1\" />" +
 			   "<itemStack modID=\"minecraft\" itemName=\"%s\" chance=\"0.15\"/>" +
 			  "</output>" +
-			 "</recipe>" + 
+			 "</recipe>" +
 			"</recipeGroup>";
+	// @formatter:on
 
 	/**
 	 *
@@ -81,7 +83,7 @@ public class EnderIOPlugin {
 	 * @param energy
 	 */
 	public static void addAlloySmelterRecipe(String metal, String outputSecondary, int energy) {
-		String str = String.format(ALLOY_SMELTER_MSG, metal, energy, metal + "_ore", metal + "_ingot");
+		final String str = String.format(ALLOY_SMELTER_MSG, metal, energy, metal + "_ore", metal + "_ingot");
 		FMLInterModComms.sendMessage(ENDER_IO_MODID, "recipe:alloysmelter", str);
 	}
 
@@ -94,7 +96,7 @@ public class EnderIOPlugin {
 	 */
 	public static void addSagMillRecipe(String metal, String outputSecondary, int energy) {
 
-		String str = String.format(SAG_MILL_MSG, metal, energy, metal + "_ore", 0, metal + "_powder", 0, outputSecondary, 0, "cobblestone");
+		final String str = String.format(SAG_MILL_MSG, metal, energy, metal + "_ore", 0, metal + "_powder", 0, outputSecondary, 0, "cobblestone");
 		FMLInterModComms.sendMessage(ENDER_IO_MODID, "recipe:sagmill", str);
 	}
 }

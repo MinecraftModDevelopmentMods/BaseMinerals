@@ -17,7 +17,7 @@ public abstract class Achievements {
 	private static boolean initDone = false;
 
 	/**
-	 * 
+	 *
 	 */
 	public static void init() {
 		if(initDone)
@@ -26,7 +26,7 @@ public abstract class Achievements {
 		page = new AchievementPage(BaseMinerals.NAME);
 		AchievementPage.registerAchievementPage(page);
 
-//		charcoal_maker = makeAchievement("charcoal_maker", cyano.basemetals.init.Achievements.metallurgy, 0, 0, Items.charcoal_ingot);
+		// charcoal_maker = makeAchievement("charcoal_maker", cyano.basemetals.init.Achievements.metallurgy, 0, 0, Items.charcoal_ingot);
 
 		initDone = true;
 	}

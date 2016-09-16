@@ -26,8 +26,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class initializes all fluids in Base Minerals and provides some utility 
- * methods for looking up fluids. 
+ * This class initializes all fluids in Base Minerals and provides some utility
+ * methods for looking up fluids.
+ *
  * @author DrCyano
  *
  */
@@ -49,7 +50,7 @@ public abstract class Fluids {
 	private static boolean initDone = false;
 
 	/**
-	 * 
+	 *
 	 */
 	public static void init() {
 		if(initDone)
@@ -69,14 +70,14 @@ public abstract class Fluids {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param modID
 	 */
 	@SideOnly(Side.CLIENT)
 	public static void bakeModels(String modID) {
-		for(Fluid fluid : fluidBlocks.keySet()) {
-			BlockFluidBase block = fluidBlocks.get(fluid);
-			Item item = Item.getItemFromBlock(block);
+		for(final Fluid fluid : fluidBlocks.keySet()) {
+			final BlockFluidBase block = fluidBlocks.get(fluid);
+			final Item item = Item.getItemFromBlock(block);
 			final ModelResourceLocation fluidModelLocation = new ModelResourceLocation(
 					modID.toLowerCase() + ":" + fluidBlockNames.get(block), "fluid");
 			ModelBakery.registerItemVariants(item);
@@ -88,11 +89,9 @@ public abstract class Fluids {
 					return fluidModelLocation;
 				}
 			});
-			ModelLoader.setCustomStateMapper(block, new StateMapperBase()
-			{
+			ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
 				@Override
-				protected ModelResourceLocation getModelResourceLocation(IBlockState state)
-				{
+				protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
 					return fluidModelLocation;
 				}
 			});
@@ -118,7 +117,7 @@ public abstract class Fluids {
 		GameRegistry.register(block);
 		block.setCreativeTab(CreativeTabs.MISC);
 
-		ItemBlock itemBlock = new ItemBlock(block);
+		final ItemBlock itemBlock = new ItemBlock(block);
 		itemBlock.setRegistryName(location);
 		itemBlock.setUnlocalizedName(location.toString());
 		GameRegistry.register(itemBlock);

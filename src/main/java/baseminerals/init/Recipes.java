@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 
+ *
  * @author Jasmine Iwanek
  *
  */
@@ -42,9 +42,9 @@ public class Recipes {
 
 	@SuppressWarnings("unused")
 	private static void initMetalRecipes() {
-		List<MetalMaterial> exceptions = Arrays.asList(Materials.vanilla_iron, Materials.vanilla_gold, Materials.vanilla_diamond, Materials.vanilla_stone, Materials.vanilla_wood, Materials.copper, Materials.silver, Materials.tin, Materials.lead, Materials.nickel, Materials.bronze, Materials.brass, Materials.steel, Materials.invar, Materials.electrum, Materials.coldiron, Materials.mithril, Materials.adamantine, Materials.starsteel, Materials.zinc, Materials.aquarium);
+		final List<MetalMaterial> exceptions = Arrays.asList(Materials.vanilla_iron, Materials.vanilla_gold, Materials.vanilla_diamond, Materials.vanilla_stone, Materials.vanilla_wood, Materials.copper, Materials.silver, Materials.tin, Materials.lead, Materials.nickel, Materials.bronze, Materials.brass, Materials.steel, Materials.invar, Materials.electrum, Materials.coldiron, Materials.mithril, Materials.adamantine, Materials.starsteel, Materials.zinc, Materials.aquarium);
 
-		for(MetalMaterial metal : Materials.getAllMetals()) {
+		for(final MetalMaterial metal : Materials.getAllMetals()) {
 			if(exceptions.contains(metal))
 				continue;
 			String baseName = metal.getName() + "_";
@@ -232,12 +232,10 @@ public class Recipes {
 	 * @param oreDictEntries
 	 * @param name
 	 */
-	public static void addOredicts(String[] oreDictEntries, Block name)
-	{
+	public static void addOredicts(String[] oreDictEntries, Block name) {
 		addOredicts(oreDictEntries, new ItemStack(name));
-//		for(int i = 0; i < oreDictEntries.length; i++) {
-//			OreDictionary.registerOre(oreDictEntries[i], name);
-//		}
+		//for(int i = 0; i < oreDictEntries.length; i++)
+		//	OreDictionary.registerOre(oreDictEntries[i], name);
 	}
 
 	/**
@@ -245,12 +243,10 @@ public class Recipes {
 	 * @param oreDictEntries
 	 * @param name
 	 */
-	public static void addOredicts(String[] oreDictEntries, Item name)
-	{
+	public static void addOredicts(String[] oreDictEntries, Item name) {
 		addOredicts(oreDictEntries, new ItemStack(name));
-//		for(int i = 0; i < oreDictEntries.length; i++) {
+//		for(int i = 0; i < oreDictEntries.length; i++)
 //			OreDictionary.registerOre(oreDictEntries[i], name);
-//		}
 	}
 
 	/**
@@ -258,9 +254,8 @@ public class Recipes {
 	 * @param oreDictEntries
 	 * @param itemStackName
 	 */
-	public static void addOredicts(String[] oreDictEntries, ItemStack itemStackName)
-	{
-		for(int i = 0; i < oreDictEntries.length; i++) {
+	public static void addOredicts(String[] oreDictEntries, ItemStack itemStackName) {
+		for(int i = 0; i < oreDictEntries.length; i++)
 			OreDictionary.registerOre(oreDictEntries[i], itemStackName);
 		}
 	}

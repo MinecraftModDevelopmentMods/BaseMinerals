@@ -4,6 +4,7 @@ import baseminerals.BaseMinerals;
 import cyano.basemetals.blocks.*;
 import cyano.basemetals.material.MetalMaterial;
 import cyano.basemetals.registry.IOreDictionaryEntry;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockSlab;
@@ -21,8 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class initializes all blocks in Base Minerals and provides some utility 
- * methods for looking up blocks. 
+ * This class initializes all blocks in Base Minerals and provides some utility
+ * methods for looking up blocks.
+ *
  * @author DrCyano
  *
  */
@@ -93,13 +95,13 @@ public abstract class Blocks {
 
 	private static boolean initDone = false;
 
-//	private static Map<Block, String> blockRegistry = new HashMap<>();
+	// private static Map<Block, String> blockRegistry = new HashMap<>();
 	private static final Map<String, Block> blockRegistry = new HashMap<>();
-//	private static Map<MetalMaterial, List<Block>> blocksByMetal = new HashMap<>();
+	// private static Map<MetalMaterial, List<Block>> blocksByMetal = new HashMap<>();
 
 	/**
-	 * Gets an block by its name. The name is the name as it is registered in 
-	 * the GameRegistry, not its unlocalized name (the unlocalized name is the 
+	 * Gets an block by its name. The name is the name as it is registered in
+	 * the GameRegistry, not its unlocalized name (the unlocalized name is the
 	 * registered name plus the prefix "fantasymetals.")
 	 * @param name The name of the block in question
 	 * @return The block matching that name, or null if there isn't one
@@ -183,7 +185,7 @@ public abstract class Blocks {
 
 		// TODO: Make this support multiple oredicts
 		// final block settings
-		for(Block b : blockRegistry.values()) {
+		for(final Block b : blockRegistry.values()) {
 			if(b instanceof IOreDictionaryEntry)
 				OreDictionary.registerOre(((IOreDictionaryEntry)b).getOreDictionaryName(), b);
 			if(!(b instanceof BlockMetalDoor))
@@ -194,13 +196,13 @@ public abstract class Blocks {
 	}
 
 	private static Block addBlock(Block block, String name) {
-		ResourceLocation location = new ResourceLocation(BaseMinerals.MODID, name);
+		final ResourceLocation location = new ResourceLocation(BaseMinerals.MODID, name);
 		block.setRegistryName(location);
 		block.setUnlocalizedName(location.toString());
 		GameRegistry.register(block);
 
 		if (!(block instanceof BlockMetalDoor) && !(block instanceof BlockMetalSlab)) {
-			ItemBlock itemBlock = new ItemBlock(block);
+			final ItemBlock itemBlock = new ItemBlock(block);
 			itemBlock.setRegistryName(location);
 			itemBlock.setUnlocalizedName(location.toString());
 			GameRegistry.register(itemBlock);
@@ -255,12 +257,12 @@ public abstract class Blocks {
 
 	@SuppressWarnings("unused")
 	private static Block createStairs(MetalMaterial metal) {
-		return addBlock(new BlockMetalStairs(metal), metal.getName() + "_stairs");
+		return addBlock(new BlockMetalStairs(metal, Blocks.getBlockByName(metal.getName() + "_block")), metal.getName() + "_stairs");
 	}
 
 	@SuppressWarnings("unused")
 	private static Block createWall(MetalMaterial metal) {
-		return addBlock(new BlockMetalWall(metal), metal.getName() + "_wall");
+		return addBlock(new BlockMetalWall(metal, Blocks.getBlockByName(metal.getName() + "_block")), metal.getName() + "_wall");
 	}
 
 	private static Block createOre(MetalMaterial metal) {
@@ -277,22 +279,22 @@ public abstract class Blocks {
 		return addBlock(new BlockMetalTrapDoor(metal), metal.getName() + "_trapdoor");
 	}
 
-	public static Map<String, Block> getBlockRegistry () {
-		return blockRegistry;
-	}
-
 	/**
 	 * 
 	 * @param event
 	 */
 	@SideOnly(Side.CLIENT)
 	public static void registerItemRenders(FMLInitializationEvent event) {
-		for(String name : blockRegistry.keySet()) {
+		for(final String name : blockRegistry.keySet()) {
 			if(blockRegistry.get(name) instanceof BlockDoor)
 				continue; // do not add door blocks
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-			.register(net.minecraft.item.Item.getItemFromBlock(blockRegistry.get(name)), 0, 
+			.register(net.minecraft.item.Item.getItemFromBlock(blockRegistry.get(name)), 0,
 				new ModelResourceLocation(new ResourceLocation(BaseMinerals.MODID, name), "inventory"));
 		}
+	}
+
+	public static Map<String, Block> getBlockRegistry() {
+		return blockRegistry;
 	}
 }
