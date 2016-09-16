@@ -1,43 +1,44 @@
 package baseminerals;
 
+
+import baseminerals.data.AdditionalLootTables;
+import baseminerals.data.DataConstants;
+
+import cyano.basemetals.registry.CrusherRecipeRegistry;
+import baseminerals.proxy.CommonProxy;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.MissingModsException;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.versioning.ArtifactVersion;
+import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.apache.logging.log4j.Level;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
-import org.apache.logging.log4j.Level;
-
-import baseminerals.data.AdditionalLootTables;
-import baseminerals.data.DataConstants;
-import cyano.basemetals.registry.CrusherRecipeRegistry;
-import baseminerals.proxy.CommonProxy;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import java.util.*;
 
 /**
  * This is the entry point for this mod.
  * @author Jasmine Iwanek
  *
  */
-@Mod(
-		modid = BaseMinerals.MODID,
-		name = BaseMinerals.NAME,
-		version = BaseMinerals.VERSION,
-		dependencies = "required-after:Forge@[12.16.1.1887,);required-after:basemetals@[2.2,)",
-		acceptedMinecraftVersions = "1.9,)",
+@Mod(modid = BaseMinerals.MODID, name = BaseMinerals.NAME, version = BaseMinerals.VERSION,
+		dependencies = "required-after:Forge@[12.17.0.1976,);required-after:basemetals@[2.3,)",
+		acceptedMinecraftVersions = "1.9.4,)",
 		//certificateFingerprint = "",
 		updateJSON = "https://raw.githubusercontent.com/jriwanek/BaseMinerals/master/update.json")
 public class BaseMinerals {
@@ -62,7 +63,7 @@ public class BaseMinerals {
 	public static final String VERSION = "0.11.0";
 
 	/** All ore-spawn files discovered in the ore-spawn folder */
-	public static final List<Path> oreSpawnConfigFiles = new LinkedList<>();
+	protected static final List<Path> oreSpawnConfigFiles = new LinkedList<>();
 
 	/** If true, hammers cannot be crafted */
 	public static boolean disableAllHammers = false;
@@ -88,20 +89,29 @@ public class BaseMinerals {
 
 		disableAllHammers = false;
 
-		requireOreSpawn = false;
 
-		oreSpawnFolder = Paths.get(event.getSuggestedConfigurationFile().toPath().getParent().toString(), "orespawn");
-		Path oreSpawnFile = Paths.get(oreSpawnFolder.toString(),MODID+".json");
-		if(!Files.exists(oreSpawnFile)) {
-			try {
-				Files.createDirectories(oreSpawnFile.getParent());
-				Files.write(oreSpawnFile, Arrays.asList(DataConstants.defaultOreSpawnJSON.split("\n")), Charset.forName("UTF-8"));
-			} catch (IOException e) {
-				FMLLog.severe(MODID+": Error: Failed to write file "+oreSpawnFile);
+		requireOreSpawn = true;
+
+		config.save();
+
+		if(requireOreSpawn) {
+			if(!net.minecraftforge.fml.common.Loader.isModLoaded("orespawn")) {
+				HashSet<ArtifactVersion> orespawnMod = new HashSet<>();
+				orespawnMod.add(new DefaultArtifactVersion("1.0.0"));
+				throw new MissingModsException(orespawnMod, "orespawn", "DrCyano's Ore Spawn Mod");
+			}
+			oreSpawnFolder = Paths.get(event.getSuggestedConfigurationFile().toPath().getParent().toString(), "orespawn");
+			Path oreSpawnFile = Paths.get(oreSpawnFolder.toString(), MODID + ".json");
+			if (!(Files.exists(oreSpawnFile))) {
+				try {
+					Files.createDirectories(oreSpawnFile.getParent());
+					Files.write(oreSpawnFile, Arrays.asList(DataConstants.DEFAULT_ORESPAWN_JSON.split("\n")), Charset.forName("UTF-8"));
+				} catch (IOException e) {
+					FMLLog.severe(MODID + ": Error: Failed to write file " + oreSpawnFile);
+				}
 			}
 		}
 
-		config.save();
 
 		baseminerals.init.Fluids.init();
 		baseminerals.init.Materials.init();
@@ -109,7 +119,10 @@ public class BaseMinerals {
 		baseminerals.init.Blocks.init();
 		baseminerals.init.Items.init();
 		baseminerals.init.VillagerTrades.init();
-		baseminerals.init.TinkersConstructPlugin.init();
+//		baseminerals.init.EnderIOPlugin.init();
+//		if(Loader.isModLoaded("tconstruct"))
+//			baseminerals.init.TinkersConstructPlugin.init();
+		baseminerals.init.VeinMinerPlugin.init();
 
 		Path ALTPath = Paths.get(event.getSuggestedConfigurationFile().getParent(), "additional-loot-tables");
 		Path myLootFolder = ALTPath.resolve(MODID);
@@ -117,27 +130,27 @@ public class BaseMinerals {
 			try {
 				Files.createDirectories(myLootFolder.resolve("chests"));
 				Files.write(myLootFolder.resolve("chests").resolve("abandoned_mineshaft.json"),
-						Arrays.asList(         AdditionalLootTables.abandoned_mineshaft));
+						Collections.singletonList(AdditionalLootTables.abandoned_mineshaft));
 				Files.write(myLootFolder.resolve("chests").resolve("desert_pyramid.json"),
-						Arrays.asList(         AdditionalLootTables.desert_pyramid));
+						Collections.singletonList(AdditionalLootTables.desert_pyramid));
 				Files.write(myLootFolder.resolve("chests").resolve("end_city_treasure.json"),
-						Arrays.asList(         AdditionalLootTables.end_city_treasure));
+						Collections.singletonList(AdditionalLootTables.end_city_treasure));
 				Files.write(myLootFolder.resolve("chests").resolve("jungle_temple.json"),
-						Arrays.asList(         AdditionalLootTables.jungle_temple));
+						Collections.singletonList(AdditionalLootTables.jungle_temple));
 				Files.write(myLootFolder.resolve("chests").resolve("nether_bridge.json"),
-						Arrays.asList(         AdditionalLootTables.nether_bridge));
+						Collections.singletonList(AdditionalLootTables.nether_bridge));
 				Files.write(myLootFolder.resolve("chests").resolve("simple_dungeon.json"),
-						Arrays.asList(         AdditionalLootTables.simple_dungeon));
+						Collections.singletonList(AdditionalLootTables.simple_dungeon));
 				Files.write(myLootFolder.resolve("chests").resolve("spawn_bonus_chest.json"),
-						Arrays.asList(         AdditionalLootTables.spawn_bonus_chest));
+						Collections.singletonList(AdditionalLootTables.spawn_bonus_chest));
 				Files.write(myLootFolder.resolve("chests").resolve("stronghold_corridor.json"),
-						Arrays.asList(         AdditionalLootTables.stronghold_corridor));
+						Collections.singletonList(AdditionalLootTables.stronghold_corridor));
 				Files.write(myLootFolder.resolve("chests").resolve("stronghold_crossing.json"),
-						Arrays.asList(         AdditionalLootTables.stronghold_crossing));
+						Collections.singletonList(AdditionalLootTables.stronghold_crossing));
 				Files.write(myLootFolder.resolve("chests").resolve("village_blacksmith.json"),
-						Arrays.asList(         AdditionalLootTables.village_blacksmith));
+						Collections.singletonList(AdditionalLootTables.village_blacksmith));
 			} catch(IOException ex) {
-				FMLLog.log(Level.ERROR,ex,"%s: Failed to extract additional loot tables",MODID);
+				FMLLog.log(Level.ERROR, ex, "%s: Failed to extract additional loot tables", MODID);
 			}
 		}
 
@@ -148,8 +161,6 @@ public class BaseMinerals {
 		if(event.getSide() == Side.SERVER) {
 			serverPreInit(event);
 		}
-//		event.getVersionProperties();
-//		event.getModMetadata();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -169,6 +180,7 @@ public class BaseMinerals {
 	 */
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+
 		baseminerals.init.Recipes.init();
 		baseminerals.init.Achievements.init();
 

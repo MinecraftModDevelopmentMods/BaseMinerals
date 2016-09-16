@@ -1,15 +1,15 @@
 package baseminerals.init;
 
-import portablejim.veinminer.api.IMCMessage;
-
 import org.apache.logging.log4j.Level;
 
 import baseminerals.BaseMinerals;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Loader;
 
+import portablejim.veinminer.api.IMCMessage;
+
 /**
- * 
+ *
  * @author Jasmine Iwanek
  *
  */
@@ -26,7 +26,7 @@ public class VeinMinerPlugin {
 
 		if(Loader.isModLoaded("VeinMiner") || Loader.isModLoaded("veinminer")) {
 			FMLLog.log(Level.ERROR, "%s: Activating VeinMiner Support", BaseMinerals.MODID);
-			
+
 			addToolsForMetal("aluminum");
 			addToolsForMetal("aluminumbrass");
 			addToolsForMetal("cadmium");

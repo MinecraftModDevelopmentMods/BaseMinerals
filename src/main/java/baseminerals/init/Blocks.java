@@ -102,7 +102,7 @@ public abstract class Blocks {
 	/**
 	 * Gets an block by its name. The name is the name as it is registered in
 	 * the GameRegistry, not its unlocalized name (the unlocalized name is the
-	 * registered name plus the prefix "fantasymetals.")
+	 * registered name plus the prefix "baseminerals.")
 	 * @param name The name of the block in question
 	 * @return The block matching that name, or null if there isn't one
 	 */

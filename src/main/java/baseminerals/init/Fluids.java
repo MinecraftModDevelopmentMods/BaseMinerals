@@ -81,14 +81,7 @@ public abstract class Fluids {
 			final ModelResourceLocation fluidModelLocation = new ModelResourceLocation(
 					modID.toLowerCase() + ":" + fluidBlockNames.get(block), "fluid");
 			ModelBakery.registerItemVariants(item);
-			ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition()
-			{
-				@Override
-				public ModelResourceLocation getModelLocation(ItemStack stack)
-				{
-					return fluidModelLocation;
-				}
-			});
+			ModelLoader.setCustomMeshDefinition(item, stack -> fluidModelLocation);
 			ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
 				@Override
 				protected ModelResourceLocation getModelResourceLocation(IBlockState state) {

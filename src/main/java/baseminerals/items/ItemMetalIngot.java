@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 
 /**
  * Ingots
+ *
  * @author Jasmine Iwanek
  *
  */
@@ -27,7 +28,7 @@ public class ItemMetalIngot extends cyano.basemetals.items.ItemMetalIngot {
 		super.onCreated(item, world, entityPlayer);
 		entityPlayer.addStat(cyano.basemetals.init.Achievements.this_is_new, 1);
 
-		if(metal == Materials.charcoal)
-			entityPlayer.addStat(Achievements.charcoal_maker, 1);
+//		if(this.getMetalMaterial == Materials.charcoal)
+//			entityPlayer.addStat(Achievements.charcoal_maker, 1);
 	}
 }

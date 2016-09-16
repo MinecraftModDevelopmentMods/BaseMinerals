@@ -1,11 +1,10 @@
 package baseminerals.init;
 
-import baseminerals.init.Fluids;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 
+import baseminerals.init.Fluids;
 import baseminerals.utils.StringUtilities;
+
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,8 +18,10 @@ import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
 
+import java.util.List;
+
 /**
- * 
+ *
  * @author Jasmine Iwanek
  *
  */
@@ -29,8 +30,6 @@ public class TinkersConstructPlugin {
 	private static final String TCONSTRUCT_MODID = "tconstruct";
 
 	private static boolean initDone = false;
-
-	private static List<MaterialIntegration> integrateList = Lists.newArrayList(); // List of materials needed to be integrated
 
 	/**
 	 *
@@ -41,33 +40,33 @@ public class TinkersConstructPlugin {
 			return;
 
 		if(Loader.isModLoaded(TCONSTRUCT_MODID)) {
-			double d = 0; //durabilityFactorGeneral;
-//			System.out.println("DURABILITY FACTOR" + d);
-			float s = 0;// (float) speedFactorGeneral;
-//			System.out.println("SPEED FACTOR" + s);
-			float a = 0; //(float) attackFactorGeneral;
-//			System.out.println("ATTACK FACTOR" + a);
+			final double d = 0; // durabilityFactorGeneral;
+			// System.out.println("DURABILITY FACTOR" + d);
+			final float s = 0;// (float) speedFactorGeneral;
+			// System.out.println("SPEED FACTOR" + s);
+			final float a = 0; // (float) attackFactorGeneral;
+			// System.out.println("ATTACK FACTOR" + a);
 
 			final Material lithium = new Material("lithium", 0xFFC5C8C1);
 			final Material silicon = new Material("silicon", 0xFFC5C8C1);
 
 			registerFluid(Fluids.fluidLithium, true);
-//			registerTinkerMaterial(lithium, Fluids.fluidLithium, (int) (235 * d), 5.33f * s, 3.80f * a, 1.15f, 17, 117, 1, false, true);
+			// registerTinkerMaterial(lithium, Fluids.fluidLithium, (int) (235 * d), 5.33f * s, 3.80f * a, 1.15f, 17, 117, 1, false, true);
 			registerFluid(Fluids.fluidSilicon, true);
-//			registerTinkerMaterial(silicon, Fluids.fluidSilicon, (int) (235 * d), 5.33f * s, 3.80f * a, 1.15f, 17, 117, 1, false, true);
+			// registerTinkerMaterial(silicon, Fluids.fluidSilicon, (int) (235 * d), 5.33f * s, 3.80f * a, 1.15f, 17, 117, 1, false, true);
 		}
 
 		initDone = true;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param fluid
 	 * @param toolforge
 	 */
 	public static void registerFluid(Fluid fluid, boolean toolforge) {
 		if(Loader.isModLoaded(TCONSTRUCT_MODID)) {
-			NBTTagCompound message = new NBTTagCompound();
+			final NBTTagCompound message = new NBTTagCompound();
 			message.setString("fluid", fluid.getName());
 			message.setString("ore", StringUtilities.upperCaseFirst(fluid.getName()));
 			message.setBoolean("toolforge", toolforge);
@@ -79,7 +78,7 @@ public class TinkersConstructPlugin {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param outputName
 	 * @param outputQty
 	 * @param inputName
@@ -91,14 +90,14 @@ public class TinkersConstructPlugin {
 			if(inputName.length != inputQty.length)
 				throw new RuntimeException("Alloy must have the same amount of inputName and intQty");
 
-			NBTTagList tagList = new NBTTagList();
-			
+			final NBTTagList tagList = new NBTTagList();
+
 			// if you have access to the fluid-instance you can also do FluidStack.writeToNBT
 			NBTTagCompound fluid = new NBTTagCompound();
 			fluid.setString("FluidName", outputName);
 			fluid.setInteger("Amount", outputQty); // 144 = 1 ingot, 16 = 1 nugget
 			tagList.appendTag(fluid);
-		
+
 			// alloy fluid
 			for(int i = 0; i < inputName.length; i++) {
 				fluid = new NBTTagCompound();
@@ -116,19 +115,22 @@ public class TinkersConstructPlugin {
 	@SuppressWarnings("unused")
 	private static void registerTinkerMaterial(Material material, Fluid fluid, int headDura, float headSpeed, float headAttack, float handleMod, int handleDura, int extra, int headLevel, boolean craft, boolean cast) {
 
+		final List<MaterialIntegration> integrateList = Lists.newArrayList(); // List of materials needed to be integrated
+
 		TinkerRegistry.addMaterialStats(material, new HeadMaterialStats(headDura, headSpeed, headAttack, headLevel)); // Sets stats for head
 		TinkerRegistry.addMaterialStats(material, new HandleMaterialStats(handleMod, handleDura)); // Sets Stats for handle
 		TinkerRegistry.addMaterialStats(material, new ExtraMaterialStats(extra)); // Sets stats for everything else
 
-		Item item = Items.getItemByName(material.identifier + "_ingot"); // Why do we need to get an item here?
+		final Item item = Items.getItemByName(material.identifier + "_ingot"); // Why do we need to get an item here?
 		
-		// Set fluid used, Set whether craftable, set whether castable, adds the item with the value 144.
+		// Set fluid used, Set whether craftable, set whether castable, adds the
+		// item with the value 144.
 		material.setFluid(fluid).setCraftable(craft).setCastable(cast).addItem(item, 1, Material.VALUE_Ingot);
 		material.setRepresentativeItem(item); // Uses item as the picture?
 
 		// Probably don't need this
-//		proxy.setRenderInfo(material);
-		MaterialIntegration integration = new MaterialIntegration(material, fluid, StringUtilities.upperCaseFirst(fluid.getName()));
+		//proxy.setRenderInfo(material);
+		final MaterialIntegration integration = new MaterialIntegration(material, fluid, StringUtilities.upperCaseFirst(fluid.getName()));
 		integration.integrate();
 		integrateList.add(integration);
 	}
