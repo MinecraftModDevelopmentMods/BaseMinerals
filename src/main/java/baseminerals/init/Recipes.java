@@ -254,7 +254,7 @@ public class Recipes {
 //				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(stairs, 4), "x", "xx", "xxx", 'x', "block" + oreDictName));
 
 			if (block != null)
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(wall, 6), "", "", "", 'x', "block" + oreDictName));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(wall, 6), "xxx", "xxx", 'x', "block" + oreDictName));
 
 		}
 
