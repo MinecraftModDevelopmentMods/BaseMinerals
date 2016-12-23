@@ -29,7 +29,7 @@ public class BaseMinerals {
 	 */
 	public static final String VERSION = "0.12.0-beta1";
 
-	@SidedProxy(clientSide = "baseminerals.proxy.ClientProxy", serverSide = "baseminerals.proxy.CommonProxy")
+	@SidedProxy(clientSide = "mmd.baseminerals.proxy.ClientProxy", serverSide = "mmd.baseminerals.proxy.CommonProxy")
 	public static CommonProxy PROXY = null;
 
 	@EventHandler
