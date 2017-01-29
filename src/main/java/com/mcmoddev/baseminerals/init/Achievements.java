@@ -1,14 +1,15 @@
 package com.mcmoddev.baseminerals.init;
 
-import cyano.basemetals.util.Config.Options;
+import com.mcmoddev.baseminerals.util.Config.Options;
+
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.fml.common.Loader;
 
 /** initializer for achievements */
-public class Achievements extends cyano.basemetals.init.Achievements {
+public class Achievements extends com.mcmoddev.basemetals.init.Achievements {
 
-	public static Achievement charcoal_maker; // make blend
+	public static Achievement silicon_maker; // make blend
 
 	private static boolean initDone = false;
 
@@ -20,12 +21,15 @@ public class Achievements extends cyano.basemetals.init.Achievements {
 			return;
 		}
 
-		if (Options.ENABLE_ACHIEVEMENTS) {
+		if (com.mcmoddev.basemetals.util.Config.Options.ENABLE_ACHIEVEMENTS) {
 			AchievementPage page = new AchievementPage(Loader.instance().activeModContainer().getModId());
 			AchievementPage.registerAchievementPage(page);
 
-			// charcoal_maker = makeAchievement("charcoal_maker", cyano.basemetals.init.Achievements.metallurgy, 0, 0, Items.charcoal_ingot, page);
+			if (Options.ENABLE_SILICON) {
+				silicon_maker = makeAchievement("silicon_maker", metallurgy, 0, 0, Materials.silicon.ingot, page);
+			}
 		}
+
 		initDone = true;
 	}
 }

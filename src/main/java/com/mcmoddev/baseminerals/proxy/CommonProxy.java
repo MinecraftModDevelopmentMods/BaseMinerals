@@ -1,5 +1,6 @@
 package com.mcmoddev.baseminerals.proxy;
 
+import com.mcmoddev.baseminerals.integration.IntegrationManager;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.init.*;
 import com.mcmoddev.baseminerals.util.Config;
@@ -26,35 +27,16 @@ public class CommonProxy {
 
 		Config.init();
 
-		Fluids.init();
 		Materials.init();
+		Fluids.init();
 		ItemGroups.init();
 		Blocks.init();
 		Items.init();
 		VillagerTrades.init();
 
-		FMLInterModComms.sendFunctionMessage("orespawn", "api", "mmd.orespawn.BaseMineralsOreSpawn");
+		FMLInterModComms.sendFunctionMessage("orespawn", "api", "com.mcmoddev.orespawn.BaseMineralsOreSpawn");
 
-		/*
-		if ((Loader.isModLoaded("EnderIO")) && Options.ENABLE_ENDER_IO) {
-			EnderIO.init();
-		}
-		if ((Loader.isModLoaded("IC2")) && Options.ENABLE_IC2) {
-			//IC2.init();
-		}
-		if ((Loader.isModLoaded("tconstruct")) && Options.ENABLE_TINKERS_CONSTRUCT) {
-			TinkersConstruct.init();
-		}
-		if ((Loader.isModLoaded("Mekanism")) && Options.ENABLE_MEKANISM) {
-			Mekanism.init();
-		}
-		if ((Loader.isModLoaded("thaumcraft")) && Options.ENABLE_THAUMCRAFT) {
-			//Thaumcraft.init();
-		}
-		if ((Loader.isModLoaded("veinminer")) && Options.ENABLE_VEINMINER) {
-			VeinMiner.init();
-		}
-		*/
+		IntegrationManager.INSTANCE.preInit(event);
 	}
 
 	public void onRemap(FMLMissingMappingsEvent event) {

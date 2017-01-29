@@ -2,15 +2,15 @@ package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.util.Config.Options;
 
-import cyano.basemetals.material.MetalMaterial;
+import com.mcmoddev.basemetals.material.MetalMaterial;
 
 /**
  * This class initializes all blocks in Base Minerals.
  *
- * @author DrCyano
+ * @author Jasmine Iwanek
  *
  */
-public class Blocks extends cyano.basemetals.init.Blocks {
+public class Blocks extends com.mcmoddev.lib.init.Blocks {
 
 	private static boolean initDone = false;
 

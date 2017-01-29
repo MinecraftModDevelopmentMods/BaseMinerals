@@ -2,8 +2,8 @@ package com.mcmoddev.orespawn;
 
 import com.google.common.base.Function;
 import com.mcmoddev.baseminerals.init.Materials;
-import com.mcmoddev.orespawn.api.OreSpawnAPI;
-import com.mcmoddev.orespawn.api.SpawnLogic;
+import mmd.orespawn.api.OreSpawnAPI;
+import mmd.orespawn.api.SpawnLogic;
 
 public class BaseMineralsOreSpawn implements Function<OreSpawnAPI, SpawnLogic> {
 

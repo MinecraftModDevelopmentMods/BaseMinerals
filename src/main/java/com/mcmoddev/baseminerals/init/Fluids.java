@@ -1,22 +1,15 @@
 package com.mcmoddev.baseminerals.init;
 
+import com.mcmoddev.basemetals.material.MetalMaterial;
 import com.mcmoddev.baseminerals.util.Config.Options;
-
-import net.minecraftforge.fluids.*;
 
 /**
  * This class initializes all fluids in Base Minerals.
  *
- * @author DrCyano
+ * @author Jasmine Iwanek
  *
  */
-public class Fluids extends cyano.basemetals.init.Fluids {
-
-	public static Fluid fluidLithium = null;
-	public static BlockFluidBase fluidBlockLithium = null;
-
-	public static Fluid fluidSilicon = null;
-	public static BlockFluidBase fluidBlockSilicon = null;
+public class Fluids extends com.mcmoddev.lib.init.Fluids {
 
 	private static boolean initDone = false;
 
@@ -28,20 +21,22 @@ public class Fluids extends cyano.basemetals.init.Fluids {
 			return;
 		}
 
-		String materialName;
+		MetalMaterial material;
 
+		// fluids and fluid blocks
 		if (Options.ENABLE_LITHIUM) {
-			materialName = "lithium";
+			material = Materials.lithium;
 
-			fluidLithium = addFluid(materialName, 2000, 10000, 330, 10);
-			fluidBlockLithium = addFluidBlock(materialName);
+			addFluid(material, 2000, 10000, 330, 10);
+			addFluidBlock(material);
 		}
 		if (Options.ENABLE_SILICON) {
-			materialName = "silicon";
+			material = Materials.silicon;
 
-			fluidSilicon = addFluid(materialName, 2000, 10000, 330, 10);
-			fluidBlockSilicon = addFluidBlock(materialName);
+			addFluid(material, 2000, 10000, 330, 10);
+			addFluidBlock(material);
 		}
+
 		initDone = true;
 	}
 }

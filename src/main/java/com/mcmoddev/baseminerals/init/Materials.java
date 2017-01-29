@@ -2,7 +2,7 @@ package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.util.Config.Options;
 
-import cyano.basemetals.material.MetalMaterial;
+import com.mcmoddev.basemetals.material.MetalMaterial;
 
 /**
  * This class initializes all of the materials in Base Minerals.
@@ -10,7 +10,7 @@ import cyano.basemetals.material.MetalMaterial;
  * @author DrCyano
  *
  */
-public class Materials extends cyano.basemetals.init.Materials {
+public class Materials extends com.mcmoddev.lib.init.Materials {
 
 	public static MetalMaterial charcoal;
 	public static MetalMaterial lithium;
@@ -34,31 +34,31 @@ public class Materials extends cyano.basemetals.init.Materials {
 
 		// Mod Materials
 		if (Options.ENABLE_CHARCOAL) {
-			charcoal = createMaterial("charcoal", 8, 8, 4.5, 0xFF000000);
+			charcoal = createMaterial("charcoal", 5, 2, 0, 0xFF000000);
 		}
 		if (Options.ENABLE_LITHIUM) {
 			lithium = createMaterial("lithium", 8, 8, 4.5, 0xFFC5C8C1);
 		}
 		if (Options.ENABLE_NITER) {
-			niter = createMaterial("niter", 8, 8, 4.5, 0xFF000000);
+			niter = createMaterial("niter", 5, 2, 0, 0xFF000000);
 		}
 		if (Options.ENABLE_PHOSPHORUS) {
-			phosphorus = createMaterial("phosphorus", 8, 8, 4.5, 0xFF000000);
+			phosphorus = createMaterial("phosphorus", 5, 2, 0, 0xFF000000);
 		}
 		if (Options.ENABLE_POTASH) {
-			potash = createMaterial("potash", 8, 8, 4.5, 0xFF000000);
+			potash = createMaterial("potash", 5, 2, 0, 0xFF000000);
 		}
 		if (Options.ENABLE_SALT) {
-			salt = createMaterial("salt", 8, 8, 4.5, 0xFF000000);
+			salt = createMaterial("salt", 5, 2, 0, 0xFF000000);
 		}
 		if (Options.ENABLE_SALTPETER) {
-			saltpeter = createMaterial("saltpeter", 8, 8, 4.5, 0xFF000000);
+			saltpeter = createMaterial("saltpeter", 5, 2, 0, 0xFF000000);
 		}
 		if (Options.ENABLE_SILICON) {
 			silicon = createMaterial("silicon", 8, 8, 4.5, 0xFFC5C8C1);
 		}
 		if (Options.ENABLE_SULFUR) {
-			sulfur = createMaterial("sulfur", 8, 8, 4.5, 0xFF000000);
+			sulfur = createMaterial("sulfur", 5, 2, 0, 0xFF000000);
 		}
 
 		initDone = true;

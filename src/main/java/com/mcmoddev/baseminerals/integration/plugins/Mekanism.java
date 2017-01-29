@@ -1,16 +1,16 @@
 package com.mcmoddev.baseminerals.integration.plugins;
 
-import cyano.basemetals.integration.BaseMetalsPlugin;
-import cyano.basemetals.integration.IIntegration;
+import com.mcmoddev.baseminerals.integration.BaseMineralsPlugin;
+import com.mcmoddev.basemetals.integration.IIntegration;
 
-@BaseMetalsPlugin(Mekanism.PLUGIN_MODID)
-public class Mekanism extends cyano.basemetals.integration.plugins.Mekanism implements IIntegration {
+@BaseMineralsPlugin(Mekanism.PLUGIN_MODID)
+public class Mekanism extends com.mcmoddev.basemetals.integration.plugins.Mekanism implements IIntegration {
 
 	private static boolean initDone = false;
 
 	@Override
 	public void init() {
-		if (initDone || !cyano.basemetals.util.Config.Options.ENABLE_MEKANISM) {
+		if (initDone || !com.mcmoddev.basemetals.util.Config.Options.ENABLE_MEKANISM) {
 			return;
 		}
 
