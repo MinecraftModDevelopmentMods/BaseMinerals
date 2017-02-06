@@ -1,6 +1,5 @@
 package com.mcmoddev.baseminerals.init;
 
-import com.mcmoddev.basemetals.material.MetalMaterial;
 import com.mcmoddev.baseminerals.util.Config.Options;
 
 /**
@@ -13,6 +12,10 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 
 	private static boolean initDone = false;
 
+	private Fluids() {
+		throw new IllegalAccessError("Not a instantiable class");
+	}
+
 	/**
 	 *
 	 */
@@ -21,20 +24,13 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 			return;
 		}
 
-		MetalMaterial material;
-
-		// fluids and fluid blocks
-		if (Options.ENABLE_LITHIUM) {
-			material = Materials.lithium;
-
-			addFluid(material, 2000, 10000, 330, 10);
-			addFluidBlock(material);
+		if (Options.enableLithium) {
+			addFluid(Materials.lithium, 2000, 10000, 330, 10);
+			addFluidBlock(Materials.lithium);
 		}
-		if (Options.ENABLE_SILICON) {
-			material = Materials.silicon;
-
-			addFluid(material, 2000, 10000, 330, 10);
-			addFluidBlock(material);
+		if (Options.enableSilicon) {
+			addFluid(Materials.silicon, 2000, 10000, 330, 10);
+			addFluidBlock(Materials.silicon);
 		}
 
 		initDone = true;

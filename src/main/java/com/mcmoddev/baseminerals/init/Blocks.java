@@ -2,8 +2,6 @@ package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.util.Config.Options;
 
-import com.mcmoddev.basemetals.material.MetalMaterial;
-
 /**
  * This class initializes all blocks in Base Minerals.
  *
@@ -25,69 +23,47 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 		Materials.init();
 		ItemGroups.init();
 
-		MetalMaterial material;
-
-		if (Options.ENABLE_CHARCOAL) {
-			material = Materials.charcoal;
-
-			createBlock(material);
-			//createOre(material);
+		if (Options.enableCharcoal) {
+			createBlock(Materials.charcoal);
 		}
 
-		if (Options.ENABLE_LITHIUM) {
-			material = Materials.lithium;
-
-			createBlock(material);
-			createOre(material);
+		if (Options.enableLithium) {
+			createBlock(Materials.lithium);
+			createOre(Materials.lithium);
 		}
 
-		if (Options.ENABLE_NITER) {
-			material = Materials.niter;
-
-			createBlock(material);
-			createOre(material);
+		if (Options.enableNiter) {
+			createBlock(Materials.niter);
+			createOre(Materials.niter);
 		}
 
-		if (Options.ENABLE_PHOSPHORUS) {
-			material = Materials.phosphorus;
-
-			createBlock(material);
-			createOre(material);
+		if (Options.enablePhosphorus) {
+			createBlock(Materials.phosphorus);
+			createOre(Materials.phosphorus);
 		}
 
-		if (Options.ENABLE_POTASH) {
-			material = Materials.potash;
-
-			createBlock(material);
-			createOre(material);
+		if (Options.enablePotash) {
+			createBlock(Materials.potash);
+			createOre(Materials.potash);
 		}
 
-		if (Options.ENABLE_SALT) {
-			material = Materials.salt;
-
-			createBlock(material);
-			createOre(material);
+		if (Options.enableSalt) {
+			createBlock(Materials.salt);
+			createOre(Materials.salt);
 		}
 
-		if (Options.ENABLE_SALTPETER) {
-			material = Materials.saltpeter;
-
-			createBlock(material);
-			createOre(material);
+		if (Options.enableSaltpeter) {
+			createBlock(Materials.saltpeter);
+			createOre(Materials.saltpeter);
 		}
 
-		if (Options.ENABLE_SILICON) {
-			material = Materials.silicon;
-
-			createBlock(material);
-			//createOre(material);
+		if (Options.enableSilicon) {
+			createBlock(Materials.silicon);
 		}
 
-		if (Options.ENABLE_SULFUR) {
-			material = Materials.sulfur;
-
-			createBlock(material);
-			createOre(material);
+		if (Options.enableSulfur) {
+			createBlock(Materials.sulfur);
+			createOre(Materials.sulfur);
 		}
 
 		initDone = true;

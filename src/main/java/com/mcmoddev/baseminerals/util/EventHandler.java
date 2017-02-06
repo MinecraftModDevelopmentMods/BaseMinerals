@@ -1,12 +1,5 @@
 package com.mcmoddev.baseminerals.util;
 
-import com.mcmoddev.basemetals.material.IMetalObject;
-import com.mcmoddev.basemetals.material.MetalMaterial;
-import com.mcmoddev.basemetals.util.Config.Options;
-import com.mcmoddev.lib.items.ItemMetalBlend;
-import com.mcmoddev.lib.items.ItemMetalIngot;
-
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
@@ -15,6 +8,7 @@ public class EventHandler {
 
 	@SubscribeEvent
 	void event(ItemCraftedEvent event) {
+/*
 		final Item item = event.crafting.getItem();
 		if (item instanceof IMetalObject) {
 			final MetalMaterial material = ((IMetalObject) item).getMaterial();
@@ -24,10 +18,12 @@ public class EventHandler {
 				}
 			}
 		}
+*/
 	}
 
 	@SubscribeEvent
 	void event(ItemSmeltedEvent event) {
+/*
 		final Item item = event.smelting.getItem();
 		if (item instanceof IMetalObject) {
 			final MetalMaterial material = ((IMetalObject) item).getMaterial();
@@ -37,5 +33,6 @@ public class EventHandler {
 				}
 			}
 		}
+*/
 	}
 }

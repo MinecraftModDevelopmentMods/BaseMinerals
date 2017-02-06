@@ -2,8 +2,6 @@ package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.util.Config.Options;
 
-import com.mcmoddev.basemetals.material.MetalMaterial;
-
 /**
  * This class initializes all items in Base Minerals.
  *
@@ -13,6 +11,10 @@ import com.mcmoddev.basemetals.material.MetalMaterial;
 public class Items extends com.mcmoddev.lib.init.Items {
 
 	private static boolean initDone = false;
+
+	protected Items() {
+		throw new IllegalAccessError("Not a instantiable class");
+	}
 
 	/**
 	 *
@@ -24,105 +26,56 @@ public class Items extends com.mcmoddev.lib.init.Items {
 
 		Blocks.init();
 
-		MetalMaterial material;
-
-		if (Options.ENABLE_CHARCOAL) {
-			material = Materials.charcoal;
-
-//			createBlend(material);
-//			createIngot(material);
-			createNugget(material); // Special
-			createPowder(material);
-//			createSmallBlend(material);
-			createSmallPowder(material);
+		if (Options.enableCharcoal) {
+			createNugget(Materials.charcoal); // Special
+			createPowder(Materials.charcoal);
+			createSmallPowder(Materials.charcoal);
 		}
 
-		if (Options.ENABLE_LITHIUM) {
-			material = Materials.lithium;
-
-//			createBlend(material);
-			createIngot(material);
-			createNugget(material);
-			createPowder(material);
-//			createSmallBlend(material);
-			createSmallPowder(material);
+		if (Options.enableLithium) {
+			createIngot(Materials.lithium);
+			createNugget(Materials.lithium);
+			createPowder(Materials.lithium);
+			createSmallPowder(Materials.lithium);
 		}
 
-		if (Options.ENABLE_NITER) {
-			material = Materials.niter;
-
-//			createBlend(material);
-//			createIngot(material);
-//			createNugget(material);
-			createPowder(material);
-//			createSmallBlend(material);
-			createSmallPowder(material);
+		if (Options.enableNiter) {
+			createPowder(Materials.niter);
+			createSmallPowder(Materials.niter);
 		}
 
-		if (Options.ENABLE_PHOSPHORUS) {
-			material = Materials.phosphorus;
-
-//			createBlend(material);
-//			createIngot(material);
-//			createNugget(material);
-			createPowder(material);
-//			createSmallBlend(material);
-			createSmallPowder(material);
+		if (Options.enablePhosphorus) {
+			createPowder(Materials.phosphorus);
+			createSmallPowder(Materials.phosphorus);
 		}
 
-		if (Options.ENABLE_POTASH) {
-			material = Materials.potash;
-
-//			createBlend(material);
-//			createIngot(material);
-//			createNugget(material);
-			createPowder(material);
-//			createSmallBlend(material);
-			createSmallPowder(material);
+		if (Options.enablePotash) {
+			createPowder(Materials.potash);
+			createSmallPowder(Materials.potash);
 		}
 
-		if (Options.ENABLE_SALT) {
-			material = Materials.salt;
-
-//			createBlend(material);
-//			createIngot(material);
-//			createNugget(material);
-			createPowder(material);
-//			createSmallblend(material);
-			createSmallPowder(material);
+		if (Options.enableSalt) {
+			createPowder(Materials.salt);
+			createSmallPowder(Materials.salt);
 		}
 
-		if (Options.ENABLE_SALTPETER) {
-			material = Materials.saltpeter;
-
-//			createBlend(material);
-//			createIngot(material);
-//			createNugget(material);
-			createPowder(material);
-//			createSmallBlend(material);
-			createSmallPowder(material);
+		if (Options.enableSaltpeter) {
+			createPowder(Materials.saltpeter);
+			createSmallPowder(Materials.saltpeter);
 		}
 
-		if (Options.ENABLE_SILICON) {
-			material = Materials.silicon;
-
-			createBlend(material);
-			createIngot(material);
-			createNugget(material);
-			createPowder(material);
-			createSmallBlend(material);
-			createSmallPowder(material);
+		if (Options.enableSilicon) {
+			createBlend(Materials.silicon);
+			createIngot(Materials.silicon);
+			createNugget(Materials.silicon);
+			createPowder(Materials.silicon);
+			createSmallBlend(Materials.silicon);
+			createSmallPowder(Materials.silicon);
 		}
 
-		if (Options.ENABLE_SULFUR) {
-			material = Materials.sulfur;
-
-//			createBlend(material);
-//			createIngot(material);
-//			createNugget(material);
-			createPowder(material);
-//			createSmallBlend(material);
-			createSmallPowder(material);
+		if (Options.enableSulfur) {
+			createPowder(Materials.sulfur);
+			createSmallPowder(Materials.sulfur);
 		}
 
 //		addToMetList() // May not be needed, check

@@ -1,7 +1,7 @@
 package com.mcmoddev.baseminerals.integration.plugins;
 
 import com.mcmoddev.baseminerals.integration.BaseMineralsPlugin;
-import com.mcmoddev.basemetals.integration.IIntegration;
+import com.mcmoddev.lib.integration.IIntegration;
 
 /**
  *
@@ -9,7 +9,7 @@ import com.mcmoddev.basemetals.integration.IIntegration;
  *
  */
 @BaseMineralsPlugin(EnderIO.PLUGIN_MODID)
-public class EnderIO extends com.mcmoddev.basemetals.integration.plugins.EnderIO implements IIntegration {
+public class EnderIO extends com.mcmoddev.lib.integration.plugins.EnderIO implements IIntegration {
 
 	private static boolean initDone = false;
 
@@ -18,11 +18,10 @@ public class EnderIO extends com.mcmoddev.basemetals.integration.plugins.EnderIO
 	 */
 	@Override
 	public void init() {
-		if (initDone || !com.mcmoddev.basemetals.util.Config.Options.ENABLE_ENDER_IO) {
+		if (initDone || !com.mcmoddev.basemetals.util.Config.Options.enableEnderIO) {
 			return;
 		}
 
-		// TODO: Verify blocks, Slabs, Ingots, Oreblocks
 
 		initDone = true;
 	}

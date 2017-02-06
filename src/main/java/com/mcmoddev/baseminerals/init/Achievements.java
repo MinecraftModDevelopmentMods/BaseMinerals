@@ -7,11 +7,16 @@ import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.fml.common.Loader;
 
 /** initializer for achievements */
-public class Achievements extends com.mcmoddev.basemetals.init.Achievements {
+public class Achievements extends com.mcmoddev.lib.init.Achievements {
 
-	public static Achievement silicon_maker; // make blend
+	/** Make Silicon Blend */
+	public static Achievement siliconMaker;
 
 	private static boolean initDone = false;
+
+	private Achievements() {
+		throw new IllegalAccessError("Not a instantiable class");
+	}
 
 	/**
 	 *
@@ -21,12 +26,12 @@ public class Achievements extends com.mcmoddev.basemetals.init.Achievements {
 			return;
 		}
 
-		if (com.mcmoddev.basemetals.util.Config.Options.ENABLE_ACHIEVEMENTS) {
+		if (com.mcmoddev.basemetals.util.Config.Options.enableAchievements) {
 			AchievementPage page = new AchievementPage(Loader.instance().activeModContainer().getModId());
 			AchievementPage.registerAchievementPage(page);
 
-			if (Options.ENABLE_SILICON) {
-				silicon_maker = makeAchievement("silicon_maker", metallurgy, 0, 0, Materials.silicon.ingot, page);
+			if (Options.enableSilicon) {
+				siliconMaker = makeAchievement("silicon_maker", com.mcmoddev.basemetals.init.Achievements.metallurgy, 0, 0, Materials.silicon.ingot, page);
 			}
 		}
 
