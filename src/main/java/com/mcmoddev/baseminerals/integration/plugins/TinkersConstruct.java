@@ -22,12 +22,10 @@ public class TinkersConstruct extends com.mcmoddev.lib.integration.plugins.Tinke
 		}
 
 		if (Options.enableLithium) {
-			//registerMaterial(Materials.lithium.getName(), false, true);
-			registerFluid(Materials.lithium.fluid, false);
+			registerFluid(Materials.lithium, 144);
 		}
 		if (Options.enableSilicon) {
-			//registerMaterial(Materials.silicon.getName(), false, true);
-			registerFluid(Materials.silicon.fluid, false);
+			registerFluid(Materials.silicon, 144);
 		}
 
 		initDone = true;
