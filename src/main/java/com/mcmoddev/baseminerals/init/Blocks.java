@@ -24,7 +24,7 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 		ItemGroups.init();
 
 		if (Options.enableCharcoal) {
-			createBlock(Materials.charcoal);
+			createBlock(Materials.vanilla_charcoal);
 		}
 
 		if (Options.enableLithium) {

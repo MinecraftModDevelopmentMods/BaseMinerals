@@ -12,15 +12,25 @@ import com.mcmoddev.lib.material.MetalMaterial;
  */
 public class Materials extends com.mcmoddev.lib.init.Materials {
 
-	public static MetalMaterial charcoal;
+	/** Lithium */
 	public static MetalMaterial lithium;
+	/** Niter */
 	public static MetalMaterial niter;
+	/** Phosphorus */
 	public static MetalMaterial phosphorus;
+	/** Potash */
 	public static MetalMaterial potash;
+	/** Salt */
 	public static MetalMaterial salt;
+	/** Saltpeter */
 	public static MetalMaterial saltpeter;
+	/** Silicon */
 	public static MetalMaterial silicon;
+	/** Sulfur */
 	public static MetalMaterial sulfur;
+
+	/** Charcoal */
+	public static MetalMaterial vanilla_charcoal;
 
 	private static boolean initDone = false;
 
@@ -37,8 +47,8 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 		}
 
 		if (Options.enableCharcoal) {
-			charcoal = createMaterial("charcoal", 5, 2, 0, 0xFF000000);
-			charcoal.materialType = MetalMaterial.MaterialType.MINERAL;
+			vanilla_charcoal = createMaterial("charcoal", 5, 2, 0, 0xFF000000);
+			vanilla_charcoal.materialType = MetalMaterial.MaterialType.MINERAL;
 		}
 
 		if (Options.enableLithium) {

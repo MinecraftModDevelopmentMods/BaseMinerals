@@ -27,9 +27,9 @@ public class Items extends com.mcmoddev.lib.init.Items {
 		Blocks.init();
 
 		if (Options.enableCharcoal) {
-			createNugget(Materials.charcoal); // Special
-			createPowder(Materials.charcoal);
-			createSmallPowder(Materials.charcoal);
+			createNugget(Materials.vanilla_charcoal); // Special
+			createPowder(Materials.vanilla_charcoal);
+			createSmallPowder(Materials.vanilla_charcoal);
 		}
 
 		if (Options.enableLithium) {
