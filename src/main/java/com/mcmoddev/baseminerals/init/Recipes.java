@@ -2,6 +2,7 @@ package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.init.Materials;
 import com.mcmoddev.baseminerals.util.Config.Options;
+import com.mcmoddev.lib.util.Oredicts;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -40,20 +41,20 @@ public class Recipes extends com.mcmoddev.lib.init.Recipes {
 
 	private static void initModSpecificRecipes() {
 
-		if ((Options.enableSulfur) && (Options.enableSaltpeter)) {
+		if ((Options.enableSulfur)) {
 			if (Options.enableSaltpeter) {
-				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(net.minecraft.init.Items.GUNPOWDER, 3), "dustCoal", "dustSulfur", "dustSaltpeter"));
-				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(net.minecraft.init.Items.GUNPOWDER, 3), "dustCharcoal", "dustSulfur", "dustSaltpeter"));
+				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(net.minecraft.init.Items.GUNPOWDER, 3), Oredicts.DUSTCOAL, Oredicts.DUST + "Sulfur", Oredicts.DUST + "Saltpeter"));
+				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(net.minecraft.init.Items.GUNPOWDER, 3), Oredicts.DUSTCHARCOAL, Oredicts.DUST + "Sulfur", Oredicts.DUST + "Saltpeter"));
 			}
-			if (Options.enableSaltpeter) {
-				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(net.minecraft.init.Items.GUNPOWDER, 3), "dustCoal", "dustSulfur", "dustPotash"));
-				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(net.minecraft.init.Items.GUNPOWDER, 3), "dustCharcoal", "dustSulfur", "dustPotash"));
+			if (Options.enablePotash) {
+				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(net.minecraft.init.Items.GUNPOWDER, 3), Oredicts.DUSTCOAL, Oredicts.DUST + "Sulfur", Oredicts.DUST + "Potash"));
+				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(net.minecraft.init.Items.GUNPOWDER, 3), Oredicts.DUSTCHARCOAL, Oredicts.DUST + "Sulfur", Oredicts.DUST + "Potash"));
 			}
 		}
 
 		if (Options.enableSilicon) {
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Materials.silicon.powder, 1), "sand", "dustCoal"));
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Materials.silicon.powder, 1), "sand", "dustCharcoal"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Materials.silicon.powder, 1), "sand", Oredicts.DUSTCOAL));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Materials.silicon.powder, 1), "sand", Oredicts.DUSTCHARCOAL));
 			OreDictionary.registerOre("itemSilicon", Materials.silicon.ingot);
 		}
 	}
