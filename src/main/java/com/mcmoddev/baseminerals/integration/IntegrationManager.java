@@ -24,7 +24,7 @@ public enum IntegrationManager {
     			IIntegration integration;
 				try {
 					integration = Class.forName(className).asSubclass(IIntegration.class).newInstance();
-					BaseMinerals.logger.info("BASEMINERALS Loaded: " + modId);
+					BaseMinerals.logger.info("BASEMINERALS Loaded: "+modId);
 					integrations.add(integration);
 					integration.init();
 				} catch (final Exception e) {
