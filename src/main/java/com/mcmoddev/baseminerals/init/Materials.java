@@ -3,6 +3,7 @@ package com.mcmoddev.baseminerals.init;
 import com.mcmoddev.baseminerals.util.Config.Options;
 
 import com.mcmoddev.lib.material.MetalMaterial;
+import com.mcmoddev.lib.material.MetalMaterial.MaterialType;
 
 /**
  * This class initializes all of the materials in Base Minerals.
@@ -47,48 +48,39 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 		}
 
 		if (Options.enableCharcoal) {
-			vanilla_charcoal = createMaterial("charcoal", 5, 2, 0, 0xFF000000);
-			vanilla_charcoal.materialType = MetalMaterial.MaterialType.MINERAL;
+			vanilla_charcoal = createMaterial("charcoal", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enableLithium) {
-			lithium = createMaterial("lithium", 8, 8, 4.5, 0xFFC5C8C1);
-			lithium.materialType = MetalMaterial.MaterialType.METAL;
+			lithium = createMaterial("lithium", MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
 		if (Options.enableNiter) {
-			niter = createMaterial("niter", 5, 2, 0, 0xFF000000);
-			niter.materialType = MetalMaterial.MaterialType.MINERAL;
+			niter = createMaterial("niter", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enablePhosphorus) {
-			phosphorus = createMaterial("phosphorus", 5, 2, 0, 0xFF000000);
-			phosphorus.materialType = MetalMaterial.MaterialType.MINERAL;
+			phosphorus = createMaterial("phosphorus", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enablePotash) {
-			potash = createMaterial("potash", 5, 2, 0, 0xFF000000);
-			potash.materialType = MetalMaterial.MaterialType.MINERAL;
+			potash = createMaterial("potash", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enableSalt) {
-			salt = createMaterial("salt", 5, 2, 0, 0xFF000000);
-			salt.materialType = MetalMaterial.MaterialType.MINERAL;
+			salt = createMaterial("salt", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enableSaltpeter) {
-			saltpeter = createMaterial("saltpeter", 5, 2, 0, 0xFF000000);
-			saltpeter.materialType = MetalMaterial.MaterialType.MINERAL;
+			saltpeter = createMaterial("saltpeter", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enableSilicon) {
-			silicon = createMaterial("silicon", 8, 8, 4.5, 0xFFC5C8C1);
-			silicon.materialType = MetalMaterial.MaterialType.METAL;
+			silicon = createMaterial("silicon", MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
 		if (Options.enableSulfur) {
-			sulfur = createMaterial("sulfur", 5, 2, 0, 0xFF000000);
-			sulfur.materialType = MetalMaterial.MaterialType.MINERAL;
+			sulfur = createMaterial("sulfur", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		initDone = true;
