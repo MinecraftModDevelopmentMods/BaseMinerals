@@ -32,7 +32,9 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 
 	/** Charcoal */
 	public static MetalMaterial vanilla_charcoal;
-
+	/** Coal */
+	public static MetalMaterial vanilla_coal;
+	
 	private static boolean initDone = false;
 
 	protected Materials() {
