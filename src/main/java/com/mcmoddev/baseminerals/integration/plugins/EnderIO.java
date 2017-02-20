@@ -22,6 +22,14 @@ public class EnderIO extends com.mcmoddev.lib.integration.plugins.EnderIO implem
 			return;
 		}
 
+		addSagMillRecipe("lithium", null, 3600);
+		addSagMillRecipe("niter", null, 3600);
+		addSagMillRecipe("phosphorus", null, 3600);
+		addSagMillRecipe("potash", null, 3600);
+		addSagMillRecipe("salt", null, 3600);
+		addSagMillRecipe("saltpeter", null, 3600);
+		// addSagMillRecipe("silicon", null, 3600);
+		addSagMillRecipe("sulfur", null, 3600);
 
 		initDone = true;
 	}
