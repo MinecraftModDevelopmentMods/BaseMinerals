@@ -30,11 +30,12 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 	/** Sulfur */
 	public static MetalMaterial sulfur;
 
+	// vanilla imports
 	/** Charcoal */
 	public static MetalMaterial vanilla_charcoal;
 	/** Coal */
 	public static MetalMaterial vanilla_coal;
-	
+
 	private static boolean initDone = false;
 
 	protected Materials() {

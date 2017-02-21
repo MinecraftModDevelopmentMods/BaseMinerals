@@ -28,6 +28,7 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 			addFluid(Materials.lithium, 2000, 10000, 330, 10);
 			addFluidBlock(Materials.lithium);
 		}
+
 		if (Options.enableSilicon) {
 			addFluid(Materials.silicon, 2000, 10000, 330, 10);
 			addFluidBlock(Materials.silicon);

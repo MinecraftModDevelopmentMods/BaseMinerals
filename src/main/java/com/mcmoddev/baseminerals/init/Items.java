@@ -78,7 +78,7 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			createSmallPowder(Materials.sulfur);
 		}
 
-//		addToMetList() // May not be needed, check
+		// addToMetList() // May not be needed, check
 
 		initDone = true;
 	}

@@ -20,7 +20,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  * @author Jasmine Iwanek
  *
  */
-@Mod(modid = BaseMinerals.MODID, name = BaseMinerals.NAME, version = BaseMinerals.VERSION, dependencies = "required-after:Forge@[12.18.3.2185,);required-after:basemetals;before:appliedenergistics2;before:buildingbricks", acceptedMinecraftVersions = "[1.10.2,)", updateJSON = BaseMinerals.UPDATEJSON)
+@Mod(
+		modid = BaseMinerals.MODID,
+		name = BaseMinerals.NAME,
+		version = BaseMinerals.VERSION,
+		dependencies = "required-after:Forge@[12.18.3.2185,);required-after:basemetals;before:appliedenergistics2;before:buildingbricks",
+		acceptedMinecraftVersions = "[1.10.2,)",
+		updateJSON = BaseMinerals.UPDATEJSON)
 public class BaseMinerals {
 
 	@Instance
@@ -37,7 +43,7 @@ public class BaseMinerals {
 	 * increased whenever a change is made that has the potential to break
 	 * compatibility with other mods that depend on this one.
 	 */
-	public static final String VERSION = "0.12.0-beta1";
+	public static final String VERSION = "2.5.0-beta1";
 
 	public static final String UPDATEJSON = "https://raw.githubusercontent.com/MinecraftModDevelopment/BaseMinerals/master/update.json";
 
@@ -46,19 +52,10 @@ public class BaseMinerals {
 	@SidedProxy(clientSide = PROXY_BASE + "ClientProxy", serverSide = PROXY_BASE + "ServerProxy")
 	public static CommonProxy proxy;
 
-	public static Logger logger;
-
-/*
-	private BaseMinerals() {
-		throw new IllegalAccessError("Not a instantiable class");
-	}
-*/
+	public static final Logger logger = LogManager.getFormatterLogger(BaseMinerals.MODID);
 
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
-//		logger = event.getModLog();
-		logger = LogManager.getFormatterLogger(BaseMinerals.MODID);
-
 		proxy.preInit(event);
 	}
 

@@ -1,6 +1,7 @@
 package com.mcmoddev.baseminerals.integration.plugins;
 
-import com.mcmoddev.baseminerals.integration.BaseMineralsPlugin;
+import com.mcmoddev.baseminerals.BaseMinerals;
+import com.mcmoddev.lib.integration.MMDPlugin;
 import com.mcmoddev.lib.integration.IIntegration;
 
 /**
@@ -8,7 +9,7 @@ import com.mcmoddev.lib.integration.IIntegration;
  * @author Jasmine Iwanek
  *
  */
-@BaseMineralsPlugin(EnderIO.PLUGIN_MODID)
+@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = EnderIO.PLUGIN_MODID)
 public class EnderIO extends com.mcmoddev.lib.integration.plugins.EnderIO implements IIntegration {
 
 	private static boolean initDone = false;

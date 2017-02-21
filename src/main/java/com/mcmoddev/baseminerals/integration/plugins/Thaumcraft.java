@@ -1,9 +1,10 @@
 package com.mcmoddev.baseminerals.integration.plugins;
 
-import com.mcmoddev.baseminerals.integration.BaseMineralsPlugin;
+import com.mcmoddev.baseminerals.BaseMinerals;
+import com.mcmoddev.lib.integration.MMDPlugin;
 import com.mcmoddev.lib.integration.IIntegration;
 
-@BaseMineralsPlugin(Thaumcraft.PLUGIN_MODID)
+@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = Thaumcraft.PLUGIN_MODID)
 public class Thaumcraft extends com.mcmoddev.lib.integration.plugins.Thaumcraft implements IIntegration {
 
 	private static boolean initDone = false;

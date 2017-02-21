@@ -1,9 +1,10 @@
 package com.mcmoddev.baseminerals.integration.plugins;
 
-import com.mcmoddev.baseminerals.integration.BaseMineralsPlugin;
+import com.mcmoddev.baseminerals.BaseMinerals;
+import com.mcmoddev.lib.integration.MMDPlugin;
 import com.mcmoddev.lib.integration.IIntegration;
 
-@BaseMineralsPlugin(Mekanism.PLUGIN_MODID)
+@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = Mekanism.PLUGIN_MODID)
 public class Mekanism extends com.mcmoddev.lib.integration.plugins.Mekanism implements IIntegration {
 
 	private static boolean initDone = false;

@@ -1,7 +1,9 @@
 package com.mcmoddev.baseminerals.proxy;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
-import com.mcmoddev.baseminerals.init.*;
+import com.mcmoddev.baseminerals.init.Blocks;
+import com.mcmoddev.baseminerals.init.Fluids;
+import com.mcmoddev.baseminerals.init.Items;
 
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
