@@ -23,9 +23,12 @@ public class TinkersConstruct extends com.mcmoddev.lib.integration.plugins.Tinke
 
 		if (Options.enableLithium) {
 			registerFluid(Materials.lithium, 144);
+			registerCasting(Materials.lithium, 144);
 		}
+
 		if (Options.enableSilicon) {
 			registerFluid(Materials.silicon, 144);
+			registerCasting(Materials.silicon, 144);
 		}
 
 		initDone = true;
