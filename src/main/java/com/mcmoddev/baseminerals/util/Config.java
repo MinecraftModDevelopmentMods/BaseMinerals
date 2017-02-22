@@ -8,7 +8,7 @@ import java.util.*;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.AdditionalLootTables;
 import com.mcmoddev.baseminerals.data.DataConstants;
-import com.mcmoddev.basemetals.registry.CrusherRecipeRegistry;
+import com.mcmoddev.lib.registry.CrusherRecipeRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
