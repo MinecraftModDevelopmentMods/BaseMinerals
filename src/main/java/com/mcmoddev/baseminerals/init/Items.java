@@ -1,6 +1,8 @@
 package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.util.Config.Options;
+import com.mcmoddev.lib.fuels.FuelRegistry;
+import com.mcmoddev.lib.util.Oredicts;
 
 /**
  * This class initializes all items in Base Minerals.
@@ -30,6 +32,11 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			createNugget(Materials.vanilla_charcoal); // Special
 			createPowder(Materials.vanilla_charcoal);
 			createSmallPowder(Materials.vanilla_charcoal);
+			FuelRegistry.addFuel(Oredicts.NUGGETCHARCOAL, 200);
+			FuelRegistry.addFuel(Oredicts.DUSTCHARCOAL, 1600);
+			FuelRegistry.addFuel(Oredicts.DUSTSMALLCHARCOAL, 200);
+			FuelRegistry.addFuel(Oredicts.DUSTTINYCHARCOAL, 200);
+			FuelRegistry.addFuel(Oredicts.BLOCK+"Charcoal", 16000);
 		}
 
 		if (Options.enableLithium) {
