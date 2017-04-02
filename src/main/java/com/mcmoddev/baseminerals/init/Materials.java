@@ -2,8 +2,8 @@ package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.util.Config.Options;
 
-import com.mcmoddev.lib.material.MetalMaterial;
-import com.mcmoddev.lib.material.MetalMaterial.MaterialType;
+import com.mcmoddev.lib.material.MMDMaterial;
+import com.mcmoddev.lib.material.MMDMaterial.MaterialType;
 
 /**
  * This class initializes all of the materials in Base Minerals.
@@ -14,27 +14,27 @@ import com.mcmoddev.lib.material.MetalMaterial.MaterialType;
 public class Materials extends com.mcmoddev.lib.init.Materials {
 
 	/** Lithium */
-	public static MetalMaterial lithium;
+	public static MMDMaterial lithium;
 	/** Niter */
-	public static MetalMaterial niter;
+	public static MMDMaterial niter;
 	/** Phosphorus */
-	public static MetalMaterial phosphorus;
+	public static MMDMaterial phosphorus;
 	/** Potash */
-	public static MetalMaterial potash;
+	public static MMDMaterial potash;
 	/** Salt */
-	public static MetalMaterial salt;
+	public static MMDMaterial salt;
 	/** Saltpeter */
-	public static MetalMaterial saltpeter;
+	public static MMDMaterial saltpeter;
 	/** Silicon */
-	public static MetalMaterial silicon;
+	public static MMDMaterial silicon;
 	/** Sulfur */
-	public static MetalMaterial sulfur;
+	public static MMDMaterial sulfur;
 
 	// vanilla imports
 	/** Charcoal */
-	public static MetalMaterial vanilla_charcoal;
+	public static MMDMaterial vanilla_charcoal;
 	/** Coal */
-	public static MetalMaterial vanilla_coal;
+	public static MMDMaterial vanilla_coal;
 
 	private static boolean initDone = false;
 
