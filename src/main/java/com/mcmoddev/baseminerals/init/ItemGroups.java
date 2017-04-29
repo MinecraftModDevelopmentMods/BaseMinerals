@@ -1,13 +1,9 @@
 package com.mcmoddev.baseminerals.init;
 
-import com.mcmoddev.basemetals.data.MaterialNames;
 import com.mcmoddev.basemetals.init.Materials;
-import com.mcmoddev.basemetals.util.Config.Options;
 import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.init.MMDCreativeTab;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 /**
