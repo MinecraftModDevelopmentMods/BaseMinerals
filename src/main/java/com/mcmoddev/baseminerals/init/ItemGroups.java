@@ -1,5 +1,15 @@
 package com.mcmoddev.baseminerals.init;
 
+import com.mcmoddev.basemetals.data.MaterialNames;
+import com.mcmoddev.basemetals.init.Materials;
+import com.mcmoddev.basemetals.util.Config.Options;
+import com.mcmoddev.lib.data.Names;
+import com.mcmoddev.lib.init.MMDCreativeTab;
+
+import net.minecraft.block.Block;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+
 /**
  * This class initializes all item groups in Base Minerals.
  *
@@ -9,6 +19,10 @@ package com.mcmoddev.baseminerals.init;
 public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 
 	private static boolean initDone = false;
+	private static final int blocksTabId  = addTab("blocks", true );;
+	private static final int itemsTabId = addTab("items", true );
+	public static final MMDCreativeTab blocksTab = getTab(blocksTabId);
+	public static final MMDCreativeTab itemsTab = getTab(itemsTabId);
 
 	private ItemGroups() {
 		throw new IllegalAccessError("Not a instantiable class");
@@ -22,10 +36,14 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 			return;
 		}
 
-		// blocksTab = addTab("blocks", true, Materials.vanilla_iron);
-		// itemsTab = addTab("items", true, Materials.vanilla_iron);
-		// toolsTab = addTab("tools", true, Materials.vanilla_iron);
-
 		initDone = true;
+	}
+	
+	public static void setupIcons() {
+		Item blocksTabIconItem = Item.getItemFromBlock(net.minecraft.init.Blocks.COAL_BLOCK);
+		Item itemsTabIconItem = Materials.getMaterialByName("silicon")!=null?Materials.getMaterialByName("silicon").getItem(Names.INGOT):net.minecraft.init.Items.COAL;
+
+		blocksTab.setTabIconItem( blocksTabIconItem );
+		itemsTab.setTabIconItem(itemsTabIconItem);
 	}
 }
