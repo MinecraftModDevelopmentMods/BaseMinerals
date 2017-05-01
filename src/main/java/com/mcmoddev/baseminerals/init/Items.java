@@ -1,10 +1,10 @@
 package com.mcmoddev.baseminerals.init;
 
-import com.mcmoddev.basemetals.init.ItemGroups;
 import com.mcmoddev.baseminerals.util.Config.Options;
 import com.mcmoddev.lib.fuels.FuelRegistry;
 import com.mcmoddev.lib.util.Oredicts;
 import com.mcmoddev.lib.util.TabContainer;
+import com.mcmoddev.baseminerals.data.MaterialNames;
 
 /**
  * This class initializes all items in Base Minerals.
@@ -43,49 +43,49 @@ public class Items extends com.mcmoddev.lib.init.Items {
 		}
 
 		if (Options.enableLithium) {
-			createIngot(Materials.getMaterialByName("lithium"), myTabs.itemsTab);
-			createNugget(Materials.getMaterialByName("lithium"), myTabs.itemsTab);
-			createPowder(Materials.getMaterialByName("lithium"), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName("lithium"), myTabs.itemsTab);
+			createIngot(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
+			createNugget(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
+			createPowder(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
 		}
 
 		if (Options.enableNiter) {
-			createPowder(Materials.getMaterialByName("niter"), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName("niter"), myTabs.itemsTab);
+			createPowder(Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
 		}
 
 		if (Options.enablePhosphorus) {
-			createPowder(Materials.getMaterialByName("phosphorus"), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName("phosphorus"), myTabs.itemsTab);
+			createPowder(Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
 		}
 
 		if (Options.enablePotash) {
-			createPowder(Materials.getMaterialByName("potash"), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName("potash"), myTabs.itemsTab);
+			createPowder(Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
 		}
 
 		if (Options.enableSalt) {
-			createPowder(Materials.getMaterialByName("salt"), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName("salt"), myTabs.itemsTab);
+			createPowder(Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
 		}
 
 		if (Options.enableSaltpeter) {
-			createPowder(Materials.getMaterialByName("saltpeter"), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName("saltpeter"), myTabs.itemsTab);
+			createPowder(Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
 		}
 
 		if (Options.enableSilicon) {
-			createBlend(Materials.getMaterialByName("silicon"), myTabs.itemsTab);
-			createIngot(Materials.getMaterialByName("silicon"), myTabs.itemsTab);
-			createNugget(Materials.getMaterialByName("silicon"), myTabs.itemsTab);
-			createPowder(Materials.getMaterialByName("silicon"), myTabs.itemsTab);
-			createSmallBlend(Materials.getMaterialByName("silicon"), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName("silicon"), myTabs.itemsTab);
+			createBlend(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			createIngot(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			createNugget(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			createPowder(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			createSmallBlend(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
 		}
 
 		if (Options.enableSulfur) {
-			createPowder(Materials.getMaterialByName("sulfur"), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName("sulfur"), myTabs.itemsTab);
+			createPowder(Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
 		}
 
 		// addToMetList() // May not be needed, check
