@@ -9,6 +9,7 @@ public final class MaterialNames {
 	public final static String NITER = "niter";
 	public final static String PHOSPHORUS = "phosphorus";
 	public final static String LITHIUM = "lithium";
+	public final static String CHARCOAL = "charcoal";
 	
 	private MaterialNames() {
 		throw new IllegalAccessError("Not a instantiable class");		
