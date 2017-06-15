@@ -5,6 +5,7 @@ import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.init.MMDCreativeTab;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * This class initializes all item groups in Base Minerals.
@@ -39,7 +40,7 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 		Item blocksTabIconItem = Item.getItemFromBlock(net.minecraft.init.Blocks.COAL_BLOCK);
 		Item itemsTabIconItem = Materials.getMaterialByName("silicon")!=null?Materials.getMaterialByName("silicon").getItem(Names.INGOT):net.minecraft.init.Items.COAL;
 
-		blocksTab.setTabIconItem( blocksTabIconItem );
-		itemsTab.setTabIconItem(itemsTabIconItem);
+		blocksTab.setTabIconItem(new ItemStack(blocksTabIconItem));
+		itemsTab.setTabIconItem(new ItemStack(itemsTabIconItem));
 	}
 }
