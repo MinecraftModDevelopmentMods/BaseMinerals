@@ -5,6 +5,8 @@ import com.mcmoddev.baseminerals.util.Config.Options;
 import com.mcmoddev.lib.material.MMDMaterial;
 import com.mcmoddev.lib.material.MMDMaterial.MaterialType;
 
+import com.mcmoddev.baseminerals.data.MaterialNames;
+
 /**
  * This class initializes all of the materials in Base Minerals.
  *
@@ -51,39 +53,39 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 		}
 
 		if (Options.enableCharcoal) {
-			vanilla_charcoal = createMaterial("charcoal", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
+			vanilla_charcoal = createMaterial(MaterialNames.CHARCOAL, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enableLithium) {
-			lithium = createMaterial("lithium", MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
+			lithium = createMaterial(MaterialNames.LITHIUM, MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
 		if (Options.enableNiter) {
-			niter = createMaterial("niter", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
+			niter = createMaterial(MaterialNames.NITER, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enablePhosphorus) {
-			phosphorus = createMaterial("phosphorus", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
+			phosphorus = createMaterial(MaterialNames.PHOSPHORUS, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enablePotash) {
-			potash = createMaterial("potash", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
+			potash = createMaterial(MaterialNames.POTASH, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enableSalt) {
-			salt = createMaterial("salt", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
+			salt = createMaterial(MaterialNames.SALT, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enableSaltpeter) {
-			saltpeter = createMaterial("saltpeter", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
+			saltpeter = createMaterial(MaterialNames.SALTPETER, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		if (Options.enableSilicon) {
-			silicon = createMaterial("silicon", MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
+			silicon = createMaterial(MaterialNames.SILICON, MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
 		if (Options.enableSulfur) {
-			sulfur = createMaterial("sulfur", MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
+			sulfur = createMaterial(MaterialNames.SULFUR, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
 		initDone = true;
