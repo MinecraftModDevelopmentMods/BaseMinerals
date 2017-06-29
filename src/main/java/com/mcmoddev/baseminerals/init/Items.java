@@ -32,9 +32,9 @@ public class Items extends com.mcmoddev.lib.init.Items {
 		Blocks.init();
 
 		if (Options.enableCharcoal) {
-			createNugget(Materials.vanilla_charcoal, myTabs.itemsTab); // Special
-			createPowder(Materials.vanilla_charcoal, myTabs.itemsTab);
-			createSmallPowder(Materials.vanilla_charcoal, myTabs.itemsTab);
+			createNugget(Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab); // Special
+			createPowder(Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
+			createSmallPowder(Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
 			FuelRegistry.addFuel(Oredicts.NUGGET_CHARCOAL, 200);
 			FuelRegistry.addFuel(Oredicts.DUST_CHARCOAL, 1600);
 			FuelRegistry.addFuel(Oredicts.DUST_SMALL_CHARCOAL, 200);
