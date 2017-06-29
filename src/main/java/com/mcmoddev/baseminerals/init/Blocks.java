@@ -32,7 +32,7 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 		ItemGroups.init();
 
 		if (Options.enableCharcoal) {
-			createBlock(Materials.vanilla_charcoal, myTabs.blocksTab);
+			createBlock(Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.blocksTab);
 		}
 
 		if (Options.enableLithium) {
