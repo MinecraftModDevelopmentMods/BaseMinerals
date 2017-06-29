@@ -1,15 +1,15 @@
 package com.mcmoddev.baseminerals.data;
 
 public final class MaterialNames {
-	public final static String SULFUR = "sulfur";
-	public final static String SILICON = "silicon";
-	public final static String SALTPETER = "saltpeter";
-	public final static String SALT = "salt";
-	public final static String POTASH = "potash";
-	public final static String NITER = "niter";
-	public final static String PHOSPHORUS = "phosphorus";
-	public final static String LITHIUM = "lithium";
-	public final static String CHARCOAL = "charcoal";
+	public static final String SULFUR = "sulfur";
+	public static final String SILICON = "silicon";
+	public static final String SALTPETER = "saltpeter";
+	public static final String SALT = "salt";
+	public static final String POTASH = "potash";
+	public static final String NITER = "niter";
+	public static final String PHOSPHORUS = "phosphorus";
+	public static final String LITHIUM = "lithium";
+	public static final String CHARCOAL = "charcoal";
 	
 	private MaterialNames() {
 		throw new IllegalAccessError("Not a instantiable class");		
