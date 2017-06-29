@@ -231,11 +231,10 @@ publishing {
     }
 }
 
-/*
 curseforge {
     apiKey = secret.curseforgeAPIKey
     project {
-        id = ''
+        id = '270972'
         changelog = file('CHANGELOG.txt')
         releaseType = 'release'
         addGameVersion(project.mc_version)
@@ -266,7 +265,6 @@ curseforge {
         }
     }
 }
-*/
 
 sonarqube {
     properties {
