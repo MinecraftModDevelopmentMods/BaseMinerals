@@ -7,7 +7,6 @@ import java.util.*;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.AdditionalLootTables;
-import com.mcmoddev.baseminerals.data.DataConstants;
 import com.mcmoddev.lib.registry.CrusherRecipeRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -29,7 +28,6 @@ public class Config {
 	private static final String CONFIG_FILE = "config/BaseMinerals.cfg";
 	private static final String MATERIALS_CAT = "Minerals";
 	private static final String ALT_CFG_PATH = "config/additional-loot-tables";
-	private static final String ORESPAWN_CFG_PATH = "config/orespawn";
 
 	@SubscribeEvent
 	public void onConfigChange(ConfigChangedEvent.OnConfigChangedEvent e) {
@@ -71,18 +69,8 @@ public class Config {
 		if (com.mcmoddev.basemetals.util.Config.Options.requireMMDOreSpawn()) {
 			if (!Loader.isModLoaded("orespawn")) {
 				final HashSet<ArtifactVersion> orespawnMod = new HashSet<>();
-				orespawnMod.add(new DefaultArtifactVersion("1.1.0"));
+				orespawnMod.add(new DefaultArtifactVersion("3.0.0"));
 				throw new MissingModsException(orespawnMod, "orespawn", "MMD Ore Spawn Mod");
-			}
-			final Path oreSpawnFile = Paths.get(ORESPAWN_CFG_PATH, BaseMinerals.MODID + ".json");
-			if (!(oreSpawnFile.toFile().exists())) {
-				try {
-					Files.createDirectories(oreSpawnFile.getParent());
-					Files.write(oreSpawnFile, Arrays.asList(DataConstants.DEFAULT_ORESPAWN_JSON.split("\n")),
-							Charset.forName("UTF-8"));
-				} catch (final IOException ex) {
-					BaseMinerals.logger.error("Failed to write file " + oreSpawnFile, ex);
-				}
 			}
 		}
 
