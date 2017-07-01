@@ -28,35 +28,35 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 			return;
 		}
 
-		if (Options.enableLithium) {
+		if (Options.materialEnabled(MaterialNames.LITHIUM)) {
 			createMaterial(MaterialNames.LITHIUM, MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
-		if (Options.enableNiter) {
+		if (Options.materialEnabled(MaterialNames.NITER)) {
 			createMaterial(MaterialNames.NITER, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.enablePhosphorus) {
+		if (Options.materialEnabled(MaterialNames.PHOSPHORUS)) {
 			createMaterial(MaterialNames.PHOSPHORUS, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.enablePotash) {
+		if (Options.materialEnabled(MaterialNames.POTASH)) {
 			createMaterial(MaterialNames.POTASH, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.enableSalt) {
+		if (Options.materialEnabled(MaterialNames.SALT)) {
 			createMaterial(MaterialNames.SALT, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.enableSaltpeter) {
+		if (Options.materialEnabled(MaterialNames.SALTPETER)) {
 			createMaterial(MaterialNames.SALTPETER, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.enableSilicon) {
+		if (Options.materialEnabled(MaterialNames.SILICON)) {
 			createMaterial(MaterialNames.SILICON, MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
-		if (Options.enableSulfur) {
+		if (Options.materialEnabled(MaterialNames.SULFUR)) {
 			createMaterial(MaterialNames.SULFUR, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 

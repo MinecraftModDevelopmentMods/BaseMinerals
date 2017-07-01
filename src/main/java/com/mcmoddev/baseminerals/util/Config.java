@@ -1,12 +1,12 @@
 package com.mcmoddev.baseminerals.util;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.util.*;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.AdditionalLootTables;
+import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.registry.CrusherRecipeRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -43,24 +43,15 @@ public class Config {
 		}
 
 		// METALS
-		Options.enableCharcoal = configuration.getBoolean("EnableCharcoal", MATERIALS_CAT, true,
-				"Enable Charcoal Items and Materials");
-		Options.enableLithium = configuration.getBoolean("EnableLithium", MATERIALS_CAT, true,
-				"Enable Lithium Items and Materials");
-		Options.enableNiter = configuration.getBoolean("EnableNiter", MATERIALS_CAT, true,
-				"Enable Niter Items and Materials");
-		Options.enablePhosphorus = configuration.getBoolean("EnablePhosphorus", MATERIALS_CAT, true,
-				"Enable Phosphorus Items and Materials");
-		Options.enablePotash = configuration.getBoolean("EnablePotash", MATERIALS_CAT, true,
-				"Enable Potash Items and Materials");
-		Options.enableSalt = configuration.getBoolean("EnableSalt", MATERIALS_CAT, true,
-				"Enable Salt Items and Materials");
-		Options.enableSaltpeter = configuration.getBoolean("EnableSaltpeter", MATERIALS_CAT, true,
-				"Enable Saltpeter Items and Materials");
-		Options.enableSilicon = configuration.getBoolean("EnableSilicon", MATERIALS_CAT, true,
-				"Enable Silicon Items and Materials");
-		Options.enableSulfur = configuration.getBoolean("EnableSulfur", MATERIALS_CAT, true,
-				"Enable Sulfur Items and Materials");
+		Options.materialEnabled.put(MaterialNames.CHARCOAL, configuration.getBoolean("EnableCharcoal", MATERIALS_CAT, true, "Enable Charcoal Items and Materials"));
+		Options.materialEnabled.put(MaterialNames.LITHIUM, configuration.getBoolean("EnableLithium", MATERIALS_CAT, true, "Enable Lithium Items and Materials"));
+		Options.materialEnabled.put(MaterialNames.NITER, configuration.getBoolean("EnableNiter", MATERIALS_CAT, true, "Enable Niter Items and Materials"));
+		Options.materialEnabled.put(MaterialNames.PHOSPHORUS, configuration.getBoolean("EnablePhosphorus", MATERIALS_CAT, true, "Enable Phosphorus Items and Materials"));
+		Options.materialEnabled.put(MaterialNames.POTASH, configuration.getBoolean("EnablePotash", MATERIALS_CAT, true, "Enable Potash Items and Materials"));
+		Options.materialEnabled.put(MaterialNames.SALT, configuration.getBoolean("EnableSalt", MATERIALS_CAT, true, "Enable Salt Items and Materials"));
+		Options.materialEnabled.put(MaterialNames.SALTPETER, configuration.getBoolean("EnableSaltpeter", MATERIALS_CAT, true, "Enable Saltpeter Items and Materials"));
+		Options.materialEnabled.put(MaterialNames.SILICON, configuration.getBoolean("EnableSilicon", MATERIALS_CAT, true, "Enable Silicon Items and Materials"));
+		Options.materialEnabled.put(MaterialNames.SULFUR, configuration.getBoolean("EnableSulfur", MATERIALS_CAT, true, "Enable Sulfur Items and Materials"));
 
 		if (configuration.hasChanged()) {
 			configuration.save();
@@ -108,18 +99,10 @@ public class Config {
 	public static class Options {
 
 		// MATERIALS
-		public static boolean enableLithium = true;
-		public static boolean enableNiter = true;
-		public static boolean enablePhosphorus = true;
-		public static boolean enablePotash = true;
-		public static boolean enableSalt = true;
-		public static boolean enableSaltpeter = true;
-		public static boolean enableSilicon = true;
-		public static boolean enableSulfur = true;
-
-		// VANILLA
-		public static boolean enableCharcoal = true;
-		public static boolean enableCoal = true;
+		protected static final Map<String, Boolean> materialEnabled = new HashMap<>();
+		public static boolean materialEnabled(String name) {
+			return materialEnabled.get(name);
+		}
 
 		private Options() {
 			throw new IllegalAccessError("Not a instantiable class");

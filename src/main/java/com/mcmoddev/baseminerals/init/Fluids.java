@@ -25,12 +25,12 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 			return;
 		}
 
-		if (Options.enableLithium) {
+		if (Options.materialEnabled(MaterialNames.LITHIUM)) {
 			addFluid(Materials.getMaterialByName(MaterialNames.LITHIUM), 2000, 10000, 330, 10);
 			addFluidBlock(Materials.getMaterialByName(MaterialNames.LITHIUM));
 		}
 
-		if (Options.enableSilicon) {
+		if (Options.materialEnabled(MaterialNames.SILICON)) {
 			addFluid(Materials.getMaterialByName(MaterialNames.SILICON), 2000, 10000, 330, 10);
 			addFluidBlock(Materials.getMaterialByName(MaterialNames.SILICON));
 		}

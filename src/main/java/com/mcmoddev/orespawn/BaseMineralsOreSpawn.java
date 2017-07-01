@@ -1,6 +1,7 @@
 package com.mcmoddev.orespawn;
 
 import com.google.common.base.Function;
+import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.baseminerals.init.Materials;
 import com.mcmoddev.orespawn.api.OreSpawnAPI;
 import com.mcmoddev.orespawn.api.SpawnLogic;
@@ -13,32 +14,32 @@ public class BaseMineralsOreSpawn implements Function<OreSpawnAPI, SpawnLogic> {
 	public SpawnLogic apply(OreSpawnAPI api) {
 		SpawnLogic logic = api.createSpawnLogic();
 
-		if( Options.enableLithium ) {
-			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName("lithium").getBlock(Names.ORE).getDefaultState(), 8, 4, 8, 0,  96);
+		if (Options.materialEnabled(MaterialNames.LITHIUM)) {
+			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName(MaterialNames.LITHIUM).getBlock(Names.ORE).getDefaultState(), 8, 4, 8, 0,  96);
 		}
 
-		if( Options.enableNiter ) {
-			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName("niter").getBlock(Names.ORE).getDefaultState(), 8, 4,  8, 0,  96);
+		if (Options.materialEnabled(MaterialNames.NITER)) {
+			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName(MaterialNames.NITER).getBlock(Names.ORE).getDefaultState(), 8, 4,  8, 0,  96);
 		}
 
-		if( Options.enableSalt ) {
-			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName("salt").getBlock(Names.ORE).getDefaultState(), 8, 4, 8, 0, 96);
+		if (Options.materialEnabled(MaterialNames.SALT)) {
+			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName(MaterialNames.SALT).getBlock(Names.ORE).getDefaultState(), 8, 4, 8, 0, 96);
 		}
 
-		if( Options.enableSulfur ) {
-			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName("sulfur").getBlock(Names.ORE).getDefaultState(), 8, 4, 6, 0, 32);
+		if (Options.materialEnabled(MaterialNames.SULFUR)) {
+			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName(MaterialNames.SULFUR).getBlock(Names.ORE).getDefaultState(), 8, 4, 6, 0, 32);
 		}
 
-		if( Options.enablePhosphorus ) {
-			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName("phosphorus").getBlock(Names.ORE).getDefaultState(), 8, 4, 6, 0, 96);
+		if (Options.materialEnabled(MaterialNames.PHOSPHORUS)) {
+			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName(MaterialNames.PHOSPHORUS).getBlock(Names.ORE).getDefaultState(), 8, 4, 6, 0, 96);
 		}
 
-		if( Options.enablePotash ) {
-			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName("potash").getBlock(Names.ORE).getDefaultState(), 8, 4, 6, 0, 96);
+		if (Options.materialEnabled(MaterialNames.POTASH)) {
+			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName(MaterialNames.POTASH).getBlock(Names.ORE).getDefaultState(), 8, 4, 6, 0, 96);
 		}
 
-		if( Options.enableSaltpeter ) {
-			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName("saltpeter").getBlock(Names.ORE).getDefaultState(), 8, 4, 6, 0, 96);
+		if (Options.materialEnabled(MaterialNames.SALTPETER)) {
+			logic.getDimension(OreSpawnAPI.DIMENSION_WILDCARD).addOre(Materials.getMaterialByName(MaterialNames.SALTPETER).getBlock(Names.ORE).getDefaultState(), 8, 4, 6, 0, 96);
 		}
 
 
