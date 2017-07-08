@@ -1,6 +1,7 @@
 package com.mcmoddev.baseminerals.integration.plugins;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
+import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.integration.MMDPlugin;
 import com.mcmoddev.lib.integration.IIntegration;
 
@@ -19,18 +20,18 @@ public class EnderIO extends com.mcmoddev.lib.integration.plugins.EnderIOBase im
 	 */
 	@Override
 	public void init() {
-		if (initDone || !com.mcmoddev.lib.util.ConfigBase.Options.isModEnabled("enderio")) {
+		if (initDone || !com.mcmoddev.basemetals.util.Config.Options.isModEnabled(EnderIO.PLUGIN_MODID)) {
 			return;
 		}
 
-		addSagMillRecipe("lithium", null, 3600);
-		addSagMillRecipe("niter", null, 3600);
-		addSagMillRecipe("phosphorus", null, 3600);
-		addSagMillRecipe("potash", null, 3600);
-		addSagMillRecipe("salt", null, 3600);
-		addSagMillRecipe("saltpeter", null, 3600);
-		// addSagMillRecipe("silicon", null, 3600);
-		addSagMillRecipe("sulfur", null, 3600);
+		addSagMillRecipe(MaterialNames.LITHIUM, null, 3600);
+		addSagMillRecipe(MaterialNames.NITER, null, 3600);
+		addSagMillRecipe(MaterialNames.PHOSPHORUS, null, 3600);
+		addSagMillRecipe(MaterialNames.POTASH, null, 3600);
+		addSagMillRecipe(MaterialNames.SALT, null, 3600);
+		addSagMillRecipe(MaterialNames.SALTPETER, null, 3600);
+		// addSagMillRecipe(MaterialNames.SILICON, null, 3600);
+		addSagMillRecipe(MaterialNames.SULFUR, null, 3600);
 
 		initDone = true;
 	}

@@ -16,7 +16,7 @@ import com.mcmoddev.baseminerals.data.MaterialNames;
 public class Items extends com.mcmoddev.lib.init.Items {
 
 	private static boolean initDone = false;
-	private static TabContainer myTabs = new TabContainer( ItemGroups.blocksTab, ItemGroups.itemsTab, null );
+	private static TabContainer myTabs = ItemGroups.myTabs;
 
 	protected Items() {
 		throw new IllegalAccessError("Not a instantiable class");
@@ -32,7 +32,7 @@ public class Items extends com.mcmoddev.lib.init.Items {
 
 		Blocks.init();
 
-		if (Options.isMaterialEnabled("Charcoal")) {
+		if (Options.isMaterialEnabled(MaterialNames.CHARCOAL)) {
 			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab); // Special
 			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
@@ -43,39 +43,39 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			FuelRegistry.addFuel(Oredicts.BLOCK+"Charcoal", 16000);
 		}
 
-		if (Options.isMaterialEnabled("Lithium")) {
+		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
 			create(Names.INGOT, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
 			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
 			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
 		}
 
-		if (Options.isMaterialEnabled("Niter")) {
+		if (Options.isMaterialEnabled(MaterialNames.NITER)) {
 			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
 		}
 
-		if (Options.isMaterialEnabled("Phosphorus")) {
+		if (Options.isMaterialEnabled(MaterialNames.PHOSPHORUS)) {
 			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
 		}
 
-		if (Options.isMaterialEnabled("Potash")) {
+		if (Options.isMaterialEnabled(MaterialNames.POTASH)) {
 			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
 		}
 
-		if (Options.isMaterialEnabled("Salt")) {
+		if (Options.isMaterialEnabled(MaterialNames.SALT)) {
 			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
 		}
 
-		if (Options.isMaterialEnabled("Saltpeter")) {
+		if (Options.isMaterialEnabled(MaterialNames.SALTPETER)) {
 			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
 		}
 
-		if (Options.isMaterialEnabled("Silicon")) {
+		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
 			create(Names.BLEND, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
 			create(Names.INGOT, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
 			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
@@ -84,7 +84,7 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
 		}
 
-		if (Options.isMaterialEnabled("Sulfur")) {
+		if (Options.isMaterialEnabled(MaterialNames.SULFUR)) {
 			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
 			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
 		}

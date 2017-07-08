@@ -10,6 +10,7 @@ import java.util.HashSet;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.AdditionalLootTables;
+
 import com.mcmoddev.lib.registry.CrusherRecipeRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
