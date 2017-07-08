@@ -2,7 +2,8 @@ package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.init.ItemGroups;
 import com.mcmoddev.baseminerals.data.MaterialNames;
-import com.mcmoddev.baseminerals.util.Config.Options;
+import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.util.TabContainer;
 
 /**
@@ -31,49 +32,49 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 		Materials.init();
 		ItemGroups.init();
 
-		if (Options.materialEnabled(MaterialNames.CHARCOAL)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.CHARCOAL)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.blocksTab);
 		}
 
-		if (Options.materialEnabled(MaterialNames.LITHIUM)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.blocksTab);
-			createOre(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.blocksTab);
+			create(Names.ORE, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.blocksTab);
 		}
 
-		if (Options.materialEnabled(MaterialNames.NITER)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.NITER), myTabs.blocksTab);
-			createOre(Materials.getMaterialByName(MaterialNames.NITER), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.NITER)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.NITER), myTabs.blocksTab);
+			create(Names.ORE, Materials.getMaterialByName(MaterialNames.NITER), myTabs.blocksTab);
 		}
 
-		if (Options.materialEnabled(MaterialNames.PHOSPHORUS)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.blocksTab);
-			createOre(Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.PHOSPHORUS)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.blocksTab);
+			create(Names.ORE, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.blocksTab);
 		}
 
-		if (Options.materialEnabled(MaterialNames.POTASH)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.POTASH), myTabs.blocksTab);
-			createOre(Materials.getMaterialByName(MaterialNames.POTASH), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.POTASH)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.blocksTab);
+			create(Names.ORE, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.blocksTab);
 		}
 
-		if (Options.materialEnabled(MaterialNames.SALT)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.SALT), myTabs.blocksTab);
-			createOre(Materials.getMaterialByName(MaterialNames.SALT), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.SALT)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SALT), myTabs.blocksTab);
+			create(Names.ORE, Materials.getMaterialByName(MaterialNames.SALT), myTabs.blocksTab);
 		}
 
-		if (Options.materialEnabled(MaterialNames.SALTPETER)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.blocksTab);
-			createOre(Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.SALTPETER)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.blocksTab);
+			create(Names.ORE, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.blocksTab);
 		}
 
-		if (Options.materialEnabled(MaterialNames.SILICON)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.blocksTab);
 		}
 
-		if (Options.materialEnabled(MaterialNames.SULFUR)) {
-			createBlock(Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.blocksTab);
-			createOre(Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.blocksTab);
+		if (Options.isMaterialEnabled(MaterialNames.SULFUR)) {
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.blocksTab);
+			create(Names.ORE, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.blocksTab);
 		}
-
+		
 		initDone = true;
 	}
 }

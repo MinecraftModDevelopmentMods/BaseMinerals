@@ -1,8 +1,8 @@
 package com.mcmoddev.baseminerals.init;
 
+import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.baseminerals.data.AchievementNames;
 import com.mcmoddev.baseminerals.data.MaterialNames;
-import com.mcmoddev.baseminerals.util.Config.Options;
 import com.mcmoddev.lib.data.Names;
 
 import net.minecraftforge.common.AchievementPage;
@@ -29,7 +29,7 @@ public class Achievements extends com.mcmoddev.lib.init.Achievements {
 			AchievementPage page = new AchievementPage(Loader.instance().activeModContainer().getModId());
 			AchievementPage.registerAchievementPage(page);
 
-			if (Options.materialEnabled(MaterialNames.SILICON)) {
+			if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
 				makeAchievement(AchievementNames.SILICON_MAKER, getAchievementByName(AchievementNames.METALLURGY), 0, 0, Materials.getMaterialByName(MaterialNames.SILICON).getItem(Names.INGOT), page);
 			}
 		}

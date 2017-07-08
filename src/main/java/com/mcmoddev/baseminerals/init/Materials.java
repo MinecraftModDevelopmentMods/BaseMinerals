@@ -1,6 +1,6 @@
 package com.mcmoddev.baseminerals.init;
 
-import com.mcmoddev.baseminerals.util.Config.Options;
+import com.mcmoddev.lib.util.ConfigBase.Options;
 
 import com.mcmoddev.lib.material.MMDMaterial.MaterialType;
 
@@ -28,35 +28,35 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 			return;
 		}
 
-		if (Options.materialEnabled(MaterialNames.LITHIUM)) {
+		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
 			createMaterial(MaterialNames.LITHIUM, MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
-		if (Options.materialEnabled(MaterialNames.NITER)) {
+		if (Options.isMaterialEnabled(MaterialNames.NITER)) {
 			createMaterial(MaterialNames.NITER, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.materialEnabled(MaterialNames.PHOSPHORUS)) {
+		if (Options.isMaterialEnabled(MaterialNames.PHOSPHORUS)) {
 			createMaterial(MaterialNames.PHOSPHORUS, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.materialEnabled(MaterialNames.POTASH)) {
+		if (Options.isMaterialEnabled(MaterialNames.POTASH)) {
 			createMaterial(MaterialNames.POTASH, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.materialEnabled(MaterialNames.SALT)) {
+		if (Options.isMaterialEnabled(MaterialNames.SALT)) {
 			createMaterial(MaterialNames.SALT, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.materialEnabled(MaterialNames.SALTPETER)) {
+		if (Options.isMaterialEnabled(MaterialNames.SALTPETER)) {
 			createMaterial(MaterialNames.SALTPETER, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 
-		if (Options.materialEnabled(MaterialNames.SILICON)) {
+		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
 			createMaterial(MaterialNames.SILICON, MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
-		if (Options.materialEnabled(MaterialNames.SULFUR)) {
+		if (Options.isMaterialEnabled(MaterialNames.SULFUR)) {
 			createMaterial(MaterialNames.SULFUR, MaterialType.MINERAL, 5, 2, 0, 0xFF000000);
 		}
 

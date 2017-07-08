@@ -1,7 +1,7 @@
 package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.data.MaterialNames;
-import com.mcmoddev.baseminerals.util.Config.Options;
+import com.mcmoddev.lib.util.ConfigBase.Options;
 
 /**
  * This class initializes all fluids in Base Minerals.
@@ -25,12 +25,12 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 			return;
 		}
 
-		if (Options.materialEnabled(MaterialNames.LITHIUM)) {
+		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
 			addFluid(Materials.getMaterialByName(MaterialNames.LITHIUM), 2000, 10000, 330, 10);
 			addFluidBlock(Materials.getMaterialByName(MaterialNames.LITHIUM));
 		}
 
-		if (Options.materialEnabled(MaterialNames.SILICON)) {
+		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
 			addFluid(Materials.getMaterialByName(MaterialNames.SILICON), 2000, 10000, 330, 10);
 			addFluidBlock(Materials.getMaterialByName(MaterialNames.SILICON));
 		}
