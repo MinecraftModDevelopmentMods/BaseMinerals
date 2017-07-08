@@ -71,7 +71,7 @@ public class Config extends com.mcmoddev.lib.util.ConfigBase {
 
 		if ((com.mcmoddev.basemetals.util.Config.Options.requireMMDOreSpawn()) && (!Loader.isModLoaded("orespawn"))) {
 			final HashSet<ArtifactVersion> orespawnMod = new HashSet<>();
-			orespawnMod.add(new DefaultArtifactVersion("3.0.0"));
+			orespawnMod.add(new DefaultArtifactVersion("3.1.0"));
 			throw new MissingModsException(orespawnMod, "orespawn", "MMD Ore Spawn Mod");
 		}
 
