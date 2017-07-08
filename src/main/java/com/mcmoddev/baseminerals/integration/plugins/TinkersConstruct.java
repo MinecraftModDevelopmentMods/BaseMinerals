@@ -3,7 +3,7 @@ package com.mcmoddev.baseminerals.integration.plugins;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.baseminerals.init.Materials;
-import com.mcmoddev.baseminerals.util.Config.Options;
+import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.lib.integration.MMDPlugin;
 import com.mcmoddev.lib.integration.IIntegration;
 
@@ -19,16 +19,16 @@ public class TinkersConstruct extends com.mcmoddev.lib.integration.plugins.Tinke
 
 	@Override
 	public void init() {
-		if (initDone || !com.mcmoddev.basemetals.util.Config.Options.modEnabled("tinkersconstruct")) {
+		if (initDone || !Options.isModEnabled("tinkersconstruct")) {
 			return;
 		}
 
-		if (Options.enableLithium) {
+		if (Options.isMaterialEnabled("Lithium")) {
 			registerFluid(Materials.getMaterialByName(MaterialNames.LITHIUM), 144);
 			registerCasting(Materials.getMaterialByName(MaterialNames.LITHIUM), 144);
 		}
 
-		if (Options.enableSilicon) {
+		if (Options.isMaterialEnabled("Silicon")) {
 			registerFluid(Materials.getMaterialByName(MaterialNames.SILICON), 144);
 			registerCasting(Materials.getMaterialByName(MaterialNames.SILICON), 144);
 		}

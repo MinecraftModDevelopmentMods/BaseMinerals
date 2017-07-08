@@ -1,6 +1,7 @@
 package com.mcmoddev.baseminerals.init;
 
-import com.mcmoddev.baseminerals.util.Config.Options;
+import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.fuels.FuelRegistry;
 import com.mcmoddev.lib.util.Oredicts;
 import com.mcmoddev.lib.util.TabContainer;
@@ -31,10 +32,10 @@ public class Items extends com.mcmoddev.lib.init.Items {
 
 		Blocks.init();
 
-		if (Options.enableCharcoal) {
-			createNugget(Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab); // Special
-			createPowder(Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Charcoal")) {
+			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab); // Special
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
 			FuelRegistry.addFuel(Oredicts.NUGGET_CHARCOAL, 200);
 			FuelRegistry.addFuel(Oredicts.DUST_CHARCOAL, 1600);
 			FuelRegistry.addFuel(Oredicts.DUST_SMALL_CHARCOAL, 200);
@@ -42,50 +43,50 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			FuelRegistry.addFuel(Oredicts.BLOCK+"Charcoal", 16000);
 		}
 
-		if (Options.enableLithium) {
-			createIngot(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
-			createNugget(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
-			createPowder(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Lithium")) {
+			create(Names.INGOT, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
+			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
 		}
 
-		if (Options.enableNiter) {
-			createPowder(Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Niter")) {
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
 		}
 
-		if (Options.enablePhosphorus) {
-			createPowder(Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Phosphorus")) {
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
 		}
 
-		if (Options.enablePotash) {
-			createPowder(Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Potash")) {
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
 		}
 
-		if (Options.enableSalt) {
-			createPowder(Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Salt")) {
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
 		}
 
-		if (Options.enableSaltpeter) {
-			createPowder(Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Saltpeter")) {
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
 		}
 
-		if (Options.enableSilicon) {
-			createBlend(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			createIngot(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			createNugget(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			createPowder(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			createSmallBlend(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Silicon")) {
+			create(Names.BLEND, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			create(Names.INGOT, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			create(Names.SMALLBLEND, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
 		}
 
-		if (Options.enableSulfur) {
-			createPowder(Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
-			createSmallPowder(Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
+		if (Options.isMaterialEnabled("Sulfur")) {
+			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
+			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
 		}
 
 		// addToMetList() // May not be needed, check
