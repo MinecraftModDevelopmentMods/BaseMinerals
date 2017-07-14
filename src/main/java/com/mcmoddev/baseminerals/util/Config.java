@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.HashSet;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
-import com.mcmoddev.baseminerals.data.AdditionalLootTables;
 
 import com.mcmoddev.lib.registry.CrusherRecipeRegistry;
 
