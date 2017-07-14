@@ -31,7 +31,6 @@ public class Config extends com.mcmoddev.lib.util.ConfigBase {
 	private static Configuration configuration;
 	private static final String CONFIG_FILE = "config/BaseMinerals.cfg";
 	private static final String MATERIALS_CAT = "Minerals";
-	private static final String ALT_CFG_PATH = "config/additional-loot-tables";
 
 	@SubscribeEvent
 	public void onConfigChange(ConfigChangedEvent.OnConfigChangedEvent e) {
@@ -74,36 +73,6 @@ public class Config extends com.mcmoddev.lib.util.ConfigBase {
 			final HashSet<ArtifactVersion> orespawnMod = new HashSet<>();
 			orespawnMod.add(new DefaultArtifactVersion("3.1.0"));
 			throw new MissingModsException(orespawnMod, "orespawn", "MMD Ore Spawn Mod");
-		}
-
-		final Path myLootFolder = Paths.get(ALT_CFG_PATH, BaseMinerals.MODID);
-		if (!(myLootFolder.toFile().exists())) {
-			try {
-				final String chests = "chests";
-				Files.createDirectories(myLootFolder.resolve(chests));
-				Files.write(myLootFolder.resolve(chests).resolve("abandoned_mineshaft.json"),
-						Collections.singletonList(AdditionalLootTables.ABANDONED_MINESHAFT));
-				Files.write(myLootFolder.resolve(chests).resolve("desert_pyramid.json"),
-						Collections.singletonList(AdditionalLootTables.DESERT_PYRAMID));
-				Files.write(myLootFolder.resolve(chests).resolve("end_city_treasure.json"),
-						Collections.singletonList(AdditionalLootTables.END_CITY_TREASURE));
-				Files.write(myLootFolder.resolve(chests).resolve("jungle_temple.json"),
-						Collections.singletonList(AdditionalLootTables.JUNGLE_TEMPLE));
-				Files.write(myLootFolder.resolve(chests).resolve("nether_bridge.json"),
-						Collections.singletonList(AdditionalLootTables.NETHER_BRIDGE));
-				Files.write(myLootFolder.resolve(chests).resolve("simple_dungeon.json"),
-						Collections.singletonList(AdditionalLootTables.SIMPLE_DUNGEON));
-				Files.write(myLootFolder.resolve(chests).resolve("spawn_bonus_chest.json"),
-						Collections.singletonList(AdditionalLootTables.SPAWN_BONUS_CHEST));
-				Files.write(myLootFolder.resolve(chests).resolve("stronghold_corridor.json"),
-						Collections.singletonList(AdditionalLootTables.STRONGHOLD_CORRIDOR));
-				Files.write(myLootFolder.resolve(chests).resolve("stronghold_crossing.json"),
-						Collections.singletonList(AdditionalLootTables.STRONGHOLD_CROSSING));
-				Files.write(myLootFolder.resolve(chests).resolve("village_blacksmith.json"),
-						Collections.singletonList(AdditionalLootTables.VILLAGE_BLACKSMITH));
-			} catch (final IOException ex) {
-				BaseMinerals.logger.error("Failed to extract additional loot tables", ex);
-			}
 		}
 	}
 
