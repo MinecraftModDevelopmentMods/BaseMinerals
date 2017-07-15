@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 		modid = BaseMinerals.MODID,
 		name = BaseMinerals.NAME,
 		version = BaseMinerals.VERSION,
-		dependencies = "required-after:forge@[13.20.0.2228,);required-after:basemetals;before:appliedenergistics2;before:buildingbricks",
+		dependencies = "required-after:forge@[13.20.1.2386,);required-after:basemetals;before:appliedenergistics2;before:buildingbricks",
 		acceptedMinecraftVersions = "[1.11.2,)",
 		updateJSON = BaseMinerals.UPDATEJSON)
 public class BaseMinerals {
@@ -43,7 +43,7 @@ public class BaseMinerals {
 	 * increased whenever a change is made that has the potential to break
 	 * compatibility with other mods that depend on this one.
 	 */
-	public static final String VERSION = "2.5.0-beta1";
+	public static final String VERSION = "2.5.0-beta2";
 
 	public static final String UPDATEJSON = "https://raw.githubusercontent.com/MinecraftModDevelopment/BaseMinerals/master/update.json";
 
@@ -71,6 +71,7 @@ public class BaseMinerals {
 
 	@EventHandler
 	public static void onRemap(FMLMissingMappingsEvent event) {
-		proxy.onRemap(event);
+		// we are not using this right now...
+		// proxy.onRemap(event);
 	}
 }

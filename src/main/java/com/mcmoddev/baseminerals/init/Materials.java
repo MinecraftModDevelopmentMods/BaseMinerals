@@ -53,7 +53,7 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
-			createMaterial(MaterialNames.SILICON, MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
+			createAlloyMaterial(MaterialNames.SILICON, MaterialType.METAL, 8, 8, 4.5, 0xFFC5C8C1);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SULFUR)) {

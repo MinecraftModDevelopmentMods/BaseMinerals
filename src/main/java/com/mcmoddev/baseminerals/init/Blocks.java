@@ -4,7 +4,7 @@ import com.mcmoddev.baseminerals.init.ItemGroups;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.lib.data.Names;
-import com.mcmoddev.lib.util.TabContainer;
+import com.mcmoddev.lib.material.MMDMaterial;
 
 /**
  * This class initializes all blocks in Base Minerals.
@@ -15,7 +15,6 @@ import com.mcmoddev.lib.util.TabContainer;
 public class Blocks extends com.mcmoddev.lib.init.Blocks {
 
 	private static boolean initDone = false;
-	private static TabContainer myTabs = ItemGroups.myTabs;
 
 	protected Blocks() {
 		throw new IllegalAccessError("Not a instantiable class");
@@ -33,48 +32,55 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 		ItemGroups.init();
 
 		if (Options.isMaterialEnabled(MaterialNames.CHARCOAL)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.blocksTab);
+			create(Names.BLOCK, MaterialNames.CHARCOAL, ItemGroups.myTabs.blocksTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.blocksTab);
-			create(Names.ORE, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.blocksTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.LITHIUM);
+			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
+			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.NITER)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.NITER), myTabs.blocksTab);
-			create(Names.ORE, Materials.getMaterialByName(MaterialNames.NITER), myTabs.blocksTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.NITER);
+			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
+			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.PHOSPHORUS)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.blocksTab);
-			create(Names.ORE, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.blocksTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.PHOSPHORUS);
+			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
+			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.POTASH)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.blocksTab);
-			create(Names.ORE, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.blocksTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.POTASH);
+			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
+			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SALT)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SALT), myTabs.blocksTab);
-			create(Names.ORE, Materials.getMaterialByName(MaterialNames.SALT), myTabs.blocksTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.SALT);
+			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
+			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SALTPETER)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.blocksTab);
-			create(Names.ORE, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.blocksTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.SALTPETER);
+			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
+			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.blocksTab);
+			create(Names.BLOCK, MaterialNames.SILICON, ItemGroups.myTabs.blocksTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SULFUR)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.blocksTab);
-			create(Names.ORE, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.blocksTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.SULFUR);
+			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
+			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
 		}
-		
+
 		initDone = true;
 	}
 }

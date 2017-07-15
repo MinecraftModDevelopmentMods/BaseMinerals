@@ -3,8 +3,8 @@ package com.mcmoddev.baseminerals.init;
 import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.fuels.FuelRegistry;
+import com.mcmoddev.lib.material.MMDMaterial;
 import com.mcmoddev.lib.util.Oredicts;
-import com.mcmoddev.lib.util.TabContainer;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 
 /**
@@ -16,7 +16,6 @@ import com.mcmoddev.baseminerals.data.MaterialNames;
 public class Items extends com.mcmoddev.lib.init.Items {
 
 	private static boolean initDone = false;
-	private static TabContainer myTabs = ItemGroups.myTabs;
 
 	protected Items() {
 		throw new IllegalAccessError("Not a instantiable class");
@@ -33,63 +32,72 @@ public class Items extends com.mcmoddev.lib.init.Items {
 		Blocks.init();
 
 		if (Options.isMaterialEnabled(MaterialNames.CHARCOAL)) {
-			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab); // Special
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.CHARCOAL), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.CHARCOAL);
+			create(Names.NUGGET, material, ItemGroups.myTabs.itemsTab); // Special
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 			FuelRegistry.addFuel(Oredicts.NUGGET_CHARCOAL, 200);
 			FuelRegistry.addFuel(Oredicts.DUST_CHARCOAL, 1600);
 			FuelRegistry.addFuel(Oredicts.DUST_SMALL_CHARCOAL, 200);
 			FuelRegistry.addFuel(Oredicts.DUST_TINY_CHARCOAL, 200);
-			FuelRegistry.addFuel(Oredicts.BLOCK+"Charcoal", 16000);
+			FuelRegistry.addFuel(Oredicts.BLOCK + material.getCapitalizedName(), 16000);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
-			create(Names.INGOT, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
-			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.LITHIUM), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.LITHIUM);
+			create(Names.INGOT, material, ItemGroups.myTabs.itemsTab);
+			create(Names.NUGGET, material, ItemGroups.myTabs.itemsTab);
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.NITER)) {
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.NITER), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.NITER);
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.PHOSPHORUS)) {
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.PHOSPHORUS), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.PHOSPHORUS);
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.POTASH)) {
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.POTASH), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.POTASH);
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SALT)) {
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SALT), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.SALT);
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SALTPETER)) {
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SALTPETER), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.SALTPETER);
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
-			create(Names.BLEND, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			create(Names.INGOT, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			create(Names.NUGGET, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			create(Names.SMALLBLEND, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SILICON), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.SILICON);
+			create(Names.BLEND, material, ItemGroups.myTabs.itemsTab);
+			create(Names.INGOT, material, ItemGroups.myTabs.itemsTab);
+			create(Names.NUGGET, material, ItemGroups.myTabs.itemsTab);
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLBLEND, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.SULFUR)) {
-			create(Names.POWDER, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
-			create(Names.SMALLPOWDER, Materials.getMaterialByName(MaterialNames.SULFUR), myTabs.itemsTab);
+			final MMDMaterial material = Materials.getMaterialByName(MaterialNames.SULFUR);
+			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
 		}
 
-		// addToMetList() // May not be needed, check
+		// addToMetList() // TODO: May not be needed, check
 
 		initDone = true;
 	}

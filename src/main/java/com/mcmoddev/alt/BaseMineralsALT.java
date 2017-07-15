@@ -4,5 +4,5 @@ import com.mcmoddev.alt.api.ALTPlugin;
 
 @ALTPlugin(modid = "baseminerals")
 class BaseMineralsALT implements IALTPlugin {
-  // Intentionally left blank
+	// Intentionally left blank
 }

@@ -23,12 +23,12 @@ public class TinkersConstruct extends com.mcmoddev.lib.integration.plugins.Tinke
 			return;
 		}
 
-		if (Options.isMaterialEnabled("Lithium")) {
+		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
 			registerFluid(Materials.getMaterialByName(MaterialNames.LITHIUM), 144);
 			registerCasting(Materials.getMaterialByName(MaterialNames.LITHIUM), 144);
 		}
 
-		if (Options.isMaterialEnabled("Silicon")) {
+		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
 			registerFluid(Materials.getMaterialByName(MaterialNames.SILICON), 144);
 			registerCasting(Materials.getMaterialByName(MaterialNames.SILICON), 144);
 		}

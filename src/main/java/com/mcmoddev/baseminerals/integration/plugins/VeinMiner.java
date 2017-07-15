@@ -2,6 +2,7 @@ package com.mcmoddev.baseminerals.integration.plugins;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.lib.integration.MMDPlugin;
+import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.lib.integration.IIntegration;
 
 /**
@@ -17,7 +18,7 @@ public class VeinMiner extends com.mcmoddev.lib.integration.plugins.VeinMinerBas
 
 	@Override
 	public void init() {
-		if (initDone || !com.mcmoddev.lib.util.ConfigBase.Options.isModEnabled(VeinMiner.PLUGIN_MODID)) {
+		if (initDone || !Options.isModEnabled(VeinMiner.PLUGIN_MODID)) {
 			return;
 		}
 
