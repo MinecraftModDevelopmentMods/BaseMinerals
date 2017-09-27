@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -24,8 +23,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 		modid = BaseMinerals.MODID,
 		name = BaseMinerals.NAME,
 		version = BaseMinerals.VERSION,
-		dependencies = "required-after:forge@[13.20.1.2386,);required-after:basemetals;before:appliedenergistics2;before:buildingbricks",
-		acceptedMinecraftVersions = "[1.11.2,)",
+		dependencies = "required-after:forge@[14.22.1.2485,);required-after:basemetals;before:appliedenergistics2;before:buildingbricks",
+		acceptedMinecraftVersions = "[1.12,)",
 		updateJSON = BaseMinerals.UPDATEJSON)
 public class BaseMinerals {
 
@@ -67,11 +66,5 @@ public class BaseMinerals {
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
-	}
-
-	@EventHandler
-	public static void onRemap(FMLMissingMappingsEvent event) {
-		// we are not using this right now...
-		// proxy.onRemap(event);
 	}
 }

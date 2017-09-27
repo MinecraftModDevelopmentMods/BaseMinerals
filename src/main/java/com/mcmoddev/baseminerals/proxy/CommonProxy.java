@@ -48,25 +48,10 @@ public class CommonProxy {
 		IntegrationManager.INSTANCE.preInit(event);
 	}
 
-	/*  Right now this isn't needed, but might be at some point
-	public void onRemap(FMLMissingMappingsEvent event) {
-		for (final MissingMapping mapping : event.get()) {
-			if (mapping.resourceLocation.getResourceDomain().equals(BaseMinerals.MODID)) {
-				if (mapping.type.equals(GameRegistry.Type.BLOCK)) {
-					// Dummy
-				} else if (mapping.type.equals(GameRegistry.Type.ITEM)) {
-					// Dummy
-				}
-			}
-		}
-	}
-	*/
 
 	public void init(FMLInitializationEvent event) {
 		BaseMinerals.logger.debug("CommonProxt init() with event %s", event.description());
 		Recipes.init();
-
-		Achievements.init();
 
 		MinecraftForge.EVENT_BUS.register(new EventHandler());
 	}

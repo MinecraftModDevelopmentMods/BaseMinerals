@@ -1,0 +1,22 @@
+{
+    "type":"forge:ore_shapeless",
+    "ingredients": [
+	{
+	    "type":"forge:ore_dict",
+	    "ore":"dustCoal"
+	},
+	{
+	    "type":"forge:ore_dict",
+	    "ore":"dustSilicon"
+	},
+	{
+	    "type":"forge:ore_dict",
+	    "ore":"sand"
+	}
+    ],
+    "result": {
+	"type":"minecraft:item",
+	"item":"baseminerals:silicon_powder"
+    },
+    "group": "baseminerals_extra"
+}
