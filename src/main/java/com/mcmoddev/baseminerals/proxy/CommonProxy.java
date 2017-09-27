@@ -45,7 +45,7 @@ public class CommonProxy {
 		VillagerTrades.init();
 		ItemGroups.setupIcons();
 
-		IntegrationManager.INSTANCE.preInit(event);
+		MinecraftForge.EVENT_BUS.register(com.mcmoddev.baseminerals.util.EventHandler.class);
 	}
 
 
@@ -53,7 +53,6 @@ public class CommonProxy {
 		BaseMinerals.logger.debug("CommonProxt init() with event %s", event.description());
 		Recipes.init();
 
-		MinecraftForge.EVENT_BUS.register(new EventHandler());
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

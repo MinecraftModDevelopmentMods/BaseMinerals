@@ -7,16 +7,12 @@
 	},
 	{
 	    "type":"forge:ore_dict",
-	    "ore":"dustSilicon"
-	},
-	{
-	    "type":"forge:ore_dict",
 	    "ore":"sand"
 	}
     ],
     "result": {
 	"type":"minecraft:item",
-	"item":"baseminerals:silicon_powder"
+	"item":"baseminerals:silicon_blend"
     },
     "group": "baseminerals_extra"
 }
