@@ -1,0 +1,125 @@
+itemGroup.baseminerals.items=Base Minerals Gegenstände
+itemGroup.baseminerals.tools=Base Minerals Werkzeuge
+itemGroup.baseminerals.blocks=Base Minerals Blöcke
+nei.baseminerals.recipehandler.crusher.name=Zerkleinerte Blöcke / Gegenstände
+
+item.baseminerals.charcoal_blend.name=Holzkohlegemisch
+item.baseminerals.charcoal_block.name=Holzkohleblock
+item.baseminerals.charcoal_ingot.name=Holzkohlebarren
+item.baseminerals.charcoal_nugget.name=Holzkohlenugget
+item.baseminerals.charcoal_ore.name=Holzkohleerz
+item.baseminerals.charcoal_powder.name=Holzkohlepulver
+item.baseminerals.charcoal_smallblend.name=Kleiner Holzkohlegemischhaufen
+item.baseminerals.charcoal_smallpowder.name=Kleiner Holzkohlepulverhaufen
+
+item.baseminerals.lithium_blend.name=Lithiumgemisch
+item.baseminerals.lithium_block.name=Lithiumblock
+item.baseminerals.lithium_ingot.name=Lithiumbarren
+item.baseminerals.lithium_nugget.name=Lithiumnugget
+item.baseminerals.lithium_ore.name=Lithiumerz
+item.baseminerals.lithium_powder.name=Lithiumpulver
+item.baseminerals.lithium_smallblend.name=Kleiner Lithiumgemischhaufen
+item.baseminerals.lithium_smallpowder.name=Kleiner Lithiumpulverhaufen
+
+item.baseminerals.niter_blend.name=Kalisalpetergemisch
+item.baseminerals.niter_block.name=Kalisalpeterblock
+item.baseminerals.niter_ingot.name=Kalisalpeterbarren
+item.baseminerals.niter_nugget.name=Kalisalpeternugget
+item.baseminerals.niter_ore.name=Kalisalpetererz
+item.baseminerals.niter_powder.name=Kalisalpeterpulver
+item.baseminerals.niter_smallblend.name=Kleiner Kalisalpetergemischhaufen
+item.baseminerals.niter_smallpowder.name=Kleiner Kalisalpeterpulverhaufen
+
+item.baseminerals.potash_blend.name=Kalisalzgemisch
+item.baseminerals.potash_block.name=Kalisalzblock
+item.baseminerals.potash_ingot.name=Kalisalzbarren
+item.baseminerals.potash_nugget.name=Kalisalznugget
+item.baseminerals.potash_ore.name=Kalisalzerz
+item.baseminerals.potash_powder.name=Kalisalzpulver
+item.baseminerals.potash_smallblend.name=Kleiner Kalisalzgemischhaufen
+item.baseminerals.potash_smallpowder.name=Kleiner Kalisalzpulverhaufen
+
+item.baseminerals.phosphorus_blend.name=Phosphorgemisch
+item.baseminerals.phosphorus_block.name=Phosphorblock
+item.baseminerals.phosphorus_ingot.name=Phosphorbarren
+item.baseminerals.phosphorus_nugget.name=Phosphornugget
+item.baseminerals.phosphorus_ore.name=Phosphorerz
+item.baseminerals.phosphorus_powder.name=Phosphorpulver
+item.baseminerals.phosphorus_smallblend.name=Kleiner Phosphorgemischhaufen
+item.baseminerals.phosphorus_smallpowder.name=Kleiner Phosphorpulverhaufen
+
+item.baseminerals.salt_blend.name=Salzgemisch
+item.baseminerals.salt_block.name=Salzblock
+item.baseminerals.salt_ingot.name=Salzbarren
+item.baseminerals.salt_nugget.name=Salznugget
+item.baseminerals.salt_ore.name=Salzerz
+item.baseminerals.salt_powder.name=Salzpulver
+item.baseminerals.salt_smallblend.name=Kleiner Salzgemischhaufen
+item.baseminerals.salt_smallpowder.name=Kleiner Salzpulverhaufen
+
+item.baseminerals.saltpeter_blend.name=Salpetergemisch
+item.baseminerals.saltpeter_block.name=Salpeterblock
+item.baseminerals.saltpeter_ingot.name=Salpeterbarren
+item.baseminerals.saltpeter_nugget.name=Salpeternugget
+item.baseminerals.saltpeter_ore.name=Salpetererz
+item.baseminerals.saltpeter_powder.name=Salpeterpulver
+item.baseminerals.saltpeter_smallblend.name=Kleiner Salpetergemischhaufen
+item.baseminerals.saltpeter_smallpowder.name=Kleiner Salpeterpulverhaufen
+
+item.baseminerals.silicon_blend.name=Siliziumgemisch
+item.baseminerals.silicon_block.name=Siliziumblock
+item.baseminerals.silicon_ingot.name=Siliziumbarren
+item.baseminerals.silicon_nugget.name=Siliziumnugget
+item.baseminerals.silicon_ore.name=Siliziumerz
+item.baseminerals.silicon_powder.name=Siliziumpulver
+item.baseminerals.silicon_smallblend.name=Kleiner Siliziumgemischhaufen
+item.baseminerals.silicon_smallpowder.name=Kleiner Siliziumpulverhaufen
+
+item.baseminerals.sulfur_blend.name=Schwefelgemisch
+item.baseminerals.sulfur_block.name=Schwefelblock
+item.baseminerals.sulfur_ingot.name=Schwefelbarren
+item.baseminerals.sulfur_nugget.name=Schwefelnugget
+item.baseminerals.sulfur_ore.name=Schwefelerz
+item.baseminerals.sulfur_powder.name=Schwefelpulver
+item.baseminerals.sulfur_smallblend.name=Kleiner Schwefelgemischhaufen
+item.baseminerals.sulfur_smallpowder.name=Kleiner Schwefelpulverhaufen
+
+tile.baseminerals.charcoal_block.name=Holzkohleblock
+tile.baseminerals.charcoal_ore.name=Holzkohleerz
+
+tile.baseminerals.lithium_block.name=Lithiumblock
+tile.baseminerals.lithium_ore.name=Lithiumerz
+
+tile.baseminerals.niter_block.name=Gereinigter Salpeterblock
+tile.baseminerals.niter_ore.name=Kalisalpetererz
+
+tile.baseminerals.phosphorus_block.name=Phosphorblock
+tile.baseminerals.phosphorus_ore.name=Phosphorerz
+
+tile.baseminerals.potash_block.name=Kalisalzblock
+tile.baseminerals.potash_ore.name=Kalisalzerz
+
+tile.baseminerals.salt_block.name=Salzblock
+tile.baseminerals.salt_ore.name=Salzerz
+
+tile.baseminerals.saltpeter_block.name=Salpeterblock
+tile.baseminerals.saltpeter_ore.name=Salpetererz
+
+tile.baseminerals.silicon_block.name=Siliziumblock
+tile.baseminerals.silicon_ore.name=Siliziumerz
+
+tile.baseminerals.sulfur_block.name=Schwefelblock
+tile.baseminerals.sulfur_ore.name=Schwefelerz
+
+tooltip.charcoal.tool=Nichts Besonderes
+
+tooltip.charcoal.armor=Nichts Besonderes
+
+achievement.charcoal_maker=Holzkohle
+achievement.charcoal_maker.desc=Kombiniere ???pulver und ???pulver, um Holzkohle herzustellen
+
+fluid.baseminerals.lithium=Geschmolzenes Lithium
+fluid.baseminerals.silicon=Geschmolzenes Silizium
+
+tile.baseminerals.lithium.name=Geschmolzenes Lithium
+tile.baseminerals.lithium.name=Geschmolzenes Silizium
