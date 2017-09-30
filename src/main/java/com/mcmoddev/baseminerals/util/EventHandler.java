@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import com.mcmoddev.lib.util.Oredicts;
 
 public class EventHandler {
 	@SubscribeEvent
@@ -19,6 +20,8 @@ public class EventHandler {
 				}
 			}
 		}
+		Oredicts.registerItemOreDictionaryEntries();
+		Oredicts.registerBlockOreDictionaryEntries();
 	}
 
 	@SubscribeEvent
