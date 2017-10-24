@@ -107,6 +107,7 @@ tile.baseminerals.saltpeter_ore.name=Saltpeter Ore
 
 tile.baseminerals.silicon_block.name=Silicon Block
 tile.baseminerals.silicon_ore.name=Silicon Ore
+tile.baseminerals.silicon.name=Molten Silicon
 
 tile.baseminerals.sulfur_block.name=Sulfur Block
 tile.baseminerals.sulfur_ore.name=Sulfur Ore
