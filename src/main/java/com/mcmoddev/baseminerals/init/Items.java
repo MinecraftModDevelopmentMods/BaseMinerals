@@ -2,7 +2,10 @@ package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.lib.data.Names;
-import com.mcmoddev.lib.fuels.FuelRegistry;
+import com.mcmoddev.lib.init.Materials;
+import com.mcmoddev.lib.item.ItemMMDNugget;
+import com.mcmoddev.lib.item.ItemMMDPowder;
+import com.mcmoddev.lib.item.ItemMMDSmallPowder;
 import com.mcmoddev.lib.material.MMDMaterial;
 import com.mcmoddev.lib.util.Oredicts;
 import com.mcmoddev.baseminerals.data.MaterialNames;
@@ -36,11 +39,9 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			create(Names.NUGGET, material, ItemGroups.myTabs.itemsTab); // Special
 			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
 			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
-			FuelRegistry.addFuel(Oredicts.NUGGET_CHARCOAL, 200);
-			FuelRegistry.addFuel(Oredicts.DUST_CHARCOAL, 1600);
-			FuelRegistry.addFuel(Oredicts.DUST_SMALL_CHARCOAL, 200);
-			FuelRegistry.addFuel(Oredicts.DUST_TINY_CHARCOAL, 200);
-			FuelRegistry.addFuel(Oredicts.BLOCK + material.getCapitalizedName(), 16000);
+			((ItemMMDNugget)Materials.getMaterialByName(MaterialNames.CHARCOAL).getItem(Names.NUGGET)).setBurnTime(200);
+			((ItemMMDPowder)Materials.getMaterialByName(MaterialNames.CHARCOAL).getItem(Names.POWDER)).setBurnTime(1600);
+			((ItemMMDSmallPowder)Materials.getMaterialByName(MaterialNames.CHARCOAL).getItem(Names.SMALLPOWDER)).setBurnTime(200);
 		}
 
 		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
