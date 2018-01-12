@@ -5,15 +5,18 @@ import org.apache.logging.log4j.Logger;
 
 import com.mcmoddev.baseminerals.proxy.CommonProxy;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-//import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * This is the entry point for this Mod.
@@ -38,16 +41,16 @@ public class BaseMinerals {
 	public static final String MODID = "baseminerals";
 
 	/** Display name of this Mod */
-	public static final String NAME = "Base Minerals";
+	protected static final String NAME = "Base Minerals";
 
 	/**
 	 * Version number, in Major.Minor.Build format. The minor number is
 	 * increased whenever a change is made that has the potential to break
 	 * compatibility with other mods that depend on this one.
 	 */
-	public static final String VERSION = "2.5.0-beta4";
+	protected static final String VERSION = "2.5.0-beta4";
 
-	public static final String UPDATEJSON = "https://raw.githubusercontent.com/MinecraftModDevelopment/BaseMinerals/master/update.json";
+	protected static final String UPDATEJSON = "https://raw.githubusercontent.com/MinecraftModDevelopmentMods/BaseMinerals/master/update.json";
 
 	private static final String PROXY_BASE = "com.mcmoddev." + MODID + ".proxy.";
 
@@ -75,10 +78,14 @@ public class BaseMinerals {
 	public static void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
 	}
-/*
-	@EventHandler
-	public static void onRemap(FMLMissingMappingsEvent event) {
-		proxy.onRemap(event);
+
+	@SubscribeEvent
+	public void onRemapBlock(RegistryEvent.MissingMappings<Block> event) {
+		proxy.onRemapBlock(event);
 	}
-*/
+
+	@SubscribeEvent
+	public void onRemapItem(RegistryEvent.MissingMappings<Item> event) {
+		proxy.onRemapItem(event);
+	}
 }

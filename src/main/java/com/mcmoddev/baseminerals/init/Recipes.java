@@ -1,9 +1,9 @@
 package com.mcmoddev.baseminerals.init;
 
 import com.mcmoddev.baseminerals.data.MaterialNames;
-import com.mcmoddev.baseminerals.init.Materials;
-import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.lib.data.Names;
+import com.mcmoddev.lib.data.SharedStrings;
+import com.mcmoddev.lib.material.MMDMaterial;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -19,7 +19,7 @@ public class Recipes extends com.mcmoddev.lib.init.Recipes {
 	private static boolean initDone = false;
 
 	private Recipes() {
-		throw new IllegalAccessError("Not a instantiable class");
+		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
 	}
 
 	/**
@@ -40,9 +40,16 @@ public class Recipes extends com.mcmoddev.lib.init.Recipes {
 	}
 
 	private static void initModSpecificRecipes() {
-		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
-			OreDictionary.registerOre("itemSilicon", Materials.getMaterialByName(MaterialNames.SILICON).getItem(Names.INGOT));
-			GameRegistry.addSmelting(Materials.getMaterialByName(MaterialNames.SILICON).getItem(Names.POWDER), new ItemStack(Materials.getMaterialByName(MaterialNames.SILICON).getItem(Names.INGOT)), 0);
+		if (Materials.hasMaterial(MaterialNames.SILICON)) {
+
+			MMDMaterial silicon = Materials.getMaterialByName(MaterialNames.SILICON);
+			if (silicon.hasItem(Names.INGOT)) {
+				OreDictionary.registerOre("itemSilicon", silicon.getItem(Names.INGOT));
+				if (silicon.hasItem(Names.POWDER)) {
+					GameRegistry.addSmelting(silicon.getItem(Names.POWDER), new ItemStack(silicon.getItem(Names.INGOT)),
+							0);
+				}
+			}
 		}
 	}
 }

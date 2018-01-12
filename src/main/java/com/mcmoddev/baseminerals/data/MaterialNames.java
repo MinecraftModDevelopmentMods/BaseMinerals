@@ -1,5 +1,7 @@
 package com.mcmoddev.baseminerals.data;
 
+import com.mcmoddev.lib.data.SharedStrings;
+
 public final class MaterialNames {
 
 	public static final String SULFUR = "sulfur";
@@ -13,6 +15,6 @@ public final class MaterialNames {
 	public static final String CHARCOAL = "charcoal"; // Vanilla
 
 	private MaterialNames() {
-		throw new IllegalAccessError("Not a instantiable class");		
+		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
 	}
 }

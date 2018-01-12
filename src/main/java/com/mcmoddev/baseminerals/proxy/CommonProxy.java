@@ -8,7 +8,10 @@ import com.mcmoddev.baseminerals.util.Config;
 import com.mcmoddev.lib.oregen.FallbackGenerator;
 import com.mcmoddev.lib.util.ConfigBase.Options;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.MissingModsException;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -36,7 +39,7 @@ public class CommonProxy {
 				GameRegistry.registerWorldGenerator(new FallbackGenerator(), 0);
 			} else {
 				final HashSet<ArtifactVersion> orespawnMod = new HashSet<>();
-				orespawnMod.add(new DefaultArtifactVersion("3.1.0"));
+				orespawnMod.add(new DefaultArtifactVersion("3.2.0"));
 				throw new MissingModsException(orespawnMod, "orespawn", "MMD Ore Spawn Mod (fallback generator disabled, MMD OreSpawn enabled)");
 			}
 		}
@@ -52,15 +55,20 @@ public class CommonProxy {
 		MinecraftForge.EVENT_BUS.register(com.mcmoddev.baseminerals.util.EventHandler.class);
 	}
 
-
 	public void init(FMLInitializationEvent event) {
-		BaseMinerals.logger.debug("CommonProxt init() with event %s", event.description());
 		Recipes.init();
 
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		BaseMinerals.logger.debug("CommonProxt postInit() with event %s", event.description());
 		Config.postInit();
+	}
+
+	public void onRemapBlock(RegistryEvent.MissingMappings<Block> event) {
+		// Currently Unused
+	}
+
+	public void onRemapItem(RegistryEvent.MissingMappings<Item> event) {
+		// Currently Unused
 	}
 }

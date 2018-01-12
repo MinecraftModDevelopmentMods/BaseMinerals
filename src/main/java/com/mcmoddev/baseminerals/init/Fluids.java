@@ -1,6 +1,10 @@
 package com.mcmoddev.baseminerals.init;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.mcmoddev.baseminerals.data.MaterialNames;
+import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.util.ConfigBase.Options;
 
 /**
@@ -14,7 +18,7 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 	private static boolean initDone = false;
 
 	private Fluids() {
-		throw new IllegalAccessError("Not a instantiable class");
+		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
 	}
 
 	/**
@@ -25,15 +29,14 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 			return;
 		}
 
-		if (Options.isMaterialEnabled(MaterialNames.LITHIUM)) {
-			addFluid(Materials.getMaterialByName(MaterialNames.LITHIUM), 2000, 10000, 330, 10);
-			addFluidBlock(Materials.getMaterialByName(MaterialNames.LITHIUM));
-		}
+		final List<String> materials = Arrays.asList(MaterialNames.LITHIUM, MaterialNames.SILICON);
 
-		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
-			addFluid(Materials.getMaterialByName(MaterialNames.SILICON), 2000, 10000, 330, 10);
-			addFluidBlock(Materials.getMaterialByName(MaterialNames.SILICON));
-		}
+		materials.stream().filter(Materials::hasMaterial)
+				.filter(name -> !Materials.getMaterialByName(name).equals(Materials.emptyMaterial))
+				.filter(Options::isFluidEnabled).forEach(name -> {
+					addFluid(name, 2000, 10000, 330, 10);
+					addFluidBlock(name);
+				});
 
 		initDone = true;
 	}
