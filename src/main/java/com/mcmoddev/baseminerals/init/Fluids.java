@@ -32,10 +32,10 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 		final List<String> materials = Arrays.asList(MaterialNames.LITHIUM, MaterialNames.SILICON);
 
 		materials.stream().filter(Materials::hasMaterial)
-				.filter(name -> !Materials.getMaterialByName(name).equals(Materials.emptyMaterial))
-				.filter(Options::isFluidEnabled).forEach(name -> {
-					addFluid(name, 2000, 10000, 330, 10);
-					addFluidBlock(name);
+				.filter(materialName -> !Materials.getMaterialByName(materialName).equals(Materials.emptyMaterial))
+				.filter(Options::isFluidEnabled).forEach(materialName -> {
+					addFluid(materialName, 2000, 10000, 330, 10);
+					addFluidBlock(materialName);
 				});
 
 		initDone = true;

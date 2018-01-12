@@ -5,7 +5,6 @@ import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.material.MMDMaterial;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -42,12 +41,11 @@ public class Recipes extends com.mcmoddev.lib.init.Recipes {
 	private static void initModSpecificRecipes() {
 		if (Materials.hasMaterial(MaterialNames.SILICON)) {
 
-			MMDMaterial silicon = Materials.getMaterialByName(MaterialNames.SILICON);
+			final MMDMaterial silicon = Materials.getMaterialByName(MaterialNames.SILICON);
 			if (silicon.hasItem(Names.INGOT)) {
 				OreDictionary.registerOre("itemSilicon", silicon.getItem(Names.INGOT));
 				if (silicon.hasItem(Names.POWDER)) {
-					GameRegistry.addSmelting(silicon.getItem(Names.POWDER), new ItemStack(silicon.getItem(Names.INGOT)),
-							0);
+					GameRegistry.addSmelting(silicon.getItemStack(Names.POWDER), silicon.getItemStack(Names.INGOT), 0);
 				}
 			}
 		}

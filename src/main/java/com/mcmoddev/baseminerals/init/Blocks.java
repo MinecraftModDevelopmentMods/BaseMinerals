@@ -37,12 +37,14 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 		Materials.init();
 		ItemGroups.init();
 
-		final List<String> materials = Arrays.asList(MaterialNames.CHARCOAL, MaterialNames.LITHIUM, MaterialNames.NITER, MaterialNames.PHOSPHORUS,
-				MaterialNames.POTASH, MaterialNames.SALT, MaterialNames.SALTPETER, MaterialNames.SILICON, MaterialNames.SULFUR);
+		final List<String> materials = Arrays.asList(MaterialNames.CHARCOAL, MaterialNames.LITHIUM, MaterialNames.NITER,
+				MaterialNames.PHOSPHORUS, MaterialNames.POTASH, MaterialNames.SALT, MaterialNames.SALTPETER,
+				MaterialNames.SILICON, MaterialNames.SULFUR);
 
 		materials.stream().filter(Materials::hasMaterial)
-				.filter(name -> !Materials.getMaterialByName(name).equals(Materials.emptyMaterial)).forEach(name -> {
-					final MMDMaterial material = Materials.getMaterialByName(name);
+				.filter(materialName -> !Materials.getMaterialByName(materialName).equals(Materials.emptyMaterial))
+				.forEach(materialName -> {
+					final MMDMaterial material = Materials.getMaterialByName(materialName);
 
 					create(Names.BLOCK, material);
 					create(Names.ORE, material);

@@ -32,15 +32,17 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 			return;
 		}
 
-		final List<String> materials = Arrays.asList(MaterialNames.LITHIUM, MaterialNames.NITER, MaterialNames.PHOSPHORUS, MaterialNames.POTASH, MaterialNames.SALT, MaterialNames.SALTPETER, MaterialNames.SULFUR);
+		final List<String> materials = Arrays.asList(MaterialNames.LITHIUM, MaterialNames.NITER,
+				MaterialNames.PHOSPHORUS, MaterialNames.POTASH, MaterialNames.SALT, MaterialNames.SALTPETER,
+				MaterialNames.SULFUR);
 
-		materials.stream()
-		.filter(Options::isMaterialEnabled)
-		.forEach(name -> createMaterial(name, getType(name), getHardness(name), getStrength(name), getMagic(name), getColor(name)));
+		materials.stream().filter(Options::isMaterialEnabled).forEach(name -> createMaterial(name, getType(name),
+				getHardness(name), getStrength(name), getMagic(name), getColor(name)));
 
 		if (Options.isMaterialEnabled(MaterialNames.SILICON)) {
 			final String name = MaterialNames.SILICON;
-			createAlloyMaterial(name, getType(name), getHardness(name), getStrength(name), getMagic(name), getColor(name));
+			createAlloyMaterial(name, getType(name), getHardness(name), getStrength(name), getMagic(name),
+					getColor(name));
 		}
 
 		initDone = true;
@@ -62,6 +64,7 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 				return MaterialType.MINERAL;
 		}
 	}
+
 	private static int getColor(@Nonnull final String name) {
 		switch (name) {
 			case MaterialNames.LITHIUM:

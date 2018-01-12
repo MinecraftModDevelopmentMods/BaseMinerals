@@ -9,6 +9,7 @@ import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.init.Materials;
+import com.mcmoddev.lib.item.ItemMMDBlock;
 import com.mcmoddev.lib.item.ItemMMDNugget;
 import com.mcmoddev.lib.item.ItemMMDPowder;
 import com.mcmoddev.lib.item.ItemMMDSmallPowder;
@@ -46,8 +47,9 @@ public class Items extends com.mcmoddev.lib.init.Items {
 				MaterialNames.SILICON, MaterialNames.SULFUR);
 
 		materials.stream().filter(Materials::hasMaterial)
-				.filter(name -> !Materials.getMaterialByName(name).equals(Materials.emptyMaterial)).forEach(name -> {
-					final MMDMaterial material = Materials.getMaterialByName(name);
+				.filter(materialName -> !Materials.getMaterialByName(materialName).equals(Materials.emptyMaterial))
+				.forEach(materialName -> {
+					final MMDMaterial material = Materials.getMaterialByName(materialName);
 
 					create(Names.POWDER, material);
 					create(Names.SMALLPOWDER, material);
@@ -66,6 +68,10 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			}
 			if (charcoal.hasItem(Names.SMALLPOWDER)) {
 				((ItemMMDSmallPowder) charcoal.getItem(Names.SMALLPOWDER)).setBurnTime(200);
+			}
+
+			if (charcoal.hasBlock(Names.BLOCK)) {
+				((ItemMMDBlock) charcoal.getItem("ItemBlock_charcoal_block")).setBurnTime(16000);
 			}
 		}
 
@@ -93,7 +99,9 @@ public class Items extends com.mcmoddev.lib.init.Items {
 
 		if ((name.equals(Names.DOOR)) || (name.equals(Names.SLAB))) {
 			tab = ItemGroups.myTabs.blocksTab;
-		} else if ((name.equals(Names.BLEND)) || (name.equals(Names.INGOT)) || (name.equals(Names.NUGGET)) || (name.equals(Names.POWDER)) || (name.equals(Names.SMALLBLEND)) || (name.equals(Names.SMALLPOWDER)) || (name.equals(Names.ROD)) || (name.equals(Names.GEAR))) {
+		} else if ((name.equals(Names.BLEND)) || (name.equals(Names.INGOT)) || (name.equals(Names.NUGGET))
+				|| (name.equals(Names.POWDER)) || (name.equals(Names.SMALLBLEND)) || (name.equals(Names.SMALLPOWDER))
+				|| (name.equals(Names.ROD)) || (name.equals(Names.GEAR))) {
 			tab = ItemGroups.myTabs.itemsTab;
 		} else {
 			tab = ItemGroups.myTabs.toolsTab;
