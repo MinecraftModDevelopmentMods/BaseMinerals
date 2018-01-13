@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "dimensions": [
+    {
+      "ores": [
+        {
+          "block": "baseminerals:lithium_ore",
+          "parameters": {
+            "size": 8,
+            "variation": 4,
+            "frequency": 8.0,
+            "minHeight": 0,
+            "maxHeight": 96
+          },
+          "feature": "default",
+          "replace_block": "default"
+        },
+        {
+          "block": "baseminerals:niter_ore",
+          "parameters": {
+            "size": 8,
+            "variation": 4,
+            "frequency": 8.0,
+            "minHeight": 0,
+            "maxHeight": 96
+          },
+          "feature": "default",
+          "replace_block": "default"
+        },
+        {
+          "block": "baseminerals:salt_ore",
+          "parameters": {
+            "size": 8,
+            "variation": 4,
+            "frequency": 8.0,
+            "minHeight": 0,
+            "maxHeight": 96
+          },
+          "feature": "default",
+          "replace_block": "default"
+        },
+        {
+          "block": "baseminerals:sulfur_ore",
+          "parameters": {
+            "size": 8,
+            "variation": 4,
+            "frequency": 6.0,
+            "minHeight": 0,
+            "maxHeight": 32
+          },
+          "feature": "default",
+          "replace_block": "default"
+        },
+        {
+          "block": "baseminerals:phosphorus_ore",
+          "parameters": {
+            "size": 8,
+            "variation": 4,
+            "frequency": 6.0,
+            "minHeight": 0,
+            "maxHeight": 96
+          },
+          "feature": "default",
+          "replace_block": "default"
+        },
+        {
+          "block": "baseminerals:potash_ore",
+          "parameters": {
+            "size": 8,
+            "variation": 4,
+            "frequency": 6.0,
+            "minHeight": 0,
+            "maxHeight": 96
+          },
+          "feature": "default",
+          "replace_block": "default"
+        },
+        {
+          "block": "baseminerals:saltpeter_ore",
+          "parameters": {
+            "size": 8,
+            "variation": 4,
+            "frequency": 6.0,
+            "minHeight": 0,
+            "maxHeight": 96
+          },
+          "feature": "default",
+          "replace_block": "default"
+        }
+      ]
+    }
+  ]
+}
