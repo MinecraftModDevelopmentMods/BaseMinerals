@@ -22,10 +22,12 @@
 				"minHeight": 0,
 				"maxHeight": 96
 			},
-			"block": {
-				"name": "baseminerals:lithium_ore",
-				"chance": 100
-			}
+			"blocks": [
+				{
+					"name": "baseminerals:lithium_ore",
+					"chance": 100
+				}
+			]
 		},
 		"niter_ore": {
 			"retrogen": false,
@@ -48,10 +50,12 @@
 				"minHeight": 0,
 				"maxHeight": 96
 			},
-			"block": {
-				"name": "baseminerals:niter_ore",
-				"chance": 100
-			}
+			"blocks": [
+				{
+					"name": "baseminerals:niter_ore",
+					"chance": 100
+				}
+			]
 		},
 		"salt_ore": {
 			"retrogen": false,
@@ -74,10 +78,12 @@
 				"minHeight": 0,
 				"maxHeight": 96
 			},
-			"block": {
-				"name": "baseminerals:salt_ore",
-				"chance": 100
-			}
+			"blocks": [
+				{
+					"name": "baseminerals:salt_ore",
+					"chance": 100
+				}
+			]
 		},
 		"sulfur_ore": {
 			"retrogen": false,
@@ -100,10 +106,12 @@
 				"minHeight": 0,
 				"maxHeight": 32
 			},
-			"block": {
-				"name": "baseminerals:sulfur_ore",
-				"chance": 100
-			}
+			"blocks": [
+				{
+					"name": "baseminerals:sulfur_ore",
+					"chance": 100
+				}
+			]
 		},
 		"phosphorus_ore": {
 			"retrogen": false,
@@ -126,10 +134,12 @@
 				"minHeight": 0,
 				"maxHeight": 96
 			},
-			"block": {
-				"name": "baseminerals:phosphorus_ore",
-				"chance": 100
-			}
+			"blocks": [
+				{
+					"name": "baseminerals:phosphorus_ore",
+					"chance": 100
+				}
+			]
 		},
 		"potash_ore": {
 			"retrogen": false,
@@ -152,10 +162,12 @@
 				"minHeight": 0,
 				"maxHeight": 96
 			},
-			"block": {
-				"name": "baseminerals:potash_ore",
-				"chance": 100
-			}
+			"blocks": [
+				{
+					"name": "baseminerals:potash_ore",
+					"chance": 100
+				}
+			]
 		},
 		"saltpeter_ore": {
 			"retrogen": false,
@@ -178,10 +190,12 @@
 				"minHeight": 0,
 				"maxHeight": 96
 			},
-			"block": {
-				"name": "baseminerals:saltpeter_ore",
-				"chance": 100
-			}
+			"blocks": [
+				{
+					"name": "baseminerals:saltpeter_ore",
+					"chance": 100
+				}
+			]
 		}
 	}
 }
