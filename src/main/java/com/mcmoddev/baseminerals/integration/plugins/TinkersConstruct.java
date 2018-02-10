@@ -1,9 +1,11 @@
 package com.mcmoddev.baseminerals.integration.plugins;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
+import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.baseminerals.init.Materials;
-import com.mcmoddev.baseminerals.util.Config.Options;
 import com.mcmoddev.lib.integration.MMDPlugin;
+import com.mcmoddev.lib.material.MMDMaterial;
+import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.lib.integration.IIntegration;
 
 /**
@@ -14,24 +16,22 @@ import com.mcmoddev.lib.integration.IIntegration;
 @MMDPlugin(addonId = BaseMinerals.MODID, pluginId = TinkersConstruct.PLUGIN_MODID)
 public class TinkersConstruct extends com.mcmoddev.lib.integration.plugins.TinkersConstructBase implements IIntegration {
 
-	private static boolean initDone = false;
-
 	@Override
 	public void init() {
-		if (initDone || !com.mcmoddev.basemetals.util.Config.Options.isModEnabled("tinkersconstruct")) {
+		if (!Options.isModEnabled(PLUGIN_MODID)) {
 			return;
 		}
 
-		if (Options.enableLithium) {
-			registerFluid(Materials.lithium, 144);
-			registerCasting(Materials.lithium, 144);
+		if (Materials.hasMaterial(MaterialNames.LITHIUM)) {
+			final MMDMaterial lithium = Materials.getMaterialByName(MaterialNames.LITHIUM);
+			registerFluid(lithium, 144);
+			registerCasting(lithium, 144);
 		}
 
-		if (Options.enableSilicon) {
-			registerFluid(Materials.silicon, 144);
-			registerCasting(Materials.silicon, 144);
+		if (Materials.hasMaterial(MaterialNames.SILICON)) {
+			final MMDMaterial silicon = Materials.getMaterialByName(MaterialNames.SILICON);
+			registerFluid(silicon, 144);
+			registerCasting(silicon, 144);
 		}
-
-		initDone = true;
 	}
 }

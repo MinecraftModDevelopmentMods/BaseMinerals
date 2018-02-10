@@ -7,4 +7,5 @@ package com.mcmoddev.baseminerals.proxy;
  *
  */
 public class ServerProxy extends CommonProxy {
+	// Nothing to see here people
 }

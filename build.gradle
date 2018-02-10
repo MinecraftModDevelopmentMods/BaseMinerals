@@ -49,7 +49,7 @@ project.afterEvaluate {
     // configure jacoco to analyze the junitPlatformTest task
     jacoco {
         // this tool version is compatible with
-        toolVersion = "0.7.9"
+        toolVersion = '0.7.9'
         applyTo junitPlatformTestTask
     }
 
@@ -69,6 +69,15 @@ junitPlatform {
     // enableStandardTestTask true
     // selectors (optional)
     // filters (optional)
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs = [
+        '-Xlint:deprecation', // deprecation, rawtypes, cast, unchecked, all
+//		'-Xdiags:verbose',
+//      '-Werror'
+    ]
 }
 
 javadoc {
@@ -134,11 +143,11 @@ repositories {
         name 'Chickenbones Repo'
         url 'http://chickenbones.net/maven/'
     }
-    maven { // The One Probe
+    maven { // The One Probe, EnderIO, EnderCore
         name 'tterrag'
         url 'http://maven.tterrag.com/'
     }
-    maven {
+    maven { // Tesla
         name 'MMD'
         url 'https://maven.mcmoddev.com/'
     }
@@ -147,14 +156,14 @@ repositories {
         url 'http://maven.amadornes.com/'
     }
     maven { // CraftTweaker, ZenScript
-        name 'jared maven'
-        url 'http://blamejared.com/maven/'
+        name 'blamejared'
+        url 'http://maven.blamejared.com/'
     }
     maven { // IC2
         name 'industrialcraft'
         url 'http://maven.ic2.player.to/'
     }
-    maven { // WAILA/HWYLA
+    maven { // HWYLA
     	name 'tehnut'
     	url 'http://tehnut.info/maven/'
     }
@@ -182,11 +191,18 @@ repositories {
         name 'thiakil'
         url 'http://maven.thiakil.com/'
     }
+    ivy {
+        url "http://ae-mod.info/builds"
+        layout "pattern", {
+            artifact "[module]-[revision](-[classifier])(.[ext])"
+        }
+	}
 }
 
 dependencies {
-    deobfCompile "slimeknights:TConstruct:${mc_version}-${tconstruct_version}"
     deobfCompile "slimeknights.mantle:Mantle:${mc_version}-${mantle_version}"
+    deobfCompile "slimeknights:TConstruct:${mc_version}-${tconstruct_version}"
+
     deobfCompile "com.mcmoddev:AdditionalLootTables:${mc_version}-${alt_version}"
     deobfCompile "com.mcmoddev:OreSpawn:${mc_version}-${orespawn_version}"
     deobfCompile "com.mcmoddev:BaseMetals:${mc_version}-${bme_version}"
