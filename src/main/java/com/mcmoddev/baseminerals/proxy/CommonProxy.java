@@ -5,6 +5,8 @@ import java.util.HashSet;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.init.*;
 import com.mcmoddev.baseminerals.util.Config;
+import com.mcmoddev.lib.data.SharedStrings;
+import com.mcmoddev.lib.integration.IntegrationManager;
 import com.mcmoddev.lib.oregen.FallbackGenerator;
 import com.mcmoddev.lib.util.ConfigBase.Options;
 
@@ -30,17 +32,17 @@ import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		BaseMinerals.logger.debug("CommonProxy preInit() with event %s", event.description());
 
 		Config.init();
 
-		if ((Options.requireMMDOreSpawn()) && (!Loader.isModLoaded("orespawn"))) {
-			if(Options.fallbackOrespawn()) {
+		if ((Options.requireMMDOreSpawn()) && (!Loader.isModLoaded(SharedStrings.ORESPAWN_MODID))) {
+			if (Options.fallbackOrespawn()) {
 				GameRegistry.registerWorldGenerator(new FallbackGenerator(), 0);
 			} else {
 				final HashSet<ArtifactVersion> orespawnMod = new HashSet<>();
-				orespawnMod.add(new DefaultArtifactVersion("3.2.0"));
-				throw new MissingModsException(orespawnMod, "orespawn", "MMD Ore Spawn Mod (fallback generator disabled, MMD OreSpawn enabled)");
+				orespawnMod.add(new DefaultArtifactVersion(SharedStrings.ORESPAWN_VERSION));
+				throw new MissingModsException(orespawnMod, SharedStrings.ORESPAWN_MODID,
+						SharedStrings.ORESPAWN_MISSING_TEXT);
 			}
 		}
 
@@ -53,6 +55,8 @@ public class CommonProxy {
 		ItemGroups.setupIcons();
 
 		MinecraftForge.EVENT_BUS.register(com.mcmoddev.baseminerals.util.EventHandler.class);
+
+		IntegrationManager.INSTANCE.preInit(event);
 	}
 
 	public void init(FMLInitializationEvent event) {

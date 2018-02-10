@@ -26,8 +26,6 @@ import net.minecraft.item.Item;
  */
 public class Items extends com.mcmoddev.lib.init.Items {
 
-	private static boolean initDone = false;
-
 	protected Items() {
 		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
 	}
@@ -36,18 +34,12 @@ public class Items extends com.mcmoddev.lib.init.Items {
 	 *
 	 */
 	public static void init() {
-		if (initDone) {
-			return;
-		}
-
-		Blocks.init();
-
 		final List<String> materials = Arrays.asList(MaterialNames.CHARCOAL, MaterialNames.LITHIUM, MaterialNames.NITER,
 				MaterialNames.PHOSPHORUS, MaterialNames.POTASH, MaterialNames.SALT, MaterialNames.SALTPETER,
 				MaterialNames.SILICON, MaterialNames.SULFUR);
 
 		materials.stream().filter(Materials::hasMaterial)
-				.filter(materialName -> !Materials.getMaterialByName(materialName).equals(Materials.emptyMaterial))
+				.filter(materialName -> !Materials.getMaterialByName(materialName).isEmpty())
 				.forEach(materialName -> {
 					final MMDMaterial material = Materials.getMaterialByName(materialName);
 
@@ -90,8 +82,6 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			create(Names.NUGGET, silicon);
 			create(Names.SMALLBLEND, silicon);
 		}
-
-		initDone = true;
 	}
 
 	private static Item create(@Nonnull final Names name, @Nonnull final MMDMaterial material) {

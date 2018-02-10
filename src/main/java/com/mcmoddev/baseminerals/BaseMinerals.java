@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mcmoddev.baseminerals.proxy.CommonProxy;
+import com.mcmoddev.lib.data.SharedStrings;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -50,18 +51,19 @@ public class BaseMinerals {
 	 */
 	protected static final String VERSION = "2.5.0-beta4";
 
-	protected static final String UPDATEJSON = "https://raw.githubusercontent.com/MinecraftModDevelopmentMods/BaseMinerals/master/update.json";
+	protected static final String UPDATEJSON = SharedStrings.UPDATE_JSON_URL + "BaseMinerals/master/update.json";
 
-	private static final String PROXY_BASE = "com.mcmoddev." + MODID + ".proxy.";
+	private static final String PROXY_BASE = SharedStrings.MMD_PROXY_GROUP + MODID + SharedStrings.DOT_PROXY_DOT;
 
-	@SidedProxy(clientSide = PROXY_BASE + "ClientProxy", serverSide = PROXY_BASE + "ServerProxy")
+	@SidedProxy(clientSide = PROXY_BASE + SharedStrings.CLIENTPROXY, serverSide = PROXY_BASE
+		+ SharedStrings.SERVERPROXY)
 	public static CommonProxy proxy;
 
 	public static final Logger logger = LogManager.getFormatterLogger(BaseMinerals.MODID);
 
 	@EventHandler
 	public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-		logger.warn("Invalid fingerprint detected!");
+		logger.warn(SharedStrings.INVALID_FINGERPRINT);
 	}
 
 	@EventHandler

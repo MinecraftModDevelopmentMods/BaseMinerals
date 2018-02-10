@@ -20,8 +20,6 @@ import net.minecraft.block.Block;
  */
 public class Blocks extends com.mcmoddev.lib.init.Blocks {
 
-	private static boolean initDone = false;
-
 	protected Blocks() {
 		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
 	}
@@ -30,27 +28,18 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 	 *
 	 */
 	public static void init() {
-		if (initDone) {
-			return;
-		}
-
-		Materials.init();
-		ItemGroups.init();
-
 		final List<String> materials = Arrays.asList(MaterialNames.CHARCOAL, MaterialNames.LITHIUM, MaterialNames.NITER,
 				MaterialNames.PHOSPHORUS, MaterialNames.POTASH, MaterialNames.SALT, MaterialNames.SALTPETER,
 				MaterialNames.SILICON, MaterialNames.SULFUR);
 
 		materials.stream().filter(Materials::hasMaterial)
-				.filter(materialName -> !Materials.getMaterialByName(materialName).equals(Materials.emptyMaterial))
+				.filter(materialName -> !Materials.getMaterialByName(materialName).isEmpty())
 				.forEach(materialName -> {
 					final MMDMaterial material = Materials.getMaterialByName(materialName);
 
 					create(Names.BLOCK, material);
 					create(Names.ORE, material);
 				});
-
-		initDone = true;
 	}
 
 	private static Block create(@Nonnull final Names name, @Nonnull final MMDMaterial material) {
