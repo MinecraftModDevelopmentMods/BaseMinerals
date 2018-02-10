@@ -6,15 +6,20 @@ import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.init.*;
 import com.mcmoddev.baseminerals.util.Config;
 import com.mcmoddev.baseminerals.util.EventHandler;
+import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.integration.IntegrationManager;
+import com.mcmoddev.lib.oregen.FallbackGenerator;
 import com.mcmoddev.lib.util.ConfigBase.Options;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.MissingModsException;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 
@@ -27,14 +32,18 @@ import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		BaseMinerals.logger.debug("CommonProxy preInit() with event %s", event.description());
 
 		Config.init();
 
-		if ((Options.requireMMDOreSpawn()) && (!Loader.isModLoaded("orespawn"))) {
-			final HashSet<ArtifactVersion> orespawnMod = new HashSet<>();
-			orespawnMod.add(new DefaultArtifactVersion("3.1.0"));
-			throw new MissingModsException(orespawnMod, "orespawn", "MMD Ore Spawn Mod");
+		if ((Options.requireMMDOreSpawn()) && (!Loader.isModLoaded(SharedStrings.ORESPAWN_MODID))) {
+			if (Options.fallbackOrespawn()) {
+				GameRegistry.registerWorldGenerator(new FallbackGenerator(), 0);
+			} else {
+				final HashSet<ArtifactVersion> orespawnMod = new HashSet<>();
+				orespawnMod.add(new DefaultArtifactVersion(SharedStrings.ORESPAWN_VERSION));
+				throw new MissingModsException(orespawnMod, SharedStrings.ORESPAWN_MODID,
+						SharedStrings.ORESPAWN_MISSING_TEXT);
+			}
 		}
 
 		Materials.init();
@@ -63,7 +72,6 @@ public class CommonProxy {
 	*/
 
 	public void init(FMLInitializationEvent event) {
-		BaseMinerals.logger.debug("CommonProxt init() with event %s", event.description());
 		Recipes.init();
 
 		Achievements.init();
@@ -72,7 +80,6 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		BaseMinerals.logger.debug("CommonProxt postInit() with event %s", event.description());
 		Config.postInit();
 	}
 }
