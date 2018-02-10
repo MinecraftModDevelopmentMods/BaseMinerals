@@ -12,7 +12,7 @@ public final class MaterialNames {
 	public static final String NITER = "niter";
 	public static final String PHOSPHORUS = "phosphorus";
 	public static final String LITHIUM = "lithium";
-	public static final String CHARCOAL = "charcoal";
+	public static final String CHARCOAL = "charcoal"; // Vanilla
 
 	private MaterialNames() {
 		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);

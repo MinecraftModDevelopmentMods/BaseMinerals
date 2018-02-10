@@ -1,6 +1,6 @@
 package com.mcmoddev.baseminerals.util;
 
-import java.io.*;
+import java.io.File;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
@@ -35,7 +35,7 @@ public class Config extends ConfigBase {
 			MinecraftForge.EVENT_BUS.register(new Config());
 		}
 
-		// METALS
+		// MATERIALS
 		Options.materialEnabled(MaterialNames.CHARCOAL, configuration.getBoolean("EnableCharcoal", MATERIALS_CAT, true,
 				"Enable Charcoal Items and Materials"));
 		Options.materialEnabled(MaterialNames.LITHIUM, configuration.getBoolean("EnableLithium", MATERIALS_CAT, true,

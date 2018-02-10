@@ -1,5 +1,6 @@
 package com.mcmoddev.baseminerals.init;
 
+import com.mcmoddev.lib.util.ConfigBase.Options;
 import com.mcmoddev.baseminerals.data.AchievementNames;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.data.Names;
@@ -19,7 +20,7 @@ public class Achievements extends com.mcmoddev.lib.init.Achievements {
 	 *
 	 */
 	public static void init() {
-		if (com.mcmoddev.lib.util.ConfigBase.Options.enableAchievements()) {
+		if (Options.enableAchievements()) {
 			AchievementPage page = new AchievementPage(Loader.instance().activeModContainer().getModId());
 			AchievementPage.registerAchievementPage(page);
 

@@ -23,13 +23,22 @@ public class EnderIO extends com.mcmoddev.lib.integration.plugins.EnderIOBase im
 			return;
 		}
 
-		addSagMillRecipe(MaterialNames.LITHIUM, null, 3600);
-		addSagMillRecipe(MaterialNames.NITER, null, 3600);
-		addSagMillRecipe(MaterialNames.PHOSPHORUS, null, 3600);
-		addSagMillRecipe(MaterialNames.POTASH, null, 3600);
-		addSagMillRecipe(MaterialNames.SALT, null, 3600);
-		addSagMillRecipe(MaterialNames.SALTPETER, null, 3600);
-		// addSagMillRecipe(MaterialNames.SILICON, null, 3600);
-		addSagMillRecipe(MaterialNames.SULFUR, null, 3600);
+		final String[] baseNames = new String[] {
+				MaterialNames.LITHIUM,
+				MaterialNames.NITER,
+				MaterialNames.PHOSPHORUS,
+				MaterialNames.POTASH,
+				MaterialNames.SALT,
+				MaterialNames.SALTPETER,
+				// MaterialNames.SILICON,
+				MaterialNames.SULFUR
+		};
+
+		for (int i = 0; i < baseNames.length; i++) {
+			final String materialName = baseNames[i];
+			if (Options.isMaterialEnabled(materialName)) {
+				addSagMillRecipe(materialName, 3600);
+			}
+		}
 	}
 }

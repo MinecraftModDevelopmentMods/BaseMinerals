@@ -4,9 +4,9 @@ import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.baseminerals.init.Materials;
 import com.mcmoddev.lib.integration.MMDPlugin;
+import com.mcmoddev.lib.integration.IIntegration;
 import com.mcmoddev.lib.material.MMDMaterial;
 import com.mcmoddev.lib.util.ConfigBase.Options;
-import com.mcmoddev.lib.integration.IIntegration;
 
 /**
  *

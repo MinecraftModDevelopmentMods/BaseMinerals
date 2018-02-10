@@ -32,6 +32,7 @@ public class Recipes extends com.mcmoddev.lib.init.Recipes {
 
 	private static void initModSpecificRecipes() {
 
+		// TODO: Make gunpowder Recipe Configurable
 		if ((Materials.hasMaterial(MaterialNames.SULFUR))) {
 			final MMDMaterial sulfur = Materials.getMaterialByName(MaterialNames.SULFUR);
 			final String dustSulphur = Oredicts.DUST + sulfur.getCapitalizedName();
