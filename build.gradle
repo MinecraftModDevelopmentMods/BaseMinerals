@@ -19,7 +19,7 @@ buildscript {
         classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.10'
         classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.1'
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.3'
-        classpath "com.jaredsburrows:gradle-checker-framework-plugin:0.2.0"
+        classpath 'com.jaredsburrows:gradle-checker-framework-plugin:0.2.0'
     }
 }
 

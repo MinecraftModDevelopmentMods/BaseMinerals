@@ -53,9 +53,13 @@ public class Recipes extends com.mcmoddev.lib.init.Recipes {
 
 		if (Materials.hasMaterial(MaterialNames.SILICON)) {
 			final MMDMaterial silicon = Materials.getMaterialByName(MaterialNames.SILICON);
-			GameRegistry.addRecipe(new ShapelessOreRecipe(silicon.getItemStack(Names.BLEND, 1), "sand", Oredicts.DUST_COAL));
-			GameRegistry.addRecipe(new ShapelessOreRecipe(silicon.getItemStack(Names.BLEND, 1), "sand", Oredicts.DUST_CHARCOAL));
-			OreDictionary.registerOre("itemSilicon", silicon.getItem(Names.INGOT));
+			if (silicon.hasItem(Names.INGOT)) {
+				OreDictionary.registerOre("itemSilicon", silicon.getItem(Names.INGOT));
+				if (silicon.hasItem(Names.BLEND)) {
+					GameRegistry.addRecipe(new ShapelessOreRecipe(silicon.getItemStack(Names.BLEND, 1), "sand", Oredicts.DUST_COAL));
+					GameRegistry.addRecipe(new ShapelessOreRecipe(silicon.getItemStack(Names.BLEND, 1), "sand", Oredicts.DUST_CHARCOAL));
+				}
+			}
 		}
 	}
 }
