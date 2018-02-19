@@ -15,8 +15,6 @@ import com.mcmoddev.lib.util.ConfigBase.Options;
  */
 public class Fluids extends com.mcmoddev.lib.init.Fluids {
 
-	private static boolean initDone = false;
-
 	private Fluids() {
 		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
 	}
@@ -25,19 +23,14 @@ public class Fluids extends com.mcmoddev.lib.init.Fluids {
 	 *
 	 */
 	public static void init() {
-		if (initDone) {
-			return;
-		}
 
 		final List<String> materials = Arrays.asList(MaterialNames.LITHIUM, MaterialNames.SILICON);
 
 		materials.stream().filter(Materials::hasMaterial)
-				.filter(materialName -> !Materials.getMaterialByName(materialName).equals(Materials.emptyMaterial))
+				.filter(materialName -> !Materials.getMaterialByName(materialName).isEmpty())
 				.filter(Options::isFluidEnabled).forEach(materialName -> {
 					addFluid(materialName, 2000, 10000, 330, 10);
 					addFluidBlock(materialName);
 				});
-
-		initDone = true;
 	}
 }

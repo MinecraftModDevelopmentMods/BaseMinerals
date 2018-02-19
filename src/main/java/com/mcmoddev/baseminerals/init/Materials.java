@@ -18,8 +18,6 @@ import com.mcmoddev.lib.util.ConfigBase.Options;
  */
 public class Materials extends com.mcmoddev.lib.init.Materials {
 
-	private static boolean initDone = false;
-
 	protected Materials() {
 		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
 	}
@@ -28,9 +26,6 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 	 *
 	 */
 	public static void init() {
-		if (initDone) {
-			return;
-		}
 
 		final List<String> materials = Arrays.asList(MaterialNames.LITHIUM, MaterialNames.NITER,
 				MaterialNames.PHOSPHORUS, MaterialNames.POTASH, MaterialNames.SALT, MaterialNames.SALTPETER,
@@ -44,8 +39,6 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 			createAlloyMaterial(name, getType(name), getHardness(name), getStrength(name), getMagic(name),
 					getColor(name));
 		}
-
-		initDone = true;
 	}
 
 	private static MaterialType getType(@Nonnull final String name) {

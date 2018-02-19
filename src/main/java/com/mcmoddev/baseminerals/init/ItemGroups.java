@@ -19,9 +19,8 @@ import net.minecraft.item.Item;
  */
 public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 
-	private static boolean initDone = false;
-	private static final int BLOCKS_TAB_ID = addTab("blocks", true);
-	private static final int ITEMS_TAB_ID = addTab("items", true);
+	private static final int BLOCKS_TAB_ID = addTab(SharedStrings.TAB_BLOCKS, true);
+	private static final int ITEMS_TAB_ID = addTab(SharedStrings.TAB_ITEMS, true);
 	private static final MMDCreativeTab blocksTab = getTab(BLOCKS_TAB_ID);
 	private static final MMDCreativeTab itemsTab = getTab(ITEMS_TAB_ID);
 	public static final TabContainer myTabs = new TabContainer(blocksTab, itemsTab, null);
@@ -34,15 +33,10 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 	 *
 	 */
 	public static void init() {
-		if (initDone) {
-			return;
-		}
-
-		initDone = true;
 	}
 
 	public static void setupIcons() {
-		MMDMaterial material = Materials.emptyMaterial;
+		MMDMaterial material = Materials.EMPTY;
 		Block blocksTabIconItem;
 		Item itemsTabIconItem;
 
@@ -50,7 +44,7 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 			material = Materials.getMaterialByName(MaterialNames.SILICON);
 		}
 
-		if (material.equals(Materials.emptyMaterial)) {
+		if (material.isEmpty()) {
 			return;
 		}
 
