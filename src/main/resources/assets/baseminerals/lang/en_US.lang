@@ -1,6 +1,7 @@
 itemGroup.baseminerals.items=Base Minerals
 itemGroup.baseminerals.tools=Base Minerals
 itemGroup.baseminerals.blocks=Base Minerals
+itemGroup.baseminerals.combat=Base Minerals
 nei.baseminerals.recipehandler.crusher.name=Crushed Blocks/Items
 
 item.baseminerals.charcoal_blend.name=Charcoal Blend
