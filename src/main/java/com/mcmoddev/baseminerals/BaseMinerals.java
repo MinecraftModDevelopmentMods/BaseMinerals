@@ -8,6 +8,7 @@ import com.mcmoddev.lib.data.SharedStrings;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -69,6 +70,9 @@ public class BaseMinerals {
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit(event);
+
+		MinecraftForge.EVENT_BUS.register(com.mcmoddev.baseminerals.init.Items.class);
+		MinecraftForge.EVENT_BUS.register(com.mcmoddev.baseminerals.init.Blocks.class);
 	}
 
 	@EventHandler

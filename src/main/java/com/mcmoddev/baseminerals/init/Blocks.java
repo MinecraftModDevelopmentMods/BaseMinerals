@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.material.MMDMaterial;
 
 import net.minecraft.block.Block;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * This class initializes all blocks in Base Minerals.
@@ -42,7 +45,14 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 				});
 	}
 
-	private static Block create(@Nonnull final Names name, @Nonnull final MMDMaterial material) {
-		return create(name, material, ItemGroups.myTabs.blocksTab);
+	@SubscribeEvent
+	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+		for (MMDMaterial material : Materials.getMaterialsByMod(BaseMinerals.MODID)) {
+			for (Block block : material.getBlocks()) {
+				if (block.getRegistryName().getResourceDomain().equals(BaseMinerals.MODID)) {
+					event.getRegistry().register(block);
+				}
+			}
+		}
 	}
 }

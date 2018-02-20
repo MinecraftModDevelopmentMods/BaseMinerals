@@ -23,25 +23,25 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
-		
+
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
-    @SubscribeEvent
-    public static void registerModels(ModelRegistryEvent event) {
+	@SubscribeEvent
+	public void fluidRendering(RegistryEvent.Register<MMDMaterial> event) {
+		for (final String name : Fluids.getFluidBlockRegistry().keySet()) {
+			RegistrationHelper.registerFluidRender(name);
+		}
+	}
+
+	@SubscribeEvent
+	public void modelRegistry(ModelRegistryEvent event) {
 		for (final String name : Items.getItemRegistry().keySet()) {
 			RegistrationHelper.registerItemRender(name);
 		}
 
 		for (final String name : Blocks.getBlockRegistry().keySet()) {
 			RegistrationHelper.registerBlockRender(name);
-		}
-    }
-
-    @SubscribeEvent
-	public void fluidRendering(RegistryEvent.Register<MMDMaterial> event) {
-		for (final String name : Fluids.getFluidBlockRegistry().keySet()) {
-			RegistrationHelper.registerFluidRender(name);
 		}
 	}
 }
