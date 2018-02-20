@@ -83,20 +83,4 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			create(Names.SMALLBLEND, silicon);
 		}
 	}
-
-	private static Item create(@Nonnull final Names name, @Nonnull final MMDMaterial material) {
-		CreativeTabs tab;
-
-		if ((name.equals(Names.DOOR)) || (name.equals(Names.SLAB))) {
-			tab = ItemGroups.myTabs.blocksTab;
-		} else if ((name.equals(Names.BLEND)) || (name.equals(Names.INGOT)) || (name.equals(Names.NUGGET))
-				|| (name.equals(Names.POWDER)) || (name.equals(Names.SMALLBLEND)) || (name.equals(Names.SMALLPOWDER))
-				|| (name.equals(Names.ROD)) || (name.equals(Names.GEAR))) {
-			tab = ItemGroups.myTabs.itemsTab;
-		} else {
-			tab = ItemGroups.myTabs.toolsTab;
-		}
-
-		return create(name, material, tab);
-	}
 }
