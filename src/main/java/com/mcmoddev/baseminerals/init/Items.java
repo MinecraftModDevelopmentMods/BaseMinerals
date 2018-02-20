@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.data.SharedStrings;
@@ -14,9 +15,12 @@ import com.mcmoddev.lib.item.ItemMMDNugget;
 import com.mcmoddev.lib.item.ItemMMDPowder;
 import com.mcmoddev.lib.item.ItemMMDSmallPowder;
 import com.mcmoddev.lib.material.MMDMaterial;
+import com.mcmoddev.lib.util.Oredicts;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * This class initializes all items in Base Minerals.
@@ -82,5 +86,18 @@ public class Items extends com.mcmoddev.lib.init.Items {
 			create(Names.NUGGET, silicon);
 			create(Names.SMALLBLEND, silicon);
 		}
+	}
+
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> event) {
+		for (MMDMaterial material : Materials.getMaterialsByMod(BaseMinerals.MODID)) {
+			for (Item item : material.getItems()) {
+				if (item.getRegistryName().getResourceDomain().equals(BaseMinerals.MODID)) {
+					event.getRegistry().register(item);
+				}
+			}
+		}
+		Oredicts.registerItemOreDictionaryEntries();
+		Oredicts.registerBlockOreDictionaryEntries();
 	}
 }

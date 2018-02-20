@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.MissingModsException;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
@@ -55,25 +56,34 @@ public class CommonProxy {
 		VillagerTrades.init();
 		ItemGroups.setupIcons(MaterialNames.SILICON);
 
-		MinecraftForge.EVENT_BUS.register(com.mcmoddev.baseminerals.util.EventHandler.class);
-
 		IntegrationManager.INSTANCE.preInit(event);
+		IntegrationManager.INSTANCE.runCallbacks("preInit");
+		MinecraftForge.EVENT_BUS.register(com.mcmoddev.baseminerals.proxy.CommonProxy.class);
+	}
+
+	@SubscribeEvent
+	public void onRemapBlock(RegistryEvent.MissingMappings<Block> event) {
+		for (final RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
+			if (mapping.key.getResourceDomain().equals(BaseMinerals.MODID)) {
+				// dummy
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onRemapItem(RegistryEvent.MissingMappings<Item> event) {
+		for (final RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
+			if (mapping.key.getResourceDomain().equals(BaseMinerals.MODID)) {
+				// dummy
+			}
+		}
 	}
 
 	public void init(FMLInitializationEvent event) {
 		Recipes.init();
-
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
 		Config.postInit();
-	}
-
-	public void onRemapBlock(RegistryEvent.MissingMappings<Block> event) {
-		// Currently Unused
-	}
-
-	public void onRemapItem(RegistryEvent.MissingMappings<Item> event) {
-		// Currently Unused
 	}
 }

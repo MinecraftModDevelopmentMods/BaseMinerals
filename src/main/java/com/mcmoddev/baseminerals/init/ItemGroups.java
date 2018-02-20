@@ -21,8 +21,8 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 
 	private static final MMDCreativeTab blocksTab = addTab(SharedStrings.TAB_BLOCKS);
 	private static final MMDCreativeTab itemsTab = addTab(SharedStrings.TAB_ITEMS);
-	private static final MMDCreativeTab toolsTab = addTab(SharedStrings.TAB_TOOLS);
-	private static final MMDCreativeTab combatTab = addTab(SharedStrings.TAB_COMBAT);
+//	private static final MMDCreativeTab toolsTab = addTab(SharedStrings.TAB_TOOLS);
+//	private static final MMDCreativeTab combatTab = addTab(SharedStrings.TAB_COMBAT);
 
 	private ItemGroups() {
 		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
@@ -42,10 +42,10 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 				blocksTab.setTabIconItem(material.getBlock(Names.BLOCK));
 			}
 
-			if ((itemsTab != null) && (material.hasItem(Names.GEAR))) {
-				itemsTab.setTabIconItem(material.getItem(Names.GEAR));
+			if ((itemsTab != null) && (material.hasItem(Names.POWDER))) {
+				itemsTab.setTabIconItem(material.getItem(Names.POWDER));
 			}
-
+/*
 			if ((toolsTab != null) && (material.hasItem(Names.PICKAXE))) {
 				toolsTab.setTabIconItem(material.getItem(Names.PICKAXE));
 			}
@@ -53,6 +53,7 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 			if ((combatTab != null) && (material.hasItem(Names.SWORD))) {
 				combatTab.setTabIconItem(material.getItem(Names.SWORD));
 			}
+*/
 		}
 	}
 }
