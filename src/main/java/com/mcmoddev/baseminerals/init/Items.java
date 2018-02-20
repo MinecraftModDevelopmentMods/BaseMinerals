@@ -30,9 +30,9 @@ public class Items extends com.mcmoddev.lib.init.Items {
 
 		if (Materials.hasMaterial(MaterialNames.CHARCOAL)) {
 			final MMDMaterial charcoal = Materials.getMaterialByName(MaterialNames.CHARCOAL);
-			create(Names.NUGGET, charcoal, ItemGroups.myTabs.itemsTab); // Special
-			create(Names.POWDER, charcoal, ItemGroups.myTabs.itemsTab);
-			create(Names.SMALLPOWDER, charcoal, ItemGroups.myTabs.itemsTab);
+			create(Names.NUGGET, charcoal); // Special
+			create(Names.POWDER, charcoal);
+			create(Names.SMALLPOWDER, charcoal);
 			FuelRegistry.addFuel(Oredicts.NUGGET_CHARCOAL, 200);
 			FuelRegistry.addFuel(Oredicts.DUST_CHARCOAL, 1600);
 			FuelRegistry.addFuel(Oredicts.DUST_SMALL_CHARCOAL, 200);
@@ -42,10 +42,10 @@ public class Items extends com.mcmoddev.lib.init.Items {
 
 		if (Materials.hasMaterial(MaterialNames.LITHIUM)) {
 			final MMDMaterial lithium = Materials.getMaterialByName(MaterialNames.LITHIUM);
-			create(Names.INGOT, lithium, ItemGroups.myTabs.itemsTab);
-			create(Names.NUGGET, lithium, ItemGroups.myTabs.itemsTab);
-			create(Names.POWDER, lithium, ItemGroups.myTabs.itemsTab);
-			create(Names.SMALLPOWDER, lithium, ItemGroups.myTabs.itemsTab);
+			create(Names.INGOT, lithium);
+			create(Names.NUGGET, lithium);
+			create(Names.POWDER, lithium);
+			create(Names.SMALLPOWDER, lithium);
 		}
 
 		final List<String> materials = Arrays.asList(MaterialNames.NITER, MaterialNames.PHOSPHORUS,
@@ -55,18 +55,18 @@ public class Items extends com.mcmoddev.lib.init.Items {
 		materials.stream().filter(Materials::hasMaterial).forEach(materialName -> {
 			final MMDMaterial material = Materials.getMaterialByName(materialName);
 
-			create(Names.POWDER, material, ItemGroups.myTabs.itemsTab);
-			create(Names.SMALLPOWDER, material, ItemGroups.myTabs.itemsTab);
+			create(Names.POWDER, material);
+			create(Names.SMALLPOWDER, material);
 		});
 
 		if (Materials.hasMaterial(MaterialNames.SILICON)) {
 			final MMDMaterial silicon = Materials.getMaterialByName(MaterialNames.SILICON);
-			create(Names.BLEND, silicon, ItemGroups.myTabs.itemsTab);
-			create(Names.INGOT, silicon, ItemGroups.myTabs.itemsTab);
-			create(Names.NUGGET, silicon, ItemGroups.myTabs.itemsTab);
-			create(Names.POWDER, silicon, ItemGroups.myTabs.itemsTab);
-			create(Names.SMALLBLEND, silicon, ItemGroups.myTabs.itemsTab);
-			create(Names.SMALLPOWDER, silicon, ItemGroups.myTabs.itemsTab);
+			create(Names.BLEND, silicon);
+			create(Names.INGOT, silicon);
+			create(Names.NUGGET, silicon);
+			create(Names.POWDER, silicon);
+			create(Names.SMALLBLEND, silicon);
+			create(Names.SMALLPOWDER, silicon);
 		}
 	}
 }

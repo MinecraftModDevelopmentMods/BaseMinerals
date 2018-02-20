@@ -3,6 +3,7 @@ package com.mcmoddev.baseminerals.proxy;
 import java.util.HashSet;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
+import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.baseminerals.init.*;
 import com.mcmoddev.baseminerals.util.Config;
 import com.mcmoddev.baseminerals.util.EventHandler;
@@ -52,7 +53,7 @@ public class CommonProxy {
 		Blocks.init();
 		Items.init();
 		VillagerTrades.init();
-		ItemGroups.setupIcons();
+		ItemGroups.setupIcons(MaterialNames.SILICON);
 
 		IntegrationManager.INSTANCE.preInit(event);
 	}

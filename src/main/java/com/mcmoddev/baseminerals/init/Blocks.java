@@ -29,7 +29,7 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 	public static void init() {
 /*
 		if (Materials.hasMaterial(MaterialNames.CHARCOAL)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.CHARCOAL), ItemGroups.myTabs.blocksTab);
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.CHARCOAL));
 		}
 */
 		final List<String> materials = Arrays.asList(MaterialNames.CHARCOAL, MaterialNames.LITHIUM, MaterialNames.NITER,
@@ -39,12 +39,12 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 		materials.stream().filter(Materials::hasMaterial).forEach(materialName -> {
 			final MMDMaterial material = Materials.getMaterialByName(materialName);
 
-			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
-			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
+			create(Names.BLOCK, material);
+			create(Names.ORE, material);
 		});
 /*
 		if (Materials.hasMaterial(MaterialNames.SILICON)) {
-			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SILICON), ItemGroups.myTabs.blocksTab);
+			create(Names.BLOCK, Materials.getMaterialByName(MaterialNames.SILICON));
 		}
 */
 	}
