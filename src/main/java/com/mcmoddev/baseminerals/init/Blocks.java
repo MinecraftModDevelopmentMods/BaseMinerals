@@ -34,8 +34,8 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 		materials.stream().filter(Materials::hasMaterial).forEach(materialName -> {
 			final MMDMaterial material = Materials.getMaterialByName(materialName);
 
-			create(Names.BLOCK, material, ItemGroups.myTabs.blocksTab);
-			create(Names.ORE, material, ItemGroups.myTabs.blocksTab);
+			create(Names.BLOCK, material);
+			create(Names.ORE, material);
 		});
 	}
 }

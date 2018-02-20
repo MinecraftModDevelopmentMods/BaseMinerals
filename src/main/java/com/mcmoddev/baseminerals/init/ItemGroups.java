@@ -5,7 +5,7 @@ import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.init.Materials;
 import com.mcmoddev.lib.init.MMDCreativeTab;
-import com.mcmoddev.lib.util.TabContainer;
+import com.mcmoddev.lib.material.MMDMaterial;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,11 +18,10 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 
-	private static final int BLOCKS_TAB_ID = addTab(SharedStrings.TAB_BLOCKS, true);
-	private static final int ITEMS_TAB_ID = addTab(SharedStrings.TAB_ITEMS, true);
-	private static final MMDCreativeTab blocksTab = getTab(BLOCKS_TAB_ID);
-	private static final MMDCreativeTab itemsTab = getTab(ITEMS_TAB_ID);
-	public static final TabContainer myTabs = new TabContainer(blocksTab, itemsTab, null);
+	private static final MMDCreativeTab blocksTab = addTab(SharedStrings.TAB_BLOCKS);
+	private static final MMDCreativeTab itemsTab = addTab(SharedStrings.TAB_ITEMS);
+	private static final MMDCreativeTab toolsTab = addTab(SharedStrings.TAB_TOOLS);
+	private static final MMDCreativeTab combatTab = addTab(SharedStrings.TAB_COMBAT);
 
 	private ItemGroups() {
 		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
@@ -34,11 +33,25 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 	public static void init() {
 	}
 	
-	public static void setupIcons() {
-		final Item blocksTabIconItem = Item.getItemFromBlock(net.minecraft.init.Blocks.COAL_BLOCK);
-		final Item itemsTabIconItem = Materials.hasMaterial(MaterialNames.SILICON) ? Materials.getMaterialByName(MaterialNames.SILICON).getItem(Names.INGOT) : net.minecraft.init.Items.COAL;
+	public static void setupIcons(String materialName) {
+		if (Materials.hasMaterial(materialName)) {
+			final MMDMaterial material = Materials.getMaterialByName(materialName);
 
-		blocksTab.setTabIconItem(new ItemStack(blocksTabIconItem));
-		itemsTab.setTabIconItem(new ItemStack(itemsTabIconItem));
+			if ((blocksTab != null) && (material.hasBlock(Names.BLOCK))) {
+				blocksTab.setTabIconItem(material.getBlock(Names.BLOCK));
+			}
+
+			if ((itemsTab != null) && (material.hasItem(Names.GEAR))) {
+				itemsTab.setTabIconItem(material.getItem(Names.GEAR));
+			}
+
+			if ((toolsTab != null) && (material.hasItem(Names.PICKAXE))) {
+				toolsTab.setTabIconItem(material.getItem(Names.PICKAXE));
+			}
+
+			if ((combatTab != null) && (material.hasItem(Names.SWORD))) {
+				combatTab.setTabIconItem(material.getItem(Names.SWORD));
+			}
+		}
 	}
 }
