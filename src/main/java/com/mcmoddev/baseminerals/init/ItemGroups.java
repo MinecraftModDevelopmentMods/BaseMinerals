@@ -1,15 +1,10 @@
 package com.mcmoddev.baseminerals.init;
 
-import com.mcmoddev.basemetals.init.Materials;
-import com.mcmoddev.baseminerals.data.MaterialNames;
+import com.mcmoddev.lib.init.Materials;
 import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.init.MMDCreativeTab;
 import com.mcmoddev.lib.material.MMDMaterial;
-import com.mcmoddev.lib.util.TabContainer;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 
 /**
  * This class initializes all item groups in Base Minerals.
@@ -21,8 +16,6 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 
 	private static final MMDCreativeTab blocksTab = addTab(SharedStrings.TAB_BLOCKS);
 	private static final MMDCreativeTab itemsTab = addTab(SharedStrings.TAB_ITEMS);
-//	private static final MMDCreativeTab toolsTab = addTab(SharedStrings.TAB_TOOLS);
-//	private static final MMDCreativeTab combatTab = addTab(SharedStrings.TAB_COMBAT);
 
 	private ItemGroups() {
 		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
@@ -45,15 +38,6 @@ public class ItemGroups extends com.mcmoddev.lib.init.ItemGroups {
 			if ((itemsTab != null) && (material.hasItem(Names.POWDER))) {
 				itemsTab.setTabIconItem(material.getItem(Names.POWDER));
 			}
-/*
-			if ((toolsTab != null) && (material.hasItem(Names.PICKAXE))) {
-				toolsTab.setTabIconItem(material.getItem(Names.PICKAXE));
-			}
-
-			if ((combatTab != null) && (material.hasItem(Names.SWORD))) {
-				combatTab.setTabIconItem(material.getItem(Names.SWORD));
-			}
-*/
 		}
 	}
 }
