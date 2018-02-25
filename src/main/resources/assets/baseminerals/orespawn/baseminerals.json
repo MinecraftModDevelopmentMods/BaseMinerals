@@ -6,12 +6,7 @@
 			"enabled": true,
 			"feature": "default",
 			"replaces": "default",
-			"dimensions": {
-				"excludes": [
-					-1,
-					1
-				]
-			},
+			"dimensions": [],
 			"biomes": {
 				"excludes": []
 			},
@@ -34,12 +29,7 @@
 			"enabled": true,
 			"feature": "default",
 			"replaces": "default",
-			"dimensions": {
-				"excludes": [
-					-1,
-					1
-				]
-			},
+			"dimensions": [],
 			"biomes": {
 				"excludes": []
 			},
@@ -62,12 +52,7 @@
 			"enabled": true,
 			"feature": "default",
 			"replaces": "default",
-			"dimensions": {
-				"excludes": [
-					-1,
-					1
-				]
-			},
+			"dimensions": [],
 			"biomes": {
 				"excludes": []
 			},
@@ -90,12 +75,7 @@
 			"enabled": true,
 			"feature": "default",
 			"replaces": "default",
-			"dimensions": {
-				"excludes": [
-					-1,
-					1
-				]
-			},
+			"dimensions": [],
 			"biomes": {
 				"excludes": []
 			},
@@ -118,12 +98,7 @@
 			"enabled": true,
 			"feature": "default",
 			"replaces": "default",
-			"dimensions": {
-				"excludes": [
-					-1,
-					1
-				]
-			},
+			"dimensions": [],
 			"biomes": {
 				"excludes": []
 			},
@@ -146,12 +121,7 @@
 			"enabled": true,
 			"feature": "default",
 			"replaces": "default",
-			"dimensions": {
-				"excludes": [
-					-1,
-					1
-				]
-			},
+			"dimensions": [],
 			"biomes": {
 				"excludes": []
 			},
@@ -174,12 +144,7 @@
 			"enabled": true,
 			"feature": "default",
 			"replaces": "default",
-			"dimensions": {
-				"excludes": [
-					-1,
-					1
-				]
-			},
+			"dimensions": [],
 			"biomes": {
 				"excludes": []
 			},

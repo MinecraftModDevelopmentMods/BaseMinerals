@@ -17,7 +17,6 @@ import com.mcmoddev.lib.item.ItemMMDSmallPowder;
 import com.mcmoddev.lib.material.MMDMaterial;
 import com.mcmoddev.lib.util.Oredicts;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -51,41 +50,41 @@ public class Items extends com.mcmoddev.lib.init.Items {
 					create(Names.SMALLPOWDER, material);
 				});
 
+		Arrays.asList(Names.INGOT, Names.NUGGET).stream()
+		.forEach( name -> {
+			Arrays.asList(MaterialNames.LITHIUM, MaterialNames.SILICON).stream()
+			.filter( material -> !Materials.hasMaterial(material))
+			.forEach( material -> create( name, Materials.getMaterialByName(material)));
+		});
+		
 		if (Materials.hasMaterial(MaterialNames.CHARCOAL)) {
-			final MMDMaterial charcoal = Materials.getMaterialByName(MaterialNames.CHARCOAL);
-
-			create(Names.NUGGET, charcoal); // Special
-
-			if (charcoal.hasItem(Names.NUGGET)) {
-				((ItemMMDNugget) charcoal.getItem(Names.NUGGET)).setBurnTime(200);
-			}
-			if (charcoal.hasItem(Names.POWDER)) {
-				((ItemMMDPowder) charcoal.getItem(Names.POWDER)).setBurnTime(1600);
-			}
-			if (charcoal.hasItem(Names.SMALLPOWDER)) {
-				((ItemMMDSmallPowder) charcoal.getItem(Names.SMALLPOWDER)).setBurnTime(200);
-			}
-
-			if (charcoal.hasBlock(Names.BLOCK)) {
-				((ItemMMDBlock) charcoal.getItem("ItemBlock_charcoal_block")).setBurnTime(16000);
-			}
-		}
-
-		if (Materials.hasMaterial(MaterialNames.LITHIUM)) {
-			final MMDMaterial lithium = Materials.getMaterialByName(MaterialNames.LITHIUM);
-
-			create(Names.INGOT, lithium);
-			create(Names.NUGGET, lithium);
+			setBurnTimes(MaterialNames.CHARCOAL);
 		}
 
 		if (Materials.hasMaterial(MaterialNames.SILICON)) {
 			final MMDMaterial silicon = Materials.getMaterialByName(MaterialNames.SILICON);
 
 			create(Names.BLEND, silicon);
-			create(Names.INGOT, silicon);
-			create(Names.NUGGET, silicon);
 			create(Names.SMALLBLEND, silicon);
 		}
+	}
+
+	private static void setBurnTimes(@Nonnull final String materialName) {
+		final MMDMaterial mat = Materials.getMaterialByName(materialName);
+		if (mat.isEmpty()) return;
+		
+		if (mat.hasItem(Names.NUGGET))
+			((ItemMMDNugget) mat.getItem(Names.NUGGET)).setBurnTime(200);
+
+		if (mat.hasItem(Names.POWDER))
+			((ItemMMDPowder) mat.getItem(Names.POWDER)).setBurnTime(1600);
+
+		if (mat.hasItem(Names.SMALLPOWDER))
+			((ItemMMDSmallPowder) mat.getItem(Names.SMALLPOWDER)).setBurnTime(200);
+
+		if (mat.hasBlock(Names.BLOCK) && mat.hasItem(Names.ITEMBLOCK) && 
+				(mat.getItem(Names.ITEMBLOCK) instanceof ItemMMDBlock))
+			((ItemMMDBlock) mat.getItem(Names.ITEMBLOCK)).setBurnTime(16000);
 	}
 
 	@SubscribeEvent
