@@ -27,12 +27,12 @@ public class TinkersConstruct extends com.mcmoddev.lib.integration.plugins.Tinke
 			return;
 		}
 
-		Arrays.asList(MaterialNames.LITHIUM, MaterialNames.SILICON).forEach(TinkersConstruct::doIMC);
+		Arrays.asList(MaterialNames.LITHIUM, MaterialNames.SILICON).forEach(this::doIMC);
 	}
 	
-	private static void doIMC(String materialName) {
+	private void doIMC(String materialName) {
 		final MMDMaterial material = Materials.getMaterialByName(materialName);
-		if(material.isEmpty()) return;
+		if(material.isEmpty() || material.getFluid() == null) return;
 		
 		// create NBT for the IMC
 		NBTTagCompound tag = new NBTTagCompound();
