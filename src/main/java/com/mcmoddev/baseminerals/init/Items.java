@@ -1,7 +1,5 @@
 package com.mcmoddev.baseminerals.init;
 
-import static org.junit.jupiter.api.DynamicTest.stream;
-
 import java.util.Arrays;
 import java.util.List;
 
