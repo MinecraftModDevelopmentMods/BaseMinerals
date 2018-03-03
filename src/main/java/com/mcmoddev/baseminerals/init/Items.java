@@ -1,5 +1,7 @@
 package com.mcmoddev.baseminerals.init;
 
+import static org.junit.jupiter.api.DynamicTest.stream;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,8 +20,10 @@ import com.mcmoddev.lib.material.MMDMaterial;
 import com.mcmoddev.lib.util.Oredicts;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 
 /**
  * This class initializes all items in Base Minerals.
@@ -89,14 +93,25 @@ public class Items extends com.mcmoddev.lib.init.Items {
 
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
-		for (MMDMaterial material : Materials.getMaterialsByMod(BaseMinerals.MODID)) {
-			for (Item item : material.getItems()) {
-				if (item.getRegistryName().getResourceDomain().equals(BaseMinerals.MODID)) {
-					event.getRegistry().register(item);
-				}
-			}
-		}
+		Materials.getMaterialsByMod(BaseMinerals.MODID).stream()
+		.forEach(mat -> regMyItems(event.getRegistry(), mat));
+
 		Oredicts.registerItemOreDictionaryEntries();
 		Oredicts.registerBlockOreDictionaryEntries();
+	}
+
+	private static Item mapFunc(ItemStack itemStack) {
+		return itemStack.getItem();
+	}
+	
+	private static boolean filterFunc(Item item) {
+		return item.getRegistryName().getResourceDomain().equals(BaseMinerals.MODID);
+	}
+	
+	private static void regMyItems(IForgeRegistry<Item> registry, MMDMaterial mat) {
+		mat.getItems().stream()
+		.map(Items::mapFunc)
+		.filter(Items::filterFunc)
+		.forEach(registry::register);
 	}
 }
