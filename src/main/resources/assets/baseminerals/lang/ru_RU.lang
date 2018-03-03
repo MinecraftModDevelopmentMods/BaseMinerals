@@ -1,0 +1,129 @@
+#   Base Minerals 1.12-2.5.0-beta2.11
+#   Translated by Grey Mamon (grey.mamon@gmail.com) 11.28.2017
+
+itemGroup.baseminerals.items=Base Minerals Предметы
+itemGroup.baseminerals.tools=Base Инструменты
+itemGroup.baseminerals.blocks=Base Minerals Блоки
+nei.baseminerals.recipehandler.crusher.name=Дроблённые Блоки/Предметы
+
+item.baseminerals.charcoal_blend.name=Измельчённый Древесный Уголь
+item.baseminerals.charcoal_block.name=Блок Древесного Угля
+item.baseminerals.charcoal_ingot.name=Слиток Древесного Угля
+item.baseminerals.charcoal_nugget.name=Самородок Древесного Угля
+item.baseminerals.charcoal_ore.name=Руда Древесного Угля
+item.baseminerals.charcoal_powder.name=Пыль Древесного Угля
+item.baseminerals.charcoal_smallblend.name=Маленькая Кучка Измельчённого Древесного Угля
+item.baseminerals.charcoal_smallpowder.name=Маленькая Кучка Пыли Древесного Угля
+
+item.baseminerals.lithium_blend.name=Измельчённый Литий
+item.baseminerals.lithium_block.name=Блок Лития
+item.baseminerals.lithium_ingot.name=Слиток Лития
+item.baseminerals.lithium_nugget.name=Самородок Лития
+item.baseminerals.lithium_ore.name=Руда Лития
+item.baseminerals.lithium_powder.name=Пыль Лития
+item.baseminerals.lithium_smallblend.name=Маленькая Кучка Измельчённого Лития
+item.baseminerals.lithium_smallpowder.name=Маленькая Кучка Пыли  Лития
+
+item.baseminerals.niter_blend.name=Измельчённый Нитрат
+item.baseminerals.niter_block.name=Блок Нитрата
+item.baseminerals.niter_ingot.name=Слиток Нитрата
+item.baseminerals.niter_nugget.name=Самородок Нитрата
+item.baseminerals.niter_ore.name=Руда Нитрата
+item.baseminerals.niter_powder.name=Пыль Нитрата
+item.baseminerals.niter_smallblend.name=Маленькая Кучка Измельчённого Нитрата
+item.baseminerals.niter_smallpowder.name=Маленькая Кучка Нитратной Пыли
+
+item.baseminerals.potash_blend.name=Измельчённый Калий
+item.baseminerals.potash_block.name=Блок Калия
+item.baseminerals.potash_ingot.name=Слиток Калия
+item.baseminerals.potash_nugget.name=Самородок Калия
+item.baseminerals.potash_ore.name=Руда Калия
+item.baseminerals.potash_powder.name=Пыль Калия
+item.baseminerals.potash_smallblend.name=Маленькая Кучка Измельчённого Калия
+item.baseminerals.potash_smallpowder.name=Маленькая Кучка Пыли Калия
+
+item.baseminerals.phosphorus_blend.name=Измельчённый Фосфор
+item.baseminerals.phosphorus_block.name=Блок Фосфора
+item.baseminerals.phosphorus_ingot.name=Слиток Фосфора
+item.baseminerals.phosphorus_nugget.name=Самородок Фосфора
+item.baseminerals.phosphorus_ore.name=Руда Фосфора
+item.baseminerals.phosphorus_powder.name=Пыль Фосфора
+item.baseminerals.phosphorus_smallblend.name=Маленькая Кучка Измельчённого Фосфора
+item.baseminerals.phosphorus_smallpowder.name=Маленькая Кучка Фосфорной Пыли
+
+item.baseminerals.salt_blend.name=Соль
+item.baseminerals.salt_block.name=Каменная Соли
+item.baseminerals.salt_ingot.name=Слиток Соли
+item.baseminerals.salt_nugget.name=Самородок Соли
+item.baseminerals.salt_ore.name=Руда Соли
+item.baseminerals.salt_powder.name=Соляная Пыль
+item.baseminerals.salt_smallblend.name=Маленькая Кучка Измельчённой Соли
+item.baseminerals.salt_smallpowder.name=Маленькая Кучка Солёной Пыли
+
+item.baseminerals.saltpeter_blend.name=Измельчённая Селитра
+item.baseminerals.saltpeter_block.name=Блок Селитры
+item.baseminerals.saltpeter_ingot.name=Слиток Селитры
+item.baseminerals.saltpeter_nugget.name=Самородок Селитры
+item.baseminerals.saltpeter_ore.name=Руда Селитры
+item.baseminerals.saltpeter_powder.name=Пыль Селитры
+item.baseminerals.saltpeter_smallblend.name=Маленькая Кучка Измельчённой Селитры
+item.baseminerals.saltpeter_smallpowder.name=Маленькая Кучка Пыли Селитры
+
+item.baseminerals.silicon_blend.name=Измельчённый Силикон
+item.baseminerals.silicon_block.name=Блок Силикона
+item.baseminerals.silicon_ingot.name=Слиток Силикона
+item.baseminerals.silicon_nugget.name=Самородок Силикона
+item.baseminerals.silicon_ore.name=Руда Силикона
+item.baseminerals.silicon_powder.name=Пыль Силикона
+item.baseminerals.silicon_smallblend.name=Маленькая Кучка Измельчённого Силикона
+item.baseminerals.silicon_smallpowder.name=Маленькая Кучка Силиконовой Пыли
+
+item.baseminerals.sulfur_blend.name=Измельчённая Сера
+item.baseminerals.sulfur_block.name=Блок Серы
+item.baseminerals.sulfur_ingot.name=Слиток Серы
+item.baseminerals.sulfur_nugget.name=Самородок Серы
+item.baseminerals.sulfur_ore.name=Руда Серы
+item.baseminerals.sulfur_powder.name=Пыль Серы
+item.baseminerals.sulfur_smallblend.name=Маленькая Кучка Измельчённой Серы
+item.baseminerals.sulfur_smallpowder.name=Маленькая Кучка Серной Пыли
+
+tile.baseminerals.charcoal_block.name=Блок Древесного Угля
+tile.baseminerals.charcoal_ore.name= Руда Древесного Угля
+
+tile.baseminerals.lithium_block.name=Блок Лития
+tile.baseminerals.lithium_ore.name=Руда Лития
+
+tile.baseminerals.niter_block.name=Блок Селитры
+tile.baseminerals.niter_ore.name=Руда Селитры
+
+tile.baseminerals.phosphorus_block.name=Блок Фосфора
+tile.baseminerals.phosphorus_ore.name=Руда Фосфора
+
+tile.baseminerals.potash_block.name=Блок Калия
+tile.baseminerals.potash_ore.name=Руда Калия
+
+tile.baseminerals.salt_block.name=Блок Соли
+tile.baseminerals.salt_ore.name=Руда Соли
+
+tile.baseminerals.saltpeter_block.name=Блок Селитры
+tile.baseminerals.saltpeter_ore.name=Руда Селитры
+
+tile.baseminerals.silicon_block.name=Блок Силикона
+tile.baseminerals.silicon_ore.name=Руда Силикона
+tile.baseminerals.silicon.name=Расплавленный Силикон
+
+tile.baseminerals.sulfur_block.name=Блок Серы
+tile.baseminerals.sulfur_ore.name=Руда Серы
+
+tooltip.charcoal.tool=Ничего Особенного
+
+tooltip.charcoal.armor=Ничего Особенного
+
+achievement.charcoal_maker=Древесный Уголь
+achievement.charcoal_maker.desc=Объедините Пыль ??? и ??? чтобы создать ???
+
+fluid.baseminerals.lithium=Расплавленный Литий
+fluid.baseminerals.silicon=Расплавленный Силикон
+
+tile.baseminerals.lithium.name=Расплавленный Литий
+tile.baseminerals.lithium.name=Расплавленный Силикон
