@@ -1,0 +1,31 @@
+{
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "blockSalt"
+		}
+	],
+	"result": {
+		"item": "baseminerals:salt_powder",
+		"count": 9
+	},
+	"group": "basics",
+	"conditions": [
+		{
+			"type": "forge:and",
+			"values": [
+				{
+					"type": "basemetals:enabled",
+					"optionName": "material",
+					"optionValue": "Salt"
+				},
+				{
+					"type": "basemetals:enabled",
+					"optionName": "thing",
+					"optionValue": "basics"
+				}
+			]
+		}
+	]
+}

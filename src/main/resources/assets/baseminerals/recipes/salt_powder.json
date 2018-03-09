@@ -1,0 +1,37 @@
+{
+	"type": "forge:ore_shaped",
+	"group": "basics",
+	"result": {
+		"type": "minecraft:item",
+		"item": "baseminerals:salt_powder",
+		"data": 0
+	},
+	"conditions": [
+		{
+			"type": "forge:and",
+			"values": [
+				{
+					"type": "basemetals:enabled",
+					"optionName": "material",
+					"optionValue": "Salt"
+				},
+				{
+					"type": "basemetals:enabled",
+					"optionName": "thing",
+					"optionValue": "Basics"
+				}
+			]
+		}
+	],
+	"key": {
+		"x": {
+			"type": "forge:ore_dict",
+			"ore": "dustTinySalt"
+		}
+	},
+	"pattern": [
+		"xxx",
+		"xxx",
+		"xxx"
+	]
+}
