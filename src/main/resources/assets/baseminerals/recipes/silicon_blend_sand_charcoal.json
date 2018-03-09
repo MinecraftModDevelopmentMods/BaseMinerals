@@ -1,0 +1,19 @@
+{
+    "type":"forge:ore_shapeless",
+    "ingredients": [
+	{
+	    "type":"forge:ore_dict",
+	    "ore":"sand"
+	},
+	{
+	    "type":"forge:ore_dict",
+	    "ore":"dustCharcoal"
+	}
+    ],
+    "result": {
+	"type":"minecraft:item",
+	"item":"baseminerals:silicon_blend",
+	"count": 3
+    },
+    "group": "baseminerals_extra"
+}
