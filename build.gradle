@@ -17,7 +17,7 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.10'
-        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.1'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.3'
         classpath 'com.jaredsburrows:gradle-checker-framework-plugin:0.2.0'
     }
@@ -202,6 +202,8 @@ repositories {
 dependencies {
     deobfCompile "slimeknights.mantle:Mantle:${mc_version}-${mantle_version}"
     deobfCompile "slimeknights:TConstruct:${mc_version}-${tconstruct_version}"
+
+	deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
 
     deobfCompile "com.mcmoddev:AdditionalLootTables:${mc_version}.1-${alt_version}"
     deobfCompile "com.mcmoddev:OreSpawn:${mc_version}-${orespawn_version}"
