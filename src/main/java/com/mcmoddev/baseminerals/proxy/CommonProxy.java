@@ -54,7 +54,6 @@ public class CommonProxy {
 		Blocks.init();
 		Items.init();
 		VillagerTrades.init();
-		ItemGroups.setupIcons(MaterialNames.SILICON);
 
 		IntegrationManager.INSTANCE.preInit(event);
 		IntegrationManager.INSTANCE.runCallbacks("preInit");
@@ -81,6 +80,8 @@ public class CommonProxy {
 
 	public void init(FMLInitializationEvent event) {
 		Recipes.init();
+
+		ItemGroups.setupIcons(MaterialNames.SILICON);
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
