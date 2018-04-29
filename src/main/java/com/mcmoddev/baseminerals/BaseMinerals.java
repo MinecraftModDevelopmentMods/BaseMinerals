@@ -3,22 +3,20 @@ package com.mcmoddev.baseminerals;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mcmoddev.baseminerals.util.Config;
 import com.mcmoddev.baseminerals.proxy.CommonProxy;
 import com.mcmoddev.lib.data.SharedStrings;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * This is the entry point for this Mod.
@@ -68,6 +66,11 @@ public class BaseMinerals {
 	}
 
 	@EventHandler
+	public static void constructing(FMLConstructionEvent event) {
+		Config.init();
+	}
+	
+	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit(event);
 
@@ -85,13 +88,4 @@ public class BaseMinerals {
 		proxy.postInit(event);
 	}
 
-	@SubscribeEvent
-	public void onRemapBlock(RegistryEvent.MissingMappings<Block> event) {
-		proxy.onRemapBlock(event);
-	}
-
-	@SubscribeEvent
-	public void onRemapItem(RegistryEvent.MissingMappings<Item> event) {
-		proxy.onRemapItem(event);
-	}
 }

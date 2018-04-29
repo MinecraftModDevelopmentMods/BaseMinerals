@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.material.MMDMaterial.MaterialType;
@@ -31,6 +32,7 @@ public class Materials extends com.mcmoddev.lib.init.Materials {
 				MaterialNames.PHOSPHORUS, MaterialNames.POTASH, MaterialNames.SALT, MaterialNames.SALTPETER,
 				MaterialNames.SULFUR);
 
+		materials.stream().forEach(mat -> BaseMinerals.logger.fatal("Material %s is %s", mat, Options.isMaterialEnabled(mat)?"enabled":"not enabled"));
 		materials.stream().filter(Options::isMaterialEnabled).forEach(name -> createMaterial(name, getType(name),
 				getHardness(name), getStrength(name), getMagic(name), getColor(name)));
 
