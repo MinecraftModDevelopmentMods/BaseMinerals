@@ -13,7 +13,7 @@
 				{
 					"type": "basemetals:enabled",
 					"optionName": "material",
-					"optionValue": "Saltpeter"
+					"optionValue": "Silicon"
 				},
 				{
 					"type": "basemetals:enabled",
@@ -26,7 +26,7 @@
 	"key": {
 		"x": {
 			"type": "forge:ore_dict",
-			"ore": "dustSilicon"
+			"ore": "ingotSilicon"
 		}
 	},
 	"pattern": [
