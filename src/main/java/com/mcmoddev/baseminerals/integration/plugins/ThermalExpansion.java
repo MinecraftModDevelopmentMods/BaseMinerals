@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 import javax.annotation.Nonnull;
 
-import com.mcmoddev.basemetals.init.Materials;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.data.Names;
+import com.mcmoddev.lib.init.Materials;
 import com.mcmoddev.lib.integration.IIntegration;
 import com.mcmoddev.lib.integration.MMDPlugin;
 import com.mcmoddev.lib.integration.plugins.ThermalExpansionBase;
@@ -20,7 +20,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@MMDPlugin(addonId=BaseMinerals.MODID, pluginId=ThermalExpansion.PLUGIN_MODID)
+@MMDPlugin(addonId=BaseMinerals.MODID, pluginId=ThermalExpansion.PLUGIN_MODID,
+		   versions = ThermalExpansion.PLUGIN_MODID+"@(,5.3.12.17];")
 public class ThermalExpansion extends ThermalExpansionBase implements IIntegration {
 	@Override
 	public void init() {
