@@ -25,9 +25,8 @@
 	],
 	"key": {
 		"x": {
-			"type": "forge:ore_dict",
-			"item": "baseminerals:silicon_smallblend",
-			"data": 0
+			"type": "minecraft:item",
+			"item": "baseminerals:silicon_smallblend"
 		}
 	},
 	"pattern": [
