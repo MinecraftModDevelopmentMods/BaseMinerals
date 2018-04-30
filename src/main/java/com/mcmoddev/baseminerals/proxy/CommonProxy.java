@@ -3,7 +3,9 @@ package com.mcmoddev.baseminerals.proxy;
 import java.util.HashSet;
 
 import com.mcmoddev.baseminerals.data.MaterialNames;
-import com.mcmoddev.baseminerals.init.*;
+import com.mcmoddev.baseminerals.init.ItemGroups;
+import com.mcmoddev.baseminerals.init.Recipes;
+import com.mcmoddev.baseminerals.init.VillagerTrades;
 import com.mcmoddev.baseminerals.util.Config;
 import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.oregen.FallbackGenerator;
@@ -27,9 +29,6 @@ import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-
-		Config.init();
-
 		if ((Options.requireMMDOreSpawn()) && (!Loader.isModLoaded(SharedStrings.ORESPAWN_MODID))) {
 			if (Options.fallbackOrespawn()) {
 				GameRegistry.registerWorldGenerator(new FallbackGenerator(), 0);
@@ -42,7 +41,7 @@ public class CommonProxy {
 		}
 
 		VillagerTrades.init();
-
+		ItemGroups.init();
 	}
 
 
