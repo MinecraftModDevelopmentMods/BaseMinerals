@@ -18,29 +18,24 @@ import net.minecraft.item.Item;
 public class EventHandler {
 	@SubscribeEvent
 	public static void mmdlibRegisterMaterials(MMDLibRegisterMaterials ev) {
-		BaseMinerals.logger.fatal("%s -- %s", BaseMinerals.MODID, ev);
 		ev.setActive(BaseMinerals.MODID);
 		Materials.init();
 	}
 	
 	@SubscribeEvent
 	public static void mmdlibRegisterBlocks(MMDLibRegisterBlocks ev) {
-		BaseMinerals.logger.fatal("%s -- %s", BaseMinerals.MODID, ev);
 		ev.setActive(BaseMinerals.MODID);
 		Blocks.init();
 	}
 
 	@SubscribeEvent
 	public static void mmdlibRegisterItems(MMDLibRegisterItems ev) {
-		BaseMinerals.logger.fatal("%s -- %s", BaseMinerals.MODID, ev);
 		ev.setActive(BaseMinerals.MODID);
 		Items.init();
 	}
 	
 	@SubscribeEvent
-	public static void mmdlibRegisterFluids(MMDLibRegisterFluids ev) {
-		BaseMinerals.logger.fatal("%s -- %s", BaseMinerals.MODID, ev);
-		ev.setActive(BaseMinerals.MODID);
+	public static void mmdlibRegisterFluids(MMDLibRegisterFluids ev) {		ev.setActive(BaseMinerals.MODID);
 		Fluids.init();
 	}
 
