@@ -4,7 +4,6 @@ import com.mcmoddev.lib.init.Materials;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.lib.data.Names;
 import com.mcmoddev.lib.data.SharedStrings;
-import com.mcmoddev.lib.init.MMDCreativeTab;
 import com.mcmoddev.lib.material.MMDMaterial;
 
 /**

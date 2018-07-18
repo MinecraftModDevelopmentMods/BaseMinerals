@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
  */
 public class CommonProxy {
 
+	@SuppressWarnings("deprecation")
 	public void preInit(FMLPreInitializationEvent event) {
 		if ((Options.requireMMDOreSpawn()) && (!Loader.isModLoaded(SharedStrings.ORESPAWN_MODID))) {
 			if (Options.fallbackOrespawn()) {

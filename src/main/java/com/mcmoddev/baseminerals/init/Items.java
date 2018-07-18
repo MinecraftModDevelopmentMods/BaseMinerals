@@ -53,11 +53,11 @@ public class Items extends com.mcmoddev.lib.init.Items {
 				});
 
 		Arrays.asList(Names.INGOT, Names.NUGGET).stream()
-		.forEach( name -> {
+		.forEach( name ->
 			Arrays.asList(MaterialNames.LITHIUM, MaterialNames.SILICON).stream()
 			.filter( material -> Materials.hasMaterial(material))
-			.forEach( material -> create( name, Materials.getMaterialByName(material)));
-		});
+			.forEach( material -> create( name, Materials.getMaterialByName(material)))
+		);
 		
 		if (Materials.hasMaterial(MaterialNames.CHARCOAL)) {
 			setBurnTimes(MaterialNames.CHARCOAL);
@@ -103,7 +103,7 @@ public class Items extends com.mcmoddev.lib.init.Items {
 	}
 	
 	private static boolean filterFunc(Item item) {
-		return item.getRegistryName().getResourceDomain().equals(BaseMinerals.MODID);
+		return item.getRegistryName().getNamespace().equals(BaseMinerals.MODID);
 	}
 	
 	private static void regMyItems(IForgeRegistry<Item> registry, MMDMaterial mat) {

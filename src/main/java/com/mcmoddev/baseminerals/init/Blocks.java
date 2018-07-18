@@ -47,7 +47,7 @@ public class Blocks extends com.mcmoddev.lib.init.Blocks {
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		for (MMDMaterial material : Materials.getMaterialsByMod(BaseMinerals.MODID)) {
 			for (Block block : material.getBlocks()) {
-				if (block.getRegistryName().getResourceDomain().equals(BaseMinerals.MODID)) {
+				if (block.getRegistryName().getNamespace().equals(BaseMinerals.MODID)) {
 					event.getRegistry().register(block);
 				}
 			}
