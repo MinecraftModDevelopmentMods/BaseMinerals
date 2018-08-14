@@ -6,10 +6,10 @@ import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.baseminerals.init.ItemGroups;
 import com.mcmoddev.baseminerals.init.Recipes;
 import com.mcmoddev.baseminerals.init.VillagerTrades;
-import com.mcmoddev.baseminerals.util.Config;
+import com.mcmoddev.baseminerals.util.BMiConfig;
 import com.mcmoddev.lib.data.SharedStrings;
 import com.mcmoddev.lib.oregen.FallbackGenerator;
-import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.util.Config.Options;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.MissingModsException;
@@ -53,6 +53,6 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		Config.postInit();
+		BMiConfig.postInit();
 	}
 }

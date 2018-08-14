@@ -2,21 +2,20 @@ package com.mcmoddev.baseminerals.integration.plugins;
 
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
-import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.util.Config.Options;
 import com.mcmoddev.lib.init.Materials;
 import com.mcmoddev.lib.integration.IIntegration;
 import com.mcmoddev.lib.integration.MMDPlugin;
-import com.mcmoddev.lib.material.MMDMaterial;
 import com.mcmoddev.lib.util.Oredicts;
 
-@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = DenseOres.PLUGIN_MODID)
-public class DenseOres extends com.mcmoddev.lib.integration.plugins.DenseOresBase implements IIntegration {
+@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = BMiDenseOres.PLUGIN_MODID)
+public class BMiDenseOres extends com.mcmoddev.lib.integration.plugins.DenseOres implements IIntegration {
 
 	private static boolean initDone = false;
 
 	@Override
 	public void init() {
-		if (initDone || !Options.isModEnabled(DenseOres.PLUGIN_MODID)) {
+		if (initDone || !Options.isModEnabled(BMiDenseOres.PLUGIN_MODID)) {
 			return;
 		}
 
@@ -43,8 +42,7 @@ public class DenseOres extends com.mcmoddev.lib.integration.plugins.DenseOresBas
 
 		for (int i = 0; i < baseNames.length; i++) {
 			final String materialName = baseNames[i];
-			final MMDMaterial material = Materials.getMaterialByName(materialName);
-			if (material != null && Options.isMaterialEnabled(materialName)) {
+			if (Materials.hasMaterial(materialName)) {
 				registerOre(String.format("%s_%s", materialName, Oredicts.ORE), Oredicts.STONE, 0);
 			}
 		}

@@ -5,7 +5,7 @@ import java.io.File;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.registry.CrusherRecipeRegistry;
-import com.mcmoddev.lib.util.ConfigBase;
+import com.mcmoddev.lib.util.Config;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * @author Jasmine Iwanek
  *
  */
-public class Config extends ConfigBase {
+public class BMiConfig extends Config {
 
 	private static Configuration configuration;
 	private static final String CONFIG_FILE = "config/BaseMinerals.cfg";
@@ -32,7 +32,7 @@ public class Config extends ConfigBase {
 	public static void init() {
 		if (configuration == null) {
 			configuration = new Configuration(new File(CONFIG_FILE));
-			MinecraftForge.EVENT_BUS.register(new Config());
+			MinecraftForge.EVENT_BUS.register(new BMiConfig());
 		}
 
 		// MATERIALS

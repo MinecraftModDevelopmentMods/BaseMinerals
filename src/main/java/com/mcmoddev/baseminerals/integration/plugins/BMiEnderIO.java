@@ -3,7 +3,7 @@ package com.mcmoddev.baseminerals.integration.plugins;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.integration.MMDPlugin;
-import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.util.Config.Options;
 import com.mcmoddev.lib.integration.IIntegration;
 
 /**
@@ -11,8 +11,8 @@ import com.mcmoddev.lib.integration.IIntegration;
  * @author Jasmine Iwanek
  *
  */
-@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = EnderIO.PLUGIN_MODID)
-public class EnderIO extends com.mcmoddev.lib.integration.plugins.EnderIOBase implements IIntegration {
+@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = BMiEnderIO.PLUGIN_MODID)
+public class BMiEnderIO extends com.mcmoddev.lib.integration.plugins.EnderIO implements IIntegration {
 
 	/**
 	 *

@@ -8,7 +8,7 @@ import com.mcmoddev.baseminerals.init.Materials;
 import com.mcmoddev.lib.integration.MMDPlugin;
 import com.mcmoddev.lib.integration.IIntegration;
 import com.mcmoddev.lib.material.MMDMaterial;
-import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.util.Config.Options;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
@@ -18,8 +18,8 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
  * @author Jasmine Iwanek
  *
  */
-@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = TinkersConstruct.PLUGIN_MODID)
-public class TinkersConstruct extends com.mcmoddev.lib.integration.plugins.TinkersConstructBase implements IIntegration {
+@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = BMiTinkersConstruct.PLUGIN_MODID)
+public class BMiTinkersConstruct extends com.mcmoddev.lib.integration.plugins.TinkersConstruct implements IIntegration {
 
 	@Override
 	public void init() {

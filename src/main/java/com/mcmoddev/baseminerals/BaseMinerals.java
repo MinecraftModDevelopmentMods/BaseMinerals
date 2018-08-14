@@ -3,7 +3,7 @@ package com.mcmoddev.baseminerals;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mcmoddev.baseminerals.util.Config;
+import com.mcmoddev.baseminerals.util.BMiConfig;
 import com.mcmoddev.baseminerals.proxy.CommonProxy;
 import com.mcmoddev.lib.data.SharedStrings;
 
@@ -67,7 +67,7 @@ public class BaseMinerals {
 
 	@EventHandler
 	public static void constructing(FMLConstructionEvent event) {
-		Config.init();
+		BMiConfig.init();
 	}
 	
 	@EventHandler

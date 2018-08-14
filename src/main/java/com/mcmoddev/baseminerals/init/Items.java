@@ -55,10 +55,10 @@ public class Items extends com.mcmoddev.lib.init.Items {
 		Arrays.asList(Names.INGOT, Names.NUGGET).stream()
 		.forEach( name ->
 			Arrays.asList(MaterialNames.LITHIUM, MaterialNames.SILICON).stream()
-			.filter( material -> Materials.hasMaterial(material))
-			.forEach( material -> create( name, Materials.getMaterialByName(material)))
+			.filter(Materials::hasMaterial)
+			.forEach(material -> create(name, Materials.getMaterialByName(material)))
 		);
-		
+
 		if (Materials.hasMaterial(MaterialNames.CHARCOAL)) {
 			setBurnTimes(MaterialNames.CHARCOAL);
 		}
