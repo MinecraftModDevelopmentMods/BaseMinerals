@@ -197,6 +197,63 @@ minecraft {
 }
 
 repositories {
+  maven { // Mantle, TCon, JEI
+    name 'DVS1 Maven FS'
+    url 'http://dvs1.progwml6.com/files/maven/'
+  }
+  maven { // CCL, CCC, NEI
+    name 'Chickenbones Repo'
+    url 'http://chickenbones.net/maven/'
+  }
+  maven { // The One Probe, EnderIO, EnderCore
+    name 'tterrag'
+    url 'http://maven.tterrag.com/'
+  }
+  maven { // MCMultipart
+    name 'amadornes'
+    url 'http://maven.amadornes.com/'
+  }
+  maven { // CraftTweaker, ZenScript
+    name 'blamejared'
+    url 'http://maven.blamejared.com/'
+  }
+  maven { // IC2
+    name 'industrialcraft'
+    url 'http://maven.ic2.player.to/'
+  }
+  maven { // HWYLA
+    name 'tehnut'
+    url 'http://tehnut.info/maven/'
+  }
+  maven { // CoFH
+    name 'Covers Maven'
+    url 'http://maven.covers1624.net/'
+  }
+  maven {
+    name = 'CurseForge'
+    url = 'https://minecraft.curseforge.com/api/maven/'
+  }
+  maven {
+    name 'opencomputers'
+    url 'http://maven.cil.li/'
+  }
+  maven { // Mekanism, TAIGA
+    name 'jitpack'
+    url 'https://jitpack.io/'
+  }
+  maven { // Buildcraft
+    name 'buildcraft'
+    url 'https://mod-buildcraft.com/maven/'
+  }
+  maven { // Storage Drawers
+    name 'thiakil'
+    url 'http://maven.thiakil.com/'
+  }
+  maven { // Applied Energistics
+    name 'forge'
+    url 'https://files.minecraftforge.net/maven/'
+  }
+
   maven {
     name 'MMD'
     url 'https://maven.mcmoddev.com/'
