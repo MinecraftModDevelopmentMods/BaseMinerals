@@ -48,7 +48,7 @@ public class BaseMinerals {
 	 * increased whenever a change is made that has the potential to break
 	 * compatibility with other mods that depend on this one.
 	 */
-	protected static final String VERSION = "2.5.0-beta6";
+	protected static final String VERSION = "2.5.0-beta7";
 
 	protected static final String UPDATEJSON = SharedStrings.UPDATE_JSON_URL + "BaseMinerals/master/update.json";
 
