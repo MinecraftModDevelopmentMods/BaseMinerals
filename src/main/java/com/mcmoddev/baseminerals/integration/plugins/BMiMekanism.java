@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import javax.annotation.Nonnull;
 
-import com.mcmoddev.basemetals.init.Materials;
+import com.mcmoddev.lib.init.Materials;
 import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.integration.MMDPlugin;
