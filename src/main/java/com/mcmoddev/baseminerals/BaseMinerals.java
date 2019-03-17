@@ -28,7 +28,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 		modid = BaseMinerals.MODID,
 		name = BaseMinerals.NAME,
 		version = BaseMinerals.VERSION,
-		dependencies = "required-after:forge@[14.21.1.2387,);required-after:basemetals;before:appliedenergistics2;before:buildingbricks",
+		dependencies = "required-after:forge@[14.21.1.2387,);required-after:mmdlib;before:appliedenergistics2;before:buildingbricks",
 		acceptedMinecraftVersions = "[1.12,)",
 		certificateFingerprint = "@FINGERPRINT@",
 		updateJSON = BaseMinerals.UPDATEJSON)
@@ -48,7 +48,7 @@ public class BaseMinerals {
 	 * increased whenever a change is made that has the potential to break
 	 * compatibility with other mods that depend on this one.
 	 */
-	protected static final String VERSION = "2.5.0-beta7";
+	protected static final String VERSION = "2.5.0-beta8";
 
 	protected static final String UPDATEJSON = SharedStrings.UPDATE_JSON_URL + "BaseMinerals/master/update.json";
 
