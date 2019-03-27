@@ -18,24 +18,21 @@ import net.minecraft.item.Item;
 public class EventHandler {
 	@SubscribeEvent
 	public static void mmdlibRegisterMaterials(MMDLibRegisterMaterials ev) {
-		ev.setActive(BaseMinerals.MODID);
 		Materials.init();
 	}
 	
 	@SubscribeEvent
 	public static void mmdlibRegisterBlocks(MMDLibRegisterBlocks ev) {
-		ev.setActive(BaseMinerals.MODID);
 		Blocks.init();
 	}
 
 	@SubscribeEvent
 	public static void mmdlibRegisterItems(MMDLibRegisterItems ev) {
-		ev.setActive(BaseMinerals.MODID);
 		Items.init();
 	}
 	
 	@SubscribeEvent
-	public static void mmdlibRegisterFluids(MMDLibRegisterFluids ev) {		ev.setActive(BaseMinerals.MODID);
+	public static void mmdlibRegisterFluids(MMDLibRegisterFluids ev) {
 		Fluids.init();
 	}
 
