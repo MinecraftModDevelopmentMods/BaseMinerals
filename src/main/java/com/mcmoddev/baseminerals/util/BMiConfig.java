@@ -6,6 +6,7 @@ import com.mcmoddev.baseminerals.BaseMinerals;
 import com.mcmoddev.baseminerals.data.MaterialNames;
 import com.mcmoddev.lib.registry.CrusherRecipeRegistry;
 import com.mcmoddev.lib.util.Config;
+import com.mcmoddev.lib.util.MaterialConfigOptions;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -20,8 +21,19 @@ public class BMiConfig extends Config {
 
 	private static Configuration configuration;
 	private static final String CONFIG_FILE = "config/BaseMinerals.cfg";
-	private static final String MATERIALS_CAT = "Minerals";
 
+	private static final MaterialConfigOptions[] MATERIAL_CONFIG_OPTIONS = new MaterialConfigOptions[]{
+			new MaterialConfigOptions(MaterialNames.CHARCOAL, true, true, true, true),
+			new MaterialConfigOptions(MaterialNames.LITHIUM, false, true, true, true),
+			new MaterialConfigOptions(MaterialNames.NITER, false, true, false, false),
+			new MaterialConfigOptions(MaterialNames.PHOSPHORUS, false, true, false, false),
+			new MaterialConfigOptions(MaterialNames.POTASH, false, true, false, false),
+			new MaterialConfigOptions(MaterialNames.SALT, false, true, false, false),
+			new MaterialConfigOptions(MaterialNames.SALTPETER, false, true, false, false),
+			new MaterialConfigOptions(MaterialNames.SILICON, false, true, false, false),
+			new MaterialConfigOptions(MaterialNames.SULFUR, false, true, false, false)
+	};
+	
 	@SubscribeEvent
 	public void onConfigChange(ConfigChangedEvent.OnConfigChangedEvent e) {
 		if (e.getModID().equals(BaseMinerals.MODID)) {
@@ -35,26 +47,8 @@ public class BMiConfig extends Config {
 			MinecraftForge.EVENT_BUS.register(new BMiConfig());
 		}
 
-		// MATERIALS
-		Options.materialEnabled(MaterialNames.CHARCOAL,
-				configuration.getBoolean("EnableCharcoal", MATERIALS_CAT, true, "Enable Charcoal Items and Materials"));
-		Options.materialEnabled(MaterialNames.LITHIUM,
-				configuration.getBoolean("EnableLithium", MATERIALS_CAT, true, "Enable Lithium Items and Materials"));
-		Options.materialEnabled(MaterialNames.NITER,
-				configuration.getBoolean("EnableNiter", MATERIALS_CAT, true, "Enable Niter Items and Materials"));
-		Options.materialEnabled(MaterialNames.PHOSPHORUS, configuration.getBoolean("EnablePhosphorus", MATERIALS_CAT,
-				true, "Enable Phosphorus Items and Materials"));
-		Options.materialEnabled(MaterialNames.POTASH,
-				configuration.getBoolean("EnablePotash", MATERIALS_CAT, true, "Enable Potash Items and Materials"));
-		Options.materialEnabled(MaterialNames.SALT,
-				configuration.getBoolean("EnableSalt", MATERIALS_CAT, true, "Enable Salt Items and Materials"));
-		Options.materialEnabled(MaterialNames.SALTPETER, configuration.getBoolean("EnableSaltpeter", MATERIALS_CAT,
-				true, "Enable Saltpeter Items and Materials"));
-		Options.materialEnabled(MaterialNames.SILICON,
-				configuration.getBoolean("EnableSilicon", MATERIALS_CAT, true, "Enable Silicon Items and Materials"));
-		Options.materialEnabled(MaterialNames.SULFUR,
-				configuration.getBoolean("EnableSulfur", MATERIALS_CAT, true, "Enable Sulfur Items and Materials"));
-
+		configMaterialOptions(MATERIAL_CONFIG_OPTIONS, configuration);
+		
 		if (configuration.hasChanged()) {
 			configuration.save();
 		}
