@@ -1,0 +1,88 @@
+// Isolated probes are never included in ordinary launches or release jars.
+sourceSets {
+    policyFixture {
+        java.srcDirs = ['tools/validation/legacy110/policy-fixture']
+        compileClasspath = sourceSets.main.compileClasspath + sourceSets.main.output
+    }
+    runtimeProbe {
+        java.srcDirs = ['tools/validation/legacy110/runtime-probe']
+        compileClasspath = sourceSets.main.compileClasspath + sourceSets.main.output
+    }
+}
+def legacyConsumer = tasks.register('generateLegacyConsumer', JavaExec) {
+    dependsOn tasks.named('runtimeProbeClasses')
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(8) }
+    classpath = sourceSets.runtimeProbe.output + sourceSets.main.compileClasspath
+    mainClass = 'review.minerals.LegacyFixtureGenerator'
+    args layout.buildDirectory.dir('test-fixtures/legacy-consumer').get().asFile.absolutePath
+    outputs.dir layout.buildDirectory.dir('test-fixtures/legacy-consumer')
+}
+def probe = tasks.register('runtimeProbeJar', Jar) {
+    dependsOn legacyConsumer
+    group = 'verification'
+    archiveFileName = 'baseminerals-probe.jar'
+    destinationDirectory = layout.buildDirectory.dir('test-mods')
+    from sourceSets.runtimeProbe.output
+    from layout.buildDirectory.dir('test-fixtures/legacy-consumer')
+}
+def packagedProbe = renamer.classes(probe) {
+    map.from minecraft.dependency.toSrgFile
+    output = layout.buildDirectory.file('test-mods/baseminerals-probe-packaged.jar')
+}
+tasks.register('packagedRuntimeProbeJar') { dependsOn packagedProbe }
+
+def policyFixtureJar = tasks.register('policyFixtureJar', Jar) {
+    archiveFileName = 'synthetic-source-policy-fixture.jar'
+    destinationDirectory = layout.buildDirectory.dir('test-mods')
+    from sourceSets.policyFixture.output
+}
+def packagedPolicyFixture = renamer.classes(policyFixtureJar) {
+    map.from minecraft.dependency.toSrgFile
+    output = layout.buildDirectory.file('test-mods/synthetic-source-policy-fixture-packaged.jar')
+}
+tasks.register('packagedPolicyFixtureJar') { dependsOn packagedPolicyFixture }
+
+// The schema audit also needs this deterministic JUnit export after a cache hit.
+tasks.named('test', Test) {
+    outputs.file(layout.buildDirectory.file('reports/native-provider.json'))
+}
+
+tasks.register('verifyProjectResources', Exec) {
+    group = 'verification'
+    dependsOn tasks.named('test')
+    doFirst {
+        commandLine providers.gradleProperty('pythonExecutable').getOrElse('python3'),
+            'tools/validation/legacy110/audit_resources.py', '--mirror',
+            file(providers.gradleProperty('legacyDependencyVerificationRepository').getOrElse('.gradle/legacy-dependencies')).absolutePath
+    }
+}
+tasks.register('packagedForgeRuntimeTest', Exec) {
+    group = 'verification'
+    dependsOn 'verifyReleaseArtifacts', 'packagedRuntimeProbeJar', 'test'
+    doFirst {
+        if (!providers.gradleProperty('packagedForgeRuntimeRoot').isPresent())
+            throw new GradleException('Set packagedForgeRuntimeRoot to a disposable Forge server template.')
+        final def java8 = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(8) }.get()
+        commandLine providers.gradleProperty('pythonExecutable').getOrElse('python3'),
+            'tools/validation/legacy110/run_packaged_suite.py', '--java', java8.executablePath.asFile.absolutePath,
+            '--template', file(providers.gradleProperty('packagedForgeRuntimeRoot').get()).absolutePath,
+            '--output', file(providers.gradleProperty('packagedForgeRuntimeOutput').getOrElse('build/packaged-forge-checks')).absolutePath,
+            '--mirror', file(providers.gradleProperty('legacyDependencyVerificationRepository').getOrElse('.gradle/legacy-dependencies')).absolutePath
+    }
+}
+
+tasks.register('packagedSourcePolicyTest', Exec) {
+    group = 'verification'
+    description = 'Tests managed-source policies with an isolated synthetic sibling, not a public integration claim.'
+    dependsOn 'verifyReleaseArtifacts', 'packagedRuntimeProbeJar', 'packagedPolicyFixtureJar'
+    doFirst {
+        if (!providers.gradleProperty('packagedForgeRuntimeRoot').isPresent())
+            throw new GradleException('Set packagedForgeRuntimeRoot to a disposable Forge server template.')
+        final def java8 = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(8) }.get()
+        commandLine providers.gradleProperty('pythonExecutable').getOrElse('python3'),
+            'tools/validation/legacy110/run_policy_fixture.py', '--java', java8.executablePath.asFile.absolutePath,
+            '--template', file(providers.gradleProperty('packagedForgeRuntimeRoot').get()).absolutePath,
+            '--output', file(providers.gradleProperty('packagedSourcePolicyOutput').getOrElse('build/packaged-source-policies')).absolutePath,
+            '--mirror', file(providers.gradleProperty('legacyDependencyVerificationRepository').getOrElse('.gradle/legacy-dependencies')).absolutePath
+    }
+}

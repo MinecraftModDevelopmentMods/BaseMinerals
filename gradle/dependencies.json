@@ -1,0 +1,28 @@
+[
+  {
+    "id": "basemetals",
+    "coordinate": "curse.maven:base-metals-240967:9280029",
+    "sha256": "8BB1823592DCD558D17C4848AE917266FE7197B754CA628297DF837CFB3D20A3",
+    "repository": "https://www.cursemaven.com",
+    "runtime": true
+  },
+  {
+    "id": "orespawn",
+    "coordinate": "curse.maven:mmd-orespawn-245586:9276430",
+    "sha256": "4D4975421FEEBF17505056306D06B0344D7A4553B6275885D7C5C5065B0348A6",
+    "repository": "https://www.cursemaven.com",
+    "runtime": true
+  },
+  {
+    "id": "mantle",
+    "coordinate": "curse.maven:mantle-74924:2380279",
+    "sha256": "1678548421B9AA5188A1A209B39782AA6FAC1247E92ACB19F0FB58401F6718C7",
+    "repository": "https://www.cursemaven.com"
+  },
+  {
+    "id": "tconstruct",
+    "coordinate": "curse.maven:tinkers-construct-74072:2425964",
+    "sha256": "BF9CB4E992F02500904A828181782486F2B8DD5F891D7972403CE92622917060",
+    "repository": "https://www.cursemaven.com"
+  }
+]

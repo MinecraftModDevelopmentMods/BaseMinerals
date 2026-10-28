@@ -1,0 +1,33 @@
+package zone.moddev.mc.baseminerals.init;
+
+import com.mcmoddev.lib.util.ConfigBase.Options;
+import zone.moddev.mc.baseminerals.data.AchievementNames;
+import zone.moddev.mc.baseminerals.data.MaterialNames;
+import com.mcmoddev.lib.data.Names;
+import com.mcmoddev.lib.data.SharedStrings;
+
+import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.fml.common.Loader;
+
+/** initializer for achievements */
+public class Achievements extends com.mcmoddev.lib.init.Achievements {
+
+	private Achievements() {
+		throw new IllegalAccessError(SharedStrings.NOT_INSTANTIABLE);
+	}
+
+	/**
+	 *
+	 */
+	public static void init() {
+		if (Options.enableAchievements()) {
+			AchievementPage page = new AchievementPage(Loader.instance().activeModContainer().getModId());
+			AchievementPage.registerAchievementPage(page);
+
+			if (Materials.hasMaterial(MaterialNames.SILICON) && Materials.getMaterialByName(MaterialNames.SILICON).hasItem(Names.INGOT)) {
+				makeAchievement(AchievementNames.SILICON_MAKER, getAchievementByName("metallurgy"), 0, 0, Materials.getMaterialByName(MaterialNames.SILICON).getItem(Names.INGOT), page);
+			}
+			// TODO: Add lithium
+		}
+	}
+}

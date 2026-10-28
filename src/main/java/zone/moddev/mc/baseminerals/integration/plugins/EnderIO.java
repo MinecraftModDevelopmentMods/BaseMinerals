@@ -1,0 +1,44 @@
+package zone.moddev.mc.baseminerals.integration.plugins;
+
+import zone.moddev.mc.baseminerals.BaseMinerals;
+import zone.moddev.mc.baseminerals.data.MaterialNames;
+import com.mcmoddev.lib.integration.MMDPlugin;
+import com.mcmoddev.lib.util.ConfigBase.Options;
+import com.mcmoddev.lib.integration.IIntegration;
+
+/**
+ *
+ * @author Jasmine Iwanek
+ *
+ */
+@MMDPlugin(addonId = BaseMinerals.MODID, pluginId = EnderIO.PLUGIN_MODID)
+public class EnderIO extends com.mcmoddev.lib.integration.plugins.EnderIOBase implements IIntegration {
+
+	/**
+	 *
+	 */
+	@Override
+	public void init() {
+		if (!Options.isModEnabled(PLUGIN_MODID)) {
+			return;
+		}
+
+		final String[] baseNames = new String[] {
+				MaterialNames.LITHIUM,
+				MaterialNames.NITER,
+				MaterialNames.PHOSPHORUS,
+				MaterialNames.POTASH,
+				MaterialNames.SALT,
+				MaterialNames.SALTPETER,
+				// MaterialNames.SILICON,
+				MaterialNames.SULFUR
+		};
+
+		for (int i = 0; i < baseNames.length; i++) {
+			final String materialName = baseNames[i];
+			if (Options.isMaterialEnabled(materialName)) {
+				addSagMillRecipe(materialName, 3600);
+			}
+		}
+	}
+}

@@ -124,3 +124,15 @@ fluid.baseminerals.silicon=Molten Silicon
 
 tile.baseminerals.lithium.name=Molten Lithium
 tile.baseminerals.lithium.name=Molten Silicon
+
+config.baseminerals.title=Base Minerals
+config.baseminerals.description=Material switches take effect after restarting Minecraft.
+config.baseminerals.enable_charcoal=Enable Charcoal
+config.baseminerals.enable_lithium=Enable Lithium
+config.baseminerals.enable_niter=Enable Niter
+config.baseminerals.enable_phosphorus=Enable Phosphorus
+config.baseminerals.enable_potash=Enable Potash
+config.baseminerals.enable_salt=Enable Salt
+config.baseminerals.enable_saltpeter=Enable Saltpeter
+config.baseminerals.enable_silicon=Enable Silicon
+config.baseminerals.enable_sulfur=Enable Sulfur
