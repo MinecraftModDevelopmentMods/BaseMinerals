@@ -1,1 +1,12 @@
-Initial Release
+2.5.1.110021 for 1.10.2
+
+Move the 1.10.2 build to ForgeGradle 7 and Forge 12.18.3.2511.
+Update the Base Metals and OreSpawn dependencies and move the Java packages to zone.moddev.mc.baseminerals. Keep existing registry names and configuration keys.
+Use OreSpawn 4 for ore generation, with new depths and deposit shapes for the seven minerals. Existing chunks are not regenerated.
+Fix material and fluid switches, charcoal ownership, disabled-content recipes and achievements, and client models and molten textures.
+Add restart-required material settings to Forge Mods and OreSpawn Mods, plus automated build, compatibility and world-generation checks.
+
+Known issues:
+- OreSpawn 4.1.2 can add a second lithium rule when an OS1-imported world is moved without its original global import file.
+- Published Electric Advantage 2.2.0 and Power Advantage 2.3.0 fail to load with the required Base Metals version.
+- Mineralogy's default keeps separate sulfur placement. Reviewed shared-output settings have been tested.

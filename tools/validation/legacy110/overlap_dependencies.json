@@ -1,0 +1,5 @@
+[
+  {"id":"electricadvantage","coordinate":"curse.maven:electric-advantage-240985:2323092","sha256":"61AE5343A79F518F54F1717D508EA3F6DA7209EE69B0C4433E0B7A9722213EE0","version":"2.2.0","repository":"https://www.cursemaven.com"},
+  {"id":"poweradvantage","coordinate":"curse.maven:power-advantage-240982:2323095","sha256":"47CD509C1141095BFE1C8C7DD689C2ECD3F99C89195E34A88CC9E0B5FC12413E","version":"2.3.0","repository":"https://www.cursemaven.com"},
+  {"id":"mineralogy","coordinate":"curse.maven:minecraft-mineralogy-240974:8700844","sha256":"9D4819404318B953D6B2BD1FF1B9F16F39104517C3E145DBBE156574F86FEDED","version":"6.0.1.110021","repository":"https://www.cursemaven.com"}
+]
