@@ -6,6 +6,8 @@ materials, ingots, blends and molten forms. Charcoal uses the material supplied
 by Base Metals. Silicon is made from sand and coal or charcoal dust; it does
 not generate as ore.
 
+The seven ores use KiriCattus's overlays on Minecraft's stone texture.
+
 This branch targets Minecraft 1.10.2 and Forge 12.18.3.2511 or later. It requires
 Base Metals 2.5.1.110021 and OreSpawn 4.1.2.110021, or compatible versions in the
 declared ranges. Mineralogy is optional. Tinkers' Construct adds melting and

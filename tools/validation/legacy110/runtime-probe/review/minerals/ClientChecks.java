@@ -66,6 +66,7 @@ public final class ClientChecks {
                         if(!"baseminerals".equals(item.getRegistryName().getResourceDomain()))continue;
                         require(mc.getRenderItem().getItemModelMesher().getItemModel(new ItemStack(item))!=mc.getRenderItem().getItemModelMesher().getModelManager().getMissingModel(),"Missing baked item: "+item.getRegistryName());
                     }
+                    OreModelChecks.verify(mc);
                     check=mc.getIntegratedServer().addScheduledTask(()->{try{BaseMineralsProbe.run(mc.getIntegratedServer());}catch(Exception e){throw new RuntimeException(e);}});
                 } else if(state==3&&check!=null&&check.isDone()) {
                     check.get();screenshot(mc,"integrated-world.png");integrated=mc.getIntegratedServer();integrated.initiateShutdown();state=4;
