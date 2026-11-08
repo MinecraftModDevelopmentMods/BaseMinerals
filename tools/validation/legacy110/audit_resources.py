@@ -9,7 +9,8 @@ from run_runtime_checks import ROOT,dependency
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--mirror',type=Path);args=parser.parse_args()
     count=0
-    for path in (ROOT/'src/main/resources').rglob('*'):
+    resources=ROOT/'build/resources/main'
+    for path in resources.rglob('*'):
         if path.is_file() and (path.suffix in ('.json','.mcmeta') or path.name=='mcmod.info'):
             json.loads(path.read_text(encoding='utf-8-sig'));count+=1
     specs=json.loads((ROOT/'gradle/dependencies.json').read_text())
@@ -21,7 +22,29 @@ def main():
     Draft202012Validator(schema,registry=registry).validate(provider)
     assert len(provider['ores'])==7
     assert all(not provider.get(section) for section in ['rocks','terrain_dimensions','geomes','fluid_deposits','biome_palettes'])
-    assets=ROOT/'src/main/resources/assets/baseminerals'
+    assets=resources/'assets/baseminerals'
+    source_textures=ROOT/'src/main/resources/assets/baseminerals/textures/blocks'
+    for ore in provider['ores'].values():
+        name=ore['block'].split(':',1)[1]
+        state=json.loads((assets/'blockstates'/f'{name}.json').read_text())
+        item=json.loads((assets/'models/item'/f'{name}.json').read_text())
+        model=json.loads((assets/'models/block'/f'{name}.json').read_text())
+        assert state['variants']['normal']['model']==f'baseminerals:{name}',name
+        assert item['parent']==f'baseminerals:block/{name}',name
+        textures=assets/'textures/blocks'
+        if (textures/'ore_overlays'/f'{name}.png').is_file():
+            assert model['parent']=='baseminerals:block/ore_overlay',name
+            assert (assets/'models/block/ore_overlay.json').is_file(),name
+            assert model['textures']=={
+                'particle':'minecraft:blocks/stone','base':'minecraft:blocks/stone',
+                'overlay':f'baseminerals:blocks/ore_overlays/{name}'
+            },name
+            if not (source_textures/f'{name}.png').is_file():
+                assert not (textures/f'{name}.png').exists(),f'{name}: stale solid texture'
+        else:
+            assert (textures/f'{name}.png').is_file(),f'{name}: missing solid texture'
+            assert model['parent']=='block/cube_all',name
+            assert model['textures']=={'all':f'baseminerals:blocks/{name}'},name
     language=dict(line.split('=',1) for line in (assets/'lang/en_US.lang').read_text().splitlines() if '=' in line and not line.startswith('#'))
     for name in ['charcoal','lithium','niter','phosphorus','potash','salt','saltpeter','silicon','sulfur']:
         assert 'config.baseminerals.enable_'+name in language,name

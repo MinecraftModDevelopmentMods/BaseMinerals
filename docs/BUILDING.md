@@ -44,6 +44,19 @@ ForgeGradle's `source-sets-not-merged-for-eclipse` diagnostic refers to its own
 automatic merge. This project deliberately merges production output itself;
 the generated profiles, Buildship model and Java 8 Eclipse compiler are audited.
 
+## Ore models
+
+`generateOreModels` writes the ore block models to `build/generated/ore-models`.
+The normal build includes them in the game and sources jars. Blockstates and
+inventory models use the existing model names.
+
+The seven ores use KiriCattus's transparent PNGs in
+`src/main/resources/assets/baseminerals/textures/blocks/ore_overlays/`. The build
+layers each PNG over Minecraft stone for the block and inventory models.
+An ore with only a full texture in `textures/blocks/` uses that texture on a
+single cube. To switch it to an overlay, put a PNG with the same name in
+`ore_overlays/` and rebuild.
+
 ## Verification
 
 `test` checks native declarations, configuration latching and namespace compatibility.
