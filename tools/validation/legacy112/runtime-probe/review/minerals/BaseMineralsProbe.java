@@ -96,8 +96,9 @@ public final class BaseMineralsProbe {
         require(!ForgeRegistries.ITEMS.containsKey(new ResourceLocation("baseminerals","charcoal_powder")),
                 "Base Minerals registered shared charcoal",failures);
         boolean charcoal=BMiConfig.isEnabled("charcoal");
+        boolean sulfur=BMiConfig.isEnabled("sulfur");
         for(String mineral:new String[]{"potash","saltpeter"}) {
-            boolean enabled=BMiConfig.isEnabled(mineral);
+            boolean enabled=sulfur&&BMiConfig.isEnabled(mineral);
             checkRecipe("gunpowder_coal_"+mineral,enabled,failures);
             checkRecipe("gunpowder_charcoal_"+mineral,enabled&&charcoal,failures);
         }
