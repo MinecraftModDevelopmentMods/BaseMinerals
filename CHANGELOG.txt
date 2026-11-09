@@ -1,3 +1,7 @@
-Addendum: update to using the "MaterialConfigOptions" API
+2.5.1.112021 for 1.12.2
 
-*Metals family wide bug-fixes and updates. No longer requires BaseMetals - only MMDLib and MMD OreSpawn.
+This brings the 1.10 and 1.11 updates across to 1.12.2. Use Forge 14.23.5.2859 with MMDLib 1.0.0 RC3 and OreSpawn 4.1.6.112021. Base Metals is optional. I checked that its hammer works on the ores with Base Metals 2.6.2.112021 installed.
+
+The seven ores use the same depths and deposit shapes as the 1.10 and 1.11 updates, with KiriCattus's overlays on vanilla stone. Your saved ore settings and existing chunks carry forward. If you're moving an OreSpawn 1 world, import its settings on 1.10.2 or 1.11.2 first and bring the saved profile with you.
+
+You can change material and fluid settings from Forge Mods or OreSpawn Mods. Restart Minecraft to apply them. Disabled materials switch off their recipes, and lithium and silicon still work with Tinkers' Construct.

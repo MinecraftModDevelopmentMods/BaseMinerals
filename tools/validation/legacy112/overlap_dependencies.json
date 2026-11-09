@@ -1,0 +1,23 @@
+[
+  {
+    "id": "baseelectric",
+    "coordinate": "curse.maven:baseelectric-1783006:9452435",
+    "version": "2.2.6.112021",
+    "sha256": "9DB6800CAF1795BBA56C483C1A177C09F0893413644B6C62ADE5978C7FF61E78",
+    "repository": "https://www.cursemaven.com"
+  },
+  {
+    "id": "basepower",
+    "coordinate": "curse.maven:basepower-1780140:9452029",
+    "version": "2.4.4.112021",
+    "sha256": "126E9D0969CE6146F45A59EE4D6CA2B5FDF29ECF559BA595DCC1A9CF29A743DB",
+    "repository": "https://www.cursemaven.com"
+  },
+  {
+    "id": "mineralogy",
+    "coordinate": "curse.maven:minecraft-mineralogy-240974:8722772",
+    "version": "6.0.1.112021",
+    "sha256": "558AD3403486F3B5CF575494BDF0A36B9F5967EA8D58E94BDBC2C2B3B6AF5D22",
+    "repository": "https://www.cursemaven.com"
+  }
+]

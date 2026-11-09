@@ -6,11 +6,11 @@ on:
   workflow_dispatch:
     inputs:
       release_version:
-        description: Base Minerals version ending in .110021 or .111021
+        description: Base Minerals version ending in .110021, .111021 or .112021
         required: true
         type: string
       release_sha:
-        description: Full merged commit SHA on the matching 1.10.2 or 1.11.2 branch
+        description: Full merged commit SHA on the matching Minecraft branch
         required: true
         type: string
       ci_run_id:
@@ -54,12 +54,12 @@ jobs:
           set -euo pipefail
           repo=MinecraftModDevelopmentMods/BaseMinerals
           [[ "$GITHUB_REPOSITORY" == "$repo" && "$GITHUB_REF" == refs/heads/master-1.12 ]]
-          [[ "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.(110021|111021)$ ]]
+          [[ "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.(110021|111021|112021)$ ]]
           case "${RELEASE_VERSION##*.}" in
-            110021) minecraft_version=1.10.2 ;;
-            111021) minecraft_version=1.11.2 ;;
+            110021) minecraft_version=1.10.2; branch=master-1.10.2 ;;
+            111021) minecraft_version=1.11.2; branch=master-1.11.2 ;;
+            112021) minecraft_version=1.12.2; branch=master-1.12 ;;
           esac
-          branch="master-$minecraft_version"
           [[ "$RELEASE_SHA" =~ ^[a-f0-9]{40}$ && "$PLAYER_SHA256" =~ ^[a-fA-F0-9]{64}$ && "$CI_RUN_ID" =~ ^[0-9]+$ ]]
 
           branch_sha="$(gh api "repos/$repo/branches/$branch" --jq .commit.sha)"
@@ -81,7 +81,18 @@ jobs:
           grep -Fx 'curseforge_project_id=270972' <<< "$properties"
           gh api "repos/$repo/contents/CHANGELOG.txt?ref=$RELEASE_SHA" --jq .content |
             base64 --decode > "$RUNNER_TEMP/merged-changelog.txt"
-          echo "minecraft_version=$minecraft_version" >> "$GITHUB_OUTPUT"
+          {
+            echo "minecraft_version=$minecraft_version"
+            echo 'curseforge_dependencies<<EOF'
+            if [[ "$minecraft_version" == '1.12.2' ]]; then
+              echo '261744(required)'
+              echo '240967(optional)'
+            else
+              echo '240967(required)'
+            fi
+            echo '245586(required)'
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
 
       - name: Download the audited CI bundle
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
@@ -131,9 +142,7 @@ jobs:
         with:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           curseforge-id: 270972
-          curseforge-dependencies: |
-            240967(required)
-            245586(required)
+          curseforge-dependencies: ${{ steps.target.outputs.curseforge_dependencies }}
           name: Base Minerals ${{ inputs.release_version }} for Minecraft ${{ steps.target.outputs.minecraft_version }} (Forge)
           version: ${{ inputs.release_version }}
           version-type: release

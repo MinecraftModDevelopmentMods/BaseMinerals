@@ -1,0 +1,5 @@
+{
+  "conditions": {
+    "material_enabled": "zone.moddev.mc.baseminerals.init.MaterialEnabledCondition"
+  }
+}
