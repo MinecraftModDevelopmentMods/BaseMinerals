@@ -9,7 +9,7 @@ not generate as ore.
 The seven ores use KiriCattus's overlays on Minecraft's stone texture.
 
 This branch targets Minecraft 1.10.2 and Forge 12.18.3.2511 or later. It requires
-Base Metals 2.5.1.110021 and OreSpawn 4.1.2.110021, or compatible versions in the
+Base Metals 2.6.0.110021 and OreSpawn 4.1.6.110021, or compatible versions in the
 declared ranges. Mineralogy is optional. Tinkers' Construct adds melting and
 casting for lithium and silicon.
 
@@ -20,15 +20,14 @@ and deposit shapes for each mineral. Vanilla stone and its variants are valid
 hosts, and Base Minerals does not replace terrain.
 
 Existing registry names and configuration keys are kept. Saved OreSpawn profiles
-and OS3 imports keep their settings, and generated chunks are not rewritten.
-OS1 imports have a known issue when a world is moved without its original global
-import file; see the [known issues](docs/KNOWN_ISSUES.md). Defaults for new worlds
-can be changed in `config/baseminerals-orespawn.json`.
+and OS1 and OS3 imports keep their settings. OreSpawn 4.1.6 fixes duplicate
+lithium placement when an OS1-imported world moves without its provider file.
+Defaults for new worlds can be changed in `config/baseminerals-orespawn.json`.
 
 See [ore generation](docs/ORE_GENERATION.md), [building](docs/BUILDING.md),
 [verification](tools/validation/legacy110/README.md) and
 [release preparation](docs/RELEASING.md).
 
-The published Electric Advantage and Power Advantage versions also have a
-compatibility problem with the required Base Metals version. The
-[known issues](docs/KNOWN_ISSUES.md) describe both problems and the test results.
+The historical Electric Advantage and Power Advantage releases have a
+compatibility problem with the required Base Metals version. See the
+[known issues](docs/KNOWN_ISSUES.md) for details.

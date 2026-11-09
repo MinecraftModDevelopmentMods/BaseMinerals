@@ -47,13 +47,15 @@ tasks.register('verifyReleaseConfiguration') {
         if (!source.contains('VERSION = "' + project.version + '"') || !source.contains('MODID = "baseminerals"')) {
             throw new GradleException('The mod identity differs from the build metadata.')
         }
-        if (project.orespawn_version != '4.1.2.110021'
-                || project.orespawn_version_range != '[4.1.2.110021,5.0.0)'
+        if (project.orespawn_version != '4.1.6.110021'
+                || project.orespawn_version_range != '[4.1.6.110021,5.0.0)'
                 || !source.contains('required-after:orespawn@' + project.orespawn_version_range)
                 || !source.contains('required-after:Forge@[12.18.3.2511,)')) {
             throw new GradleException('The OreSpawn or Forge runtime requirement changed.')
         }
-        if (!source.contains('required-after:basemetals@[2.5.1.110021,2.6.0)')) {
+        if (project.basemetals_version != '2.6.0.110021'
+                || project.basemetals_version_range != '[2.6.0.110021,2.7.0)'
+                || !source.contains('required-after:basemetals@' + project.basemetals_version_range)) {
             throw new GradleException('The published Base Metals runtime requirement changed.')
         }
     }

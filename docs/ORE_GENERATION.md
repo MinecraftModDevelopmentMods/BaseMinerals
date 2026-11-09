@@ -51,6 +51,10 @@ does not become controllable merely through an Ore Dictionary alias.
 An existing profile choice remains authoritative even after sources become
 manageable. Review the resulting source groups in OreSpawn before changing them.
 
+With OreSpawn 4.1.6, fresh worlds using public Base Electric share sulfur and
+lithium outputs under one placement source per ore. With Mineralogy installed,
+Mineralogy places sulfur. Base Minerals places lithium in the combined pack.
+
 Native global overrides use `config/baseminerals-orespawn.json`. Existing world
 profiles and native overrides take precedence over legacy imports. Supported
 OS1/OS3 custom and disabled rules retain their settings rather than adopting this
@@ -59,5 +63,6 @@ these are alternative dimension declarations, not two generation passes. Existin
 ore entries are kept as whole entries, including older selector-only rules. Missing entries follow OreSpawn's normal provider merge behavior.
 Retrogen stays disabled; generated chunks are unchanged. Keep legacy files until
 the importer report and resulting settings have been reviewed.
-The pinned engine currently reinserts a native rule after an OS1-imported world
-reload; that migration gate fails. See [qualification limits](KNOWN_ISSUES.md).
+OreSpawn 4.1.6 keeps OS1 placement settings when only the saved world is moved.
+It backs up profiles before removing an untouched duplicate and flags edited
+duplicates for review. See [qualification limits](KNOWN_ISSUES.md).

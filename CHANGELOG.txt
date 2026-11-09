@@ -1,13 +1,11 @@
 2.5.1.110021 for 1.10.2
 
-Move the 1.10.2 build to ForgeGradle 7 and Forge 12.18.3.2511.
-Update the Base Metals and OreSpawn dependencies and move the Java packages to zone.moddev.mc.baseminerals. Keep existing registry names and configuration keys.
-Use OreSpawn 4 for ore generation, with new depths and deposit shapes for the seven minerals. Existing chunks are not regenerated.
-Fix material and fluid switches, charcoal ownership, disabled-content recipes and achievements, and client models and molten textures.
-Add restart-required material settings to Forge Mods and OreSpawn Mods, plus automated build, compatibility and world-generation checks.
-Use KiriCattus's ore overlays for all seven ores. Generate the models during the build, with support for full ore textures as well.
+This brings the 1.10.2 build up to date on Forge 12.18.3.2511. It needs Base Metals 2.6.0.110021 and OreSpawn 4.1.6.110021.
 
-Known issues:
-- OreSpawn 4.1.2 can add a second lithium rule when an OS1-imported world is moved without its original global import file.
-- Published Electric Advantage 2.2.0 and Power Advantage 2.3.0 fail to load with the required Base Metals version.
-- Mineralogy's default keeps separate sulfur placement. Reviewed shared-output settings have been tested.
+The seven ores have new depths and deposit shapes, and now use KiriCattus's overlays on vanilla stone. Saved ore settings and existing chunks are kept. OreSpawn now preserves the imported lithium rule when you move an old OS1 world and can remove an untouched duplicate left by an earlier version.
+
+Base Electric shares sulfur and lithium placement with Base Minerals. In a pack with both Base Electric and Mineralogy, Mineralogy places sulfur and Base Minerals places lithium.
+
+Material settings are available from Forge Mods and OreSpawn Mods and take effect after a restart. This update also fixes disabled material recipes and achievements, charcoal ownership, and molten material textures.
+
+The old Electric Advantage 2.2.0 and Power Advantage 2.3.0 releases are incompatible with this Base Metals build.

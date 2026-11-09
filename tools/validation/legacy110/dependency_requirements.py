@@ -9,7 +9,9 @@ from run_runtime_checks import ROOT, FORGE, dependency, prepare, write_json
 
 OLD = {
     'base':('base-metals-240967','2323100','f919cef794c73f02758bbd967346dba0b53f6383153c7e29bd79f211cda8c319'),
-    'os':('mmd-orespawn-245586','2533153','d964148c20175e16ccefab02ae43a181a50dc08a1d636a77e59cfe8c8ea8d41a')
+    'previous_base':('base-metals-240967','9280029','8bb1823592dcd558d17c4848ae917266fe7197b754ca628297df837cfb3d20a3'),
+    'os':('mmd-orespawn-245586','2533153','d964148c20175e16ccefab02ae43a181a50dc08a1d636a77e59cfe8c8ea8d41a'),
+    'os4':('mmd-orespawn-245586','9276430','4d4975421feebf17505056306d06b0344d7a4553b6275885d7c5c5065b0348a6')
 }
 
 def verify(java,template,output,base,orespawn,minerals):
@@ -22,10 +24,12 @@ def verify(java,template,output,base,orespawn,minerals):
         assert hashlib.sha256(target.read_bytes()).hexdigest()==expected,'Public fixture checksum mismatch'
         old[key]=target
     scenarios={
-        'missing-base':([orespawn,minerals],'basemetals','2.5.1.110021'),
-        'old-base':([old['base'],orespawn,minerals],'basemetals','2.5.1.110021'),
-        'missing-orespawn':([base,minerals],'orespawn','4.1.2.110021'),
-        'old-orespawn':([base,old['os'],minerals],'orespawn','4.1.2.110021')
+        'missing-base':([orespawn,minerals],'basemetals','2.6.0.110021'),
+        'old-base':([old['base'],orespawn,minerals],'basemetals','2.6.0.110021'),
+        'previous-base':([old['previous_base'],orespawn,minerals],'basemetals','2.6.0.110021'),
+        'missing-orespawn':([base,minerals],'orespawn','4.1.6.110021'),
+        'old-orespawn':([base,old['os'],minerals],'orespawn','4.1.6.110021'),
+        'old-orespawn4':([base,old['os4'],minerals],'orespawn','4.1.6.110021')
     }
     result={}
     for name,(jars,modid,version) in scenarios.items():
