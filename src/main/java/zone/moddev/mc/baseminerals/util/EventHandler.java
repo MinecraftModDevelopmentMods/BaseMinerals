@@ -16,27 +16,27 @@ import net.minecraft.item.Item;
 
 @EventBusSubscriber
 public class EventHandler {
-	@SubscribeEven
+	@SubscribeEvent
 	public static void mmdlibRegisterMaterials(MMDLibRegisterMaterials ev) {
 		Materials.init();
 	}
 
-	@SubscribeEven
+	@SubscribeEvent
 	public static void mmdlibRegisterBlocks(MMDLibRegisterBlocks ev) {
 		Blocks.init();
 	}
 
-	@SubscribeEven
+	@SubscribeEvent
 	public static void mmdlibRegisterItems(MMDLibRegisterItems ev) {
 		Items.init();
 	}
 
-	@SubscribeEven
+	@SubscribeEvent
 	public static void mmdlibRegisterFluids(MMDLibRegisterFluids ev) {
 		Fluids.init();
 	}
 
-	@SubscribeEven
+	@SubscribeEvent
 	public static void onRemapBlock(RegistryEvent.MissingMappings<Block> event) {
 		for (final RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getAllMappings()) {
 			if (mapping.key.getNamespace().equals(BaseMinerals.MODID)) {
@@ -45,7 +45,7 @@ public class EventHandler {
 		}
 	}
 
-	@SubscribeEven
+	@SubscribeEvent
 	public static void onRemapItem(RegistryEvent.MissingMappings<Item> event) {
 		for (final RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getAllMappings()) {
 			if (mapping.key.getNamespace().equals(BaseMinerals.MODID)) {
