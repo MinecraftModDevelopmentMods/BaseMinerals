@@ -6,15 +6,15 @@ on:
   workflow_dispatch:
     inputs:
       release_version:
-        description: Base Minerals version ending in .110021
+        description: Base Minerals version ending in .110021 or .111021
         required: true
         type: string
       release_sha:
-        description: Full merged commit SHA on master-1.10.2
+        description: Full merged commit SHA on the matching 1.10.2 or 1.11.2 branch
         required: true
         type: string
       ci_run_id:
-        description: Successful upstream push run of Base Minerals 1.10 CI
+        description: Successful upstream push CI run for the matching branch
         required: true
         type: string
       player_sha256:
@@ -36,12 +36,13 @@ concurrency:
 
 jobs:
   release:
-    name: Verify and release Base Minerals 1.10.2
+    name: Verify and release Base Minerals
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
       - name: Verify the merged source and CI run
+        id: target
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_VERSION: ${{ inputs.release_version }}
@@ -52,9 +53,13 @@ jobs:
         run: |
           set -euo pipefail
           repo=MinecraftModDevelopmentMods/BaseMinerals
-          branch=master-1.10.2
           [[ "$GITHUB_REPOSITORY" == "$repo" && "$GITHUB_REF" == refs/heads/master-1.12 ]]
-          [[ "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.110021$ ]]
+          [[ "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.(110021|111021)$ ]]
+          case "${RELEASE_VERSION##*.}" in
+            110021) minecraft_version=1.10.2 ;;
+            111021) minecraft_version=1.11.2 ;;
+          esac
+          branch="master-$minecraft_version"
           [[ "$RELEASE_SHA" =~ ^[a-f0-9]{40}$ && "$PLAYER_SHA256" =~ ^[a-fA-F0-9]{64}$ && "$CI_RUN_ID" =~ ^[0-9]+$ ]]
 
           branch_sha="$(gh api "repos/$repo/branches/$branch" --jq .commit.sha)"
@@ -71,16 +76,17 @@ jobs:
 
           properties="$(gh api "repos/$repo/contents/gradle.properties?ref=$RELEASE_SHA" --jq .content | base64 --decode)"
           grep -Fx "mod_version=$RELEASE_VERSION" <<< "$properties"
-          grep -Fx 'minecraft_version=1.10.2' <<< "$properties"
+          grep -Fx "minecraft_version=$minecraft_version" <<< "$properties"
           grep -Fx 'loader_name=forge' <<< "$properties"
           grep -Fx 'curseforge_project_id=270972' <<< "$properties"
           gh api "repos/$repo/contents/CHANGELOG.txt?ref=$RELEASE_SHA" --jq .content |
             base64 --decode > "$RUNNER_TEMP/merged-changelog.txt"
+          echo "minecraft_version=$minecraft_version" >> "$GITHUB_OUTPUT"
 
       - name: Download the audited CI bundle
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
-          name: BaseMinerals-1.10.2-${{ inputs.release_sha }}
+          name: BaseMinerals-${{ steps.target.outputs.minecraft_version }}-${{ inputs.release_sha }}
           path: ${{ runner.temp }}/release-input
           github-token: ${{ github.token }}
           run-id: ${{ inputs.ci_run_id }}
@@ -128,12 +134,12 @@ jobs:
           curseforge-dependencies: |
             240967(required)
             245586(required)
-          name: Base Minerals ${{ inputs.release_version }} for Minecraft 1.10.2 (Forge)
+          name: Base Minerals ${{ inputs.release_version }} for Minecraft ${{ steps.target.outputs.minecraft_version }} (Forge)
           version: ${{ inputs.release_version }}
           version-type: release
           changelog-file: ${{ runner.temp }}/release-input/CHANGELOG.txt
           loaders: forge
-          game-versions: 1.10.2
+          game-versions: ${{ steps.target.outputs.minecraft_version }}
           game-version-filter: none
           environment: client | server
           java: Java 8
