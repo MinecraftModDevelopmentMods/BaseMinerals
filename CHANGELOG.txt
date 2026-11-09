@@ -1,1 +1,9 @@
-Initial Release
+2.5.1.111021 for 1.11.2
+
+This brings the 1.10 update across to 1.11.2. It runs on Forge 13.20.1.2588 and needs Base Metals 2.5.1.111021 and OreSpawn 4.1.6.111021.
+
+The seven ores have new depths and deposit shapes, and now use KiriCattus's overlays on vanilla stone. Saved ore settings and existing chunks are kept. OreSpawn now preserves the imported lithium rule when you move an old OS1 world and can remove an untouched duplicate left by an earlier version.
+
+Material settings are available from Forge Mods and OreSpawn Mods and take effect after a restart. This update also fixes disabled material recipes and achievements, charcoal ownership, and molten material textures. Tinkers' Construct still supports melting and casting lithium and silicon.
+
+The old Electric Advantage 2.2.0 and Power Advantage 2.3.0 releases fail to load on this setup. Mineralogy 3.3.0.6 still places its own sulfur alongside Base Minerals sulfur.

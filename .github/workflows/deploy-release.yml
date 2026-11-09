@@ -1,0 +1,147 @@
+name: Release Base Minerals to CurseForge
+
+run-name: Base Minerals ${{ inputs.release_version }} CurseForge (${{ inputs.confirm_live_publication && 'publish' || 'check only' }})
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: Base Minerals version ending in .110021 or .111021
+        required: true
+        type: string
+      release_sha:
+        description: Full merged commit SHA on the matching 1.10.2 or 1.11.2 branch
+        required: true
+        type: string
+      ci_run_id:
+        description: Successful upstream push CI run for the matching branch
+        required: true
+        type: string
+      player_sha256:
+        description: SHA-256 of the tested player jar
+        required: true
+        type: string
+      confirm_live_publication:
+        description: Upload the verified player jar to CurseForge
+        default: false
+        type: boolean
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: baseminerals-curseforge-${{ inputs.release_version }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Verify and release Base Minerals
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Verify the merged source and CI run
+        id: target
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.release_version }}
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          CI_RUN_ID: ${{ inputs.ci_run_id }}
+          PLAYER_SHA256: ${{ inputs.player_sha256 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          repo=MinecraftModDevelopmentMods/BaseMinerals
+          [[ "$GITHUB_REPOSITORY" == "$repo" && "$GITHUB_REF" == refs/heads/master-1.12 ]]
+          [[ "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.(110021|111021)$ ]]
+          case "${RELEASE_VERSION##*.}" in
+            110021) minecraft_version=1.10.2 ;;
+            111021) minecraft_version=1.11.2 ;;
+          esac
+          branch="master-$minecraft_version"
+          [[ "$RELEASE_SHA" =~ ^[a-f0-9]{40}$ && "$PLAYER_SHA256" =~ ^[a-fA-F0-9]{64}$ && "$CI_RUN_ID" =~ ^[0-9]+$ ]]
+
+          branch_sha="$(gh api "repos/$repo/branches/$branch" --jq .commit.sha)"
+          if [[ "$RELEASE_SHA" != "$branch_sha" ]]; then
+            echo "Expected the current upstream $branch SHA, found $branch_sha" >&2
+            exit 1
+          fi
+          gh api "repos/$repo/actions/runs/$CI_RUN_ID" |
+            jq -e --arg sha "$RELEASE_SHA" --arg repo "$repo" --arg branch "$branch" '
+              .head_sha == $sha and .head_repository.full_name == $repo
+              and .head_branch == $branch and .event == "push"
+              and .status == "completed" and .conclusion == "success"
+              and .path == ".github/workflows/ci.yml"' >/dev/null
+
+          properties="$(gh api "repos/$repo/contents/gradle.properties?ref=$RELEASE_SHA" --jq .content | base64 --decode)"
+          grep -Fx "mod_version=$RELEASE_VERSION" <<< "$properties"
+          grep -Fx "minecraft_version=$minecraft_version" <<< "$properties"
+          grep -Fx 'loader_name=forge' <<< "$properties"
+          grep -Fx 'curseforge_project_id=270972' <<< "$properties"
+          gh api "repos/$repo/contents/CHANGELOG.txt?ref=$RELEASE_SHA" --jq .content |
+            base64 --decode > "$RUNNER_TEMP/merged-changelog.txt"
+          echo "minecraft_version=$minecraft_version" >> "$GITHUB_OUTPUT"
+
+      - name: Download the audited CI bundle
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: BaseMinerals-${{ steps.target.outputs.minecraft_version }}-${{ inputs.release_sha }}
+          path: ${{ runner.temp }}/release-input
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.ci_run_id }}
+
+      - name: Verify the bundle and the tested player jar
+        id: bundle
+        env:
+          RELEASE_VERSION: ${{ inputs.release_version }}
+          PLAYER_SHA256: ${{ inputs.player_sha256 }}
+          CI_RUN_ID: ${{ inputs.ci_run_id }}
+          RELEASE_SHA: ${{ inputs.release_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/release-input"
+          jar="BaseMinerals-$RELEASE_VERSION.jar"
+          cmp "$RUNNER_TEMP/merged-changelog.txt" CHANGELOG.txt
+          (
+            cd build/libs
+            sha256sum --strict --check ../release/SHA256SUMS
+            printf '%s  %s\n' "${PLAYER_SHA256,,}" "$jar" | sha256sum --strict --check
+          )
+          echo "jar=$RUNNER_TEMP/release-input/build/libs/$jar" >> "$GITHUB_OUTPUT"
+          echo "Verified $jar from CI run $CI_RUN_ID at $RELEASE_SHA." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check CurseForge credential availability
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CONFIRM_LIVE: ${{ inputs.confirm_live_publication }}
+        shell: bash
+        run: |
+          if [[ -z "$CURSEFORGE_TOKEN" ]]; then
+            echo '::warning::CURSEFORGE_TOKEN is unavailable to Base Minerals.'
+            [[ "$CONFIRM_LIVE" == false ]]
+          else
+            echo 'The CurseForge upload credential is available.'
+          fi
+
+      - name: Publish the tested jar to CurseForge
+        if: inputs.confirm_live_publication
+        uses: Kira-NT/mc-publish@52307b03863581dec6b652b83e597aec02ebb075 # v3.3.1
+        with:
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          curseforge-id: 270972
+          curseforge-dependencies: |
+            240967(required)
+            245586(required)
+          name: Base Minerals ${{ inputs.release_version }} for Minecraft ${{ steps.target.outputs.minecraft_version }} (Forge)
+          version: ${{ inputs.release_version }}
+          version-type: release
+          changelog-file: ${{ runner.temp }}/release-input/CHANGELOG.txt
+          loaders: forge
+          game-versions: ${{ steps.target.outputs.minecraft_version }}
+          game-version-filter: none
+          environment: client | server
+          java: Java 8
+          fail-mode: fail
+          files: ${{ steps.bundle.outputs.jar }}
