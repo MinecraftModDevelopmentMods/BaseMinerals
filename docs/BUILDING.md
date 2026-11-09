@@ -13,6 +13,8 @@ The staging script downloads and verifies MMDLib, OreSpawn and the optional
 compatibility jars using `gradle/dependencies.json`. The exact MMDLib pin is the
 published 1.0.0 RC3 jar. Its embedded Forge metadata still reports `1.0.0-rc2`,
 which is why that version appears in the runtime dependency range.
+The mirror also supplies the checksum-pinned LegacyDev 0.2.3.1 used to bootstrap
+Forge 1.12.2.
 
 Select Java 17 with `JAVA_HOME` and `PATH`, then stage the dependencies and build.
 
