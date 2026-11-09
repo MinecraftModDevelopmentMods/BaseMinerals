@@ -29,6 +29,10 @@
 					"optionValue": "Basics"
 				}
 			]
+		},
+		{
+			"type": "baseminerals:material_enabled",
+			"material": "charcoal"
 		}
 	],
 	"group": "baseminerals_extra"

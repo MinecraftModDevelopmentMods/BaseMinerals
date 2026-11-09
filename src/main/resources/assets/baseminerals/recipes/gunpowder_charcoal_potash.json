@@ -1,23 +1,37 @@
 {
-    "type":"forge:ore_shapeless",
-    "ingredients": [
-	{
-	    "type":"forge:ore_dict",
-	    "ore":"dustCharcoal"
+	"type": "forge:ore_shapeless",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustCharcoal"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustSulfur"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dustPotash"
+		}
+	],
+	"result": {
+		"type": "minecraft:item",
+		"item": "minecraft:gunpowder",
+		"count": 3
 	},
-	{
-	    "type":"forge:ore_dict",
-	    "ore":"dustSulfur"
-	},
-	{
-	    "type":"forge:ore_dict",
-	    "ore":"dustPotash"
-	}
-    ],
-    "result": {
-	"type":"minecraft:item",
-	"item":"minecraft:gunpowder",
-	"count": 3
-    },
-    "group": "baseminerals_extra"
+	"group": "baseminerals_extra",
+	"conditions": [
+		{
+			"type": "baseminerals:material_enabled",
+			"material": "sulfur"
+		},
+		{
+			"type": "baseminerals:material_enabled",
+			"material": "potash"
+		},
+		{
+			"type": "baseminerals:material_enabled",
+			"material": "charcoal"
+		}
+	]
 }

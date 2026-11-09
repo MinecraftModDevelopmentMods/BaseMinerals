@@ -1,0 +1,49 @@
+{
+  "schema_version": 7,
+  "ores": {
+    "baseminerals:legacy/baseminerals_lithium_ore_0": {
+      "enabled": true,
+      "block": "baseminerals:lithium_ore",
+      "source_mod": "baseminerals",
+      "native_generation": false,
+      "retrogen": false,
+      "legacy_import": "os1",
+      "outputs": [
+        {
+          "block": "baseminerals:lithium_ore",
+          "weight": 100
+        }
+      ],
+      "dimensions": {
+        "minecraft:overworld": {
+          "enabled": true,
+          "min_y": 8,
+          "max_y": 39,
+          "frequency": 1.5,
+          "quantity": 4,
+          "pattern": "orespawn:default",
+          "height_distribution": "uniform",
+          "spread": 8,
+          "vertical_spread": 0,
+          "node_size": 4,
+          "length": 16,
+          "fluid": "minecraft:water",
+          "host_blocks": [
+            "minecraft:stone",
+            "minecraft:netherrack",
+            "minecraft:end_stone"
+          ],
+          "host_tags": [],
+          "host_families": [],
+          "biome_ids": [],
+          "excluded_biome_ids": [],
+          "biome_dictionary": [],
+          "excluded_biome_dictionary": [],
+          "geomes": {}
+        }
+      },
+      "source_provider": "baseminerals",
+      "dimension_selectors": {}
+    }
+  }
+}

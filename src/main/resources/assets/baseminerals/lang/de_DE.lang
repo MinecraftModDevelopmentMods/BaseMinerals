@@ -123,4 +123,5 @@ fluid.baseminerals.lithium=Geschmolzenes Lithium
 fluid.baseminerals.silicon=Geschmolzenes Silizium
 
 tile.baseminerals.lithium.name=Geschmolzenes Lithium
-tile.baseminerals.lithium.name=Geschmolzenes Silizium
+tile.baseminerals.lithium.name=Geschmolzenes Siliziumconfig.baseminerals.fluid_lithium=Flüssiges Lithium
+config.baseminerals.fluid_silicon=Flüssiges Silizium
