@@ -26,7 +26,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 		modid = BaseMinerals.MODID,
 		name = BaseMinerals.NAME,
 		version = BaseMinerals.VERSION,
-		dependencies = "required-after:Forge@[12.18.3.2511,);required-after:basemetals@[2.5.1.110021,2.6.0);required-after:orespawn@[4.1.2.110021,5.0.0);after:tconstruct;after:enderio;before:buildingbricks",
+		dependencies = "required-after:Forge@[12.18.3.2511,);required-after:basemetals@[2.6.0.110021,2.7.0);required-after:orespawn@[4.1.6.110021,5.0.0);after:tconstruct;after:enderio;before:buildingbricks",
 		acceptedMinecraftVersions = "[1.10.2]",
         guiFactory = "zone.moddev.mc.baseminerals.client.BaseMineralsGuiFactory",
 		updateJSON = BaseMinerals.UPDATEJSON)

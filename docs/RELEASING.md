@@ -10,22 +10,18 @@ CI has a cold bootstrap/offline rebuild, build/tests, resource/schema checks,
 packaged server qualification, Eclipse generation and clean reproducibility check.
 CodeQL/wrapper checks are separate. Actions use full commit hashes.
 
-Versions use `Major.Minor.Patch.110021`. Tags validate metadata/prior CI without
-publishing. The dispatcher requires `confirm_live_publication`, the upstream
-repository, matching target/tag/commit and successful hosted checks. It publishes
-the same candidate bytes to Maven, CurseForge **270972**, then GitHub. CurseForge
-requires Base Metals **240967** and MMD OreSpawn **245586**. Credentials and an
-HTTPS Maven target are required.
+Run `deploy-release.yml` from MMD's default branch, `master-1.12`. Enter the
+`Major.Minor.Patch.110021` version, full merged `master-1.10.2` SHA, successful
+upstream push CI run ID and SHA-256 of the tested player jar. Run it once with
+confirmation off to verify the source, changelog and CI bundle.
 
-The dispatcher must be installed on the repository's default branch before a
-manual release can be started. Merging the 1.10 branch does not install it on the
-1.12 default branch. Publication is a separate step and needs approval. If an
-upload times out, check its status before trying again.
+Set `confirm_live_publication` to upload the verified player jar to CurseForge
+project **270972** with Base Metals **240967** and MMD OreSpawn **245586** marked
+as required. The workflow needs access to `CURSEFORGE_TOKEN`. Check the public
+file and its download checksum after upload. If an upload times out, check its
+status before trying again.
 
-The [known issues](KNOWN_ISSUES.md) remain unresolved: a moved OS1-imported world
-can gain a second lithium rule, and the published Electric Advantage / Power
-Advantage pair fails before world load with the required Base Metals version.
-The synthetic source-policy tests do not prove that those public mods load.
-Mineralogy's reviewed sulfur settings pass, while its default keeps separate
-placement. Keep these results with the release candidate; the full compatibility
-suite has not passed.
+The historical Electric Advantage and Power Advantage pair fails before world
+load with the required Base Metals version. Keep the public compatibility
+results and the OS1 migration checks with the release candidate. See the
+[known issues](KNOWN_ISSUES.md).

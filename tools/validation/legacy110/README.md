@@ -24,11 +24,11 @@ material is tested through actual generation, rather than registration alone.
 Seed zero needs explicit fresh metadata because server.properties treats `0`
 as random. `--quick` is only an early smoke.
 
-The full packaged suite currently fails when it loads an OS1-imported world
-without the original global import file: the pinned engine adds a second native
-lithium rule. Run `reproduce_os1_reload.py` with `--java`, `--template` and a new
-`--output` directory for the shorter reproduction. See the
-[known issues](../../../docs/KNOWN_ISSUES.md). This failure is kept in the suite.
+The packaged suite requires a single imported lithium rule after moving an OS1
+world without its global import file. Run `reproduce_os1_reload.py` with
+`--java`, `--template` and a new `--output` directory for the shorter check.
+Keep the assertion when updating OreSpawn. See the
+[known issues](../../../docs/KNOWN_ISSUES.md) for edited profiles.
 
 `run_overlap_suite.py` stages public sibling jars pinned in
 `overlap_dependencies.json` and captures their real source policies. Its Electric
