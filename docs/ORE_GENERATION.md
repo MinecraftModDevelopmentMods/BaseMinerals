@@ -31,7 +31,7 @@ The balance draws on [lithium pegmatites](https://www.usgs.gov/data/lithium-depo
 [evaporite potash](https://www.usgs.gov/publications/potash-a-global-overview-evaporate-related-potash-resources-including-spatial)
 and [sedimentary phosphate](https://pubs.usgs.gov/bul/b1693/html/bull74kl.htm).
 
-Vanilla stone, including metadata variants, is eligible. Additional hosts are
+New profiles allow stone and the six named granite, diorite and andesite variants, including polished forms. Additional hosts are
 intrusive igneous rocks for lithium, sedimentary rocks for nitrates, salt, potash
 and phosphorus, and sedimentary or volcanic rocks for sulfur. There are no hard biome
 restrictions. Rules cover ordinary dimensions except vanilla Nether/End.

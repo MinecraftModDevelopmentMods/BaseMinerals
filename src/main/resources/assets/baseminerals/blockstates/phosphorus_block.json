@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "baseminerals:phosphorus_block" }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/phosphorus_block"
     }
+  }
 }

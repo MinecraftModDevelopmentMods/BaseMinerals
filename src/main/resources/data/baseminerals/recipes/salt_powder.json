@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "basics",
+  "result": {
+    "item": "baseminerals:salt_powder"
+  },
+  "key": {
+    "x": {
+      "tag": "forge:tiny_dusts/salt"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ]
+}

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "baseminerals:sulfur_block" }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/sulfur_block"
     }
+  }
 }

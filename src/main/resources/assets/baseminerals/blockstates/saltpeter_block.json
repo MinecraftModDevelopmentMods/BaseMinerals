@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "baseminerals:saltpeter_block" }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/saltpeter_block"
     }
+  }
 }

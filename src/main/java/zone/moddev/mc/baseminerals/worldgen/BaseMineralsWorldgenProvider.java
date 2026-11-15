@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Consumer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistries;
 import zone.moddev.mc.orespawn.api.*;
 
 /** Declarations only: OreSpawn resolves, bakes and executes all placement. */
@@ -37,6 +37,10 @@ public final class BaseMineralsWorldgenProvider {
                 p.yRange(rule.minY,rule.maxY).attempts(rule.frequency).quantityRange(rule.minQuantity,rule.maxQuantity)
                     .pattern(rule.pattern).heightDistribution(rule.height).placementChannel(id("orespawn","standard"))
                     .spread(rule.horizontal,rule.vertical).nodeSize(rule.node).hostBlock(id("minecraft","stone"));
+                for (String host : new String[] {"granite", "diorite", "andesite",
+                        "polished_granite", "polished_diorite", "polished_andesite"}) {
+                    p.hostBlock(id("minecraft", host));
+                }
                 // API major 1 exposes vein length through the standard pattern codec.
                 if(rule.pattern==OrePattern.VEIN) {
                     com.google.gson.JsonObject settings=new com.google.gson.JsonObject();

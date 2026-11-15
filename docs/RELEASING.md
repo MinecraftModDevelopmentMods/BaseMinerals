@@ -1,22 +1,28 @@
-# Release preparation
+# Releasing Base Minerals for Minecraft 1.13.2
 
-Normal builds never publish. Main, sources, Javadocs and SHA-256 form one audited
-candidate. Gradle enforces Java 8 bytecode, deterministic archives, processed
-metadata, dependency hashes and exclusion of tests, local context and shared
-library copies. Prepared bundles contain exactly those three jars, `SHA256SUMS`
-and `CHANGELOG.txt`. `verifyPreparedReleaseArtifacts` audits the prepared files.
+Build with Java 17, Temurin 8u502-b07 for compilation and Java 25 for
+Mavenizer. Run check, build, verify113ReleaseArtifacts,
+write113ReleaseChecksums, genEclipseRuns and eclipse. Keep the packaged
+gameplay and saved-world checks local, then complete manual testing.
 
-CI has a cold bootstrap/offline rebuild, build/tests, resource/schema checks,
-packaged server qualification, Eclipse generation and clean reproducibility check.
-CodeQL/wrapper checks are separate. Actions use full commit hashes.
+Open a PR from the fork to MMD's master-1.13.2. After merging, wait for the
+successful push CI run and download BaseMinerals-1.13.2-<merged SHA>. Compare
+all three jars with the locally qualified bundle. The CI bundle contains
+the player, sources and Javadoc jars, SHA256SUMS and CHANGELOG.txt.
 
-The shared dispatcher on MMD's default branch, `master-1.12`, picks the branch
-and CurseForge dependencies from the version. For 1.12.2, supply the
-`Major.Minor.Patch.112021` version, full merged `master-1.12` SHA, successful
-upstream push CI run ID and SHA-256 of the tested player jar. Run verification
-with publication confirmation off before uploading.
+Run deploy-release.yml on master-1.13.2 with the release version, full merged
+commit and qualified game-jar SHA-256. Leave confirm_live_publication false
+for verification. Set it true only when publication is authorised. The
+workflow checks the branch tip, successful merged CI and bundle hashes,
+then publishes those exact files to MMD Maven, CurseForge and GitHub.
+It does not rebuild the jars during publication.
 
-CurseForge project **270972** should list MMDLib **261744** and MMD OreSpawn
-**245586** as required, with Base Metals **240967** optional. The workflow needs
-access to `CURSEFORGE_TOKEN`. Check the public file and its download checksum
-after upload. If an upload times out, check its status before trying again.
+MMD needs CURSEFORGE_TOKEN, MAVEN_UPLOAD_URL, MAVEN_UPLOAD_USERNAME and
+MAVEN_UPLOAD_PASSWORD as repository or shared organisation secrets. Maven
+publication requires HTTPS and validates the prepared bundle again.
+
+Verify anonymous downloads and hashes on all three services, including the
+CurseForge dependency metadata. If a publication job fails, preserve its
+logs and retry only the failed job; do not duplicate an accepted upload.
+Base Metals is optional and OreSpawn is required. Publish Base Metals first
+and keep the compatibility pin on its public 1.13.2 release.

@@ -1,0 +1,19 @@
+{
+  "type": "baseminerals:shared_crushing",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        { "type": "forge:mod_loaded", "modid": "basemetals" },
+        { "type": "forge:mod_loaded", "modid": "modernmetals" }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "baseminerals:niter_ore"
+  },
+  "result": {
+    "item": "baseminerals:niter_powder",
+    "count": 2
+  }
+}

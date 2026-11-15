@@ -1,0 +1,14 @@
+{
+  "pools": [
+    {
+      "name": "block",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "baseminerals:niter_block"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "basics",
+  "result": {
+    "item": "baseminerals:phosphorus_block"
+  },
+  "key": {
+    "x": {
+      "tag": "forge:dusts/phosphorus"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ]
+}

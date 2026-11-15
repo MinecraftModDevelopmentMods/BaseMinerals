@@ -1,0 +1,19 @@
+{
+  "type": "baseminerals:shared_crushing",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        { "type": "forge:mod_loaded", "modid": "basemetals" },
+        { "type": "forge:mod_loaded", "modid": "modernmetals" }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "baseminerals:lithium_ore"
+  },
+  "result": {
+    "item": "baseminerals:lithium_powder",
+    "count": 2
+  }
+}

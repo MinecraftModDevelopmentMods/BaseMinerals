@@ -1,23 +1,18 @@
-import org.apache.tools.ant.filters.FixCrLfFilter
+import groovy.json.JsonSlurper
+import java.security.MessageDigest
 
 plugins {
     id 'java'
     id 'eclipse'
-    id 'idea'
     id 'maven-publish'
     id 'net.minecraftforge.renamer' version '1.1.5'
     id 'net.minecraftforge.gradle' version '7.0.34'
 }
 
-group = project.mod_group
-version = project.mod_version
+group = 'zone.moddev.mc.baseminerals'
+version = '2.5.1.113021'
 base.archivesName = 'BaseMinerals'
 
-if (!(project.version ==~ /\d+\.\d+\.\d+\.112021/)) {
-    throw new GradleException('Use Major.Minor.Patch.112021 for Minecraft 1.12.2 on Forge.')
-}
-
-// Gradle and Mavenizer use modern JDKs; the mod and game still use Java 8.
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(8)
     withSourcesJar()
@@ -25,157 +20,150 @@ java {
 }
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    sourceCompatibility = targetCompatibility = '1.8'
-    options.compilerArgs.addAll(['-Xmaxerrs', '1000'])
 }
-tasks.named('compileTestJava', JavaCompile) { options.compilerArgs.add('-proc:none') }
-tasks.withType(Test).configureEach { useJUnitPlatform() }
 tasks.withType(Javadoc).configureEach {
-    failOnError = false
     options.encoding = 'UTF-8'
     options.addStringOption('Xdoclint:none', '-quiet')
-    options.addStringOption('docencoding', 'UTF-8')
-    options.addStringOption('charset', 'UTF-8')
     options.addBooleanOption('notimestamp', true)
 }
 tasks.withType(AbstractArchiveTask).configureEach {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
-    includeEmptyDirs = false
-    exclude '**/desktop.ini', '**/Thumbs.db', '**/.DS_Store'
-}
-// Mapped dependency bytes no longer match their original signatures. Keep the
-// verified downloads intact and strip signatures only from renamed copies.
-tasks.withType(net.minecraftforge.renamer.gradle.RenameJar).configureEach {
-    additionalArgs.addAll('--strip-sigs', 'ALL', '--disable-abstract-param')
 }
 
-def textPatterns = ['cfg', 'css', 'html', 'info', 'java', 'js', 'json', 'lang', 'mcmeta', 'md', 'properties', 'txt', 'xml']
-        .collect { "**/*.${it}".toString() }
-def normalizeText = { details ->
-    details.filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('lf'),
-            eof: FixCrLfFilter.AddAsisRemove.newInstance('asis'))
-}
-
-def developmentOutput = layout.buildDirectory.dir('forge12-development/main')
-def prepareDevelopmentMod = tasks.register('prepareDevelopmentMod', Sync) {
-    group = 'ide'
-    description = 'Merges production classes and processed resources for Forge 1.12 launches.'
-    dependsOn tasks.named('classes')
-    from tasks.named('compileJava', JavaCompile).flatMap { it.destinationDirectory }
-    from sourceSets.main.output.resourcesDir
-    into developmentOutput
+def modClasses = layout.buildDirectory.dir('forge-run-mod-classes/main')
+def stageRunClasses = tasks.register('stageRunClasses', Sync) {
+    from sourceSets.main.output
+    into modClasses
 }
 
 minecraft {
-    mappings channel: project.mappings_channel, version: project.mappings_version
+    mappings channel: 'snapshot', version: '20180921-1.13'
     if (gradle.startParameter.offline) mavenizerArguments.add('--offline')
     runs {
         configureEach {
+            mainClass = 'net.minecraftforge.userdev.LaunchTesting'
             workingDir.convention layout.projectDirectory.dir(
                     providers.gradleProperty('baseMineralsRunDirectory').getOrElse('run'))
-            environment 'MC_VERSION', project.minecraft_version
-            environment 'MOD_CLASSES', developmentOutput.get().asFile.absolutePath
-            systemProperty 'fml.coreMods.load', project.coreplugin
-            systemProperty 'log4j.skipJansi', 'true'
-            systemProperty 'forge.logging.console.level', 'info'
-            systemProperty 'log4j.configurationFile', file('gradle/ide/log4j2.xml').toURI().toString()
-            if (providers.gradleProperty('baseMineralsLaunchProbePhase').isPresent()) {
-                systemProperty 'launch.phase', providers.gradleProperty('baseMineralsLaunchProbePhase').get()
-            }
+            mods { baseminerals { source sourceSets.main } }
+            environment 'target', name == 'client' ? 'fmluserdevclient' : 'fmluserdevserver'
+            environment 'MC_VERSION', '1.13.2'
+            environment 'MCP_VERSION', '20190213.203750'
+            environment 'MCP_MAPPINGS', 'snapshot_20180921-1.13'
+            environment 'FORGE_VERSION', '25.0.223'
+            environment 'FORGE_GROUP', 'net.minecraftforge'
+            def path = modClasses.get().asFile.absolutePath
+            environment 'MOD_CLASSES', "baseminerals%%${path}${File.pathSeparator}baseminerals%%${path}"
         }
         register('client')
-        register('server') { args 'nogui' }
+        register('server') { args '--nogui' }
     }
 }
 
-tasks.matching { it.name in ['runClient', 'runServer'] }.configureEach {
-    dependsOn prepareDevelopmentMod
-    dependsOn 'prepareJava8Launcher'
-    doFirst {
-        Set<File> splitOutputs = sourceSets.main.output.files.collect { it.canonicalFile } as Set<File>
-        classpath = files(developmentOutput, tasks.named('prepareJava8Launcher'), classpath.filter {
-            !splitOutputs.contains(it.canonicalFile) && it.name != 'slime-launcher-0.2.2.jar'
-        })
-        environment 'MC_VERSION', project.minecraft_version
-        environment 'MOD_CLASSES', developmentOutput.get().asFile.absolutePath
-    }
-}
-
-def legacyMirror = file(providers.gradleProperty('legacyDependencyVerificationRepository')
-        .orElse(providers.gradleProperty('legacyDependencyRepository'))
+def mirror = file(providers.gradleProperty('legacyDependencyVerificationRepository')
         .getOrElse('.gradle/legacy-dependencies'))
-def legacyRepository = { String remote -> legacyMirror.isDirectory() ? legacyMirror.toURI() : uri(remote) }
-
 repositories {
     minecraft.mavenizer(it)
     maven fg.forgeMaven
     maven fg.minecraftLibsMaven
-    maven {
-        name = 'VerifiedLegacyMirror'
-        url = legacyMirror.toURI()
-        metadataSources { artifact() }
-    }
     exclusiveContent {
-        forRepository { maven { url = legacyRepository('https://www.cursemaven.com'); metadataSources { artifact() } } }
+        forRepository {
+            maven {
+                url = mirror.isDirectory() ? mirror.toURI() : uri('https://www.cursemaven.com')
+                metadataSources { artifact() }
+            }
+        }
         filter { includeGroup 'curse.maven' }
     }
     exclusiveContent {
-        forRepository { maven { url = legacyRepository('https://chickenbones.net/maven/'); metadataSources { artifact() } } }
-        filter { includeGroup 'codechicken' }
-    }
-    exclusiveContent {
-        forRepository { maven { url = legacyRepository('https://dvs1.progwml6.com/files/maven/'); metadataSources { artifact() } } }
-        filter { includeGroup 'slimeknights'; includeGroup 'slimeknights.mantle'; includeGroup 'mezz.jei' }
-    }
-    exclusiveContent {
-        forRepository { maven { url = legacyRepository('https://maven.ic2.player.to/'); metadataSources { artifact() } } }
-        filter { includeGroup 'net.industrial-craft' }
-    }
-    exclusiveContent {
-        forRepository { maven { url = legacyRepository('https://maven.covers1624.net/'); metadataSources { artifact() } } }
-        filter { includeGroup 'cofh' }
-    }
-    exclusiveContent {
-        forRepository { maven { url = legacyRepository('https://maven.moddev.zone/releases'); metadataSources { artifact() } } }
-        filter { includeModule 'zone.moddev.mc.basemetals', 'BaseMetals'; includeModule 'zone.moddev.mc.orespawn', 'OreSpawn' }
+        forRepository {
+            maven {
+                name = 'PublishedBaseMetals'
+                url = mirror.isDirectory() ? mirror.toURI() : uri('https://maven.moddev.zone/releases')
+                metadataSources { artifact() }
+            }
+        }
+        filter { includeModule('zone.moddev.mc.basemetals', 'BaseMetals') }
     }
     mavenCentral()
 }
 
-apply from: 'gradle/dependencies.gradle'
-renamer.mappings.from minecraft.dependency.toSrgFile
-
-tasks.named('processResources', ProcessResources) {
-    filteringCharset = 'UTF-8'
-    exclude '**/desktop.ini', '**/Thumbs.db', '**/.DS_Store'
-    inputs.property 'version', project.version
-    inputs.property 'mcversion', project.minecraft_version
-    filesMatching('mcmod.info') { expand version: project.version, mcversion: project.minecraft_version }
-    filesMatching('assets/baseminerals/lang/*.lang') { details -> details.name = details.name.toLowerCase(Locale.ROOT) }
-    rename '(.+_at.cfg)', 'META-INF/$1'
-    filesMatching(textPatterns, normalizeText)
+def specs = new JsonSlurper().parse(file('gradle/dependencies.json'))
+configurations {
+    pinnedMods { canBeConsumed = false; transitive = false }
 }
-
+dependencies {
+    implementation minecraft.dependency('net.minecraftforge:forge:1.13.2-25.0.223')
+    specs.each { spec ->
+        pinnedMods spec.coordinate
+        if (spec.runtime) implementation renamer.dependency(spec.coordinate)
+    }
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
+}
+renamer.mappings.from minecraft.dependency.toSrgFile
 tasks.named('jar', Jar) {
     archiveClassifier = 'deobf'
     destinationDirectory = layout.buildDirectory.dir('libs-dev')
-    manifest.attributes(
-            'Implementation-Title': 'BaseMinerals', 'Implementation-Version': project.version,
-            'Maven-Artifact': "${project.group}:BaseMinerals:${project.version}",
-            'Built-On-Java': '8', 'Built-On': "${project.minecraft_version}-${project.forge_version}",
-            'FMLCorePluginContainsFMLMod': 'true', 'FMLCorePlugin': project.coreplugin)
 }
-['sourcesJar', 'javadocJar'].each { name ->
-    tasks.named(name, Jar) {
-        filteringCharset = 'UTF-8'
-        filesMatching(textPatterns, normalizeText)
+def playerJar = renamer.classes(tasks.named('jar', Jar)) {
+    map.from minecraft.dependency.toSrgFile
+    archiveClassifier = null
+    output = layout.buildDirectory.file("libs/BaseMinerals-${project.version}.jar")
+}
+tasks.named('assemble') { dependsOn playerJar }
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'BaseMinerals'
+            artifact(playerJar)
+            artifact(tasks.named('sourcesJar'))
+            artifact(tasks.named('javadocJar'))
+        }
     }
 }
 
-ext.baseMineralsBuild = [developmentOutput: developmentOutput].asImmutable()
+tasks.register('verifyPinnedMods') {
+    group = 'verification'
+    inputs.files(configurations.pinnedMods)
+    doLast {
+        def artifacts = configurations.pinnedMods.resolvedConfiguration.resolvedArtifacts
+        specs.each { spec ->
+            def version = spec.coordinate.split(':')[2]
+            def archive = artifacts.find { it.moduleVersion.id.version == version }.file
+            def hash = MessageDigest.getInstance('SHA-256').digest(archive.bytes).encodeHex().toString()
+            if (!hash.equalsIgnoreCase(spec.sha256)) throw new GradleException("Wrong SHA-256 for ${spec.coordinate}")
+        }
+    }
+}
+tasks.named('compileJava') { dependsOn 'verifyPinnedMods' }
+tasks.named('test') { useJUnitPlatform() }
+
+tasks.register('verifyFluidRegistration', Exec) {
+    group = 'verification'
+    description = 'Checks that fluid registration runs before blocks, outside parallel construction.'
+    commandLine 'node', '--test', 'tools/test_fluid_registration.js'
+}
+tasks.named('check') { dependsOn 'verifyFluidRegistration' }
+['client', 'server'].each { run ->
+    tasks.matching { it.name == 'run' + run.capitalize() }.configureEach {
+        dependsOn stageRunClasses
+        doFirst {
+            File gameDir = minecraft.runs.named(run).get().workingDir.get().asFile
+            File mods = new File(gameDir, 'mods')
+            if (!mods.isDirectory() && !mods.mkdirs()) throw new GradleException("Could not create ${mods}")
+        }
+    }
+}
+tasks.named('eclipse') { dependsOn 'genEclipseRuns', stageRunClasses }
+
+tasks.named('processResources', ProcessResources) {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') { expand(version: project.version) }
+}
+
 apply from: 'gradle/ore-models.gradle'
-apply from: 'gradle/release/artifacts.gradle'
-apply from: 'gradle/release/publishing.gradle'
-apply from: 'gradle/verification/runtime.gradle'
-apply from: 'gradle/ide/eclipse.gradle'
+
+apply from: 'gradle/release-113.gradle'
+
+apply from: 'gradle/normalize-javadoc-trees.gradle'
