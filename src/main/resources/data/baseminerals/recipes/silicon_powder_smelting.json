@@ -4,6 +4,6 @@
     "item": "baseminerals:silicon_powder"
   },
   "result": "baseminerals:silicon_ingot",
-  "experience": 0,
+  "experience": 0.45,
   "cookingtime": 200
 }

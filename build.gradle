@@ -1,4 +1,6 @@
 import groovy.json.JsonSlurper
+import groovy.xml.XmlParser
+import groovy.xml.XmlUtil
 import java.security.MessageDigest
 
 plugins {
@@ -10,7 +12,7 @@ plugins {
 }
 
 group = 'zone.moddev.mc.baseminerals'
-version = '2.5.1.113021'
+version = project.mod_version
 base.archivesName = 'BaseMinerals'
 
 java {
@@ -139,6 +141,28 @@ tasks.register('verifyPinnedMods') {
 tasks.named('compileJava') { dependsOn 'verifyPinnedMods' }
 tasks.named('test') { useJUnitPlatform() }
 
+sourceSets {
+    miningProbe {
+        java.srcDirs = ['tools/validation/legacy113/mining-probe/java']
+        resources.srcDirs = ['tools/validation/legacy113/mining-probe/resources']
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
+}
+def miningProbeJar = tasks.register('miningProbeJar', Jar) {
+    dependsOn tasks.named('miningProbeClasses')
+    from sourceSets.miningProbe.output
+    destinationDirectory = layout.buildDirectory.dir('test-mods')
+    archiveFileName = 'mineral-mining-probe-dev.jar'
+}
+def packagedMiningProbe = renamer.classes(miningProbeJar) {
+    map.from minecraft.dependency.toSrgFile
+    archiveClassifier = null
+    output = layout.buildDirectory.file('test-mods/mineral-mining-probe.jar')
+}
+tasks.register('packagedMiningProbeJar') { dependsOn packagedMiningProbe }
+// Keep the executable test mod out of Eclipse's normal game launches.
+eclipse.classpath.sourceSets = [sourceSets.main, sourceSets.test]
+
 tasks.register('verifyFluidRegistration', Exec) {
     group = 'verification'
     description = 'Checks that fluid registration runs before blocks, outside parallel construction.'
@@ -155,7 +179,50 @@ tasks.named('check') { dependsOn 'verifyFluidRegistration' }
         }
     }
 }
-tasks.named('eclipse') { dependsOn 'genEclipseRuns', stageRunClasses }
+// Eclipse splits bare launcher paths at spaces, unlike Gradle's JavaExec tasks.
+def eclipseLauncherPath = ~/(--(?:cache|metadata|to-srg|to-obf) )("[^"]*"|.+?)(?= (?:--metadata |--to-srg |--to-obf |--(?: |$)))/
+tasks.matching { it.name.startsWith('genEclipseRun') && it.name.endsWith('ForForge') }.configureEach {
+    dependsOn stageRunClasses
+    String launchName = name.replaceFirst('^genEclipseRun', 'run').replaceFirst('ForForge$', '') + '.launch'
+    File launch = layout.projectDirectory.file(launchName).asFile
+    doLast {
+        Node configuration = new XmlParser().parse(launch)
+        Node programArguments = configuration.stringAttribute.find {
+            it.attribute('key') == 'org.eclipse.jdt.launching.PROGRAM_ARGUMENTS'
+        }
+        String arguments = programArguments.attribute('value')
+        String quoted = arguments.replaceAll(eclipseLauncherPath) { match, option, path ->
+            path.startsWith('"') ? match : option + '"' + path + '"'
+        }
+        if (quoted != arguments) {
+            programArguments.attributes().put('value', quoted)
+            launch.setText(XmlUtil.serialize(configuration), 'UTF-8')
+        }
+    }
+}
+eclipse { synchronizationTasks 'genEclipseRuns' }
+
+tasks.register('verifyEclipseLaunchArguments') {
+    group = 'verification'
+    description = 'Checks that generated Eclipse launcher paths stay intact when they contain spaces.'
+    dependsOn 'genEclipseRuns'
+    doLast {
+        ['runClient', 'runServer', 'runTestClient', 'runTestServer'].each { name ->
+            Node launch = new XmlParser().parse(file(name + '.launch'))
+            String arguments = launch.stringAttribute.find {
+                it.attribute('key') == 'org.eclipse.jdt.launching.PROGRAM_ARGUMENTS'
+            }.attribute('value')
+            ['cache', 'metadata', 'to-srg', 'to-obf'].each { flag ->
+                def path = arguments =~ /(?:^| )--${flag} "([^"]+)"/
+                if (!path.find() || !file(path.group(1)).exists()) {
+                    throw new GradleException("${name} needs a quoted, existing --${flag} path")
+                }
+            }
+        }
+    }
+}
+tasks.named('check') { dependsOn 'verifyEclipseLaunchArguments' }
+tasks.named('eclipse') { dependsOn 'verifyEclipseLaunchArguments', stageRunClasses }
 
 tasks.named('processResources', ProcessResources) {
     inputs.property 'version', project.version

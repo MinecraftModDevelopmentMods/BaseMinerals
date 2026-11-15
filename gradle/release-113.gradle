@@ -57,6 +57,7 @@ def audit = { File directory ->
                 String path = entry.name.toLowerCase(Locale.ROOT)
                 if (path.contains('agent-notes') || path.contains('agents.md') || path.contains('.codex')
                         || path.startsWith('tools/') || path.startsWith('reference/') || path.contains('/testmod/')
+                        || path.startsWith('test/') || path.contains('mineralminingprobe')
                         || path.startsWith('com/mcmoddev/lib/') || path.startsWith('zone/moddev/mc/mmdlib/')
                         || path.startsWith('zone/moddev/mc/basemetals/') || path.startsWith('com/mcmoddev/orespawn/')
                         || path.startsWith('net/minecraft/') || path.startsWith('org/junit/')) {

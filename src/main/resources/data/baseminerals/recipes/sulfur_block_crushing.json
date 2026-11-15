@@ -1,0 +1,25 @@
+{
+  "type": "baseminerals:shared_crushing",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "basemetals"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "modernmetals"
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/sulfur"
+  },
+  "result": {
+    "item": "baseminerals:sulfur_powder",
+    "count": 9
+  }
+}

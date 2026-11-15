@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "baseminerals:silicon_smallblend"
+  },
+  "result": "baseminerals:silicon_nugget",
+  "experience": 0.05,
+  "cookingtime": 200
+}
