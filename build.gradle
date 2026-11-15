@@ -122,6 +122,8 @@ tasks.named('processResources', ProcessResources) {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    // Fail on deprecated or removal-marked API, so new uses are replaced rather than kept.
+    options.compilerArgs += ['-Xlint:deprecation,removal', '-Werror']
 }
 
 neoForge.addModdingDependenciesTo(sourceSets.gametest)

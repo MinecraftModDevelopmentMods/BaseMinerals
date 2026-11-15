@@ -16,6 +16,10 @@ version instead (see [releasing](RELEASING.md)). `./gradlew runClient` and
 MMDLib and OreSpawn come from the MMD Maven repository at
 `https://maven.moddev.zone/releases`. Their versions are in `gradle.properties`.
 
+Compilation fails on any use of deprecated or removal-marked API, in the mod
+and its tests alike. Use the replacement the deprecation names; NeoForge's are
+usually extension methods that take the level and position.
+
 ## Where things live
 
 - `src/main/resources/mmdlib/material/` holds one MMDLib material per mineral:

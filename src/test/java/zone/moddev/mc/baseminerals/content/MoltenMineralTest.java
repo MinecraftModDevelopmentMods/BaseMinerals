@@ -28,8 +28,8 @@ import net.neoforged.testframework.junit.EphemeralTestServerProvider;
 import zone.moddev.mc.baseminerals.LegacyIds;
 
 /**
- * Molten lithium and silicon flow and fill buckets as they did on 1.13.2. Burning needs a
- * world, so {@code MoltenMineralGameTests} covers it.
+ * Molten lithium and silicon flow and fill buckets as they did on 1.13.2. Burning and
+ * explosion resistance need a world, so {@code BaseMineralsGameTests} covers them.
  */
 @ExtendWith(EphemeralTestServerProvider.class)
 class MoltenMineralTest {
@@ -43,7 +43,6 @@ class MoltenMineralTest {
             assertSame(flowing, source.getFlowing(), name);
             assertTrue(source.isSource(source.defaultFluidState()), name);
             assertEquals(30, source.getTickDelay(level), name);
-            assertEquals(100.0F, source.defaultFluidState().getExplosionResistance(), name);
             assertFalse(source.getFluidType().canConvertToSource(source.defaultFluidState(), level, BlockPos.ZERO),
                     name);
         }
@@ -70,7 +69,7 @@ class MoltenMineralTest {
             assertSame(fluid(name), liquid.fluid, name);
             BlockState state = liquid.defaultBlockState();
             assertTrue(state.canBeReplaced(), name);
-            assertTrue(state.liquid(), name);
+            assertSame(fluid(name), state.getFluidState().getType(), name);
             // Kept so stacks of the 1.13.2 block item in old inventories survive.
             assertSame(block, ((net.minecraft.world.item.BlockItem) BuiltInRegistries.ITEM.get(LegacyIds.id(name)))
                     .getBlock(), name);
