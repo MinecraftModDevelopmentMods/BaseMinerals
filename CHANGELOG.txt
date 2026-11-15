@@ -1,3 +1,11 @@
+2.5.2.113021 for Minecraft 1.13.2
+
+This fixes the ore drops to match 1.10 to 1.12. Lithium drops one ore block; the other six ores drop 2–4 powders. Fortune increases the maximum, and Silk Touch returns the ore block.
+
+The missing lithium and silicon smelting recipes are back, along with block, ingot and nugget crushing. This also restores the earlier mining hardness, tool requirements, blast resistance, storage-block beacon support, molten-fluid light and smith ingot trades.
+
+Eclipse launches now work when the project path contains spaces.
+
 2.5.1.113021 for Minecraft 1.13.2
 
 - Bring the eight minerals and seven ore deposits across to Forge 25, without MMDLib.

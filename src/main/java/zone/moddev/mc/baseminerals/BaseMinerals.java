@@ -10,6 +10,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import zone.moddev.mc.baseminerals.client.MineralFluidRenderer;
 import zone.moddev.mc.baseminerals.recipe.SharedCrushingSerializer;
+import zone.moddev.mc.baseminerals.trade.MineralTrades;
 import zone.moddev.mc.baseminerals.worldgen.BaseMineralsWorldgenProvider;
 
 @Mod(BaseMinerals.MOD_ID)
@@ -23,7 +24,10 @@ public final class BaseMinerals {
     }
 
     private void setup(FMLCommonSetupEvent event) {
-        DeferredWorkQueue.runLater(() -> RecipeSerializers.register(new SharedCrushingSerializer()));
+        DeferredWorkQueue.runLater(() -> {
+            RecipeSerializers.register(new SharedCrushingSerializer());
+            MineralTrades.register();
+        });
     }
 
     private void enqueueProvider(InterModEnqueueEvent event) {

@@ -14,6 +14,11 @@ Use 3.0.3.113021 or a later compatible 1.13.2 build when installing the two toge
 Base Minerals shares its ore crushing recipes with Base Metals when installed.
 If Base Metals is absent, Modern Metals crackhammers can crush the ores instead.
 
+Mining lithium returns one ore block. Niter, phosphorus, potash, salt,
+saltpeter and sulfur drop 2–4 powders, with Fortune increasing the upper
+limit by its level. Silk Touch returns one ore block. A Crack Hammer gives
+two powders per ore, as on the earlier branches.
+
 ## Upgrading a world
 
 Copy the whole save folder before opening it on 1.13.2, including level.dat

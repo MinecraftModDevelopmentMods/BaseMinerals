@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "baseminerals:lithium_smallpowder"
+  },
+  "result": "baseminerals:lithium_nugget",
+  "experience": 0.05,
+  "cookingtime": 200
+}
