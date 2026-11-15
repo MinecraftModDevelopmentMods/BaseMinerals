@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "basics",
+  "result": {
+    "item": "baseminerals:saltpeter_smallpowder",
+    "count": 9
+  },
+  "ingredients": [
+    {
+      "tag": "forge:dusts/saltpeter"
+    }
+  ]
+}

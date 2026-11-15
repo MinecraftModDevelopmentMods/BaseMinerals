@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/lithium"
+    }
+  ],
+  "result": {
+    "item": "baseminerals:lithium_powder",
+    "count": 9
+  },
+  "group": "basics"
+}

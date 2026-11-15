@@ -1,3 +1,13 @@
+2.5.1.113021 for Minecraft 1.13.2
+
+- Bring the eight minerals and seven ore deposits across to Forge 25, without MMDLib.
+- Convert old metadata to named block states and keep saved mineral blocks, fluids and buckets when upgrading a copied world.
+- Share crushing recipes with Base Metals 3.0.3, or Modern Metals when Base Metals is absent.
+- Keep KiriCattus's ore overlays on the active stone texture and use OreSpawn's native provider.
+- Use OreSpawn 4.1.7 for the latest world generation and saved-profile fixes.
+- Fix missing fluids and startup hangs with other fluid-adding mods during parallel loading.
+- The old material settings screens and Tinkers integration are not available on 1.13.2. Ore generation is configured through OreSpawn.
+
 2.5.1.112021 for 1.12.2
 
 This brings the 1.10 and 1.11 updates across to 1.12.2. Use Forge 14.23.5.2859 with MMDLib 1.0.0 RC3 and OreSpawn 4.1.6.112021. Base Metals is optional. I checked that its hammer works on the ores with Base Metals 2.6.2.112021 installed.

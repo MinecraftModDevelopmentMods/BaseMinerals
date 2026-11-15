@@ -1,19 +1,12 @@
-# Known issues for Minecraft 1.12.2
+# Known limits for Minecraft 1.13.2
 
-## Moving an OreSpawn 1 configuration
+The 1.12 material and molten-form switches in BaseMinerals.cfg and their settings
+screens have not been ported. The 1.13 registries keep the old content available
+for saved blocks and inventories. Use OreSpawn to change ore generation.
+The 1.12 Tinkers' Construct integration does not carry over to Forge 25.
 
-The 1.12.2 importer reads OreSpawn 2 and 3 configuration files. For an OreSpawn
-1 configuration, use OreSpawn 4 on 1.10.2 or 1.11.2 to import it before
-moving the world. Carry the resulting `serverconfig/orespawn-worldgen.json`
-with the save.
+OreSpawn 1 settings need to be imported on a supported older installation before
+moving the world. Carry the resulting saved profile with the world.
 
-[OreSpawn 4.1.6.112021](https://www.curseforge.com/minecraft/mc-mods/mmd-orespawn/files/9527784)
-keeps the saved imported lithium rule. It backs up affected profiles before
-removing an untouched duplicate. If the added rule or its source policy was
-edited, OreSpawn preserves the edits and flags the rule for review.
-
-## MMDLib version in Forge
-
-The [published MMDLib 1.0.0 RC3 jar](https://www.curseforge.com/minecraft/mc-mods/mmdlib/files/9414723)
-reports `1.0.0-rc2` in the Forge Mods list. Base Minerals builds and tests against
-the exact RC3 download and accepts the version reported by its metadata.
+An already-converted world whose numeric registry or original chunks were
+discarded requires the original backup for lossless conversion.

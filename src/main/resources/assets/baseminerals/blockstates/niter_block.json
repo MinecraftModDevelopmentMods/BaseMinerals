@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "baseminerals:niter_block" }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/niter_block"
     }
+  }
 }

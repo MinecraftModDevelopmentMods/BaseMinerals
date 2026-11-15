@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "basics",
+  "result": {
+    "item": "baseminerals:lithium_block"
+  },
+  "key": {
+    "x": {
+      "tag": "forge:dusts/lithium"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ]
+}

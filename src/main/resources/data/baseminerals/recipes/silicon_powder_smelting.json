@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "baseminerals:silicon_powder"
+  },
+  "result": "baseminerals:silicon_ingot",
+  "experience": 0,
+  "cookingtime": 200
+}

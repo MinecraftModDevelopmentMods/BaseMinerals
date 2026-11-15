@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "baseminerals:salt_ore" }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/salt_ore"
     }
+  }
 }

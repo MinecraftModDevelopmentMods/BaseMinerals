@@ -1,9 +1,7 @@
 {
-    "forge_marker": 1,
-    "variants": {
-        "fluid": {
-            "model": "forge:fluid",
-            "custom": { "fluid": "silicon" }
-        }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/silicon_molten"
     }
+  }
 }

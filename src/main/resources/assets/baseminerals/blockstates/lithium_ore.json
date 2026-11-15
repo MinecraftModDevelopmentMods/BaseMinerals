@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "baseminerals:lithium_ore" }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/lithium_ore"
     }
+  }
 }

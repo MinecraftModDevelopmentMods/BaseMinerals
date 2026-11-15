@@ -1,6 +1,6 @@
 import groovy.json.JsonOutput
 
-// Forge 1.12 predates Minecraft's data generator. Generate models during the build.
+// Generate ore overlay models from the supplied textures.
 def assets = layout.projectDirectory.dir('src/main/resources/assets/baseminerals')
 def textures = assets.dir('textures/blocks')
 def solidTextures = fileTree(textures) { include '*_ore.png' }
@@ -47,7 +47,7 @@ def generateOreModels = tasks.register('generateOreModels') {
             if (overlays.contains(name)) {
                 writeModel(name, [
                     parent: 'baseminerals:block/ore_overlay',
-                    textures: [particle: 'minecraft:blocks/stone', base: 'minecraft:blocks/stone',
+                    textures: [particle: 'minecraft:block/stone', base: 'minecraft:block/stone',
                                overlay: "baseminerals:blocks/ore_overlays/${name}"]
                 ])
             } else {

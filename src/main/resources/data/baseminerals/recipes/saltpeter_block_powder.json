@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/saltpeter"
+    }
+  ],
+  "result": {
+    "item": "baseminerals:saltpeter_powder",
+    "count": 9
+  },
+  "group": "basics"
+}

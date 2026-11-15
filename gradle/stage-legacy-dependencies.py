@@ -9,18 +9,9 @@ import urllib.request
 from pathlib import Path
 
 
-LEGACYDEV_VERSION = "0.2.3.1"
-LEGACYDEV_SHA256 = "5A906209C2DC429DCCD9AA4B208100D4E2E07A6B9FA1D8A48D436236F4F02642"
-FORGE_RELEASES = (
-    "https://maven.minecraftforge.net/releases",
-    "https://maven.minecraftforge.net",
-    "https://maven.creeperhost.net",
-)
-
-
-def download(relative, repositories):
+def download(relative, repositories, download_url=None):
     for repository in repositories:
-        url = repository.rstrip("/") + "/" + relative.as_posix()
+        url = download_url or repository.rstrip("/") + "/" + relative.as_posix()
         request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         for attempt in range(3):
             try:
@@ -35,36 +26,6 @@ def download(relative, repositories):
     raise last_error
 
 
-def stage_legacydev(destination, cache):
-    module = Path("net/minecraftforge/legacydev")
-    relative = module / LEGACYDEV_VERSION / f"legacydev-{LEGACYDEV_VERSION}-fatjar.jar"
-    target = destination / relative
-    cached = cache / "caches/minecraftforge/forgegradle/mavenizer/caches/maven/forge" / relative if cache else None
-    if target.is_file():
-        data = target.read_bytes()
-    elif cached and cached.is_file():
-        data = cached.read_bytes()
-    else:
-        data = download(relative, FORGE_RELEASES)
-    if hashlib.sha256(data).hexdigest().upper() != LEGACYDEV_SHA256:
-        raise ValueError(f"Checksum mismatch for LegacyDev {LEGACYDEV_VERSION}")
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(data)
-    target.with_suffix(".jar.sha1").write_text(hashlib.sha1(data).hexdigest(), encoding="ascii")
-    # Mavenizer follows the legacy userdev version range. Offer only the tested build.
-    (destination / module / "maven-metadata.xml").write_text(f"""<metadata>
-  <groupId>net.minecraftforge</groupId>
-  <artifactId>legacydev</artifactId>
-  <versioning>
-    <latest>{LEGACYDEV_VERSION}</latest>
-    <release>{LEGACYDEV_VERSION}</release>
-    <versions><version>{LEGACYDEV_VERSION}</version></versions>
-  </versioning>
-</metadata>
-""", encoding="utf-8")
-    print("legacydev", LEGACYDEV_SHA256, flush=True)
-
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("destination", type=Path)
@@ -72,7 +33,7 @@ def main():
     args = parser.parse_args()
     specs = json.loads(Path(__file__).with_name("dependencies.json").read_text(encoding="utf-8"))
     destination = args.destination.resolve()
-    stage_legacydev(destination, args.cache)
+
 
     for spec in specs:
         group, artifact, version, *classifier = spec["coordinate"].split(":")
@@ -86,7 +47,7 @@ def main():
             if cached:
                 data = cached[0].read_bytes()
             else:
-                data = download(relative, (spec["repository"],))
+                data = download(relative, (spec["repository"],), spec.get("download_url"))
             if hashlib.sha256(data).hexdigest().upper() != spec["sha256"]:
                 raise ValueError(f"Checksum mismatch: {spec['coordinate']}")
             target.write_bytes(data)

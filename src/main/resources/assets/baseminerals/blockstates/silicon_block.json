@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "baseminerals:silicon_block" }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/silicon_block"
     }
+  }
 }

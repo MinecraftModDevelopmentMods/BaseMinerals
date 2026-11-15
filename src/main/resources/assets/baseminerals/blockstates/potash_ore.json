@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "baseminerals:potash_ore" }
+  "variants": {
+    "": {
+      "model": "baseminerals:block/potash_ore"
     }
+  }
 }
