@@ -1,7 +1,7 @@
 {
   "type": "mmdlib:crushing",
   "ingredient": {
-    "item": "baseminerals:potash_ore"
+    "tag": "c:ores/potash"
   },
   "result": {
     "id": "baseminerals:potash_powder",

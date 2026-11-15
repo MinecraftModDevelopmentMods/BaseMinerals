@@ -36,7 +36,7 @@ import zone.moddev.mc.baseminerals.LegacyIds;
 @ExtendWith(EphemeralTestServerProvider.class)
 class ServerDataTest {
     /** The number of recipe files under {@code data/baseminerals/recipe}. */
-    private static final int RECIPE_FILES = 52;
+    private static final int RECIPE_FILES = 64;
 
     @Test
     void everyRecipeLoads(MinecraftServer server) {
@@ -45,20 +45,28 @@ class ServerDataTest {
         assertEquals(RECIPE_FILES, ours, "A Base Minerals recipe failed to load; check the server log");
     }
 
+    /** The crusher recipes 1.12's MMDLib made for every material with a powder. */
     @Test
-    void crackhammersCrushEachOreIntoTwoPowders(MinecraftServer server) {
+    void crushersTurnOresBlocksIngotsAndNuggetsIntoPowder(MinecraftServer server) {
         Map<ResourceLocation, RecipeHolder<?>> recipes = server.getRecipeManager().getRecipes().stream()
                 .collect(Collectors.toMap(RecipeHolder::id, Function.identity()));
         for (String name : LegacyIds.ORES) {
-            RecipeHolder<?> holder = recipes.get(LegacyIds.id(name + "_ore_crushing"));
-            assertNotNull(holder, name);
-            Recipe<?> recipe = holder.value();
-            assertEquals(ResourceLocation.fromNamespaceAndPath("mmdlib", "crushing"),
-                    BuiltInRegistries.RECIPE_TYPE.getKey(recipe.getType()), name);
-            ItemStack result = recipe.getResultItem(server.registryAccess());
-            assertEquals(item(name + "_powder"), result.getItem(), name);
-            assertEquals(2, result.getCount(), name);
-            assertTrue(recipe.getIngredients().get(0).test(new ItemStack(item(name + "_ore"))), name);
+            assertCrushes(server, recipes, name + "_ore_crushing", name + "_ore", name + "_powder", 2);
+        }
+        for (String name : LegacyIds.MINERALS) {
+            assertCrushes(server, recipes, name + "_block_crushing", name + "_block", name + "_powder", 9);
+        }
+        for (String name : LegacyIds.MOLTEN) {
+            assertCrushes(server, recipes, name + "_ingot_crushing", name + "_ingot", name + "_powder", 1);
+            assertCrushes(server, recipes, name + "_nugget_crushing", name + "_nugget", name + "_smallpowder", 1);
+        }
+    }
+
+    @Test
+    void crackhammersMineOresAndBlocksQuickly() {
+        TagKey<Block> crushable = TagKey.create(Registries.BLOCK, ResourceLocation.parse("mmdlib:crackhammer_crushable"));
+        for (ResourceLocation id : LegacyIds.solidBlocks()) {
+            assertTrue(BuiltInRegistries.BLOCK.get(id).defaultBlockState().is(crushable), id::toString);
         }
     }
 
@@ -113,7 +121,7 @@ class ServerDataTest {
     }
 
     @Test
-    void mineralBlocksDropThemselves(MinecraftServer server) {
+    void mineralBlocksAndOresHaveLootTables(MinecraftServer server) {
         for (ResourceLocation id : LegacyIds.solidBlocks()) {
             ResourceKey<LootTable> key = BuiltInRegistries.BLOCK.get(id).getLootTable();
             assertEquals(id.withPrefix("blocks/"), key.location(), id::toString);
@@ -125,6 +133,19 @@ class ServerDataTest {
             Block block = BuiltInRegistries.BLOCK.get(LegacyIds.id(name));
             assertEquals(net.minecraft.world.level.storage.loot.BuiltInLootTables.EMPTY, block.getLootTable(), name);
         }
+    }
+
+    private static void assertCrushes(MinecraftServer server, Map<ResourceLocation, RecipeHolder<?>> recipes,
+            String recipeId, String input, String output, int count) {
+        RecipeHolder<?> holder = recipes.get(LegacyIds.id(recipeId));
+        assertNotNull(holder, recipeId);
+        Recipe<?> recipe = holder.value();
+        assertEquals(ResourceLocation.fromNamespaceAndPath("mmdlib", "crushing"),
+                BuiltInRegistries.RECIPE_TYPE.getKey(recipe.getType()), recipeId);
+        ItemStack result = recipe.getResultItem(server.registryAccess());
+        assertEquals(item(output), result.getItem(), recipeId);
+        assertEquals(count, result.getCount(), recipeId);
+        assertTrue(recipe.getIngredients().get(0).test(new ItemStack(item(input))), recipeId);
     }
 
     private static Item item(String path) {

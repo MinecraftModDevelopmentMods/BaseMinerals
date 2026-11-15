@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:storage_blocks/phosphorus"
+  },
+  "result": {
+    "id": "baseminerals:phosphorus_powder",
+    "count": 9
+  }
+}

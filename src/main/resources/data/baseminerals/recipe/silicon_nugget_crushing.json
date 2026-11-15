@@ -1,0 +1,9 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:nuggets/silicon"
+  },
+  "result": {
+    "id": "baseminerals:silicon_smallpowder"
+  }
+}

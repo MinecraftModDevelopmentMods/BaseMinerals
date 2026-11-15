@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:storage_blocks/potash"
+  },
+  "result": {
+    "id": "baseminerals:potash_powder",
+    "count": 9
+  }
+}

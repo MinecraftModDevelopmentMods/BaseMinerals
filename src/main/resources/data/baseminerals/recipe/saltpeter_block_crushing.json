@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:storage_blocks/saltpeter"
+  },
+  "result": {
+    "id": "baseminerals:saltpeter_powder",
+    "count": 9
+  }
+}

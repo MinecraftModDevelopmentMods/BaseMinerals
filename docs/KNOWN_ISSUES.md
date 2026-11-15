@@ -10,6 +10,7 @@ Worlds from 1.12.2 and earlier must be upgraded on 1.13.2 first; see
 Ore depths are the 1.13.2 ranges, all above Y 4. The deeper 1.18+ caves below
 Y 0 don't hold Base Minerals ores unless an OreSpawn profile changes them.
 
-Ores become powders only through the `mmdlib:crushing` recipes, which need a
-crackhammer or crusher from another MMD mod such as Base Metals. Without one,
-ores can be mined and placed but not processed, as on 1.13.2.
+Lithium ore, and mineral ores taken with Silk Touch, become powders only
+through the `mmdlib:crushing` recipes, which need a crackhammer or crusher from
+another MMD mod such as Base Metals. A crackhammer crushes a mined ore whole,
+without Fortune, so it gives two powders where a pickaxe gives two to four.

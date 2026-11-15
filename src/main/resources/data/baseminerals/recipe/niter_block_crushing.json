@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:storage_blocks/niter"
+  },
+  "result": {
+    "id": "baseminerals:niter_powder",
+    "count": 9
+  }
+}

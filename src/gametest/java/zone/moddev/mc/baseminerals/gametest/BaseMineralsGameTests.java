@@ -5,11 +5,19 @@ import java.util.List;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -29,6 +37,9 @@ public final class BaseMineralsGameTests {
     private static final List<String> MOLTEN = List.of("lithium", "silicon");
     private static final List<String> ORES =
             List.of("lithium", "niter", "phosphorus", "potash", "salt", "saltpeter", "sulfur");
+    /** Ores of 1.12's MINERAL materials, which drop powder; lithium was a metal. */
+    private static final List<String> DUST_ORES =
+            List.of("niter", "phosphorus", "potash", "salt", "saltpeter", "sulfur");
 
     private BaseMineralsGameTests() {}
 
@@ -49,9 +60,12 @@ public final class BaseMineralsGameTests {
         });
     }
 
-    /** Ores drop themselves through their loot tables and give no experience. */
+    /**
+     * Breaking an ore in the world: lithium ore drops itself and needs a crusher, the
+     * other minerals drop their powder. None give experience.
+     */
     @GameTest(template = "empty")
-    public static void oresDropThemselvesWithoutExperience(GameTestHelper helper) {
+    public static void oresDropPowderOrThemselvesWithoutExperience(GameTestHelper helper) {
         for (int i = 0; i < ORES.size(); i++) {
             BlockPos pos = new BlockPos(i, 1, 3);
             helper.setBlock(pos, block(ORES.get(i) + "_ore"));
@@ -60,10 +74,64 @@ public final class BaseMineralsGameTests {
         }
         helper.succeedWhen(() -> {
             for (int i = 0; i < ORES.size(); i++) {
-                helper.assertItemEntityPresent(block(ORES.get(i) + "_ore").asItem(), new BlockPos(i, 1, 3), 1.5);
+                String name = ORES.get(i);
+                Item drop = DUST_ORES.contains(name) ? item(name + "_powder") : block(name + "_ore").asItem();
+                helper.assertItemEntityPresent(drop, new BlockPos(i, 1, 3), 1.5);
             }
             helper.assertEntityNotPresent(EntityType.EXPERIENCE_ORB);
         });
+    }
+
+    /**
+     * Mineral ores drop 2 to 4 powders, one more per Fortune level, as 1.12's mineral
+     * ores did; Silk Touch keeps the ore. Lithium ore always drops itself.
+     */
+    @GameTest(template = "empty")
+    public static void mineralOreDropsFollowFortuneAndSilkTouch(GameTestHelper helper) {
+        ServerLevel level = helper.getLevel();
+        BlockPos pos = helper.absolutePos(new BlockPos(3, 1, 3));
+        ItemStack plain = new ItemStack(Items.DIAMOND_PICKAXE);
+        ItemStack fortune = enchanted(level, Enchantments.FORTUNE, 3);
+        ItemStack silk = enchanted(level, Enchantments.SILK_TOUCH, 1);
+        for (String name : ORES) {
+            BlockState ore = block(name + "_ore").defaultBlockState();
+            Item expected = DUST_ORES.contains(name) ? item(name + "_powder") : ore.getBlock().asItem();
+            int plainMin = Integer.MAX_VALUE;
+            int plainMax = 0;
+            int fortuneMax = 0;
+            for (int roll = 0; roll < 200; roll++) {
+                int count = count(helper, Block.getDrops(ore, level, pos, null, null, plain), expected, name);
+                plainMin = Math.min(plainMin, count);
+                plainMax = Math.max(plainMax, count);
+                fortuneMax = Math.max(fortuneMax,
+                        count(helper, Block.getDrops(ore, level, pos, null, null, fortune), expected, name));
+            }
+            List<ItemStack> silkDrops = Block.getDrops(ore, level, pos, null, null, silk);
+            helper.assertTrue(silkDrops.size() == 1 && silkDrops.get(0).is(ore.getBlock().asItem())
+                    && silkDrops.get(0).getCount() == 1, name + " ore should drop itself with Silk Touch");
+            if (DUST_ORES.contains(name)) {
+                helper.assertTrue(plainMin == 2 && plainMax == 4,
+                        name + " ore dropped " + plainMin + ".." + plainMax + " powder without Fortune");
+                helper.assertTrue(fortuneMax > 4 && fortuneMax <= 7,
+                        name + " ore dropped at most " + fortuneMax + " powder with Fortune III");
+            } else {
+                helper.assertTrue(plainMax == 1 && fortuneMax == 1, name + " ore should drop exactly itself");
+            }
+        }
+        helper.succeed();
+    }
+
+    private static int count(GameTestHelper helper, List<ItemStack> drops, Item expected, String name) {
+        helper.assertTrue(drops.size() == 1 && drops.get(0).is(expected),
+                name + " ore dropped " + drops + ", expected " + expected);
+        return drops.get(0).getCount();
+    }
+
+    private static ItemStack enchanted(ServerLevel level, ResourceKey<Enchantment> key, int enchantmentLevel) {
+        ItemStack stack = new ItemStack(Items.DIAMOND_PICKAXE);
+        stack.enchant(level.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(key),
+                enchantmentLevel);
+        return stack;
     }
 
     /**
@@ -97,6 +165,12 @@ public final class BaseMineralsGameTests {
                     "Molten " + name + " should have blast resistance 100");
         }
         helper.succeed();
+    }
+
+    private static Item item(String path) {
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(BaseMinerals.MOD_ID, path);
+        if (!BuiltInRegistries.ITEM.containsKey(id)) throw new IllegalStateException("Missing item " + id);
+        return BuiltInRegistries.ITEM.get(id);
     }
 
     private static Block block(String path) {

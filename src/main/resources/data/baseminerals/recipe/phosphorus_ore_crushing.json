@@ -1,7 +1,7 @@
 {
   "type": "mmdlib:crushing",
   "ingredient": {
-    "item": "baseminerals:phosphorus_ore"
+    "tag": "c:ores/phosphorus"
   },
   "result": {
     "id": "baseminerals:phosphorus_powder",

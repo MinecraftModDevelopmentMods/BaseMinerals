@@ -1,0 +1,9 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:ingots/lithium"
+  },
+  "result": {
+    "id": "baseminerals:lithium_powder"
+  }
+}

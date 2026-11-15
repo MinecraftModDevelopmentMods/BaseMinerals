@@ -1,0 +1,19 @@
+{
+  "values": [
+    "baseminerals:lithium_ore",
+    "baseminerals:niter_ore",
+    "baseminerals:phosphorus_ore",
+    "baseminerals:potash_ore",
+    "baseminerals:salt_ore",
+    "baseminerals:saltpeter_ore",
+    "baseminerals:sulfur_ore",
+    "baseminerals:lithium_block",
+    "baseminerals:niter_block",
+    "baseminerals:phosphorus_block",
+    "baseminerals:potash_block",
+    "baseminerals:salt_block",
+    "baseminerals:saltpeter_block",
+    "baseminerals:silicon_block",
+    "baseminerals:sulfur_block"
+  ]
+}

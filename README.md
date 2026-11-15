@@ -1,9 +1,10 @@
 # Base Minerals for Minecraft 1.21.1
 
 Base Minerals adds lithium, niter, phosphorus, potash, salt, saltpeter, sulfur
-and silicon. Mine the seven ores, crush them into powders, store them as blocks,
-and smelt silicon into ingots. Saltpeter or potash with sulfur and coal makes
-gunpowder. Lithium and silicon also come as molten fluids in buckets.
+and silicon. Niter, phosphorus, potash, salt, saltpeter and sulfur ores drop 2
+to 4 powders, more with Fortune; lithium ore drops itself and needs crushing.
+Store the powders as blocks, and smelt silicon into ingots. Saltpeter or potash
+with sulfur and coal makes gunpowder. Lithium and silicon also come as molten fluids in buckets.
 
 ## Installation
 
@@ -15,8 +16,9 @@ client and server. Base Minerals needs:
 - [MMD OreSpawn](https://www.curseforge.com/minecraft/mc-mods/mmd-orespawn)
   4.1.1.121012 or a later 4.x release, which places the ores.
 
-Base Metals is optional. Its crackhammers and crushers use the same
-`mmdlib:crushing` recipes, which turn each ore into two powders.
+Base Metals is optional. Its crackhammers and crushers use MMDLib's shared
+`mmdlib:crushing` recipes: each ore gives two powders, a storage block nine,
+and lithium and silicon ingots and nuggets give a powder and a small powder.
 
 ## Upgrading a world
 

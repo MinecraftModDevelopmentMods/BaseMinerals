@@ -1,7 +1,7 @@
 {
   "type": "mmdlib:crushing",
   "ingredient": {
-    "item": "baseminerals:saltpeter_ore"
+    "tag": "c:ores/saltpeter"
   },
   "result": {
     "id": "baseminerals:saltpeter_powder",

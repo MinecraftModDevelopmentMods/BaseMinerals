@@ -6,8 +6,14 @@ Metals is optional.
 
 - The minerals' powders, ingots, nuggets, blends, blocks and ores are now
   MMDLib materials. Every block, item and fluid keeps its 1.13.2 ID.
-- Ore crushing uses `mmdlib:crushing` recipes, shared by every MMD crackhammer
-  and crusher, in place of the recipes routed to Base Metals or Modern Metals.
+- Niter, phosphorus, potash, salt, saltpeter and sulfur ores drop 2 to 4
+  powders again, one more per Fortune level, as on 1.12; Silk Touch keeps the
+  ore. Lithium ore drops itself. Ores give no experience.
+- Crushing uses MMDLib's `mmdlib:crushing` recipes, shared by every MMD
+  crackhammer and crusher, in place of the recipes routed to Base Metals or
+  Modern Metals. As on 1.12, ores crush into 2 powders, storage blocks into 9,
+  and lithium and silicon ingots and nuggets into a powder and a small powder.
+  Crackhammers mine the ores and storage blocks quickly.
 - Molten lithium and silicon are NeoForge fluids. Their buckets show the fluid
   and work with tanks and pipes, and the molten blocks still burn like lava.
 - Tags moved from `forge:` to the common `c:` namespace, with parent tags such

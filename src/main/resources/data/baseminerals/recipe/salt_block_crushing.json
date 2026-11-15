@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:storage_blocks/salt"
+  },
+  "result": {
+    "id": "baseminerals:salt_powder",
+    "count": 9
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:ingots/silicon"
+  },
+  "result": {
+    "id": "baseminerals:silicon_powder"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:nuggets/lithium"
+  },
+  "result": {
+    "id": "baseminerals:lithium_smallpowder"
+  }
+}
