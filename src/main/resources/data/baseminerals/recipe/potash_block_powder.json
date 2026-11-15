@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/potash"
+    }
+  ],
+  "result": {
+    "id": "baseminerals:potash_powder",
+    "count": 9
+  },
+  "group": "basics",
+  "category": "misc"
+}

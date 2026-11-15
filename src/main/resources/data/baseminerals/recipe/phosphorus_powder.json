@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "basics",
+  "result": {
+    "id": "baseminerals:phosphorus_powder"
+  },
+  "key": {
+    "x": {
+      "tag": "c:tiny_dusts/phosphorus"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "category": "misc"
+}

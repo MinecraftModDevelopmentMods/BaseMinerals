@@ -1,169 +1,174 @@
-import groovy.json.JsonSlurper
-import java.security.MessageDigest
-
 plugins {
-    id 'java'
+    id 'java-library'
     id 'eclipse'
+    id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.renamer' version '1.1.5'
-    id 'net.minecraftforge.gradle' version '7.0.34'
+    id 'net.neoforged.moddev' version '2.0.148'
 }
 
-group = 'zone.moddev.mc.baseminerals'
-version = mod_version
-base.archivesName = 'BaseMinerals'
+def env = System.getenv()
+def tag = providers.environmentVariable('TAG')
+version = tag.orElse("${mod_version}-development").get()
+group = mod_group
+
+base {
+    archivesName = mod_archive_name
+}
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(8)
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
     withSourcesJar()
     withJavadocJar()
 }
+
+sourceSets {
+    // In-world game tests, kept out of the published jar.
+    gametest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+configurations {
+    gametestImplementation.extendsFrom implementation
+}
+
+neoForge {
+    version = neoforge_version
+
+    parchment {
+        minecraftVersion = parchment_minecraft_version
+        mappingsVersion = parchment_mappings_version
+    }
+
+    runs {
+        configureEach {
+            gameDirectory = file('run')
+        }
+        client {
+            client()
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+        // Runs every Base Minerals game test in a fresh world, then exits; check runs it.
+        gameTestServer {
+            type = 'gameTestServer'
+            sourceSet = sourceSets.gametest
+            gameDirectory = layout.buildDirectory.dir('gametest').get().asFile
+            systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.gametest
+        }
+    }
+
+    // JUnit tests run with the game, MMDLib, OreSpawn and Base Minerals loaded.
+    unitTest {
+        enable()
+        testedMod = mods."${mod_id}"
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'ModDevZone'
+        url = uri('https://maven.moddev.zone/releases')
+        content {
+            includeGroup 'zone.moddev.mc.lib'
+            includeGroup 'zone.moddev.mc.orespawn'
+        }
+    }
+}
+
+dependencies {
+    implementation "zone.moddev.mc.lib:mmdlib:${mmdlib_version}"
+    implementation "zone.moddev.mc.orespawn:OreSpawn:${orespawn_version}"
+
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation "net.neoforged:testframework:${neoforge_version}"
+}
+
+tasks.named('processResources', ProcessResources) {
+    def properties = [
+            minecraft_version_range: minecraft_version_range,
+            neoforge_version_range: neoforge_version_range,
+            loader_version_range: loader_version_range,
+            mmdlib_version_range: mmdlib_version_range,
+            orespawn_version_range: orespawn_version_range,
+            mod_id: mod_id,
+            mod_name: mod_name,
+            mod_license: mod_license,
+            mod_version: project.version,
+            mod_authors: mod_authors,
+            mod_description: mod_description,
+            curseforge_url: "https://www.curseforge.com/minecraft/mc-mods/base-minerals",
+            issue_url: issue_url,
+            update_url: update_url
+    ]
+    inputs.properties properties
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand properties
+    }
+}
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
-tasks.withType(Javadoc).configureEach {
-    options.encoding = 'UTF-8'
-    options.addStringOption('Xdoclint:none', '-quiet')
-    options.addBooleanOption('notimestamp', true)
-}
-tasks.withType(AbstractArchiveTask).configureEach {
-    preserveFileTimestamps = false
-    reproducibleFileOrder = true
+
+neoForge.addModdingDependenciesTo(sourceSets.gametest)
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
 }
 
-def modClasses = layout.buildDirectory.dir('forge-run-mod-classes/main')
-def stageRunClasses = tasks.register('stageRunClasses', Sync) {
-    from sourceSets.main.output
-    into modClasses
+tasks.named('check') {
+    dependsOn 'runGameTestServer'
 }
 
-minecraft {
-    mappings channel: 'snapshot', version: '20180921-1.13'
-    if (gradle.startParameter.offline) mavenizerArguments.add('--offline')
-    runs {
-        configureEach {
-            mainClass = 'net.minecraftforge.userdev.LaunchTesting'
-            workingDir.convention layout.projectDirectory.dir(
-                    providers.gradleProperty('baseMineralsRunDirectory').getOrElse('run'))
-            mods { baseminerals { source sourceSets.main } }
-            environment 'target', name == 'client' ? 'fmluserdevclient' : 'fmluserdevserver'
-            environment 'MC_VERSION', '1.13.2'
-            environment 'MCP_VERSION', '20190213.203750'
-            environment 'MCP_MAPPINGS', 'snapshot_20180921-1.13'
-            environment 'FORGE_VERSION', '25.0.223'
-            environment 'FORGE_GROUP', 'net.minecraftforge'
-            def path = modClasses.get().asFile.absolutePath
-            environment 'MOD_CLASSES', "baseminerals%%${path}${File.pathSeparator}baseminerals%%${path}"
-        }
-        register('client')
-        register('server') { args '--nogui' }
-    }
-}
-
-def mirror = file(providers.gradleProperty('legacyDependencyVerificationRepository')
-        .getOrElse('.gradle/legacy-dependencies'))
-repositories {
-    minecraft.mavenizer(it)
-    maven fg.forgeMaven
-    maven fg.minecraftLibsMaven
-    exclusiveContent {
-        forRepository {
-            maven {
-                url = mirror.isDirectory() ? mirror.toURI() : uri('https://www.cursemaven.com')
-                metadataSources { artifact() }
-            }
-        }
-        filter { includeGroup 'curse.maven' }
-    }
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = 'PublishedBaseMetals'
-                url = mirror.isDirectory() ? mirror.toURI() : uri('https://maven.moddev.zone/releases')
-                metadataSources { artifact() }
-            }
-        }
-        filter { includeModule('zone.moddev.mc.basemetals', 'BaseMetals') }
-    }
-    mavenCentral()
-}
-
-def specs = new JsonSlurper().parse(file('gradle/dependencies.json'))
-configurations {
-    pinnedMods { canBeConsumed = false; transitive = false }
-}
-dependencies {
-    implementation minecraft.dependency('net.minecraftforge:forge:1.13.2-25.0.223')
-    specs.each { spec ->
-        pinnedMods spec.coordinate
-        if (spec.runtime) implementation renamer.dependency(spec.coordinate)
-    }
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
-}
-renamer.mappings.from minecraft.dependency.toSrgFile
 tasks.named('jar', Jar) {
-    archiveClassifier = 'deobf'
-    destinationDirectory = layout.buildDirectory.dir('libs-dev')
-}
-def playerJar = renamer.classes(tasks.named('jar', Jar)) {
-    map.from minecraft.dependency.toSrgFile
-    archiveClassifier = null
-    output = layout.buildDirectory.file("libs/BaseMinerals-${project.version}.jar")
-}
-tasks.named('assemble') { dependsOn playerJar }
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'BaseMinerals'
-            artifact(playerJar)
-            artifact(tasks.named('sourcesJar'))
-            artifact(tasks.named('javadocJar'))
-        }
-    }
-}
-
-tasks.register('verifyPinnedMods') {
-    group = 'verification'
-    inputs.files(configurations.pinnedMods)
-    doLast {
-        def artifacts = configurations.pinnedMods.resolvedConfiguration.resolvedArtifacts
-        specs.each { spec ->
-            def version = spec.coordinate.split(':')[2]
-            def archive = artifacts.find { it.moduleVersion.id.version == version }.file
-            def hash = MessageDigest.getInstance('SHA-256').digest(archive.bytes).encodeHex().toString()
-            if (!hash.equalsIgnoreCase(spec.sha256)) throw new GradleException("Wrong SHA-256 for ${spec.coordinate}")
-        }
-    }
-}
-tasks.named('compileJava') { dependsOn 'verifyPinnedMods' }
-tasks.named('test') { useJUnitPlatform() }
-
-tasks.register('verifyFluidRegistration', Exec) {
-    group = 'verification'
-    description = 'Checks that fluid registration runs before blocks, outside parallel construction.'
-    commandLine 'node', '--test', 'tools/test_fluid_registration.js'
-}
-tasks.named('check') { dependsOn 'verifyFluidRegistration' }
-['client', 'server'].each { run ->
-    tasks.matching { it.name == 'run' + run.capitalize() }.configureEach {
-        dependsOn stageRunClasses
-        doFirst {
-            File gameDir = minecraft.runs.named(run).get().workingDir.get().asFile
-            File mods = new File(gameDir, 'mods')
-            if (!mods.isDirectory() && !mods.mkdirs()) throw new GradleException("Could not create ${mods}")
-        }
-    }
-}
-tasks.named('eclipse') { dependsOn 'genEclipseRuns', stageRunClasses }
-
-tasks.named('processResources', ProcessResources) {
-    inputs.property 'version', project.version
-    filesMatching('META-INF/mods.toml') { expand(version: project.version) }
+    from('LICENSE', 'LICENSE-ART.txt', 'LICENSE-TiC.txt')
 }
 
 apply from: 'gradle/ore-models.gradle'
 
-apply from: 'gradle/release-113.gradle'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = mod_archive_name
+            from components.java
+        }
+    }
+    repositories {
+        if (env.MAVEN_UPLOAD_URL) {
+            maven {
+                url = uri(env.MAVEN_UPLOAD_URL)
+                credentials {
+                    username = env.MAVEN_UPLOAD_USERNAME
+                    password = env.MAVEN_UPLOAD_PASSWORD
+                }
+            }
+        }
+    }
+}
 
-apply from: 'gradle/normalize-javadoc-trees.gradle'
+idea {
+    module {
+        downloadSources = true
+    }
+}
+
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}

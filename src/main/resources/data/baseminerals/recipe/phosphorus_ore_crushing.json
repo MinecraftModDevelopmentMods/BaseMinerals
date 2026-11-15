@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "item": "baseminerals:phosphorus_ore"
+  },
+  "result": {
+    "id": "baseminerals:phosphorus_powder",
+    "count": 2
+  }
+}

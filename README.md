@@ -1,31 +1,29 @@
-# Base Minerals
+# Base Minerals for Minecraft 1.21.1
 
 Base Minerals adds lithium, niter, phosphorus, potash, salt, saltpeter, sulfur
-and silicon. The seven ores use KiriCattus's overlays. OreSpawn handles
-placement, including the saved rules and shared ore sources.
+and silicon. Mine the seven ores, crush them into powders, store them as blocks,
+and smelt silicon into ingots. Saltpeter or potash with sulfur and coal makes
+gunpowder. Lithium and silicon also come as molten fluids in buckets.
 
-This branch targets Minecraft 1.13.2 and Forge 25.0.223. Install
-[OreSpawn 4.1.7.113021](https://www.curseforge.com/minecraft/mc-mods/mmd-orespawn/files/9611746).
-[Base Metals 3.0.3.113021](https://github.com/MinecraftModDevelopmentMods/BaseMetals/releases/tag/3.0.3.113021)
-is optional in new worlds and supplies the Crack Hammer. Keep Base Metals
-installed when upgrading a world that already contains its blocks or items.
-Use 3.0.3.113021 or a later compatible 1.13.2 build when installing the two together.
+## Installation
 
-Base Minerals shares its ore crushing recipes with Base Metals when installed.
-If Base Metals is absent, Modern Metals crackhammers can crush the ores instead.
+Use Java 21 and NeoForge **21.1.265 or later for Minecraft 1.21.1** on both
+client and server. Base Minerals needs:
+
+- [MMDLib](https://www.curseforge.com/minecraft/mc-mods/mmdlib) 2.0.2 or later.
+  The minerals, their items and blocks are MMDLib materials.
+- [MMD OreSpawn](https://www.curseforge.com/minecraft/mc-mods/mmd-orespawn)
+  4.1.1.121012 or a later 4.x release, which places the ores.
+
+Base Metals is optional. Its crackhammers and crushers use the same
+`mmdlib:crushing` recipes, which turn each ore into two powders.
 
 ## Upgrading a world
 
-Copy the whole save folder before opening it on 1.13.2, including level.dat
-and serverconfig. Start the copy with Forge, Base Minerals, OreSpawn and the
-1.13.2 versions of any other mods whose content it uses. Check existing blocks
-and inventories, save, then reopen the copy.
-
-Base Minerals reads the old Forge registry from the world and saves the
-mineral ID mapping alongside it. Keep baseminerals-legacy-registry.dat with the
-save because previously unloaded chunks may still use the old numeric IDs.
-Placed molten lithium and silicon keep their fluid level. The old Forge filled
-buckets become the matching named buckets.
+Copy the world before you open it. Worlds from Base Minerals 2.5.1 for 1.13.2
+upgrade directly: block, item and fluid names are unchanged. Worlds from 1.12.2
+or earlier must first be upgraded with Base Minerals 2.5.1.113021 on 1.13.2.
+[World upgrade details](docs/WORLD_UPGRADES.md)
 
 See [building](docs/BUILDING.md), [ore generation](docs/ORE_GENERATION.md),
-[upgrade checks](docs/WORLD_UPGRADES.md) and [known limits](docs/KNOWN_ISSUES.md).
+[releasing](docs/RELEASING.md) and [known limits](docs/KNOWN_ISSUES.md).

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    [
+      {
+        "tag": "c:dusts/coal"
+      },
+      {
+        "item": "minecraft:coal"
+      }
+    ],
+    {
+      "tag": "c:dusts/sulfur"
+    },
+    {
+      "tag": "c:dusts/potash"
+    }
+  ],
+  "result": {
+    "id": "minecraft:gunpowder",
+    "count": 3
+  },
+  "group": "baseminerals_extra",
+  "category": "misc"
+}

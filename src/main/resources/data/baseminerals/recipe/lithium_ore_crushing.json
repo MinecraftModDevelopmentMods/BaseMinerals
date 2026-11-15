@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "item": "baseminerals:lithium_ore"
+  },
+  "result": {
+    "id": "baseminerals:lithium_powder",
+    "count": 2
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "item": "baseminerals:salt_ore"
+  },
+  "result": {
+    "id": "baseminerals:salt_powder",
+    "count": 2
+  }
+}

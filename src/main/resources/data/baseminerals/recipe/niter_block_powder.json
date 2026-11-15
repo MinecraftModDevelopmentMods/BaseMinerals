@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/niter"
+    }
+  ],
+  "result": {
+    "id": "baseminerals:niter_powder",
+    "count": 9
+  },
+  "group": "basics",
+  "category": "misc"
+}

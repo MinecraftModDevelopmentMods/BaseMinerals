@@ -8,6 +8,7 @@ rocks, terrain, biomes, strata or fluid deposits, and needs no Mineralogy.
 
 Ranges are inclusive. Frequency is expected attempts per chunk. Quantity is a
 requested block budget, so veins can yield less when hosts are unavailable.
+The ranges are unchanged from 1.13.2, so no mineral generates below Y 4.
 
 | Mineral | Y | Attempts/chunk | Quantity | Shape |
 | --- | --- | ---: | --- | --- |
@@ -47,18 +48,11 @@ OreSpawn's reviewed source policies can share one placement budget across
 equivalent outputs. Sulfur priority is Mineralogy, Base Minerals, then Base
 Electric. Lithium priority is Base Minerals then Base Electric. Only actual
 loaded/managed sources qualify for automatic consolidation. An external generator
-does not become controllable merely through an Ore Dictionary alias.
+does not become controllable merely through a shared tag.
 An existing profile choice remains authoritative even after sources become
 manageable. Review the resulting source groups in OreSpawn before changing them.
 
 Native global overrides use `config/baseminerals-orespawn.json`. Existing world
-profiles and native overrides take precedence over legacy imports. Saved OS1
-rules carried forward from 1.10.2 or 1.11.2 and imported OS3 rules keep their
-custom settings and disabled flags. The explicit Overworld rule overrides the ordinary-dimension fallback,
-so each chunk receives a single placement budget. Existing
-ore entries are kept as whole entries, including older selector-only rules. Missing entries follow OreSpawn's normal provider merge behavior.
-Retrogen stays disabled. Keep legacy files until
-the importer report and resulting settings have been reviewed.
-OreSpawn 4.1.6 preserves the imported lithium rule when only the saved world
-is moved. It backs up profiles before removing an untouched duplicate and
-flags edited duplicates for review. See [known issues](KNOWN_ISSUES.md).
+profiles and native overrides take precedence over these defaults. The explicit
+Overworld rule overrides the ordinary-dimension fallback, so each chunk receives
+a single placement budget. Retrogen stays disabled.

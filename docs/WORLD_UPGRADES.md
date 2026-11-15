@@ -1,27 +1,31 @@
-# Base Minerals 1.13.2 upgrade checks
+# Upgrading Base Minerals worlds to 1.21.1
 
-The older saves store a Forge registry snapshot alongside their numeric chunks.
-Two saves may assign different numbers to the same mineral block. The upgrade
-uses the registry in the save being opened, supplies named states only during
-that chunk's flattening pass, and keeps the mapping for later reloads.
-Ordinary mineral blocks have one state. The two molten blocks map the old
-metadata nibble to the named level property. Existing item names carry forward,
-and Forge's old universal buckets become named lithium and silicon buckets.
+1. Close Minecraft or stop the server. Copy the whole world directory before
+   upgrading, and keep the copy until you're happy with the result.
+2. Install Base Minerals 4.0.0, MMDLib 2.0.2 or later and MMD OreSpawn 4.1.1 or
+   later on NeoForge for 1.21.1, plus 1.21.1 versions of the other mods that
+   placed blocks or items in the world.
+3. Open the world. Use Optimize World or the server's `--forceUpgrade`
+   option to convert every region at once; otherwise chunks convert as you
+   visit them.
 
-The packaged test runner copies the source world and fingerprints every file.
-It checks every original chunk after conversion and reload. It compares exact
-mineral coordinates and states, chest inventory slots, stack sizes, custom
-names, unrelated NBT tags and the saved OreSpawn mineral rules. A test chest
-and placed blocks extend coverage to every item and block in the source
-registry. The fixture also covers all 16 fluid levels for each registered
-molten block. Each original chunk must use the flattened 1.13.2 format.
+## From 1.13.2
 
-    python tools/validation/legacy113/verify_upgrade.py --java <java8> --runtime <forge-server-template> --source <old-world> --output <new-run-directory> --mods <baseminerals.jar> <orespawn.jar> [basemetals.jar]
+Base Minerals 2.5.1.113021 worlds upgrade directly. Every block, item and
+fluid keeps its ID, and Minecraft converts their states and item stacks.
 
-The default probe chunk is (64, 64). Supply --probe-chunk X Z to use a different
-generated chunk outside the spawn area. Add --natural-open to check a normal
-first open before converting the remaining chunks. Use verify_generation.py
-with the same Java, template, output and mod arguments to census new ores.
+- Placed molten lithium and silicon keep their level. The molten block items
+  that 1.13.2 registered still exist, outside the creative tab, so stacks of
+  them in inventories survive.
+- The OreSpawn rules keep their `baseminerals:legacy/<mineral>_ore` IDs.
+- Tags moved from `forge:` to `c:`, so a data pack or script that names
+  `forge:dusts/sulfur` should now name `c:dusts/sulfur`.
+- `baseminerals-legacy-registry.dat`, written by the 1.13.2 upgrade, is no
+  longer read and can be deleted once the world has been upgraded.
 
-Keep the original world and its mod set together. Forge and any companion mods
-own conversion of their own blocks, items and saved data.
+## From 1.12.2 and earlier
+
+Upgrade the world on 1.13.2 with Base Minerals 2.5.1.113021 first. That
+version reads the old Forge registry and keeps the minerals through Minecraft's
+1.13 flattening, including molten fluid levels and Forge's old filled buckets;
+1.21.1 cannot do this. Then follow the 1.13.2 steps above.

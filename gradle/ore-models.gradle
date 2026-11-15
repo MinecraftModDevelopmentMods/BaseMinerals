@@ -2,14 +2,10 @@ import groovy.json.JsonOutput
 
 // Generate ore overlay models from the supplied textures.
 def assets = layout.projectDirectory.dir('src/main/resources/assets/baseminerals')
-def textures = assets.dir('textures/blocks')
+def textures = assets.dir('textures/block')
 def solidTextures = fileTree(textures) { include '*_ore.png' }
 def overlayTextures = fileTree(textures.dir('ore_overlays')) { include '*_ore.png' }
-def oreStates = fileTree(assets.dir('blockstates')) {
-    include '*_ore.json'
-    // Historical placeholders with no registered ore blocks.
-    exclude 'charcoal_ore.json', 'silicon_ore.json'
-}
+def oreStates = fileTree(assets.dir('blockstates')) { include '*_ore.json' }
 def generated = layout.buildDirectory.dir('generated/ore-models')
 
 def generateOreModels = tasks.register('generateOreModels') {
@@ -41,6 +37,7 @@ def generateOreModels = tasks.register('generateOreModels') {
         }
         writeModel('ore_overlay', [
             parent: 'minecraft:block/block',
+            render_type: 'minecraft:cutout_mipped',
             elements: [cube(0, 16, '#base'), cube(-0.05, 16.05, '#overlay')]
         ])
         names.each { name ->
@@ -48,12 +45,12 @@ def generateOreModels = tasks.register('generateOreModels') {
                 writeModel(name, [
                     parent: 'baseminerals:block/ore_overlay',
                     textures: [particle: 'minecraft:block/stone', base: 'minecraft:block/stone',
-                               overlay: "baseminerals:blocks/ore_overlays/${name}"]
+                               overlay: "baseminerals:block/ore_overlays/${name}"]
                 ])
             } else {
                 writeModel(name, [
-                    parent: 'block/cube_all',
-                    textures: [all: "baseminerals:blocks/${name}"]
+                    parent: 'minecraft:block/cube_all',
+                    textures: [all: "baseminerals:block/${name}"]
                 ])
             }
         }

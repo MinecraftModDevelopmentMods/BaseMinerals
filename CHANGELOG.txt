@@ -1,3 +1,20 @@
+4.0.0.121012 for Minecraft 1.21.1
+
+All eight minerals come across to NeoForge 1.21.1. Use Java 21, NeoForge
+21.1.265 or later, MMDLib 2.0.2 or later and MMD OreSpawn 4.1.1 or later. Base
+Metals is optional.
+
+- The minerals' powders, ingots, nuggets, blends, blocks and ores are now
+  MMDLib materials. Every block, item and fluid keeps its 1.13.2 ID.
+- Ore crushing uses `mmdlib:crushing` recipes, shared by every MMD crackhammer
+  and crusher, in place of the recipes routed to Base Metals or Modern Metals.
+- Molten lithium and silicon are NeoForge fluids. Their buckets show the fluid
+  and work with tanks and pipes, and the molten blocks still burn like lava.
+- Tags moved from `forge:` to the common `c:` namespace, with parent tags such
+  as `c:ores` and `c:dusts`. Blocks are tagged for pickaxes and stone tools.
+- 1.13.2 worlds upgrade directly. Upgrade 1.12.2 worlds on 1.13.2 first.
+- The build now follows the MMD mod template.
+
 2.5.1.113021 for Minecraft 1.13.2
 
 - Bring the eight minerals and seven ore deposits across to Forge 25, without MMDLib.

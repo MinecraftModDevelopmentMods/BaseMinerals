@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
-    "textures": {
-        "layer0": "baseminerals:items/lithium_powder"
-    }
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "baseminerals:item/lithium_powder"
+  }
 }

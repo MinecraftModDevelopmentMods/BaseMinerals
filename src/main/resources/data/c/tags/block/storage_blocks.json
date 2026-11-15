@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#c:storage_blocks/lithium",
+    "#c:storage_blocks/niter",
+    "#c:storage_blocks/phosphorus",
+    "#c:storage_blocks/potash",
+    "#c:storage_blocks/salt",
+    "#c:storage_blocks/saltpeter",
+    "#c:storage_blocks/silicon",
+    "#c:storage_blocks/sulfur"
+  ]
+}

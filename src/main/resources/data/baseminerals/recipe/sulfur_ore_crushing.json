@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "item": "baseminerals:sulfur_ore"
+  },
+  "result": {
+    "id": "baseminerals:sulfur_powder",
+    "count": 2
+  }
+}

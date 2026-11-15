@@ -40,5 +40,7 @@
   "block.baseminerals.lithium": "Molten Lithium",
   "item.baseminerals.lithium_bucket": "Molten Lithium Bucket",
   "item.baseminerals.silicon_bucket": "Molten Silicon Bucket",
-  "itemGroup.baseminerals": "Base Minerals"
+  "itemGroup.baseminerals.materials": "Base Minerals",
+  "fluid_type.baseminerals.lithium": "Molten Lithium",
+  "fluid_type.baseminerals.silicon": "Molten Silicon"
 }

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "basics",
+  "result": {
+    "id": "baseminerals:silicon_nugget",
+    "count": 9
+  },
+  "ingredients": [
+    {
+      "tag": "c:ingots/silicon"
+    }
+  ],
+  "category": "misc"
+}

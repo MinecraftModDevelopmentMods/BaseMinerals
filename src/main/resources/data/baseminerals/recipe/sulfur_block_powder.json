@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/sulfur"
+    }
+  ],
+  "result": {
+    "id": "baseminerals:sulfur_powder",
+    "count": 9
+  },
+  "group": "basics",
+  "category": "misc"
+}

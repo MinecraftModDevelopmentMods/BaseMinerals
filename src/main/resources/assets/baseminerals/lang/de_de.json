@@ -36,5 +36,6 @@
   "block.baseminerals.sulfur_ore": "Schwefelerz",
   "item.baseminerals.sulfur_powder": "Schwefelpulver",
   "item.baseminerals.sulfur_smallpowder": "Kleiner Schwefelpulverhaufen",
-  "block.baseminerals.lithium": "Geschmolzenes Siliziumconfig.baseminerals.fluid_lithium=Flüssiges Lithium"
+  "block.baseminerals.lithium": "Geschmolzenes Siliziumconfig.baseminerals.fluid_lithium=Flüssiges Lithium",
+  "fluid_type.baseminerals.lithium": "Geschmolzenes Siliziumconfig.baseminerals.fluid_lithium=Flüssiges Lithium"
 }

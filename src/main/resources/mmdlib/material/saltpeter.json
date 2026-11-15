@@ -1,0 +1,23 @@
+{
+  "type": "mineral",
+  "color": -1,
+  "hardness": 3,
+  "strength": 0,
+  "magic": 0,
+  "items": "baseminerals:powder smallpowder",
+  "blocks": "block ore",
+  "entities": "",
+  "has_fluid": false,
+  "special": {
+    "blast_resistance": 5
+  },
+  "runtime": {
+    "block_sound": "stone",
+    "map_color": "stone",
+    "tinted": false
+  },
+  "harvest_tags": [
+    "minecraft:mineable/pickaxe",
+    "minecraft:needs_stone_tool"
+  ]
+}

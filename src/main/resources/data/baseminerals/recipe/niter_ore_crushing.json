@@ -1,0 +1,10 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "item": "baseminerals:niter_ore"
+  },
+  "result": {
+    "id": "baseminerals:niter_powder",
+    "count": 2
+  }
+}

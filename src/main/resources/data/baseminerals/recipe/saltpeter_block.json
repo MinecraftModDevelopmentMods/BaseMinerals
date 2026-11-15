@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "basics",
+  "result": {
+    "id": "baseminerals:saltpeter_block"
+  },
+  "key": {
+    "x": {
+      "tag": "c:dusts/saltpeter"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "category": "misc"
+}

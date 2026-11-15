@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    [
+      {
+        "tag": "c:dusts/charcoal"
+      },
+      {
+        "item": "minecraft:charcoal"
+      }
+    ],
+    {
+      "tag": "minecraft:sand"
+    }
+  ],
+  "result": {
+    "id": "baseminerals:silicon_blend"
+  },
+  "group": "baseminerals_extra",
+  "category": "misc"
+}

@@ -1,26 +1,48 @@
-# Building Base Minerals 1.13.2
+# Building Base Minerals for Minecraft 1.21.1
 
-Use Java 17 for Gradle, Java 25 for Forge's Mavenizer, and Java 8 for compilation
-and Minecraft. The wrapper is Gradle 9.6.1 with ForgeGradle 7.0.34, Renamer 1.1.5,
-Forge 25.0.223 and MCP snapshot 20180921-1.13.
+The build follows the MMD mod template: Gradle 9.8 with NeoForge's
+ModDevGradle, Java 21 and Parchment mappings. Gradle downloads Java 21 itself
+if it isn't installed.
 
-Select one Gradle cache for Eclipse and the terminal. Stage the checksum-pinned
-public OreSpawn and Base Metals jars, then build with Java 17 as JAVA_HOME.
-Base Metals is pinned to the published MMD Maven release 3.0.3.113021 and
-checked by SHA-256. It remains optional when playing.
+```sh
+./gradlew build
+```
 
-    python gradle/stage-legacy-dependencies.py <mirror>
-    .\gradlew.bat check build genEclipseRuns eclipse "-PlegacyDependencyVerificationRepository=<mirror>"
+On Windows, use `gradlew.bat`. The game jar is
+`build/libs/BaseMinerals-4.0.0.121012-development.jar`; a release tag sets the
+version instead (see [releasing](RELEASING.md)). `./gradlew runClient` and
+`./gradlew runServer` start the game from `run/`.
 
-On a configured machine, add --offline to rebuild from the same cache.
-The reobfuscated player jar is build/libs/BaseMinerals-4.0.0.113021.jar.
-Development output lives under build/libs-dev. Sources and Javadocs are separate.
+MMDLib and OreSpawn come from the MMD Maven repository at
+`https://maven.moddev.zone/releases`. Their versions are in `gradle.properties`.
 
-Import the inner checkout as an Eclipse Gradle project. The generated client
-and server launch files use the Java 8 game toolchain and staged mod output.
-For a terminal launch, use runClient or runServer. Use the published Base Metals
-jar with the packaged Forge profile when checking Crack Hammer integration.
+## Where things live
 
-The test runners in tools/validation/legacy113 use an independently installed
-Forge server template. Install requirements.txt from that directory for the
-Anvil and NBT checks.
+- `src/main/resources/mmdlib/material/` holds one MMDLib material per mineral:
+  its forms, hardness, mining tier and block sound. MMDLib registers the
+  powders, ingots, nuggets, blends, storage blocks and ores from these files.
+- `src/main/resources/mmdlib/item/` adds Base Minerals' own forms:
+  `baseminerals:powder`, which keeps the `<mineral>_powder` IDs, and
+  `baseminerals:bucket`, which fills the molten fluids.
+- Molten lithium and silicon are registered in `content/ModContent.java`, so
+  their fluid and block IDs match older saves.
+- `src/main/resources/assets/` holds the textures, models and language files.
+  Ore models are generated at build time by `gradle/ore-models.gradle` from the
+  overlay textures in `textures/block/ore_overlays/`.
+- `src/main/resources/data/` holds the recipes, loot tables and tags.
+
+## Tests
+
+`./gradlew check` runs both suites:
+
+- `src/test/` holds JUnit tests that run with the game, MMDLib, OreSpawn and
+  Base Minerals loaded. They check that every 1.13.2 block, item and fluid ID is
+  still registered, that the recipes, tags and loot tables load in a server,
+  the OreSpawn declarations, the molten fluids and buckets, and that every
+  block and item has its models, textures and English name.
+- `src/gametest/` holds game tests, run by `./gradlew runGameTestServer` in a
+  fresh world: molten minerals set entities on fire, and ores drop themselves
+  without experience. The source set is not part of the published jar.
+
+Use a fresh test world when checking the OreSpawn defaults. See
+[ore generation](ORE_GENERATION.md) for the placement rules and overrides.

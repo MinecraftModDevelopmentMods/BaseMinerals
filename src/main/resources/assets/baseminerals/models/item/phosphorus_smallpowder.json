@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
-    "textures": {
-        "layer0": "baseminerals:items/phosphorus_smallpowder"
-    }
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "baseminerals:item/phosphorus_smallpowder"
+  }
 }

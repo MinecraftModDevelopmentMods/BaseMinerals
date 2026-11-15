@@ -1,12 +1,15 @@
-# Known limits for Minecraft 1.13.2
+# Known limits for Minecraft 1.21.1
 
-The 1.12 material and molten-form switches in BaseMinerals.cfg and their settings
-screens have not been ported. The 1.13 registries keep the old content available
-for saved blocks and inventories. Use OreSpawn to change ore generation.
-The 1.12 Tinkers' Construct integration does not carry over to Forge 25.
+The 1.12 material and molten-form switches in BaseMinerals.cfg and their
+settings screens have not been ported. Use OreSpawn to change ore generation.
+The 1.12 Tinkers' Construct integration does not carry over.
 
-OreSpawn 1 settings need to be imported on a supported older installation before
-moving the world. Carry the resulting saved profile with the world.
+Worlds from 1.12.2 and earlier must be upgraded on 1.13.2 first; see
+[world upgrades](WORLD_UPGRADES.md).
 
-An already-converted world whose numeric registry or original chunks were
-discarded requires the original backup for lossless conversion.
+Ore depths are the 1.13.2 ranges, all above Y 4. The deeper 1.18+ caves below
+Y 0 don't hold Base Minerals ores unless an OreSpawn profile changes them.
+
+Ores become powders only through the `mmdlib:crushing` recipes, which need a
+crackhammer or crusher from another MMD mod such as Base Metals. Without one,
+ores can be mined and placed but not processed, as on 1.13.2.

@@ -37,5 +37,7 @@
   "item.baseminerals.sulfur_powder": "Пыль Серы",
   "item.baseminerals.sulfur_smallpowder": "Маленькая Кучка Серной Пыли",
   "block.baseminerals.silicon": "Расплавленный Силикон",
-  "block.baseminerals.lithium": "Расплавленный Силикон"
+  "block.baseminerals.lithium": "Расплавленный Силикон",
+  "fluid_type.baseminerals.lithium": "Расплавленный Силикон",
+  "fluid_type.baseminerals.silicon": "Расплавленный Силикон"
 }

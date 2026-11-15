@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "baseminerals:blocks/niter_block"
-    }
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "baseminerals:block/niter_block"
+  }
 }

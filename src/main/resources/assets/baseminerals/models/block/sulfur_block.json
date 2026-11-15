@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "baseminerals:blocks/sulfur_block"
-    }
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "baseminerals:block/sulfur_block"
+  }
 }
