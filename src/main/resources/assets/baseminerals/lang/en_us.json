@@ -42,5 +42,6 @@
   "item.baseminerals.silicon_bucket": "Molten Silicon Bucket",
   "itemGroup.baseminerals.materials": "Base Minerals",
   "fluid_type.baseminerals.lithium": "Molten Lithium",
-  "fluid_type.baseminerals.silicon": "Molten Silicon"
+  "fluid_type.baseminerals.silicon": "Molten Silicon",
+  "item.baseminerals.lithium_raw": "Raw Lithium"
 }

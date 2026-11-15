@@ -26,12 +26,15 @@ import zone.moddev.mc.baseminerals.BaseMinerals;
 import zone.moddev.mc.baseminerals.LegacyIds;
 import zone.moddev.mc.lib.common.runtime.MaterialBacked;
 
-/** Every 1.13.2 ID is registered, nothing else is, and blocks keep their 1.13.2 behaviour. */
+/**
+ * Every 1.13.2 ID is registered, and only the 4.0.0 additions besides; blocks keep their
+ * 1.13.2 behaviour.
+ */
 class RegistryContentTest {
     @Test
     void registersExactlyTheLegacyBlocksItemsAndFluids() {
         assertEquals(Set.copyOf(LegacyIds.blocks()), ours(BuiltInRegistries.BLOCK.keySet()));
-        assertEquals(Set.copyOf(LegacyIds.items()), ours(BuiltInRegistries.ITEM.keySet()));
+        assertEquals(Set.copyOf(LegacyIds.allItems()), ours(BuiltInRegistries.ITEM.keySet()));
         assertEquals(Set.copyOf(LegacyIds.fluids()), ours(BuiltInRegistries.FLUID.keySet()));
     }
 
@@ -67,6 +70,14 @@ class RegistryContentTest {
                 assertEquals(LegacyIds.id(name), backed.material().name().orElseThrow());
             }
         }
+    }
+
+    @Test
+    void rawLithiumIsALithiumMaterialItem() {
+        var item = BuiltInRegistries.ITEM.get(LegacyIds.id("lithium_raw"));
+        MaterialBacked backed = assertInstanceOf(MaterialBacked.class, item);
+        assertEquals(LegacyIds.id("lithium"), backed.material().name().orElseThrow());
+        assertEquals(64, item.getDefaultMaxStackSize());
     }
 
     @Test

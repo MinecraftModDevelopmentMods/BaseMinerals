@@ -2,8 +2,8 @@
 
 Base Minerals adds lithium, niter, phosphorus, potash, salt, saltpeter, sulfur
 and silicon. Niter, phosphorus, potash, salt, saltpeter and sulfur ores drop 2
-to 4 powders, more with Fortune; lithium ore drops itself and needs crushing.
-Store the powders as blocks, and smelt silicon into ingots. Saltpeter or potash
+to 4 powders, more with Fortune. Lithium ore drops raw lithium, which smelts
+into lithium ingots. Store the powders as blocks, and smelt silicon into ingots. Saltpeter or potash
 with sulfur and coal makes gunpowder. Lithium and silicon also come as molten fluids in buckets.
 
 ## Installation
@@ -18,7 +18,8 @@ client and server. Base Minerals needs:
 
 Base Metals is optional. Its crackhammers and crushers use MMDLib's shared
 `mmdlib:crushing` recipes: each ore gives two powders, a storage block nine,
-and lithium and silicon ingots and nuggets give a powder and a small powder.
+raw lithium one, and lithium and silicon ingots and nuggets give a powder and a
+small powder.
 
 ## Upgrading a world
 

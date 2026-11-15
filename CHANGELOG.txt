@@ -8,7 +8,11 @@ Metals is optional.
   MMDLib materials. Every block, item and fluid keeps its 1.13.2 ID.
 - Niter, phosphorus, potash, salt, saltpeter and sulfur ores drop 2 to 4
   powders again, one more per Fortune level, as on 1.12; Silk Touch keeps the
-  ore. Lithium ore drops itself. Ores give no experience.
+  ore. Ores give no experience.
+- New raw lithium. Lithium ore drops it as vanilla iron ore drops raw iron:
+  one, more with Fortune, or the ore with Silk Touch. Raw lithium and lithium
+  ore smelt or blast into lithium ingots, and raw lithium crushes into a
+  powder. It is tagged `c:raw_materials/lithium`.
 - Crushing uses MMDLib's `mmdlib:crushing` recipes, shared by every MMD
   crackhammer and crusher, in place of the recipes routed to Base Metals or
   Modern Metals. As on 1.12, ores crush into 2 powders, storage blocks into 9,

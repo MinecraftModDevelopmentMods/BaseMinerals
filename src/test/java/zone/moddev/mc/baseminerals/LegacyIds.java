@@ -54,6 +54,16 @@ public final class LegacyIds {
         return ids;
     }
 
+    /** Items first added in 4.0.0, which no older save contains. */
+    public static List<ResourceLocation> addedItems() {
+        return List.of(id("lithium_raw"));
+    }
+
+    /** Every item 4.0.0 registers: the 1.13.2 items and the added ones. */
+    public static List<ResourceLocation> allItems() {
+        return Stream.concat(items().stream(), addedItems().stream()).toList();
+    }
+
     /** Source and flowing fluids for each molten mineral. */
     public static List<ResourceLocation> fluids() {
         return MOLTEN.stream().flatMap(name -> Stream.of(id(name), id("flowing_" + name))).toList();

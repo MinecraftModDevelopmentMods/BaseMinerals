@@ -1,0 +1,9 @@
+{
+  "type": "mmdlib:crushing",
+  "ingredient": {
+    "tag": "c:raw_materials/lithium"
+  },
+  "result": {
+    "id": "baseminerals:lithium_powder"
+  }
+}

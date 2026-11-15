@@ -46,8 +46,7 @@ usually extension methods that take the level and position.
   block and item has its models, textures and English name.
 - `src/gametest/` holds game tests, run by `./gradlew runGameTestServer` in a
   fresh world: molten minerals set entities on fire; ores drop powder (or
-  lithium ore itself) without experience, with the Fortune and Silk Touch
-  counts; and blocks sound like stone and resist explosions. The source set is
+  raw lithium) without experience, with the Fortune and Silk Touch counts; and blocks sound like stone and resist explosions. The source set is
   not part of the published jar.
 
 Use a fresh test world when checking the OreSpawn defaults. See

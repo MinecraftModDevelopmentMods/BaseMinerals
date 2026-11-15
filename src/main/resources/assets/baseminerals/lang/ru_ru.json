@@ -39,5 +39,6 @@
   "block.baseminerals.silicon": "Расплавленный Силикон",
   "block.baseminerals.lithium": "Расплавленный Силикон",
   "fluid_type.baseminerals.lithium": "Расплавленный Силикон",
-  "fluid_type.baseminerals.silicon": "Расплавленный Силикон"
+  "fluid_type.baseminerals.silicon": "Расплавленный Силикон",
+  "item.baseminerals.lithium_raw": "Рудное сырьё: Литий"
 }

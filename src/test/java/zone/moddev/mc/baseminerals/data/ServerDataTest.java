@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,11 +23,13 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.testframework.junit.EphemeralTestServerProvider;
 import zone.moddev.mc.baseminerals.BaseMinerals;
@@ -36,7 +39,7 @@ import zone.moddev.mc.baseminerals.LegacyIds;
 @ExtendWith(EphemeralTestServerProvider.class)
 class ServerDataTest {
     /** The number of recipe files under {@code data/baseminerals/recipe}. */
-    private static final int RECIPE_FILES = 64;
+    private static final int RECIPE_FILES = 69;
 
     @Test
     void everyRecipeLoads(MinecraftServer server) {
@@ -59,6 +62,22 @@ class ServerDataTest {
         for (String name : LegacyIds.MOLTEN) {
             assertCrushes(server, recipes, name + "_ingot_crushing", name + "_ingot", name + "_powder", 1);
             assertCrushes(server, recipes, name + "_nugget_crushing", name + "_nugget", name + "_smallpowder", 1);
+        }
+        assertCrushes(server, recipes, "lithium_raw_crushing", "lithium_raw", "lithium_powder", 1);
+    }
+
+    /** Raw lithium and lithium ore smelt or blast into an ingot, as BaseMetals' raw metals do. */
+    @Test
+    void rawLithiumAndItsOreSmeltIntoIngots(MinecraftServer server) {
+        for (String input : new String[] {"lithium_raw", "lithium_ore"}) {
+            var single = new SingleRecipeInput(new ItemStack(item(input)));
+            for (RecipeType<? extends AbstractCookingRecipe> type : List.of(RecipeType.SMELTING, RecipeType.BLASTING)) {
+                var recipe = server.getRecipeManager().getRecipeFor(type, single, server.overworld());
+                assertTrue(recipe.isPresent(), input + " " + type);
+                assertEquals(item("lithium_ingot"),
+                        recipe.get().value().getResultItem(server.registryAccess()).getItem(), input + " " + type);
+                assertEquals(0.2F, recipe.get().value().getExperience(), 1e-6, input + " " + type);
+            }
         }
     }
 
@@ -105,6 +124,8 @@ class ServerDataTest {
             assertBlockTag("c:ores/" + name, name + "_ore");
             assertBlockTag("c:ores", name + "_ore");
         }
+        assertItemTag("c:raw_materials/lithium", "lithium_raw");
+        assertItemTag("c:raw_materials", "lithium_raw");
         for (String name : LegacyIds.MOLTEN) {
             assertItemTag("c:ingots/" + name, name + "_ingot");
             assertItemTag("c:nuggets/" + name, name + "_nugget");
@@ -131,7 +152,7 @@ class ServerDataTest {
         // Molten blocks have no loot, as liquids don't.
         for (String name : LegacyIds.MOLTEN) {
             Block block = BuiltInRegistries.BLOCK.get(LegacyIds.id(name));
-            assertEquals(net.minecraft.world.level.storage.loot.BuiltInLootTables.EMPTY, block.getLootTable(), name);
+            assertEquals(BuiltInLootTables.EMPTY, block.getLootTable(), name);
         }
     }
 

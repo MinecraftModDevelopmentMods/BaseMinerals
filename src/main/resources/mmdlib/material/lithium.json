@@ -4,7 +4,7 @@
   "hardness": 3,
   "strength": 0,
   "magic": 0,
-  "items": "baseminerals:powder smallpowder ingot nugget baseminerals:bucket",
+  "items": "baseminerals:raw baseminerals:powder smallpowder ingot nugget baseminerals:bucket",
   "blocks": "block ore",
   "entities": "",
   "has_fluid": false,

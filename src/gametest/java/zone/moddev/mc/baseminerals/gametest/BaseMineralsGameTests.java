@@ -61,11 +61,11 @@ public final class BaseMineralsGameTests {
     }
 
     /**
-     * Breaking an ore in the world: lithium ore drops itself and needs a crusher, the
-     * other minerals drop their powder. None give experience.
+     * Breaking an ore in the world: lithium ore drops raw lithium, the other minerals
+     * drop their powder. None give experience.
      */
     @GameTest(template = "empty")
-    public static void oresDropPowderOrThemselvesWithoutExperience(GameTestHelper helper) {
+    public static void oresDropPowderOrRawLithiumWithoutExperience(GameTestHelper helper) {
         for (int i = 0; i < ORES.size(); i++) {
             BlockPos pos = new BlockPos(i, 1, 3);
             helper.setBlock(pos, block(ORES.get(i) + "_ore"));
@@ -75,7 +75,7 @@ public final class BaseMineralsGameTests {
         helper.succeedWhen(() -> {
             for (int i = 0; i < ORES.size(); i++) {
                 String name = ORES.get(i);
-                Item drop = DUST_ORES.contains(name) ? item(name + "_powder") : block(name + "_ore").asItem();
+                Item drop = item(DUST_ORES.contains(name) ? name + "_powder" : name + "_raw");
                 helper.assertItemEntityPresent(drop, new BlockPos(i, 1, 3), 1.5);
             }
             helper.assertEntityNotPresent(EntityType.EXPERIENCE_ORB);
@@ -84,7 +84,8 @@ public final class BaseMineralsGameTests {
 
     /**
      * Mineral ores drop 2 to 4 powders, one more per Fortune level, as 1.12's mineral
-     * ores did; Silk Touch keeps the ore. Lithium ore always drops itself.
+     * ores did; Silk Touch keeps the ore. Lithium ore drops one raw lithium, more with
+     * Fortune, as vanilla iron ore does.
      */
     @GameTest(template = "empty")
     public static void mineralOreDropsFollowFortuneAndSilkTouch(GameTestHelper helper) {
@@ -95,7 +96,7 @@ public final class BaseMineralsGameTests {
         ItemStack silk = enchanted(level, Enchantments.SILK_TOUCH, 1);
         for (String name : ORES) {
             BlockState ore = block(name + "_ore").defaultBlockState();
-            Item expected = DUST_ORES.contains(name) ? item(name + "_powder") : ore.getBlock().asItem();
+            Item expected = item(DUST_ORES.contains(name) ? name + "_powder" : name + "_raw");
             int plainMin = Integer.MAX_VALUE;
             int plainMax = 0;
             int fortuneMax = 0;
@@ -115,7 +116,9 @@ public final class BaseMineralsGameTests {
                 helper.assertTrue(fortuneMax > 4 && fortuneMax <= 7,
                         name + " ore dropped at most " + fortuneMax + " powder with Fortune III");
             } else {
-                helper.assertTrue(plainMax == 1 && fortuneMax == 1, name + " ore should drop exactly itself");
+                helper.assertTrue(plainMin == 1 && plainMax == 1, name + " ore should drop one raw " + name);
+                helper.assertTrue(fortuneMax > 1 && fortuneMax <= 4,
+                        name + " ore dropped at most " + fortuneMax + " raw " + name + " with Fortune III");
             }
         }
         helper.succeed();

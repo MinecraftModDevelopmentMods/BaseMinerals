@@ -42,7 +42,7 @@ class ClientAssetTest {
 
     @Test
     void everyItemHasAModelWhoseTexturesExist() throws IOException {
-        for (ResourceLocation id : LegacyIds.items()) {
+        for (ResourceLocation id : LegacyIds.allItems()) {
             assertModelResolves(id.withPrefix("item/"), "item " + id);
         }
     }
@@ -51,7 +51,7 @@ class ClientAssetTest {
     void everyBlockItemAndFluidIsNamedInEnglish() throws IOException {
         JsonObject english = json("assets/baseminerals/lang/en_us.json");
         List<String> missing = new ArrayList<>();
-        for (ResourceLocation id : LegacyIds.items()) {
+        for (ResourceLocation id : LegacyIds.allItems()) {
             String key = BuiltInRegistries.ITEM.get(id).getDescriptionId();
             if (!english.has(key)) missing.add(key);
         }
