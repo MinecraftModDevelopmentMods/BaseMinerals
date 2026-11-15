@@ -13,7 +13,7 @@ checked by SHA-256. It remains optional when playing.
     .\gradlew.bat check build genEclipseRuns eclipse "-PlegacyDependencyVerificationRepository=<mirror>"
 
 On a configured machine, add --offline to rebuild from the same cache.
-The reobfuscated player jar is build/libs/BaseMinerals-2.5.1.113021.jar.
+The reobfuscated player jar is build/libs/BaseMinerals-4.0.0.113021.jar.
 Development output lives under build/libs-dev. Sources and Javadocs are separate.
 
 Import the inner checkout as an Eclipse Gradle project. The generated client

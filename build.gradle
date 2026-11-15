@@ -10,7 +10,7 @@ plugins {
 }
 
 group = 'zone.moddev.mc.baseminerals'
-version = '2.5.1.113021'
+version = mod_version
 base.archivesName = 'BaseMinerals'
 
 java {
