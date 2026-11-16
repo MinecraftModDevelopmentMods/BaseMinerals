@@ -1,3 +1,9 @@
+4.0.1.121012 for Minecraft 1.21.1
+
+- Reduce widespread salt, potash and nitrate ores and favour more appropriate dry-basin settings.
+- Tune lithium, sulfur and phosphorus depths and host preferences without adding a Mineralogy dependency.
+- Keep all mineral identities, drops, custom-dimension fallbacks and saved profile choices unchanged. No retrogen is enabled.
+
 4.0.0.121012 for Minecraft 1.21.1
 
 All eight minerals come across to NeoForge 1.21.1. Use Java 21, NeoForge
