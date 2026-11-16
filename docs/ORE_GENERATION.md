@@ -8,21 +8,22 @@ rocks, terrain, biomes, strata or fluid deposits, and needs no Mineralogy.
 
 Ranges are inclusive. Frequency is expected attempts per chunk. Quantity is a
 requested block budget, so veins can yield less when hosts are unavailable.
-The ranges are unchanged from 1.13.2, so no mineral generates below Y 4.
+The tuned ranges below apply to fresh Overworld defaults. Other ordinary
+dimensions retain the previous fallback ranges and budgets.
 
 | Mineral | Y | Attempts/chunk | Quantity | Shape |
 | --- | --- | ---: | --- | --- |
-| Lithium | 8..47 | 4 | 12..18 | Vein |
-| Niter | 16..63 | 5 | 8..16 | Clusters |
-| Salt | 24..79 | 2.5 | 16..32 | Flat clusters |
-| Sulfur | 4..31 | 3 | 12..18 | Clusters |
-| Phosphorus | 16..63 | 3 | 12..18 | Clusters |
-| Potash | 8..47 | 2.5 | 12..24 | Flat clusters |
-| Saltpeter | 24..79 | 3.75 | 8..16 | Clusters |
+| Lithium | -32..56 | 3 | 15 | Vein |
+| Niter | 32..88 | 1.5 | 12 | Clusters |
+| Salt | 16..80 | 0.55 | 20 | Flat clusters |
+| Sulfur | -32..64 | 1.5 | 15 | Clusters |
+| Phosphorus | -16..64 | 1.5 | 15 | Clusters |
+| Potash | 8..64 | 0.8 | 18 | Flat clusters |
+| Saltpeter | 40..96 | 1.25 | 12 | Clusters |
 
 Lithium and phosphorus use a triangular height curve. Sulfur favors the bottom
-of its range, and the others use uniform heights. Each mineral retains its previous
-expected requested budget while changing depth and shape. These are gameplay
+of its range, and the others use uniform heights. The new Overworld defaults reduce excessive soluble-mineral supply while
+retaining the previous shapes and the fallback budgets in other ordinary dimensions. These are gameplay
 approximations rather than geological simulations.
 
 Lithium uses vein length 8 and node size 3. Cluster horizontal spread, vertical
@@ -32,10 +33,11 @@ The balance draws on [lithium pegmatites](https://www.usgs.gov/data/lithium-depo
 [evaporite potash](https://www.usgs.gov/publications/potash-a-global-overview-evaporate-related-potash-resources-including-spatial)
 and [sedimentary phosphate](https://pubs.usgs.gov/bul/b1693/html/bull74kl.htm).
 
-New profiles allow stone and the six named granite, diorite and andesite variants, including polished forms. Additional hosts are
+Fresh Overworld rules accept exact natural stone/deepslate fallbacks, not polished
+blocks. Other ordinary dimensions keep their historical fallback hosts. Geological hosts are
 intrusive igneous rocks for lithium, sedimentary rocks for nitrates, salt, potash
-and phosphorus, and sedimentary or volcanic rocks for sulfur. There are no hard biome
-restrictions. Rules cover ordinary dimensions except vanilla Nether/End.
+and phosphorus, and sedimentary or volcanic rocks for sulfur. There are no hard biome restrictions. Salt, potash and nitrates favour dry basins;
+phosphorus favours sedimentary provinces and lithium favours intrusive settings. Rules cover ordinary dimensions except vanilla Nether/End.
 Silicon and charcoal do not generate.
 
 ## Saved settings and shared ores

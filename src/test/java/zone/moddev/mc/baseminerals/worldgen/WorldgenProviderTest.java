@@ -44,13 +44,13 @@ class WorldgenProviderTest {
         JsonObject ores = provider().getAsJsonObject("ores");
         // Mineral, min Y, max Y, attempts per chunk, min and max quantity (docs/ORE_GENERATION.md).
         Object[][] table = {
-            {"lithium", 8, 47, 4.0, 12, 18},
-            {"niter", 16, 63, 5.0, 8, 16},
-            {"salt", 24, 79, 2.5, 16, 32},
-            {"sulfur", 4, 31, 3.0, 12, 18},
-            {"phosphorus", 16, 63, 3.0, 12, 18},
-            {"potash", 8, 47, 2.5, 12, 24},
-            {"saltpeter", 24, 79, 3.75, 8, 16},
+            {"lithium", -32, 56, 3.0, 15, 15},
+            {"niter", 32, 88, 1.5, 12, 12},
+            {"salt", 16, 80, .55, 20, 20},
+            {"sulfur", -32, 64, 1.5, 15, 15},
+            {"phosphorus", -16, 64, 1.5, 15, 15},
+            {"potash", 8, 64, .8, 18, 18},
+            {"saltpeter", 40, 96, 1.25, 12, 12},
         };
         for (Object[] row : table) {
             JsonObject placement = ores.getAsJsonObject("baseminerals:legacy/" + row[0] + "_ore")
@@ -58,16 +58,31 @@ class WorldgenProviderTest {
             assertEquals(row[1], placement.get("min_y").getAsInt(), row[0] + " min_y");
             assertEquals(row[2], placement.get("max_y").getAsInt(), row[0] + " max_y");
             assertEquals((double) row[3], placement.get("frequency").getAsDouble(), 1e-9, row[0] + " frequency");
-            assertEquals(row[4], placement.get("min_quantity").getAsInt(), row[0] + " min_quantity");
-            assertEquals(row[5], placement.get("max_quantity").getAsInt(), row[0] + " max_quantity");
+            assertEquals(row[4], placement.get("quantity").getAsInt(), row[0] + " fixed quantity");
+            assertEquals(row[4], row[5]);
             assertEquals("orespawn:standard", placement.get("placement_channel").getAsString());
             Set<String> hosts = new HashSet<>();
             for (JsonElement host : placement.getAsJsonArray("host_blocks")) {
                 hosts.add(host.isJsonObject() ? host.getAsJsonObject().get("block").getAsString() : host.getAsString());
             }
-            for (String host : BaseMineralsWorldgenProvider.STONE_HOSTS) {
-                assertTrue(hosts.contains("minecraft:" + host), row[0] + " accepts " + host);
-            }
+            assertEquals(Set.of("minecraft:stone", "minecraft:deepslate"), hosts);
+            assertEquals(8, placement.getAsJsonObject("geomes").size());
+        }
+    }
+
+    @Test
+    void customDimensionFallbackKeepsItsPreviousBudgetAndRouting() {
+        JsonObject ores = provider().getAsJsonObject("ores");
+        for (BaseMineralsWorldgenProvider.Ore rule : BaseMineralsWorldgenProvider.ORES) {
+            JsonObject ore = ores.getAsJsonObject("baseminerals:legacy/" + rule.name() + "_ore");
+            JsonObject fallback = ore.getAsJsonObject("dimension_selectors").getAsJsonObject("orespawn:all_except_nether_end");
+            assertEquals(rule.frequency(), fallback.get("frequency").getAsDouble(), 1e-9);
+            assertEquals(rule.minY(), fallback.get("min_y").getAsInt());
+            assertEquals(rule.maxY(), fallback.get("max_y").getAsInt());
+            assertEquals(rule.minQuantity(), fallback.get("min_quantity").getAsInt());
+            assertEquals(rule.maxQuantity(), fallback.get("max_quantity").getAsInt());
+            assertFalse(ore.getAsJsonObject("dimensions").has("minecraft:the_nether"));
+            assertFalse(ore.getAsJsonObject("dimensions").has("minecraft:the_end"));
         }
     }
 
