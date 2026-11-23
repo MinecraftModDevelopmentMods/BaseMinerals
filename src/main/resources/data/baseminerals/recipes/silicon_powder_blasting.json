@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "baseminerals:silicon_powder"
+  },
+  "result": "baseminerals:silicon_ingot",
+  "experience": 0.45,
+  "cookingtime": 100
+}

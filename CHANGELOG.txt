@@ -1,3 +1,13 @@
+2.5.2.114041 for Minecraft 1.14.4
+
+This brings the released 1.13.2 build across to Forge 28, using OreSpawn 4.1.7.114041. The mineral IDs, ore depths and deposit shapes stay the same, and saved ore settings carry forward.
+
+The ores keep their earlier drops, Fortune and Silk Touch behaviour, and work with Base Metals or Modern Metals crackhammers. Lithium and silicon can also be smelted in a blast furnace. Molten fluids use Forge's native renderer, and the ingot trades use the new villager professions.
+
+The minerals now join both hammer mining tags, so breaking an ore uses the hammer's proper speed. Local test launches pin the fixed Base Metals and Modern Metals jars by hash, including the ore overlay fix.
+
+The old numeric-world conversion is adapted for 1.14.4. Keep the full save and its baseminerals-legacy-registry.dat file together, and test an upgrade on a copy. The older material settings screens and Tinkers integration are still unavailable.
+
 2.5.2.113021 for Minecraft 1.13.2
 
 This fixes the ore drops to match 1.10 to 1.12. Lithium drops one ore block; the other six ores drop 2–4 powders. Fortune increases the maximum, and Silk Touch returns the ore block.

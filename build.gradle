@@ -40,7 +40,7 @@ def stageRunClasses = tasks.register('stageRunClasses', Sync) {
 }
 
 minecraft {
-    mappings channel: 'snapshot', version: '20180921-1.13'
+    mappings channel: 'snapshot', version: '20190719-1.14.3'
     if (gradle.startParameter.offline) mavenizerArguments.add('--offline')
     runs {
         configureEach {
@@ -48,11 +48,11 @@ minecraft {
             workingDir.convention layout.projectDirectory.dir(
                     providers.gradleProperty('baseMineralsRunDirectory').getOrElse('run'))
             mods { baseminerals { source sourceSets.main } }
-            environment 'target', name == 'client' ? 'fmluserdevclient' : 'fmluserdevserver'
-            environment 'MC_VERSION', '1.13.2'
-            environment 'MCP_VERSION', '20190213.203750'
-            environment 'MCP_MAPPINGS', 'snapshot_20180921-1.13'
-            environment 'FORGE_VERSION', '25.0.223'
+            environment 'target', name.toLowerCase().contains('client') ? 'fmluserdevclient' : 'fmluserdevserver'
+            environment 'MC_VERSION', '1.14.4'
+            environment 'MCP_VERSION', '20190829.143755'
+            environment 'MCP_MAPPINGS', 'snapshot_20190719-1.14.3'
+            environment 'FORGE_VERSION', '28.2.26'
             environment 'FORGE_GROUP', 'net.minecraftforge'
             def path = modClasses.get().asFile.absolutePath
             environment 'MOD_CLASSES', "baseminerals%%${path}${File.pathSeparator}baseminerals%%${path}"
@@ -80,12 +80,12 @@ repositories {
     exclusiveContent {
         forRepository {
             maven {
-                name = 'PublishedBaseMetals'
+                name = 'PublishedOreSpawn'
                 url = mirror.isDirectory() ? mirror.toURI() : uri('https://maven.moddev.zone/releases')
                 metadataSources { artifact() }
             }
         }
-        filter { includeModule('zone.moddev.mc.basemetals', 'BaseMetals') }
+        filter { includeModule('zone.moddev.mc.orespawn', 'OreSpawn'); includeModule('zone.moddev.mc.modernmetals', 'ModernMetals'); includeModule('zone.moddev.mc.basemetals', 'BaseMetals') }
     }
     mavenCentral()
 }
@@ -95,7 +95,7 @@ configurations {
     pinnedMods { canBeConsumed = false; transitive = false }
 }
 dependencies {
-    implementation minecraft.dependency('net.minecraftforge:forge:1.13.2-25.0.223')
+    implementation minecraft.dependency('net.minecraftforge:forge:1.14.4-28.2.26')
     specs.each { spec ->
         pinnedMods spec.coordinate
         if (spec.runtime) implementation renamer.dependency(spec.coordinate)
@@ -142,9 +142,19 @@ tasks.named('compileJava') { dependsOn 'verifyPinnedMods' }
 tasks.named('test') { useJUnitPlatform() }
 
 sourceSets {
+    generationProbe {
+        java.srcDirs = ['tools/validation/port114/generation-probe/java']
+        resources.srcDirs = ['tools/validation/port114/generation-probe/resources']
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
+    clientProbe {
+        java.srcDirs = ['tools/validation/port114/client-probe/java']
+        resources.srcDirs = ['tools/validation/port114/client-probe/resources']
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+    }
     miningProbe {
-        java.srcDirs = ['tools/validation/legacy113/mining-probe/java']
-        resources.srcDirs = ['tools/validation/legacy113/mining-probe/resources']
+        java.srcDirs = ['tools/validation/port114/mining-probe/java']
+        resources.srcDirs = ['tools/validation/port114/mining-probe/resources']
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
     }
 }
@@ -160,15 +170,39 @@ def packagedMiningProbe = renamer.classes(miningProbeJar) {
     output = layout.buildDirectory.file('test-mods/mineral-mining-probe.jar')
 }
 tasks.register('packagedMiningProbeJar') { dependsOn packagedMiningProbe }
+
+def generationProbeJar = tasks.register('generationProbeJar', Jar) {
+    dependsOn tasks.named('generationProbeClasses')
+    from sourceSets.generationProbe.output
+    destinationDirectory = layout.buildDirectory.dir('test-mods')
+    archiveFileName = 'mineral-generation-probe-dev.jar'
+}
+def packagedGenerationProbe = renamer.classes(generationProbeJar) {
+    map.from minecraft.dependency.toSrgFile
+    archiveClassifier = null
+    output = layout.buildDirectory.file('test-mods/mineral-generation-probe.jar')
+}
+tasks.register('packagedGenerationProbeJar') { dependsOn packagedGenerationProbe }
+tasks.register('clientProbeJar', Jar) {
+    dependsOn tasks.named('clientProbeClasses')
+    from sourceSets.clientProbe.output
+    destinationDirectory = layout.buildDirectory.dir('test-mods')
+    archiveFileName = 'mineral-client-probe-dev.jar'
+}
 // Keep the executable test mod out of Eclipse's normal game launches.
 eclipse.classpath.sourceSets = [sourceSets.main, sourceSets.test]
 
-tasks.register('verifyFluidRegistration', Exec) {
+tasks.register('verifyStartupRegistration', Exec) {
     group = 'verification'
     description = 'Checks that fluid registration runs before blocks, outside parallel construction.'
     commandLine 'node', '--test', 'tools/test_fluid_registration.js'
 }
-tasks.named('check') { dependsOn 'verifyFluidRegistration' }
+tasks.named('check') { dependsOn 'verifyStartupRegistration' }
+tasks.register('verify114Resources', Exec) {
+    group = 'verification'
+    commandLine 'node', '--test', 'tools/test_114_resources.js'
+}
+tasks.named('check') { dependsOn 'verify114Resources' }
 ['client', 'server'].each { run ->
     tasks.matching { it.name == 'run' + run.capitalize() }.configureEach {
         dependsOn stageRunClasses
@@ -187,6 +221,10 @@ tasks.matching { it.name.startsWith('genEclipseRun') && it.name.endsWith('ForFor
     File launch = layout.projectDirectory.file(launchName).asFile
     doLast {
         Node configuration = new XmlParser().parse(launch)
+        if (launchName in ['runClient.launch', 'runServer.launch']) {
+            new Node(configuration, 'booleanAttribute',
+                    [key: 'org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE', value: 'true'])
+        }
         Node programArguments = configuration.stringAttribute.find {
             it.attribute('key') == 'org.eclipse.jdt.launching.PROGRAM_ARGUMENTS'
         }
@@ -231,6 +269,8 @@ tasks.named('processResources', ProcessResources) {
 
 apply from: 'gradle/ore-models.gradle'
 
-apply from: 'gradle/release-113.gradle'
+apply from: 'gradle/release-114.gradle'
 
 apply from: 'gradle/normalize-javadoc-trees.gradle'
+
+apply from: 'gradle/compatibility-114.gradle'

@@ -1,0 +1,13 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+license="LGPL-2.1"
+[[mods]]
+modId="mineralclientprobe"
+version="1"
+displayName="Base Minerals client test"
+[[dependencies.mineralclientprobe]]
+modId="baseminerals"
+mandatory=true
+versionRange="[2.5.2.114041,)"
+ordering="AFTER"
+side="CLIENT"

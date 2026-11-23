@@ -1,0 +1,99 @@
+import groovy.xml.XmlParser
+import groovy.xml.XmlUtil
+import java.security.MessageDigest
+
+apply from: 'gradle/local-companions-114.gradle'
+
+def basePin = localCompanionPins.basemetals
+def modernPin = localCompanionPins.modernmetals
+def withBase = providers.gradleProperty('withBaseMetals').map { it.toBoolean() }.orElse(false)
+def withModern = providers.gradleProperty('withModernMetals').map { it.toBoolean() }.orElse(false)
+def published = new groovy.json.JsonSlurper().parse(file('gradle/dependencies.json')).collectEntries { [(it.id): it] }
+def haveModern = modernPin.enabled || published.modernmetals != null
+configurations { baseMetalsDevelopment; modernMetalsDevelopment }
+def mappedBase = basePin.enabled ? files(file(basePin.pin.mappedJar)) : renamer.dependency(published.basemetals.coordinate)
+def mappedModern = modernPin.enabled ? files(file(modernPin.pin.mappedJar)) : renamer.dependency(published.modernmetals.coordinate)
+dependencies {
+    baseMetalsDevelopment mappedBase
+    if (withBase.get()) runtimeOnly mappedBase
+    if (haveModern) modernMetalsDevelopment mappedModern
+    if (withModern.get()) {
+        if (!haveModern) throw new GradleException('Run pinLocalModernMetals before using withModernMetals')
+        runtimeOnly mappedModern
+    }
+}
+tasks.named('compileJava') { dependsOn 'verifyLocalCompanions' }
+
+def profiles = ['WithBaseMetals': ['base']]
+if (haveModern) {
+    profiles['WithModernMetals'] = ['modern']
+    profiles['WithBoth'] = ['base', 'modern']
+}
+tasks.register('generateCompatibilityRuns') {
+    dependsOn 'genEclipseRunClientForForge', 'verifyPinnedMods', 'verifyLocalCompanions'
+    dependsOn configurations.baseMetalsDevelopment
+    if (haveModern) dependsOn configurations.modernMetalsDevelopment
+    doLast {
+        profiles.each { label, mods ->
+            File directory = file('run/' + label)
+            File modDirectory = new File(directory, 'mods')
+            modDirectory.mkdirs()
+            def selected = [:]
+            if (mods.contains('base')) selected['BaseMetals-3.0.2.114041-mapped.jar'] = configurations.baseMetalsDevelopment.singleFile
+            if (mods.contains('modern')) selected['ModernMetals-3.0.0.114041-mapped.jar'] = configurations.modernMetalsDevelopment.singleFile
+            // Preserve replaced copies; retire only managed companion files.
+            modDirectory.listFiles().findAll { it.isFile() &&
+                (it.name ==~ /(?:BaseMetals-|base-metals-240967-|ModernMetals-).+\.jar/) &&
+                (!selected.containsKey(it.name) || !java.util.Arrays.equals(it.bytes, selected[it.name].bytes)) }.each { obsolete ->
+                String digest = MessageDigest.getInstance('SHA-256').digest(obsolete.bytes).encodeHex().toString()
+                File retained = file('.gradle/retired-compatibility-jars/' + label + '/' + digest + '-' + obsolete.name)
+                retained.parentFile.mkdirs()
+                retained.bytes = obsolete.bytes
+                if (!obsolete.delete()) throw new GradleException("Could not retire stale companion jar ${obsolete}")
+            }
+            selected.each { name, source ->
+                File target = new File(modDirectory, name)
+                target.bytes = source.bytes
+                if (!java.util.Arrays.equals(target.bytes, source.bytes)) throw new GradleException("Staged jar differs: ${target}")
+            }
+            Node launch = new XmlParser().parse(file('runClient.launch'))
+            launch.stringAttribute.find { it.attribute('key') == 'org.eclipse.jdt.launching.WORKING_DIRECTORY' }
+                    .attributes().put('value', directory.absolutePath)
+            file('runClient' + label + '.launch').setText(XmlUtil.serialize(launch), 'UTF-8')
+        }
+    }
+}
+tasks.register('verifyStagedCompanions') {
+    group = 'verification'
+    dependsOn 'generateCompatibilityRuns'
+    doLast {
+        def hash = { File jar -> MessageDigest.getInstance('SHA-256').digest(jar.bytes).encodeHex().toString() }
+        profiles.each { label, mods ->
+            File directory = file('run/' + label + '/mods')
+            ['base': ['BaseMetals-3.0.2.114041-mapped.jar', configurations.baseMetalsDevelopment],
+             'modern': ['ModernMetals-3.0.0.114041-mapped.jar', configurations.modernMetalsDevelopment]].each { kind, spec ->
+                if (mods.contains(kind) && hash(new File(directory, spec[0])) != hash(spec[1].singleFile))
+                    throw new GradleException("Wrong ${kind} jar staged for ${label}")
+            }
+        }
+    }
+}
+tasks.named('check') { dependsOn 'verifyStagedCompanions' }
+
+tasks.named('genEclipseRuns') { dependsOn 'generateCompatibilityRuns' }
+tasks.named('eclipse') { dependsOn 'verifyStagedCompanions' }
+
+tasks.register('configureEclipseBuildship') {
+    doLast {
+        File target = file('.settings/org.eclipse.buildship.core.prefs')
+        target.parentFile.mkdirs()
+        Properties settings = new Properties()
+        ['eclipse.preferences.version':'1', 'connection.gradle.distribution':'GRADLE_DISTRIBUTION(WRAPPER)',
+         'connection.gradle.user.home':gradle.gradleUserHomeDir.canonicalPath,
+         'connection.project.dir':'', 'gradle.user.home':gradle.gradleUserHomeDir.canonicalPath,
+         'java.home':new File(System.getProperty('java.home')).canonicalPath,
+         'override.workspace.settings':'true'].each { key, value -> settings.setProperty(key, value) }
+        target.withOutputStream { settings.store(it, 'Generated Base Minerals Buildship settings') }
+    }
+}
+tasks.named('genEclipseRuns') { dependsOn 'configureEclipseBuildship' }
