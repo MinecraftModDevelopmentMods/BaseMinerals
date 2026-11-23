@@ -1,54 +1,22 @@
 package zone.moddev.mc.baseminerals.client;
 
-import zone.moddev.mc.baseminerals.BaseMinerals;
-import zone.moddev.mc.baseminerals.content.MineralContent;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.fluid.IFluidState;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import zone.moddev.mc.baseminerals.content.MineralContent;
 
-/** Adds the fluid textures and colours that Forge 25 doesn't render on its own. */
+/** Forge fluid attributes provide the world sprites; item colours tint the bucket contents. */
 @OnlyIn(Dist.CLIENT)
 public final class MineralFluidRenderer {
-    private static final ResourceLocation STILL = new ResourceLocation(BaseMinerals.MOD_ID, "blocks/molten_metal_still");
-    private static final ResourceLocation FLOW = new ResourceLocation(BaseMinerals.MOD_ID, "blocks/molten_metal_flow");
-    private static volatile TextureAtlasSprite[] sprites;
-
     private MineralFluidRenderer() {}
-
     public static void register() {
-        MinecraftForge.EVENT_BUS.addListener(MineralFluidRenderer::onTexturePre);
-        MinecraftForge.EVENT_BUS.addListener(MineralFluidRenderer::onTexturePost);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(MineralFluidRenderer::bucketColours);
     }
-
-    private static void onTexturePre(TextureStitchEvent.Pre event) {
-        event.getMap().registerSprite(Minecraft.getInstance().getResourceManager(), STILL);
-        event.getMap().registerSprite(Minecraft.getInstance().getResourceManager(), FLOW);
-    }
-
-    private static void onTexturePost(TextureStitchEvent.Post event) {
-        sprites = new TextureAtlasSprite[] { event.getMap().getSprite(STILL), event.getMap().getSprite(FLOW) };
-    }
-
-    public static boolean useOpaqueFluidPath(IFluidState state, boolean vanillaValue) {
-        return isOurs(state) || vanillaValue;
-    }
-
-    public static TextureAtlasSprite[] overrideSprites(IFluidState state, TextureAtlasSprite[] vanillaSprites) {
-        TextureAtlasSprite[] current = sprites;
-        return isOurs(state) && current != null ? current : vanillaSprites;
-    }
-
-    public static int overrideColor(IFluidState state, int vanillaColor) {
-        return isOurs(state) ? 0xC5C8C1 : vanillaColor;
-    }
-
-    private static boolean isOurs(IFluidState state) {
-        return state != null && MineralContent.ownsFluid(state.getFluid());
+    private static void bucketColours(ColorHandlerEvent.Item event) {
+        for (String material : new String[] {"lithium", "silicon"}) {
+            event.getItemColors().register((stack, tint) -> tint == 1 ? 0xC5C8C1 : 0xFFFFFF,
+                    MineralContent.bucket(material));
+        }
     }
 }

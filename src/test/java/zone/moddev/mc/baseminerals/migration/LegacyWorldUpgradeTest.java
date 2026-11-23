@@ -1,7 +1,7 @@
 package zone.moddev.mc.baseminerals.migration;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,22 +9,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class LegacyWorldUpgradeTest {
     @Test
     void convertsNestedMineralBucketsAndKeepsTheRestOfTheStack() {
-        NBTTagCompound lithium = bucket("lithium");
-        NBTTagCompound silicon = bucket("baseminerals:silicon");
-        NBTTagList inventory = new NBTTagList();
+        CompoundNBT lithium = bucket("lithium");
+        CompoundNBT silicon = bucket("baseminerals:silicon");
+        ListNBT inventory = new ListNBT();
         inventory.add(lithium);
         inventory.add(silicon);
-        NBTTagCompound player = new NBTTagCompound();
-        player.setTag("Inventory", inventory);
+        CompoundNBT player = new CompoundNBT();
+        player.put("Inventory", inventory);
 
         LegacyWorldUpgrade.migrateItems(player);
-        NBTTagCompound afterFirstPass = player.copy();
+        CompoundNBT afterFirstPass = player.copy();
         LegacyWorldUpgrade.migrateItems(player);
 
         assertEquals(afterFirstPass, player);
         assertEquals("baseminerals:lithium_bucket", lithium.getString("id"));
         assertEquals("baseminerals:silicon_bucket", silicon.getString("id"));
-        for (NBTTagCompound stack : new NBTTagCompound[] {lithium, silicon}) {
+        for (CompoundNBT stack : new CompoundNBT[] {lithium, silicon}) {
             assertEquals(1, stack.getByte("Count"));
             assertEquals("Keep me", stack.getCompound("tag").getString("Custom"));
             assertFalse(stack.getCompound("tag").contains("FluidName", 8));
@@ -34,28 +34,28 @@ class LegacyWorldUpgradeTest {
 
     @Test
     void leavesOtherModsBucketsAndOrdinaryMineralItemsUntouched() {
-        NBTTagCompound copper = bucket("copper");
-        NBTTagCompound original = copper.copy();
+        CompoundNBT copper = bucket("copper");
+        CompoundNBT original = copper.copy();
         LegacyWorldUpgrade.migrateItems(copper);
         assertEquals(original, copper);
 
-        NBTTagCompound powder = new NBTTagCompound();
-        powder.setString("id", "baseminerals:lithium_powder");
-        powder.setByte("Count", (byte) 3);
+        CompoundNBT powder = new CompoundNBT();
+        powder.putString("id", "baseminerals:lithium_powder");
+        powder.putByte("Count", (byte) 3);
         original = powder.copy();
         LegacyWorldUpgrade.migrateItems(powder);
         assertEquals(original, powder);
     }
 
-    private static NBTTagCompound bucket(String fluid) {
-        NBTTagCompound stack = new NBTTagCompound();
-        stack.setString("id", "forge:bucketfilled");
-        stack.setByte("Count", (byte) 1);
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setString("FluidName", fluid);
-        tag.setInt("Amount", 1000);
-        tag.setString("Custom", "Keep me");
-        stack.setTag("tag", tag);
+    private static CompoundNBT bucket(String fluid) {
+        CompoundNBT stack = new CompoundNBT();
+        stack.putString("id", "forge:bucketfilled");
+        stack.putByte("Count", (byte) 1);
+        CompoundNBT tag = new CompoundNBT();
+        tag.putString("FluidName", fluid);
+        tag.putInt("Amount", 1000);
+        tag.putString("Custom", "Keep me");
+        stack.put("tag", tag);
         return stack;
     }
 }

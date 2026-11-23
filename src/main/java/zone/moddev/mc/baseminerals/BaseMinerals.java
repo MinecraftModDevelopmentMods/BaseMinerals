@@ -1,6 +1,5 @@
 package zone.moddev.mc.baseminerals;
 
-import net.minecraft.item.crafting.RecipeSerializers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
@@ -9,8 +8,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import zone.moddev.mc.baseminerals.client.MineralFluidRenderer;
-import zone.moddev.mc.baseminerals.recipe.SharedCrushingSerializer;
-import zone.moddev.mc.baseminerals.trade.MineralTrades;
+import zone.moddev.mc.baseminerals.loot.MineralPowderCount;
+import net.minecraft.world.storage.loot.functions.LootFunctionManager;
 import zone.moddev.mc.baseminerals.worldgen.BaseMineralsWorldgenProvider;
 
 @Mod(BaseMinerals.MOD_ID)
@@ -25,8 +24,7 @@ public final class BaseMinerals {
 
     private void setup(FMLCommonSetupEvent event) {
         DeferredWorkQueue.runLater(() -> {
-            RecipeSerializers.register(new SharedCrushingSerializer());
-            MineralTrades.register();
+            LootFunctionManager.registerFunction(new MineralPowderCount.Serializer());
         });
     }
 

@@ -1,0 +1,13 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+license="LGPL-3.0"
+[[mods]]
+modId="mineralgenerationprobe"
+version="1"
+displayName="Base Minerals disposable generation census"
+[[dependencies.mineralgenerationprobe]]
+modId="baseminerals"
+mandatory=true
+versionRange="[2.5.2.114041,)"
+ordering="AFTER"
+side="SERVER"

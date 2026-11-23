@@ -1,12 +1,17 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
-      "name": "block",
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
+          "type": "minecraft:item",
           "name": "baseminerals:silicon_block"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
         }
       ]
     }

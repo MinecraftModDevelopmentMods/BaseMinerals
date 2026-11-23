@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "baseminerals:lithium_powder"
+  },
+  "result": "baseminerals:lithium_ingot",
+  "experience": 0.45,
+  "cookingtime": 100
+}

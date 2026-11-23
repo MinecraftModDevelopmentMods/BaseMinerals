@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "baseminerals:silicon_smallpowder"
+  },
+  "result": "baseminerals:silicon_nugget",
+  "experience": 0.05,
+  "cookingtime": 100
+}

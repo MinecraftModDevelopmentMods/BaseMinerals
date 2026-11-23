@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ores/lithium",
+    "#forge:ores/niter",
+    "#forge:ores/phosphorus",
+    "#forge:ores/potash",
+    "#forge:ores/salt",
+    "#forge:ores/saltpeter",
+    "#forge:ores/sulfur"
+  ]
+}

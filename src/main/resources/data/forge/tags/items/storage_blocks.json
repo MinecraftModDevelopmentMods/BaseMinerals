@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:storage_blocks/lithium",
+    "#forge:storage_blocks/niter",
+    "#forge:storage_blocks/phosphorus",
+    "#forge:storage_blocks/potash",
+    "#forge:storage_blocks/salt",
+    "#forge:storage_blocks/saltpeter",
+    "#forge:storage_blocks/silicon",
+    "#forge:storage_blocks/sulfur"
+  ]
+}

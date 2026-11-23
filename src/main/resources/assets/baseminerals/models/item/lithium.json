@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "baseminerals:blocks/molten_metal_still"
+    "layer0": "baseminerals:block/molten_metal_still"
   }
 }

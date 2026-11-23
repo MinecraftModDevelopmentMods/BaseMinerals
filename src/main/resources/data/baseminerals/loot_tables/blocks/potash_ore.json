@@ -1,12 +1,44 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
-      "name": "block",
       "rolls": 1,
       "entries": [
         {
-          "type": "item",
-          "name": "baseminerals:potash_ore"
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "name": "baseminerals:potash_ore",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:item",
+              "name": "baseminerals:potash_powder",
+              "functions": [
+                {
+                  "function": "baseminerals:mineral_powder_count"
+                },
+                {
+                  "function": "minecraft:explosion_decay"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
