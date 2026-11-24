@@ -1,11 +1,11 @@
-# Manual testing on 1.14.4
+# Manual testing on 1.15.2
 
 Refresh the inner BaseMinerals Gradle project in Eclipse. Start with
-runClientWithBoth.launch to load the pinned local Base Metals and Modern Metals
-fixes. Run pinLocalCompanions and regenerate launches after rebuilding those
-siblings. runClient.launch is standalone;
-runClientWithBaseMetals.launch and runClientWithModernMetals.launch test the
-two companions separately. Each profile has its own run directory.
+runClientWithBaseMetals.launch for the pinned local Base Metals model fix and
+iron-hammer testing. runClient.launch is standalone. Rebuild the sibling, run
+pinLocalBaseMetals, then regenerate launches after changing that candidate.
+Each profile has its own run directory. No Modern Metals 1.15 artifact is
+currently available; do not use its 1.14 jar.
 
 Use a disposable world for these checks:
 
@@ -19,7 +19,7 @@ Use a disposable world for these checks:
    Check familiar mineral deposits, stored items, placed molten blocks and
    buckets. Save and reopen the copy. Keep its saved OreSpawn profile and
    baseminerals-legacy-registry.dat together. See WORLD_UPGRADES.md for the
-   expected Forge 25 vanilla-registry prompts.
+   expected vanilla-registry prompts when Forge 31 opens older saves.
 
 The older material settings screens and Tinkers integration remain unavailable,
 as on the released 1.13.2 branch. Change generation through OreSpawn. Automated

@@ -2,7 +2,7 @@ import groovy.xml.XmlParser
 import groovy.xml.XmlUtil
 import java.security.MessageDigest
 
-apply from: 'gradle/local-companions-114.gradle'
+apply from: 'gradle/local-companions-115.gradle'
 
 def basePin = localCompanionPins.basemetals
 def modernPin = localCompanionPins.modernmetals
@@ -12,7 +12,7 @@ def published = new groovy.json.JsonSlurper().parse(file('gradle/dependencies.js
 def haveModern = modernPin.enabled || published.modernmetals != null
 configurations { baseMetalsDevelopment; modernMetalsDevelopment }
 def mappedBase = basePin.enabled ? files(file(basePin.pin.mappedJar)) : renamer.dependency(published.basemetals.coordinate)
-def mappedModern = modernPin.enabled ? files(file(modernPin.pin.mappedJar)) : renamer.dependency(published.modernmetals.coordinate)
+def mappedModern = modernPin.enabled ? files(file(modernPin.pin.mappedJar)) : (published.modernmetals ? renamer.dependency(published.modernmetals.coordinate) : null)
 dependencies {
     baseMetalsDevelopment mappedBase
     if (withBase.get()) runtimeOnly mappedBase
@@ -39,8 +39,8 @@ tasks.register('generateCompatibilityRuns') {
             File modDirectory = new File(directory, 'mods')
             modDirectory.mkdirs()
             def selected = [:]
-            if (mods.contains('base')) selected['BaseMetals-3.0.2.114041-mapped.jar'] = configurations.baseMetalsDevelopment.singleFile
-            if (mods.contains('modern')) selected['ModernMetals-3.0.0.114041-mapped.jar'] = configurations.modernMetalsDevelopment.singleFile
+            if (mods.contains('base')) selected['BaseMetals-3.0.3.115021-mapped.jar'] = configurations.baseMetalsDevelopment.singleFile
+            if (mods.contains('modern')) selected['ModernMetals-3.0.0.115021-mapped.jar'] = configurations.modernMetalsDevelopment.singleFile
             // Preserve replaced copies; retire only managed companion files.
             modDirectory.listFiles().findAll { it.isFile() &&
                 (it.name ==~ /(?:BaseMetals-|base-metals-240967-|ModernMetals-).+\.jar/) &&
@@ -70,8 +70,8 @@ tasks.register('verifyStagedCompanions') {
         def hash = { File jar -> MessageDigest.getInstance('SHA-256').digest(jar.bytes).encodeHex().toString() }
         profiles.each { label, mods ->
             File directory = file('run/' + label + '/mods')
-            ['base': ['BaseMetals-3.0.2.114041-mapped.jar', configurations.baseMetalsDevelopment],
-             'modern': ['ModernMetals-3.0.0.114041-mapped.jar', configurations.modernMetalsDevelopment]].each { kind, spec ->
+            ['base': ['BaseMetals-3.0.3.115021-mapped.jar', configurations.baseMetalsDevelopment],
+             'modern': ['ModernMetals-3.0.0.115021-mapped.jar', configurations.modernMetalsDevelopment]].each { kind, spec ->
                 if (mods.contains(kind) && hash(new File(directory, spec[0])) != hash(spec[1].singleFile))
                     throw new GradleException("Wrong ${kind} jar staged for ${label}")
             }

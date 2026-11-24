@@ -40,7 +40,7 @@ def stageRunClasses = tasks.register('stageRunClasses', Sync) {
 }
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190719-1.14.3'
+    mappings channel: 'snapshot', version: '20200514-1.15.1'
     if (gradle.startParameter.offline) mavenizerArguments.add('--offline')
     runs {
         configureEach {
@@ -49,10 +49,10 @@ minecraft {
                     providers.gradleProperty('baseMineralsRunDirectory').getOrElse('run'))
             mods { baseminerals { source sourceSets.main } }
             environment 'target', name.toLowerCase().contains('client') ? 'fmluserdevclient' : 'fmluserdevserver'
-            environment 'MC_VERSION', '1.14.4'
-            environment 'MCP_VERSION', '20190829.143755'
-            environment 'MCP_MAPPINGS', 'snapshot_20190719-1.14.3'
-            environment 'FORGE_VERSION', '28.2.26'
+            environment 'MC_VERSION', '1.15.2'
+            environment 'MCP_VERSION', '20200515.085601'
+            environment 'MCP_MAPPINGS', 'snapshot_20200514-1.15.1'
+            environment 'FORGE_VERSION', '31.2.57'
             environment 'FORGE_GROUP', 'net.minecraftforge'
             def path = modClasses.get().asFile.absolutePath
             environment 'MOD_CLASSES', "baseminerals%%${path}${File.pathSeparator}baseminerals%%${path}"
@@ -95,7 +95,7 @@ configurations {
     pinnedMods { canBeConsumed = false; transitive = false }
 }
 dependencies {
-    implementation minecraft.dependency('net.minecraftforge:forge:1.14.4-28.2.26')
+    implementation minecraft.dependency('net.minecraftforge:forge:1.15.2-31.2.57')
     specs.each { spec ->
         pinnedMods spec.coordinate
         if (spec.runtime) implementation renamer.dependency(spec.coordinate)
@@ -143,18 +143,18 @@ tasks.named('test') { useJUnitPlatform() }
 
 sourceSets {
     generationProbe {
-        java.srcDirs = ['tools/validation/port114/generation-probe/java']
-        resources.srcDirs = ['tools/validation/port114/generation-probe/resources']
+        java.srcDirs = ['tools/validation/port115/generation-probe/java']
+        resources.srcDirs = ['tools/validation/port115/generation-probe/resources']
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
     }
     clientProbe {
-        java.srcDirs = ['tools/validation/port114/client-probe/java']
-        resources.srcDirs = ['tools/validation/port114/client-probe/resources']
+        java.srcDirs = ['tools/validation/port115/client-probe/java']
+        resources.srcDirs = ['tools/validation/port115/client-probe/resources']
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
     }
     miningProbe {
-        java.srcDirs = ['tools/validation/port114/mining-probe/java']
-        resources.srcDirs = ['tools/validation/port114/mining-probe/resources']
+        java.srcDirs = ['tools/validation/port115/mining-probe/java']
+        resources.srcDirs = ['tools/validation/port115/mining-probe/resources']
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
     }
 }
@@ -198,11 +198,11 @@ tasks.register('verifyStartupRegistration', Exec) {
     commandLine 'node', '--test', 'tools/test_fluid_registration.js'
 }
 tasks.named('check') { dependsOn 'verifyStartupRegistration' }
-tasks.register('verify114Resources', Exec) {
+tasks.register('verify115Resources', Exec) {
     group = 'verification'
-    commandLine 'node', '--test', 'tools/test_114_resources.js'
+    commandLine 'node', '--test', 'tools/test_115_resources.js'
 }
-tasks.named('check') { dependsOn 'verify114Resources' }
+tasks.named('check') { dependsOn 'verify115Resources' }
 ['client', 'server'].each { run ->
     tasks.matching { it.name == 'run' + run.capitalize() }.configureEach {
         dependsOn stageRunClasses
@@ -269,8 +269,8 @@ tasks.named('processResources', ProcessResources) {
 
 apply from: 'gradle/ore-models.gradle'
 
-apply from: 'gradle/release-114.gradle'
+apply from: 'gradle/release-115.gradle'
 
 apply from: 'gradle/normalize-javadoc-trees.gradle'
 
-apply from: 'gradle/compatibility-114.gradle'
+apply from: 'gradle/compatibility-115.gradle'

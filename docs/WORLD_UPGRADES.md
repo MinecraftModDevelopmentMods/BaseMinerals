@@ -1,4 +1,4 @@
-# Base Minerals 1.14.4 upgrade checks
+# Base Minerals 1.15.2 upgrade checks
 
 The older saves store a Forge registry snapshot alongside their numeric chunks.
 Two saves may assign different numbers to the same mineral block. The upgrade
@@ -14,13 +14,13 @@ mineral coordinates and states, chest inventory slots, stack sizes, custom
 names, unrelated NBT tags and the saved OreSpawn mineral rules. A test chest
 and placed blocks extend coverage to every item and block in the source
 registry. The fixture also covers all 16 fluid levels for each registered
-molten block. Each original chunk must reach the flattened 1.14.4 format
-(DataVersion 1976 or later). Already flattened 1.13.2 saves are checked with
+molten block. Each original chunk must reach the flattened 1.15.2 format
+(DataVersion 2230 or later). Already flattened 1.13.2 and 1.14.4 saves are checked with
 the separate named-world runner, including their inventories and saved rules.
 
-    python tools/validation/port114/verify_upgrade.py --java <java8> --runtime <forge-server-runtime> --source <old-world> --output <new-run-directory> --mods <baseminerals.jar> <orespawn.jar> [basemetals.jar]
+    python tools/validation/port115/verify_upgrade.py --java <java8> --runtime <forge-server-runtime> --source <old-world> --output <new-run-directory> --mods <baseminerals.jar> <orespawn.jar> [basemetals.jar]
 
-Use verify_named_upgrade.py with the same arguments for a 1.13.2 source. It
+Use verify_named_upgrade.py with the same arguments for a 1.13.2 or 1.14.4 source. It
 does not insert the numeric fixture or alter the source world. Keep
 baseminerals-legacy-registry.dat with any previously flattened save: chunks
 that were never loaded may still need its original registry mapping.
@@ -33,7 +33,7 @@ first open before converting the remaining chunks. Use verify_census.py with
 Keep the original world and its mod set together. Forge and any companion mods
 own conversion of their own blocks, items and saved data.
 
-Forge 28 may ask for confirmation when opening a Forge 25 world because the
+Forge 31 may ask for confirmation when opening a Forge 25 world because the
 old villager-profession registry was removed and the vanilla signs and three
 dye IDs were renamed. The disposable runner accepts only those exact vanilla
 lists and records the prompts. It stops for any unknown missing content.

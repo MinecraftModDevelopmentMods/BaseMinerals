@@ -15,7 +15,6 @@ import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
@@ -141,10 +140,6 @@ public final class MineralContent {
         @Override public int getHarvestLevel(BlockState state) { return harvestLevel; }
         @Override public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
             return !ore;
-        }
-        @Override @OnlyIn(Dist.CLIENT)
-        public BlockRenderLayer getRenderLayer() {
-            return ore ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
         }
     }
 }

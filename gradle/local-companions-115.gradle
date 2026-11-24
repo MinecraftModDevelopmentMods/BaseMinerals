@@ -5,8 +5,8 @@ import java.security.MessageDigest
 // Local candidates are selected by hash. Release builds keep published dependencies.
 def releaseBuild = providers.gradleProperty('releaseBuild').map { it.toBoolean() }.orElse(false).get()
 def definitions = [
-    basemetals: [label: 'BaseMetals', version: '3.0.2.114041', checkout: '../../BaseMetals 114/BaseMetals', property: 'baseMetalsCheckout'],
-    modernmetals: [label: 'ModernMetals', version: '3.0.0.114041', checkout: '../../ModernMetals 114/ModernMetals', property: 'modernMetalsCheckout']
+    basemetals: [label: 'BaseMetals', version: '3.0.3.115021', checkout: '../../BaseMetals 115/BaseMetals', property: 'baseMetalsCheckout'],
+    modernmetals: [label: 'ModernMetals', version: '3.0.0.115021', checkout: '../../ModernMetals 115/ModernMetals', property: 'modernMetalsCheckout']
 ]
 def hash = { File jar -> MessageDigest.getInstance('SHA-256').digest(jar.bytes).encodeHex().toString() }
 def pins = [:]
