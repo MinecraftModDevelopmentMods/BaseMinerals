@@ -1,3 +1,11 @@
+2.5.2.115021 for Minecraft 1.15.2
+
+This brings the released 1.14.4 build across to Forge 31, using OreSpawn 4.1.7.115021. The minerals, drops, hammer mining tags, recipes and ore defaults carry forward. Base Metals 3.0.3.115021 remains optional.
+
+Ore and molten-fluid rendering now uses the 1.15 render-layer API. The old-world conversion follows the new chunk loader while keeping each save's own numeric registry mapping. Keep the full save and baseminerals-legacy-registry.dat together when upgrading a copy.
+
+Modern Metals 3.0.0.115021 also supplies shared crushing when installed.
+
 2.5.2.114041 for Minecraft 1.14.4
 
 This brings the released 1.13.2 build across to Forge 28, using OreSpawn 4.1.7.114041. The mineral IDs, ore depths and deposit shapes stay the same, and saved ore settings carry forward.

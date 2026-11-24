@@ -15,7 +15,7 @@ public final class MoltenMineralBlock extends FlowingFluidBlock {
     @Override public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         super.onEntityCollision(state, world, pos, entity);
         if (!world.isRemote && entity instanceof LivingEntity && !entity.isImmuneToFire() && !entity.isInLava()
-                && entity.getBoundingBox().minY < pos.getY() + state.getFluidState().func_215679_a(world, pos)) {
+                && entity.getBoundingBox().minY < pos.getY() + state.getFluidState().getActualHeight(world, pos)) {
             entity.attackEntityFrom(DamageSource.LAVA, 4.0F);
             entity.setFire(15);
         }

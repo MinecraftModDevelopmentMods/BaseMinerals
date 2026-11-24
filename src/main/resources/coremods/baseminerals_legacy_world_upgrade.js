@@ -50,7 +50,7 @@ function initializeCoreMod() {
                     method.instructions.insert(prefix);
                     return node;
                 }
-                throw new Error('Base Minerals could not find the Forge 28 numeric state converter');
+                throw new Error('Base Minerals could not find the Forge 31 numeric state converter');
             }
         },
         'baseminerals_save_registry': {
@@ -73,27 +73,36 @@ function initializeCoreMod() {
                         return node;
                     }
                 }
-                throw new Error('Base Minerals could not find the Forge 28 world registry reader');
+                throw new Error('Base Minerals could not find the Forge 31 world registry reader');
             }
         },
         'baseminerals_region_directory': {
-            target: {type: 'CLASS', name: 'net.minecraft.world.chunk.storage.RegionFileCache'},
+            target: {type: 'CLASS', name: 'net.minecraft.world.chunk.storage.ChunkLoader'},
             transformer: function(node) {
-                var field = null;
-                for (var i = 0; i < node.fields.size(); ++i) {
-                    var candidate = node.fields.get(i);
-                    if (candidate.desc !== 'Ljava/io/File;') continue;
-                    if (field !== null) throw new Error('Ambiguous Forge 28 region directory');
-                    field = candidate;
+                var FieldNode = Java.type('org.objectweb.asm.tree.FieldNode');
+                var name = 'baseminerals$regionDirectory';
+                node.fields.add(new FieldNode(Opcodes.ACC_PRIVATE | Opcodes.ACC_FINAL, name, 'Ljava/io/File;', null, null));
+                var patched = 0;
+                for (var i = 0; i < node.methods.size(); ++i) {
+                    var method = node.methods.get(i);
+                    if (method.name !== '<init>' || method.desc !== '(Ljava/io/File;Lcom/mojang/datafixers/DataFixer;)V') continue;
+                    for (var insn = method.instructions.getFirst(); insn !== null; insn = insn.getNext()) {
+                        if (insn.getOpcode() !== Opcodes.RETURN) continue;
+                        var capture = new InsnList();
+                        capture.add(new VarInsnNode(Opcodes.ALOAD, 0));
+                        capture.add(new VarInsnNode(Opcodes.ALOAD, 1));
+                        capture.add(new FieldInsnNode(Opcodes.PUTFIELD, node.name, name, 'Ljava/io/File;'));
+                        method.instructions.insertBefore(insn, capture);
+                        patched++;
+                    }
                 }
-                if (field === null) throw new Error('Missing Forge 28 region directory');
+                if (patched !== 1) throw new Error('Base Minerals could not capture the Forge 31 chunk directory');
                 var getter = new MethodNode(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL,
                     'baseminerals$getRegionDirectory', '()Ljava/io/File;', null, null);
                 getter.instructions.add(new VarInsnNode(Opcodes.ALOAD, 0));
-                getter.instructions.add(new FieldInsnNode(Opcodes.GETFIELD, node.name, field.name, field.desc));
+                getter.instructions.add(new FieldInsnNode(Opcodes.GETFIELD, node.name, name, 'Ljava/io/File;'));
                 getter.instructions.add(new InsnNode(Opcodes.ARETURN));
-                getter.maxStack = 1;
-                getter.maxLocals = 1;
+                getter.maxStack = 1; getter.maxLocals = 1;
                 node.methods.add(getter);
                 return node;
             }
@@ -112,7 +121,7 @@ function initializeCoreMod() {
                                 var directory = new InsnList();
                                 directory.add(new VarInsnNode(Opcodes.ALOAD, 0));
                                 directory.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL,
-                                    'net/minecraft/world/chunk/storage/RegionFileCache',
+                                    'net/minecraft/world/chunk/storage/ChunkLoader',
                                     'baseminerals$getRegionDirectory', '()Ljava/io/File;', false));
                                 method.instructions.insertBefore(insn, directory);
                                 method.instructions.set(insn, call('fixChunk', FIX_ARGS + 'IILjava/io/File;)' + NBT));
@@ -125,7 +134,7 @@ function initializeCoreMod() {
                         insn = next;
                     }
                 }
-                if (patched !== 2) throw new Error('Base Minerals could not wrap both Forge 28 chunk upgrades');
+                if (patched !== 2) throw new Error('Base Minerals could not wrap both Forge 31 chunk upgrades');
                 return node;
             }
         },
@@ -144,7 +153,7 @@ function initializeCoreMod() {
                         patched++;
                     }
                 }
-                if (patched === 0) throw new Error('Base Minerals could not find the Forge 28 player data reader');
+                if (patched === 0) throw new Error('Base Minerals could not find the Forge 31 player data reader');
                 return node;
             }
         }

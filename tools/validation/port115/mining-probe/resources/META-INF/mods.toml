@@ -1,0 +1,12 @@
+modLoader="javafml"
+loaderVersion="[25,)"
+[[mods]]
+modId="mineralminingprobe"
+version="1"
+displayName="Base Minerals mining checks"
+[[dependencies.mineralminingprobe]]
+modId="baseminerals"
+mandatory=true
+versionRange="[2.5.1.115021,)"
+ordering="AFTER"
+side="BOTH"
